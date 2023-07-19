@@ -20,7 +20,7 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
     if (cards.length === 0) {
       loadCards();
     }
-  }, []);
+  });
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -79,6 +79,7 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
         <FiveTwentyFourAccordion
           five24Cards={cardsListComponent}
           user={userName}
+          showCards={cards524.length > 0}
           fiveTwentyFourStatusElement={five24TrackerElem}
         />
         <br />

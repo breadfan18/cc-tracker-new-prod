@@ -3,6 +3,7 @@ import { Accordion } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 export default function FiveTwentyFourAccordion({
+  showCards,
   five24Cards,
   user,
   fiveTwentyFourStatusElement,
@@ -21,7 +22,7 @@ export default function FiveTwentyFourAccordion({
         <Accordion.Header>{user}</Accordion.Header>
         <Accordion.Body>{fiveTwentyFourStatusElement}</Accordion.Body>
       </Accordion.Item>
-      <Accordion.Item eventKey="1">
+      {showCards && <Accordion.Item eventKey="1">
         <Accordion.Header
           id="five24AccordionHeader"
           onClick={() => setCardsShowing(!cardsShowing)}
@@ -29,7 +30,7 @@ export default function FiveTwentyFourAccordion({
           {cardsShowing ? "Hide Cards" : "Show Cards"}
         </Accordion.Header>
         <Accordion.Body>{five24Cards}</Accordion.Body>
-      </Accordion.Item>
+      </Accordion.Item>}
     </Accordion>
   );
 }
