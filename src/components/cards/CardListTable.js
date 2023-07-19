@@ -162,13 +162,11 @@ export default function CardListTable({
                   <td className="editDeleteCard">
                     <CardAddEditModal
                       card={card}
-                      modalOpen={modalOpen}
                       setModalOpen={setModalOpen}
                     />
                     <ConfirmDeleteModal
                       data={card}
                       dataType="card"
-                      modalOpen={modalOpen}
                       setModalOpen={setModalOpen}
                     />
                   </td>

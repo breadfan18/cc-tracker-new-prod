@@ -16,7 +16,6 @@ function CardAddEditModal({
   card,
   saveCardToFirebase,
   setModalOpen,
-  modalOpen,
 }) {
   const [cardForModal, setCardForModal] = useState(
     card ? { ...card } : NEW_CARD
@@ -97,12 +96,20 @@ function CardAddEditModal({
   function handleEditButtonClick(e) {
     e.stopPropagation();
     toggleShow();
-    setModalOpen(true);
+    try {
+      setModalOpen(true);
+    } catch (err) {
+      console.log('setModalOpen func is not passed for this component');
+    }
   }
 
   function toggleModal() {
     toggleShow();
-    setModalOpen(!modalOpen);
+    try {
+      setModalOpen(false);
+    } catch (err) {
+      console.log('setModalOpen func is not passed for this component');
+    }
   }
 
   return (
@@ -153,7 +160,6 @@ CardAddEditModal.propTypes = {
   card: PropTypes.object,
   saveCardToFirebase: PropTypes.func.isRequired,
   setModalOpen: PropTypes.func,
-  modalOpen: PropTypes.bool,
 };
 
 function mapStateToProps(state) {

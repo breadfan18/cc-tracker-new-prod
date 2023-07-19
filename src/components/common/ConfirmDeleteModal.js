@@ -14,7 +14,6 @@ function ConfirmDeleteModal({
   dataType,
   deleteCardFromFirebase,
   deleteLoyaltyDataFromFirebase,
-  modalOpen,
   setModalOpen,
   redirect,
 }) {
@@ -38,12 +37,20 @@ function ConfirmDeleteModal({
   function handleDeleteButtonClick(e) {
     e.stopPropagation();
     toggleShow();
-    setModalOpen(true);
+    try {
+      setModalOpen(true);
+    } catch (err) {
+      console.log('setModalOpen func is not passed for this component');
+    }
   }
 
   function toggleModal() {
     toggleShow();
-    setModalOpen(!modalOpen);
+    try {
+      setModalOpen(false);
+    } catch (err) {
+      console.log('setModalOpen func is not passed for this component');
+    }
   }
 
   return (
@@ -76,7 +83,6 @@ ConfirmDeleteModal.propTypes = {
   deleteCardFromFirebase: PropTypes.func.isRequired,
   deleteLoyaltyDataFromFirebase: PropTypes.func.isRequired,
   setModalOpen: PropTypes.func || undefined,
-  modalOpen: PropTypes.bool,
   redirect: PropTypes.bool,
 };
 
