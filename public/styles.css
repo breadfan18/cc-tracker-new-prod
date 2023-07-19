@@ -1,0 +1,44 @@
+body {
+    background: #efefef;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Arial, Verdana;
+  }
+  
+  h1 {
+    color: #888888;
+  }
+  
+  p {
+    color: #666666;
+  }
+  
+  #wrapper {
+    width: 500px;
+    /* margin: 0 auto; */
+    padding: 20px;
+  }
+  
+  #thumbnails {
+    position: relative;
+    display: block;
+    display:flex;
+    flex-wrap:wrap;
+  }
+  
+  #bigimage {
+    height: 300px;
+    width: 100%;
+    object-fit:cover;
+  }
+  
+  .thumb {
+    flex:1;
+    margin: 5px;
+    height: 100px;
+    width: 100px;
+    display: block;
+    cursor: pointer;
+    object-fit:cover;
+  }
+  

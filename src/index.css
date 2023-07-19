@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
+
+:root {
+  --color-blue: #0080FF;
+  --light-gray: #D9D7D7;
+  --light-blue: rgb(210, 237, 246);
+  --black-opacity: rgba(0,0,0,0.09);
+  --url-white-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
+  --url-black-bkgrd: url("https://i.imgur.com/nK3V6T8.jpg");
+}
+
+body {
+  background-image: var(--url-white-bkgrd);
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.fiveTwentyFourContainer,
+.loyaltyContainer,
+.cardDetailsContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.cardDetailsBody {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: clamp(0.6rem, 5vw, 1rem);
+}
+
+#cardDetailsSectionRight{
+  flex: 1;
+}
+
+#cardDetailsSectionRight .card {
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.navContainer {
+  background-color: var(--color-blue);
+  padding: 0;
+  margin-bottom: 10px;
+  min-height: 3rem;
+}
+
+.navFull {
+  padding: 10px 0;
+  text-decoration: none;
+  color: var(--light-blue);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.navSmall {
+  display: flex;
+  flex-direction: column;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.navSmall a {
+  margin-bottom: 5px;
+}
+
+#burgerContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#burger{
+  min-height: 3rem;
+  background: none;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+}
+
+a:hover {
+  background-color: var(--light-blue);
+  color: var(--color-blue);
+}
+
+.sectionHeaders{
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--black-opacity);
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--color-blue);
+  margin-bottom: 1rem;
+}
+
+.labels{
+  background-color: var(--black-opacity);
+  padding: 5px 5px 5px 10px;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  color: black;
+  font-weight: bold;
+}
+
+.field input, .form-group select {
+  border-radius: 0 0 10px 10px;
+}
+
+.form-group {
+  padding: 10px 0;
+}
+
+.radioField {
+  background-color: white;
+  padding-left: 10px;
+  border-radius: 0 0 10px 10px;
+  border: 1px solid rgb(222, 226, 230);
+}
+
+
+div.alert-danger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeIcon {
+  transition: all .2s ease-in-out;
+}
+
+.closeIcon:hover {
+  transform: scale(1.5);
+}
+
+.nav-tabs .nav-item .nav-link {
+  color: var(--color-blue);
+  background-color: var(--light-blue);
+  border-bottom: 2px solid var(--color-blue);
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  color: #FFF;
+  background-color: var(--color-blue);
+  font-weight: bold;
+}
+
+.tableHeader>svg {
+  cursor: pointer;
+}
+
+.editDeleteCells {
+  max-width: 5rem;
+}
+
+.editDeleteCard> button {
+  margin-right: 5px;
+}
+
+.accordion {
+  text-align: left
+}
+
+.rounded-circle {
+  transition: all .2s ease-in-out;
+}
+
+.rounded-circle:hover {
+  transform: scale(1.1);
+  box-shadow: 1px 1px 2px black;
+}
+
+#cardBody, #loyaltyCardBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px
+}
+
+#cardBody:hover {
+  background-color: var(--black-opacity);
+  cursor: pointer;
+}
+
+.cardBodyLabels {
+  font-weight: bold;
+}
+
+#cardCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#cardCardContainer>* {
+  margin: 5px;
+}
+
+.editDeleteOnCards {
+  padding: 10px 5px 10px 0;
+  width: 100%;
+  background-color: var(--black-opacity);
+  text-align: right;
+  border-radius: 0 0 5px 5px;
+}
+
+.issuerLogos {
+  height: 2.5rem;
+  width: 4rem;
+  object-fit: contain;
+  border: 1px solid var(--light-gray);
+  padding: 2px;
+  border-radius: 10px;
+  background-color: var(--black-opacity);
+}
+
+.loyaltyLogos {
+  height: 3.5rem;
+  width: 5rem;
+  object-fit: contain;
+  border: 1px solid var(--light-blue);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+form {
+  max-width: 55rem;
+  margin: 0 auto;
+}
+
+.addButton {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  float: right;
+}
+
+.modalHeader{
+  color: var(--color-blue);
+  background-color: var(--light-blue);
+}
+
+.list-group-item {
+  padding-left: 0;
+  border: none;
+}
+
+.notesFooter {
+  display: flex;
+  justify-content: center;
+  /* padding: 10px 15px; */
+  background-color: var(--light-blue);
+}
+
+.notesFooter button {
+  margin-left: 10px;
+}
+
+.cardDetailsFieldHeaders {
+  font-weight: bold;
+  font-size: clamp(0.9rem, 5vw, 1.2rem);
+}
+
+.cardHeaders, .accordion-button, .accordion-button[aria-expanded='true'] {
+  font-weight: bold;
+  color: var(--color-blue);
+  background-color: var(--light-blue);
+  text-align: left;
+  font-size: clamp(1.2rem, 5vw, 1.5rem)
+}
+
+.bureauImgs {
+  height: 1.7rem;
+  width: 1.7rem;
+  margin: 0 4px 0 0;
+  object-fit: cover;
+}
+
+.bureauImgs[alt='experian'] {
+  border: 1px solid #D92B80;
+  border-radius: 50%;
+  padding: 2px;
+  padding: 2px;
+  background-color: var(--light-gray);
+}
+
+#five24AccordionHeader .accordion-button {
+  font-size: 0.9rem;
+  background-color: var(--black-opacity);
+}
