@@ -1,0 +1,231 @@
+{
+  "cards": {
+    "amex-hilton-honors-3-59ebba53fcd": {
+      "annualFee": "65",
+      "appDate": "2023-03-02",
+      "bonusEarnDate": "2023-05-17",
+      "bonusEarned": true,
+      "card": "Hilton Honors",
+      "cardNotes": {
+        "1eb7701cf3f": {
+          "date": "2023-07-12",
+          "id": "1eb7701cf3f",
+          "note": "Amex Special Offer expires March 2032"
+        },
+        "eb7701cf3fb": {
+          "date": "2023-07-12",
+          "id": "eb7701cf3fb",
+          "note": "Upgrade to Surpass next year "
+        }
+      },
+      "cardType": "Personal",
+      "creditLine": "5000",
+      "id": "amex-hilton-honors-3-59ebba53fcd",
+      "inquiries": {
+        "equifax": false,
+        "experian": false,
+        "transunion": true
+      },
+      "issuer": {
+        "img": "https://i.imgur.com/1XOuPt8.png",
+        "name": "Amex"
+      },
+      "nextFeeDate": "2023-11-29",
+      "signupBonus": "25,000 Points",
+      "spendBy": "2023-06-02",
+      "spendReq": "3000",
+      "status": "downgraded",
+      "userId": 3
+    },
+    "barclays-aviator-red-4-cd2274f9abe": {
+      "annualFee": "65",
+      "appDate": "2022-06-21",
+      "bonusEarnDate": "2022-08-31",
+      "bonusEarned": true,
+      "card": "Aviator Red",
+      "cardNotes": {
+        "03a1eb7701c": {
+          "date": "2023-07-12",
+          "id": "03a1eb7701c",
+          "note": "Need to downgrade in 2024"
+        }
+      },
+      "cardType": "Personal",
+      "creditLine": "9000",
+      "id": "barclays-aviator-red-4-cd2274f9abe",
+      "inquiries": {
+        "equifax": false,
+        "experian": false,
+        "transunion": true
+      },
+      "issuer": {
+        "img": "https://i.imgur.com/bsjoGQv.png",
+        "name": "Barclays"
+      },
+      "nextFeeDate": "2023-07-13",
+      "signupBonus": "50,000 Points",
+      "spendBy": "2022-09-22",
+      "spendReq": "3000",
+      "status": "open",
+      "userId": 4
+    },
+    "capone-venture-x-1-64e49a6fe8d": {
+      "annualFee": "95",
+      "appDate": "2023-07-11",
+      "card": "Venture X",
+      "cardNotes": {
+        "269f0483d1e": {
+          "date": "2023-07-12",
+          "id": "269f0483d1e",
+          "note": "Eligible to get another bonus on Sept 2025"
+        },
+        "69f0483d1ea": {
+          "date": "2023-07-12",
+          "id": "69f0483d1ea",
+          "note": "Special bonus offer 10,000 points - by July 2024"
+        }
+      },
+      "cardType": "Personal",
+      "creditLine": "9000",
+      "id": "capone-venture-x-1-64e49a6fe8d",
+      "inquiries": {
+        "equifax": true,
+        "experian": true,
+        "transunion": true
+      },
+      "issuer": {
+        "img": "https://i.imgur.com/u3Rr8rT.png",
+        "name": "CapOne"
+      },
+      "nextFeeDate": "2024-07-11",
+      "signupBonus": "100,000 Miles",
+      "spendBy": "2023-10-19",
+      "spendReq": "6000",
+      "status": "open",
+      "userId": 1
+    },
+    "chase-freedom-ultd-1-8aef65c6f5d": {
+      "annualFee": "35",
+      "appDate": "2015-01-14",
+      "bonusEarnDate": "2015-03-29",
+      "bonusEarned": true,
+      "card": "Freedom Ultd",
+      "cardNotes": {
+        "aef65c6f5d0": {
+          "date": "2023-07-12",
+          "id": "aef65c6f5d0",
+          "note": "Closed this card on 02-23-2021"
+        },
+        "ef65c6f5d05": {
+          "date": "2023-07-12",
+          "id": "ef65c6f5d05",
+          "note": "Make referral to Anshu"
+        }
+      },
+      "cardType": "Personal",
+      "creditLine": "3500",
+      "id": "chase-freedom-ultd-1-8aef65c6f5d",
+      "inquiries": {
+        "equifax": true,
+        "experian": true,
+        "transunion": false
+      },
+      "issuer": {
+        "img": "https://i.imgur.com/AsfYKFY.png",
+        "name": "Chase"
+      },
+      "nextFeeDate": "2016-01-15",
+      "signupBonus": "10,000 UR",
+      "spendBy": "2015-04-15",
+      "spendReq": "1500",
+      "status": "closed",
+      "userId": 1
+    }
+  },
+  "loyaltyData": {
+    "american-aadvantage-1-d1b537a0d09": {
+      "id": "american-aadvantage-1-d1b537a0d09",
+      "loginId": "breadfan18",
+      "loyaltyType": "airlines",
+      "memberId": "92J7LK0",
+      "password": "T*******d35#",
+      "program": {
+        "id": 1,
+        "img": "https://i.imgur.com/Pc1I7uX.png",
+        "name": "American AAdvantage",
+        "type": "airlines"
+      },
+      "userId": 1
+    },
+    "global-entry-4-d27e7269e6c": {
+      "id": "global-entry-4-d27e7269e6c",
+      "loginId": "GeeseGal32",
+      "loyaltyType": "misc",
+      "memberId": "TKO09876",
+      "password": "F*****e77#",
+      "program": {
+        "id": 5,
+        "img": "",
+        "name": "Global Entry",
+        "type": "misc"
+      },
+      "userId": 4
+    },
+    "hilton-honors-5-27e7269e6cb": {
+      "id": "hilton-honors-5-27e7269e6cb",
+      "loginId": "dmarchall18",
+      "loyaltyType": "hotels",
+      "memberId": "HHON776",
+      "password": "T*****ks99",
+      "program": {
+        "id": 4,
+        "img": "https://i.imgur.com/3A83gV6.png",
+        "name": "Hilton Honors",
+        "type": "hotels"
+      },
+      "userId": 5
+    },
+    "united-mileagueplus-1-2d27e7269e6": {
+      "id": "united-mileagueplus-1-2d27e7269e6",
+      "loginId": "boobooman18",
+      "loyaltyType": "airlines",
+      "memberId": "MK76549",
+      "password": "P*******f89%",
+      "program": {
+        "id": 2,
+        "img": "https://i.imgur.com/znFTwQ1.png",
+        "name": "United MileaguePlus",
+        "type": "airlines"
+      },
+      "userId": 1
+    },
+    "united-mileagueplus-2-82d27e7269e": {
+      "id": "united-mileagueplus-2-82d27e7269e",
+      "loginId": "kisadick88",
+      "loyaltyType": "airlines",
+      "memberId": "67983924",
+      "password": "T*****ks88",
+      "program": {
+        "id": 2,
+        "img": "https://i.imgur.com/znFTwQ1.png",
+        "name": "United MileaguePlus",
+        "type": "airlines"
+      },
+      "userId": 2
+    },
+    "world-of-hyatt-1-f82d27e7269": {
+      "id": "world-of-hyatt-1-f82d27e7269",
+      "loginId": "foofman18",
+      "loyaltyType": "hotels",
+      "memberId": "HE123TT6",
+      "password": "T******d78%",
+      "program": {
+        "id": 3,
+        "img": "https://i.imgur.com/UnaXElg.png",
+        "name": "World of Hyatt",
+        "type": "hotels"
+      },
+      "userId": 1
+    }
+  }
+}

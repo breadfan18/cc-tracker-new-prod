@@ -1,0 +1,138 @@
+{
+    "amex-hilton-honors-3-59ebba53fcd": {
+        "annualFee": "65",
+        "appDate": "2023-03-02",
+        "bonusEarnDate": "2023-05-17",
+        "bonusEarned": true,
+        "card": "Hilton Honors",
+        "cardNotes": {
+            "1eb7701cf3f": {
+                "date": "2023-07-12",
+                "id": "1eb7701cf3f",
+                "note": "Amex Special Offer expires March 2032"
+            },
+            "eb7701cf3fb": {
+                "date": "2023-07-12",
+                "id": "eb7701cf3fb",
+                "note": "Upgrade to Surpass next year "
+            }
+        },
+        "cardType": "Personal",
+        "creditLine": "5000",
+        "id": "amex-hilton-honors-3-59ebba53fcd",
+        "inquiries": {
+            "equifax": false,
+            "experian": false,
+            "transunion": true
+        },
+        "issuer": {
+            "img": "https://i.imgur.com/1XOuPt8.png",
+            "name": "Amex"
+        },
+        "nextFeeDate": "2023-11-29",
+        "signupBonus": "25,000 Points",
+        "spendBy": "2023-06-02",
+        "spendReq": "3000",
+        "status": "downgraded",
+        "userId": 3
+    },
+    "barclays-aviator-red-4-cd2274f9abe": {
+        "annualFee": "65",
+        "appDate": "2022-06-21",
+        "bonusEarnDate": "2022-08-31",
+        "bonusEarned": true,
+        "card": "Aviator Red",
+        "cardNotes": {
+            "03a1eb7701c": {
+                "date": "2023-07-12",
+                "id": "03a1eb7701c",
+                "note": "Need to downgrade in 2024"
+            }
+        },
+        "cardType": "Personal",
+        "creditLine": "9000",
+        "id": "barclays-aviator-red-4-cd2274f9abe",
+        "inquiries": {
+            "equifax": false,
+            "experian": false,
+            "transunion": true
+        },
+        "issuer": {
+            "img": "https://i.imgur.com/bsjoGQv.png",
+            "name": "Barclays"
+        },
+        "nextFeeDate": "2023-07-13",
+        "signupBonus": "50,000 Points",
+        "spendBy": "2022-09-22",
+        "spendReq": "3000",
+        "status": "open",
+        "userId": 4
+    },
+    "capone-venture-x-1-64e49a6fe8d": {
+        "annualFee": "95",
+        "appDate": "2023-07-11",
+        "card": "Venture X",
+        "cardNotes": {
+            "269f0483d1e": {
+                "date": "2023-07-12",
+                "id": "269f0483d1e",
+                "note": "Eligible to get another bonus on Sept 2025"
+            },
+            "69f0483d1ea": {
+                "date": "2023-07-12",
+                "id": "69f0483d1ea",
+                "note": "Special bonus offer 10,000 points - by July 2024"
+            }
+        },
+        "cardType": "Personal",
+        "creditLine": "9000",
+        "id": "capone-venture-x-1-64e49a6fe8d",
+        "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": true
+        },
+        "issuer": {
+            "img": "https://i.imgur.com/u3Rr8rT.png",
+            "name": "CapOne"
+        },
+        "nextFeeDate": "2024-07-11",
+        "signupBonus": "100,000 Miles",
+        "spendBy": "2023-10-19",
+        "spendReq": "6000",
+        "status": "open",
+        "userId": 1
+    },
+    "chase-freedom-3-9ebba53fcd1": {
+        "annualFee": 0,
+        "appDate": "2017-02-15",
+        "bonusEarnDate": "2017-04-26",
+        "bonusEarned": true,
+        "card": "Freedom",
+        "cardNotes": {
+            "a7714b2382f": {
+                "date": "2023-07-12",
+                "id": "a7714b2382f",
+                "note": "Card Closed on 01-01-2023"
+            }
+        },
+        "cardType": "Personal",
+        "creditLine": "2500",
+        "id": "chase-freedom-3-9ebba53fcd1",
+        "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": true
+        },
+        "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+        },
+        "nextFeeDate": "2018-02-15",
+        "signupBonus": "10,000 UR",
+        "spendBy": "2017-05-18",
+        "spendReq": "1000",
+        "status": "closed",
+        "userId": 3
+    }
+}
