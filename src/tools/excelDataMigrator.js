@@ -92,23 +92,13 @@ console.log(test.length);
 
 const withUid = test.map(card => {
   const keysSorted = _.chain(card).toPairs().sortBy(0).fromPairs().value()
-  const appDate = formatDate(keysSorted.appDate)
-  const nextFeeDate = formatDate(keysSorted.nextFeeDate)
-  const spendBy = formatDate(keysSorted.spendBy)
-  const bonusEarnDate = formatDate(keysSorted.bonusEarnDate)
-
-  console.log({appDate});
-  console.log({nextFeeDate});
-  console.log({spendBy});
-  console.log({bonusEarnDate});
-  console.log({appDate});
-
   const inquiriesSplit = keysSorted.inquiries.split(' , ')
   const inqObj = {
     experian: inquiriesSplit.includes('Experian'),
     equifax: inquiriesSplit.includes('Equifax'),
     transunion: inquiriesSplit.includes('Transunion')
   }
+
   const issuerObj = ISSUERS.find(issuer => issuer.name === keysSorted.issuer)
   const id = slugify(
     issuerObj.name + " " + card.card + " " + card.userId + " " + uid()
@@ -116,10 +106,6 @@ const withUid = test.map(card => {
 
   return {
     ...keysSorted,
-    appDate,
-    nextFeeDate,
-    spendBy,
-    bonusEarnDate,
     inquiries: inqObj,
     issuer: issuerObj,
     id
@@ -127,5 +113,3 @@ const withUid = test.map(card => {
 })
 
 fooFile.write(_.keyBy(withUid, "id"))
-
-// console.log(_.keyBy(withUid, "id"));

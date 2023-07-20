@@ -121,15 +121,15 @@ export const USERS = [
   },
   {
     id: 2,
-    name: "Marcus Rashford",
+    name: "Anshu Thapa",
   },
   {
     id: 3,
-    name: "Mason Mount",
+    name: "Astha Thapa",
   },
   {
     id: 4,
-    name: "David DeGea",
+    name: "Tulasi Uprety",
   },
   {
     id: 5,
