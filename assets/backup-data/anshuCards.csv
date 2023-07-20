@@ -1,0 +1,17 @@
+﻿appDate,card,cardType,inquiries,issuer,annualFee,nextFeeDate,creditLine,status,spendReq,spendBy,signupBonus,bonusEarnDate,bonusEarned,userId
+6/24/15,Chase Freedom Anshu,Personal,"Equifax , Experian",Chase,0,,1000,Open,500,9/15/15,20K UR,,TRUE,2
+12/7/15,Chase Sapphire Anshu,Personal,"Equifax , Experian",Chase,95,1/1/16,5000,Downgraded,4000,3/7/16,60K UR,,TRUE,2
+3/15/16,Citi Aadvantage,Personal,Experian,Citi,95,3/14/17,7000,Downgraded,3000,6/29/16,60K AA ,,TRUE,2
+8/6/16,CapOne Venture,Personal,"Equifax , Experian, Transunion",CapOne,59,8/5/17,20000,Downgraded,3000,11/5/16,40K Miles,,TRUE,2
+5/17/17,Amex PRG,Personal,Experian,Amex,195,5/10/18,5000,Closed,1000,8/17/17,50K MR,,TRUE,2
+5/17/17,Barclays Arrival +,Personal,Transunion,Barclays,89,5/10/18,5000,Downgraded,3000,8/17/17,50K Miles,,TRUE,2
+5/12/18,Chase Sapphire Reserve,Personal,"Equifax , Experian",Chase,450,6/1/19,10000,Closed,4000,9/4/18,50K UR,8/8/18,TRUE,2
+8/15/18,Chase Ink Preferred,Business,"Equifax , Experian",Chase,95,9/1/19,9000,Closed,5000,12/8/18,80K UR,11/14/18,TRUE,2
+8/21/18,Barclays Aviator Red,Personal,Transunion,Barclays,95,8/31/19,18000,Closed,0,8/22/18,60K AA ,9/12/18,TRUE,2
+1/18/19,Chase Ink Cash,Business,"Equifax , Experian",Chase,0,,12000,Closed,3000,5/13/19,50K UR,3/15/19,TRUE,2
+11/25/20,Chase Ink Unlimited,Business,"Equifax , Experian",Chase,0,,3000,Closed,7500,3/4/21,75K UR,3/10/21,TRUE,2
+8/24/21,Amex Blue Cash ,Personal,Experian,Amex,0,,21900,Open,2000,2/24/21,$200 ,,TRUE,2
+5/3/22,Chase BA Avios,Personal,"Equifax , Experian",Chase,95,6/1/23,18700,Closed,5000,8/3/22,100K Avios,7/7/22,TRUE,2
+7/15/22,Amex Hilton,Personal,Experian,Amex,0,,10000,Open,1000,10/15/22,100K HHonors,8/11/22,TRUE,2
+1/17/23,Chase Ink Cash,Business,"Equifax , Experian",Chase,0,,3000,Open,6000,4/17/23,90K UR,2/16/23,TRUE,2
+5/1/23,Chase Sapphire Preferred,Personal,"Equifax , Experian",Chase,95,5/1/24,21900,Open,4000,8/1/23,80K UR,6/13/23,TRUE,2
