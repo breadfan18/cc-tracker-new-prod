@@ -74,8 +74,8 @@ export const ISSUERS = [
   { name: "Amex", img: "https://i.imgur.com/1XOuPt8.png" },
   { name: "CapOne", img: "https://i.imgur.com/u3Rr8rT.png" },
   { name: "Barclays", img: "https://i.imgur.com/bsjoGQv.png" },
-  { name: "Citi", img: "" },
-  { name: "WellsFargo", img: "" },
+  { name: "Citi", img: "https://i.imgur.com/3xnhXZo.png" },
+  { name: "WellsFargo", img: "https://i.imgur.com/GJT4lHt.png" },
 ];
 
 export const CARD_TYPE = ["Personal", "Business"];

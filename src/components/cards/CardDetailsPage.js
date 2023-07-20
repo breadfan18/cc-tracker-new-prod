@@ -136,7 +136,7 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
                   >
                     Next Fee Date:
                   </td>
-                  <td>{formatDate(props.card.nextFeeDate)}</td>
+                  <td>{props.card.nextFeeDate !== "" ? formatDate(props.card.nextFeeDate) : "N/A"}</td>
                 </tr>
                 <tr>
                   <td
@@ -181,7 +181,7 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
                   >
                     Spend By:
                   </td>
-                  <td>{formatDate(props.card.spendBy)}</td>
+                  <td>{props.card.spendBy !== "" ? formatDate(props.card.spendBy) : "N/A"}</td>
                 </tr>
                 <tr>
                   <td
