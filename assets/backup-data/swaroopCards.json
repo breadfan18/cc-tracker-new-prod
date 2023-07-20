@@ -1,0 +1,527 @@
+{
+ "chase-freedom-1-e930c5e5a6a": {
+  "annualFee": "0",
+  "appDate": "2012-01-01",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "Freedom",
+  "cardType": "Personal",
+  "creditLine": "6000",
+  "inquiries": {
+   "experian": false,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "",
+  "signupBonus": "0",
+  "spendBy": "",
+  "spendReq": "0",
+  "status": "open",
+  "userId": 1,
+  "id": "chase-freedom-1-e930c5e5a6a"
+ },
+ "capone-venture-1-930c5e5a6ac": {
+  "annualFee": "59",
+  "appDate": "2015-01-24",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "Venture",
+  "cardType": "Personal",
+  "creditLine": "10000",
+  "inquiries": {
+   "experian": false,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "CapOne",
+   "img": "https://i.imgur.com/u3Rr8rT.png"
+  },
+  "nextFeeDate": "2016-01-30",
+  "signupBonus": "40K CapOne Points",
+  "spendBy": "2015-04-30",
+  "spendReq": "3000",
+  "status": "downgraded",
+  "userId": 1,
+  "id": "capone-venture-1-930c5e5a6ac"
+ },
+ "chase-sapphire-preferred-1-30c5e5a6ac0": {
+  "annualFee": "95",
+  "appDate": "2015-02-04",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "Sapphire Preferred",
+  "cardType": "Personal",
+  "creditLine": "17200",
+  "inquiries": {
+   "experian": false,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "2016-02-04",
+  "signupBonus": "40K UR Points",
+  "spendBy": "2015-05-04",
+  "spendReq": "4000",
+  "status": "downgraded",
+  "userId": 1,
+  "id": "chase-sapphire-preferred-1-30c5e5a6ac0"
+ },
+ "barclays-us-airways-1-0c5e5a6ac0c": {
+  "annualFee": "89",
+  "appDate": "2015-02-04",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "US Airways",
+  "cardType": "Personal",
+  "creditLine": "15000",
+  "inquiries": {
+   "experian": false,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Barclays",
+   "img": "https://i.imgur.com/bsjoGQv.png"
+  },
+  "nextFeeDate": "2017-12-09",
+  "signupBonus": "50K Dividend Miles",
+  "spendBy": "",
+  "spendReq": "0",
+  "status": "closed",
+  "userId": 1,
+  "id": "barclays-us-airways-1-0c5e5a6ac0c"
+ },
+ "amex-platinum-1-c5e5a6ac0c7": {
+  "annualFee": "450",
+  "appDate": "2015-04-17",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "Platinum",
+  "cardType": "Personal",
+  "creditLine": "10000",
+  "inquiries": {
+   "experian": false,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Amex",
+   "img": "https://i.imgur.com/1XOuPt8.png"
+  },
+  "nextFeeDate": "2016-04-16",
+  "signupBonus": "100K MR Points",
+  "spendBy": "2015-07-18",
+  "spendReq": "3000",
+  "status": "closed",
+  "userId": 1,
+  "id": "amex-platinum-1-c5e5a6ac0c7"
+ },
+ "citi-aadvantage-plat-select-1-5e5a6ac0c78": {
+  "annualFee": "95",
+  "appDate": "2015-06-19",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "AAdvantage Plat Select",
+  "cardType": "Personal",
+  "creditLine": "11000",
+  "inquiries": {
+   "experian": true,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Citi",
+   "img": ""
+  },
+  "nextFeeDate": "2016-06-18",
+  "signupBonus": "50K AAdvantage points",
+  "spendBy": "2015-09-19",
+  "spendReq": "3000",
+  "status": "closed",
+  "userId": 1,
+  "id": "citi-aadvantage-plat-select-1-5e5a6ac0c78"
+ },
+ "citi-aadvantage-plat-select-2-1-e5a6ac0c780": {
+  "annualFee": "95",
+  "appDate": "2016-02-06",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "AAdvantage Plat Select 2",
+  "cardType": "Personal",
+  "creditLine": "6900",
+  "inquiries": {
+   "experian": true,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Citi",
+   "img": ""
+  },
+  "nextFeeDate": "2017-02-06",
+  "signupBonus": "50K AAdvantage points",
+  "spendBy": "2016-05-06",
+  "spendReq": "3k",
+  "status": "downgraded",
+  "userId": 1,
+  "id": "citi-aadvantage-plat-select-2-1-e5a6ac0c780"
+ },
+ "chase-sapp-reserve-1-5a6ac0c780d": {
+  "annualFee": "450",
+  "appDate": "2017-03-06",
+  "bonusEarnDate": "2017-05-08",
+  "bonusEarned": true,
+  "card": "Sapp Reserve",
+  "cardType": "Personal",
+  "creditLine": "10000",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "2018-04-01",
+  "signupBonus": "100K UR points",
+  "spendBy": "2017-06-29",
+  "spendReq": "4000",
+  "status": "downgraded",
+  "userId": 1,
+  "id": "chase-sapp-reserve-1-5a6ac0c780d"
+ },
+ "chase-ink-preferred-1-a6ac0c780d5": {
+  "annualFee": "0",
+  "appDate": "2018-01-08",
+  "bonusEarnDate": "2018-03-11",
+  "bonusEarned": true,
+  "card": "Ink Preferred",
+  "cardType": "Business",
+  "creditLine": "15500",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "2019-02-01",
+  "signupBonus": "80K UR points",
+  "spendBy": "2018-05-04",
+  "spendReq": "5000",
+  "status": "closed",
+  "userId": 1,
+  "id": "chase-ink-preferred-1-a6ac0c780d5"
+ },
+ "chase-ink-unlimited-1-6ac0c780d5c": {
+  "annualFee": "0",
+  "appDate": "2018-05-23",
+  "bonusEarnDate": "2018-07-11",
+  "bonusEarned": true,
+  "card": "Ink Unlimited",
+  "cardType": "Business",
+  "creditLine": "12000",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "",
+  "signupBonus": "50K UR points",
+  "spendBy": "2018-09-16",
+  "spendReq": "3000",
+  "status": "open",
+  "userId": 1,
+  "id": "chase-ink-unlimited-1-6ac0c780d5c"
+ },
+ "barclays-aviator-red-1-ac0c780d5c3": {
+  "annualFee": "95",
+  "appDate": "2018-08-08",
+  "bonusEarnDate": "2018-09-05",
+  "bonusEarned": true,
+  "card": "Aviator Red",
+  "cardType": "Personal",
+  "creditLine": "32500",
+  "inquiries": {
+   "experian": false,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Barclays",
+   "img": "https://i.imgur.com/bsjoGQv.png"
+  },
+  "nextFeeDate": "2019-08-31",
+  "signupBonus": "60K AA Miles",
+  "spendBy": "",
+  "spendReq": "0",
+  "status": "open",
+  "userId": 1,
+  "id": "barclays-aviator-red-1-ac0c780d5c3"
+ },
+ "chase-ink-cash-1-c0c780d5c3d": {
+  "annualFee": "0",
+  "appDate": "2018-11-12",
+  "bonusEarnDate": "2019-01-11",
+  "bonusEarned": true,
+  "card": "Ink Cash",
+  "cardType": "Business",
+  "creditLine": "12000",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "",
+  "signupBonus": "50K UR points",
+  "spendBy": "2019-03-07",
+  "spendReq": "3000",
+  "status": "open",
+  "userId": 1,
+  "id": "chase-ink-cash-1-c0c780d5c3d"
+ },
+ "barclays-arrival-1-0c780d5c3d3": {
+  "annualFee": "89",
+  "appDate": "2019-03-01",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "Arrival +",
+  "cardType": "Personal",
+  "creditLine": "20000",
+  "inquiries": {
+   "experian": false,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Barclays",
+   "img": "https://i.imgur.com/bsjoGQv.png"
+  },
+  "nextFeeDate": "2020-03-01",
+  "signupBonus": "70K Points",
+  "spendBy": "2019-05-30",
+  "spendReq": "5000",
+  "status": "open",
+  "userId": 1,
+  "id": "barclays-arrival-1-0c780d5c3d3"
+ },
+ "capone-savor-1-c780d5c3d36": {
+  "annualFee": "95",
+  "appDate": "2019-05-12",
+  "bonusEarnDate": "",
+  "bonusEarned": true,
+  "card": "Savor",
+  "cardType": "Personal",
+  "creditLine": "30000",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": true
+  },
+  "issuer": {
+   "name": "CapOne",
+   "img": "https://i.imgur.com/u3Rr8rT.png"
+  },
+  "nextFeeDate": "2020-05-12",
+  "signupBonus": 500,
+  "spendBy": "2019-08-12",
+  "spendReq": "3000",
+  "status": "open",
+  "userId": 1,
+  "id": "capone-savor-1-c780d5c3d36"
+ },
+ "chase-ink-preferred-1-780d5c3d369": {
+  "annualFee": "95",
+  "appDate": "2021-01-14",
+  "bonusEarnDate": "2021-04-10",
+  "bonusEarned": true,
+  "card": "Ink Preferred",
+  "cardType": "Business",
+  "creditLine": "8000",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "2022-01-14",
+  "signupBonus": "100K UR points",
+  "spendBy": "2021-04-16",
+  "spendReq": "15000",
+  "status": "open",
+  "userId": 1,
+  "id": "chase-ink-preferred-1-780d5c3d369"
+ },
+ "amex-hilton-honors-1-80d5c3d3696": {
+  "annualFee": "0",
+  "appDate": "2021-05-21",
+  "bonusEarnDate": "2021-06-21",
+  "bonusEarned": true,
+  "card": "Hilton Honors",
+  "cardType": "Personal",
+  "creditLine": "12000",
+  "inquiries": {
+   "experian": true,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Amex",
+   "img": "https://i.imgur.com/1XOuPt8.png"
+  },
+  "nextFeeDate": "",
+  "signupBonus": "150K Hilton points",
+  "spendBy": "2021-11-15",
+  "spendReq": "1000",
+  "status": "open",
+  "userId": 1,
+  "id": "amex-hilton-honors-1-80d5c3d3696"
+ },
+ "chase-sapp-preferred-1-0d5c3d36964": {
+  "annualFee": "95",
+  "appDate": "2021-06-21",
+  "bonusEarnDate": "2021-07-08",
+  "bonusEarned": true,
+  "card": "Sapp Preferred",
+  "cardType": "Personal",
+  "creditLine": "21900",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "2023-07-01",
+  "signupBonus": "100K UR points",
+  "spendBy": "2021-09-21",
+  "spendReq": "4000",
+  "status": "open",
+  "userId": 1,
+  "id": "chase-sapp-preferred-1-0d5c3d36964"
+ },
+ "chase-british-airways-1-d5c3d36964a": {
+  "annualFee": "95",
+  "appDate": "2022-04-11",
+  "bonusEarnDate": "2022-06-07",
+  "bonusEarned": true,
+  "card": "British Airways",
+  "cardType": "Personal",
+  "creditLine": "13700",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "2023-04-11",
+  "signupBonus": "100k Avios",
+  "spendBy": "2022-07-11",
+  "spendReq": "5000",
+  "status": "open",
+  "userId": 1,
+  "id": "chase-british-airways-1-d5c3d36964a"
+ },
+ "chase-ink-unlimited-1-5c3d36964a7": {
+  "annualFee": "0",
+  "appDate": "2022-11-28",
+  "bonusEarnDate": "2023-02-10",
+  "bonusEarned": true,
+  "card": "Ink Unlimited",
+  "cardType": "Business",
+  "creditLine": "5000",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "Chase",
+   "img": "https://i.imgur.com/AsfYKFY.png"
+  },
+  "nextFeeDate": "",
+  "signupBonus": "90K UR Points",
+  "spendBy": "2022-05-28",
+  "spendReq": "6000",
+  "status": "open",
+  "userId": 1,
+  "id": "chase-ink-unlimited-1-5c3d36964a7"
+ },
+ "capone-venture-1-c3d36964a7a": {
+  "annualFee": "95",
+  "appDate": "2023-06-02",
+  "bonusEarnDate": "",
+  "bonusEarned": false,
+  "card": "Venture",
+  "cardType": "Personal",
+  "creditLine": "10000",
+  "inquiries": {
+   "experian": true,
+   "equifax": true,
+   "transunion": true
+  },
+  "issuer": {
+   "name": "CapOne",
+   "img": "https://i.imgur.com/u3Rr8rT.png"
+  },
+  "nextFeeDate": "2024-06-02",
+  "signupBonus": "75K miles",
+  "spendBy": "2023-09-02",
+  "spendReq": "4000",
+  "status": "open",
+  "userId": 1,
+  "id": "capone-venture-1-c3d36964a7a"
+ },
+ "wellsfargo-fargo-bilt-1-3d36964a7a7": {
+  "annualFee": "0",
+  "appDate": "2023-06-28",
+  "bonusEarnDate": "",
+  "bonusEarned": "",
+  "card": "Fargo Bilt",
+  "cardType": "Personal",
+  "creditLine": "0",
+  "inquiries": {
+   "experian": false,
+   "equifax": false,
+   "transunion": false
+  },
+  "issuer": {
+   "name": "WellsFargo",
+   "img": ""
+  },
+  "nextFeeDate": "",
+  "signupBonus": "0",
+  "spendBy": "",
+  "spendReq": "0",
+  "status": "",
+  "userId": 1,
+  "id": "wellsfargo-fargo-bilt-1-3d36964a7a7"
+ }
+}

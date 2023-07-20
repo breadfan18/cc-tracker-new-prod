@@ -1,3 +1,4 @@
+
 const testCard = {
   annualFee: "595",
   appDate: "2023-07-03",
@@ -22,3 +23,19 @@ const testCard = {
   status: "open",
   userId: 4,
 };
+
+// function formatDate(dateStr) {
+//   if (dateStr.length === 0) return ""
+//   const dateSplit = dateStr.split("-");
+//   const formattedMonth = dateSplit[0].length === 1 ? `0${dateSplit[0]}` : dateSplit[0] 
+//   const formattedDay = dateSplit[1].length === 1 ? `0${dateSplit[1]}` : dateSplit[1] 
+//   return `${dateSplit[2]}-${formattedMonth}-${formattedDay}`;
+// }
+
+// console.log(formatDate('2-4-2016'));
+const arr = [1,2,3]
+const firstElem = arr.shift()
+
+arr.push(firstElem)
+
+console.log(arr);
