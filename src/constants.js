@@ -194,7 +194,7 @@ export const PROGRAMS = [
     id: 19,
     type: 'misc',
     name: 'Priority Pass',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/zsKSMjM.png'
   },
   {
     id: 20,
@@ -206,7 +206,7 @@ export const PROGRAMS = [
     id: 21,
     type: 'misc',
     name: 'Global Entry',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/dFmgSFt.jpg'
   },
   {
     id: 22,
