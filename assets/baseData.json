@@ -1,0 +1,74 @@
+[
+    {
+      "loyaltyType": "airlines",
+      "program": 1,
+      "memberId": "9U15XH4",
+      "loginId": "thapa.anshu",
+      "password": "de*****15",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "airlines",
+      "program": 2,
+      "memberId": "NA419225",
+      "loginId": "NA419225",
+      "password": "de*****15",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "airlines",
+      "program": 3,
+      "memberId": 20585539133,
+      "loginId": "thapaanshu11",
+      "password": "Tr******29",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "airlines",
+      "program": 7,
+      "memberId": 20186433,
+      "loginId": "thapa.anshu@gmail.com",
+      "password": "De*****15*",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "airlines",
+      "program": 8,
+      "memberId": 526089394,
+      "loginId": "upretyswaroop@gmail.com",
+      "password": "De*****15*",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "airlines",
+      "program": 13,
+      "memberId": 766250076,
+      "loginId": "thapaanshu11",
+      "password": "de*****15#",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "misc",
+      "program": 19,
+      "memberId": 1050349255,
+      "loginId": "anshut",
+      "password": "Tr***l@2*1",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "misc",
+      "program": 21,
+      "memberId": 999164347,
+      "loginId": "thapa.anshu@gmail.com",
+      "password": "Tr********29",
+      "userId": 2
+    },
+    {
+      "loyaltyType": "hotels",
+      "program": 24,
+      "memberId": 1403002411,
+      "loginId": "thapaanshu",
+      "password": "D********5*",
+      "userId": 2
+    }
+  ]
