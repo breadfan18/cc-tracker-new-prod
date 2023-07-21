@@ -98,49 +98,49 @@ export const PROGRAMS = [
     id: 3,
     type: 'airlines',
     name: 'SouthWest',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/4BseEAn.png'
   },
   {
     id: 4,
     type: 'airlines',
     name: 'Delta',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/W6lIiX5.png'
   },
   {
     id: 5,
     type: 'airlines',
     name: 'Turkish Airlines',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/aeoorRK.png'
   },
   {
     id: 6,
     type: 'airlines',
     name: 'Etihad Guest',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
-  },
+    img: 'https://i.imgur.com/vuJCxdN.png'
+},
   {
     id: 7,
     type: 'airlines',
     name: 'British Airways',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/KewcSxm.png'
   },
   {
     id: 8,
     type: 'airlines',
     name: 'Qatar Airways',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/nFQMegw.png'
   },
   {
     id: 9,
     type: 'airlines',
     name: 'Singapore Air',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/5wGl5W8.png'
   },
   {
     id: 10,
     type: 'airlines',
     name: 'Korean Skypass',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/dwzSiBX.png'
   },
   {
     id: 11,
@@ -158,7 +158,7 @@ export const PROGRAMS = [
     id: 13,
     type: 'airlines',
     name: 'Asiana Airlines',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/oPoKtH5.png'
   },
   {
     id: 14,
@@ -176,13 +176,13 @@ export const PROGRAMS = [
     id: 16,
     type: 'airlines',
     name: 'Alaska Airlines',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/lz8tJu3.png'
   },
   {
     id: 17,
     type: 'airlines',
     name: 'Hawaiian Airlines',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/yZ1CCBd.png'
   },
   {
     id: 18,
@@ -218,7 +218,7 @@ export const PROGRAMS = [
     id: 23,
     type: 'hotels',
     name: 'IHG',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/sj4njcR.png'
   },
   {
     id: 24,
@@ -236,13 +236,13 @@ export const PROGRAMS = [
     id: 26,
     type: 'hotels',
     name: 'Marriott/SPG',
-    img: 'https://i.imgur.com/B7Jvm5b.png'
+    img: 'https://i.imgur.com/DnJUT35.png'
   },
   {
     id: 27,
     type: 'hotels',
     name: 'Hyatt',
-    img: 'https://i.imgur.com/UnaXElg.png'
+    img: 'https://i.imgur.com/XbQJMri.png'
   }
 ]
 
