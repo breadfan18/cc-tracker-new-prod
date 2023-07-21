@@ -91,6 +91,7 @@ a:hover {
 .sectionHeaders{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: var(--black-opacity);
   padding: 10px;
   border-radius: 10px;

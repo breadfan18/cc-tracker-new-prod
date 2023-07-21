@@ -169,7 +169,7 @@ export const PROGRAMS = [
   {
     id: 15,
     type: 'airlines',
-    name: 'ANA Mileage Club',
+    name: 'Ana Mileage Club',
     img: 'https://i.imgur.com/B7Jvm5b.png'
   },
   {

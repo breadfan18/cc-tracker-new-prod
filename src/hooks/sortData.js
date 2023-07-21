@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { PROGRAMS } from "../constants";
 
 export const useSortableData = (data) => {
   const [sortConfig, setSortConfig] = useState({
@@ -7,7 +8,15 @@ export const useSortableData = (data) => {
   });
 
   const sortedData = useMemo(() => {
-    let dataCopy = [...data];
+    let dataCopy = data.map(i => {
+      if(i.hasOwnProperty('program')) {
+        return {
+          ...i,
+          program: i.program.name
+        }
+      }
+      return i
+    });
     if (sortConfig.key !== null) {
       dataCopy.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -19,7 +28,15 @@ export const useSortableData = (data) => {
         return 0;
       });
     }
-    return dataCopy;
+    return dataCopy.map(i => {
+      if(i.hasOwnProperty('program')) {
+        return {
+          ...i,
+          program: PROGRAMS.find(p => p.name === i.program)
+        }
+      }
+      return i
+    })
   }, [data, sortConfig]);
 
   const requestSort = (key) => {
