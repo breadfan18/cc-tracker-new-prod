@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -7,22 +7,21 @@ import {
   saveCardToFirebase,
 } from "../../redux/actions/cardsActions";
 import CardForm from "./CardForm";
+import CardFormResponsive from "./CardFormResponsive";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { ISSUERS, NEW_CARD } from "../../constants";
+import { WindowWidthContext } from "../App";
 
-function CardAddEditModal({
-  card,
-  saveCardToFirebase,
-  setModalOpen,
-}) {
+function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
   const [cardForModal, setCardForModal] = useState(
     card ? { ...card } : NEW_CARD
   );
   const [inquiries, setInquiries] = useState({ ...cardForModal.inquiries });
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
+  const windowWidth = useContext(WindowWidthContext);
 
   function handleChange(event) {
     const { name, value, checked } = event.target;
@@ -99,7 +98,7 @@ function CardAddEditModal({
     try {
       setModalOpen(true);
     } catch (err) {
-      console.log('setModalOpen func is not passed for this component');
+      console.log("setModalOpen func is not passed for this component");
     }
   }
 
@@ -108,7 +107,7 @@ function CardAddEditModal({
     try {
       setModalOpen(false);
     } catch (err) {
-      console.log('setModalOpen func is not passed for this component');
+      console.log("setModalOpen func is not passed for this component");
     }
   }
 
@@ -143,13 +142,21 @@ function CardAddEditModal({
           <Modal.Title>{cardForModal.id ? "Edit" : "Add"} Card</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CardForm
-            card={cardForModal}
-            onSave={handleSaveForFirebase}
-            onChange={handleChange}
-            // toggle={toggle}
-            // errors={errors}
-          />
+          {windowWidth > 980 ? (
+            <CardForm
+              card={cardForModal}
+              onSave={handleSaveForFirebase}
+              onChange={handleChange}
+              // toggle={toggle}
+              // errors={errors}
+            />
+          ) : (
+            <CardFormResponsive
+              card={cardForModal}
+              onSave={handleSaveForFirebase}
+              onChange={handleChange}
+            />
+          )}
         </Modal.Body>
       </Modal>
     </>
