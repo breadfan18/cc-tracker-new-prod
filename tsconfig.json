@@ -5,7 +5,7 @@
     "noImplicitAny": false,
     "outDir": "./dist/",
     "allowJs": true,
-    "sourceMap": true
+    "sourceMap": false
   },
-  "files": ["src/tools/excelDataMigrator.js", "src/ts/test.js"]
+  "files": ["src/tools/excelDataMigrator.js", "src/ts/createTestCard.js"]
 }
