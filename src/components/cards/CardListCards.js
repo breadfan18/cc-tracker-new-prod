@@ -27,7 +27,11 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
   const allCards = cards.map((card) => {
     const cardTitleColor = setColorForCardStatus("cardCard", card.status);
     return (
-      <Card style={{ width: cardWidth }} key={card.id} className="cardCard">
+      <Card
+        style={{ width: cardWidth, boxShadow: "0 0 5px gray" }}
+        key={card.id}
+        className="cardCard"
+      >
         <Card.Body style={{ padding: "0" }}>
           <div
             style={{

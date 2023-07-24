@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap");
 
 :root {
-  --color-blue: #0080FF;
-  --light-gray: #D9D7D7;
+  --color-blue: #0080ff;
+  --light-gray: #d9d7d7;
   --light-blue: rgb(210, 237, 246);
-  --black-opacity: rgba(0,0,0,0.09);
+  --black-opacity: rgba(0, 0, 0, 0.09);
   --url-white-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --url-black-bkgrd: url("https://i.imgur.com/nK3V6T8.jpg");
 }
 
 body {
   background-image: var(--url-white-bkgrd);
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .fiveTwentyFourContainer,
@@ -27,7 +27,7 @@ body {
   font-size: clamp(0.6rem, 5vw, 1rem);
 }
 
-#cardDetailsSectionRight{
+#cardDetailsSectionRight {
   flex: 1;
 }
 
@@ -75,12 +75,12 @@ nav a {
   justify-content: flex-end;
 }
 
-#burger{
+#burger {
   min-height: 3rem;
   background: none;
-	border: none;
-	padding: 10px;
-	cursor: pointer;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
 }
 
 a:hover {
@@ -88,7 +88,7 @@ a:hover {
   color: var(--color-blue);
 }
 
-.sectionHeaders{
+.sectionHeaders {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,7 +99,7 @@ a:hover {
   margin-bottom: 1rem;
 }
 
-.labels{
+.labels {
   background-color: var(--black-opacity);
   padding: 5px 5px 5px 10px;
   width: 100%;
@@ -108,7 +108,8 @@ a:hover {
   font-weight: bold;
 }
 
-.field input, .form-group select {
+.field input,
+.form-group select {
   border-radius: 0 0 10px 10px;
 }
 
@@ -123,7 +124,6 @@ a:hover {
   border: 1px solid rgb(222, 226, 230);
 }
 
-
 div.alert-danger {
   display: flex;
   justify-content: space-between;
@@ -131,7 +131,7 @@ div.alert-danger {
 }
 
 .closeIcon {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .closeIcon:hover {
@@ -145,12 +145,12 @@ div.alert-danger {
 }
 
 .nav-tabs .nav-item .nav-link.active {
-  color: #FFF;
+  color: #fff;
   background-color: var(--color-blue);
   font-weight: bold;
 }
 
-.tableHeader>svg {
+.tableHeader > svg {
   cursor: pointer;
 }
 
@@ -158,16 +158,16 @@ div.alert-danger {
   max-width: 5rem;
 }
 
-.editDeleteCard> button {
+.editDeleteCard > button {
   margin-right: 5px;
 }
 
 .accordion {
-  text-align: left
+  text-align: left;
 }
 
 .rounded-circle {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .rounded-circle:hover {
@@ -175,11 +175,12 @@ div.alert-danger {
   box-shadow: 1px 1px 2px black;
 }
 
-#cardBody, #loyaltyCardBody {
+#cardBody,
+#loyaltyCardBody {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px
+  padding: 10px;
 }
 
 #cardBody:hover {
@@ -196,8 +197,8 @@ div.alert-danger {
   flex-wrap: wrap;
 }
 
-#cardCardContainer>* {
-  margin: 5px;
+#cardCardContainer > * {
+  margin: 7px;
 }
 
 .editDeleteOnCards {
@@ -238,7 +239,7 @@ form {
   float: right;
 }
 
-.modalHeader{
+.modalHeader {
   color: var(--color-blue);
   background-color: var(--light-blue);
 }
@@ -264,12 +265,14 @@ form {
   font-size: clamp(0.9rem, 5vw, 1.2rem);
 }
 
-.cardHeaders, .accordion-button, .accordion-button[aria-expanded='true'] {
+.cardHeaders,
+.accordion-button,
+.accordion-button[aria-expanded="true"] {
   font-weight: bold;
   color: var(--color-blue);
   background-color: var(--light-blue);
   text-align: left;
-  font-size: clamp(1.2rem, 5vw, 1.5rem)
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
 }
 
 .bureauImgs {
@@ -279,8 +282,8 @@ form {
   object-fit: cover;
 }
 
-.bureauImgs[alt='experian'] {
-  border: 1px solid #D92B80;
+.bureauImgs[alt="experian"] {
+  border: 1px solid #d92b80;
   border-radius: 50%;
   padding: 2px;
   padding: 2px;
