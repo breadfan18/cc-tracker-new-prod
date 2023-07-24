@@ -30,7 +30,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "basedata": "node --unhandled-rejections=strict src/tools/excelDataMigrator.js"
+    "basedata": "tsc && node --unhandled-rejections=strict dist/tools/excelDataMigrator.js",
+    "createTestCard": "tsc && node dist/test.js"
+
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +51,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^16.1.0",
+    "typescript": "^5.1.6"
   }
 }
