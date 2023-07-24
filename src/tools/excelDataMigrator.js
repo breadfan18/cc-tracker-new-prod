@@ -1,9 +1,9 @@
-const fs = require("fs-extra");
-const { stringify } = require("csv-stringify");
-const { uid } = require("uid");
-const _ = require("lodash");
-const { PROGRAMS, ISSUERS } = require("../constants");
-const { slugify } = require("../helpers");
+import fs from "fs-extra";
+import { stringify } from "csv-stringify";
+import { uid } from "uid";
+import _ from "lodash";
+import { PROGRAMS, ISSUERS } from "../constants";
+import { slugify } from "../helpers";
 
 function formatDate(dateStr) {
   if (dateStr.length === 0 || dateStr.length === undefined) return "";

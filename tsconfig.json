@@ -7,5 +7,5 @@
     "allowJs": true,
     "sourceMap": true
   },
-  "files": ["src/tools/excelDataMigrator.js"]
+  "files": ["src/tools/excelDataMigrator.js", "src/ts/test.js"]
 }

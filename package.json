@@ -30,8 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "basedata": "tsc && node --unhandled-rejections=strict dist/tools/excelDataMigrator.js",
-    "createTestCard": "tsc && node dist/test.js"
+    "basedata": "tsc && node dist/tools/excelDataMigrator.js",
+    "test-card": "tsc && node dist/ts/test.js"
 
   },
   "eslintConfig": {

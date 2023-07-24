@@ -1,6 +1,6 @@
-const { uid } = require("uid");
-const { slugify } = require("../helpers");
-const { writeToFirebase } = require("../tools/firebase");
+import { uid } from "uid";
+import { slugify } from "../helpers";
+import { writeToFirebase } from "../tools/firebase";
 
 const testCard = {
   appDate: "2023-01-01",
@@ -8,7 +8,7 @@ const testCard = {
     name: "Chase",
     img: "https://i.imgur.com/AsfYKFY.png",
   },
-  testCard: "Test testCard",
+  card: "Test Card",
   cardType: "Personal",
   inquiries: {
     experian: true,
@@ -27,17 +27,14 @@ const testCard = {
   userId: 5,
 };
 
-const uuid =
-  testCard.id === null
-    ? slugify(
-        testCard.issuer.name +
-          " " +
-          testCard.testCard +
-          " " +
-          testCard.userId +
-          " " +
-          uid()
-      )
-    : testCard.id;
+const uuid = slugify(
+  testCard.issuer.name +
+    " " +
+    testCard.card +
+    " " +
+    testCard.userId +
+    " " +
+    uid()
+);
 
 writeToFirebase("cards", testCard, uuid);
