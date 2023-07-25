@@ -27,11 +27,7 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
   const allCards = cards.map((card) => {
     const cardTitleColor = setColorForCardStatus("cardCard", card.status);
     return (
-      <Card
-        style={{ width: cardWidth, boxShadow: "0 0 5px gray" }}
-        key={card.id}
-        className="cardCard"
-      >
+      <Card style={{ width: cardWidth }} key={card.id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
           <div
             style={{
@@ -51,12 +47,12 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
               </Card.Title>
             )}
             <Card.Subtitle
-              className="text-muted"
               style={{
                 padding: "10px",
                 margin: "0",
                 backgroundColor: cardTitleColor,
                 borderRadius: showUserName ? null : "5px 5px 0 0 ",
+                color: showUserName ? "rgba(33, 37, 41, 0.75)" : "black",
               }}
             >
               <div
