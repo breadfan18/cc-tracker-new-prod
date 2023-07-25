@@ -131,16 +131,12 @@ export default function CardListTable({
                 </td>
               )}
               <td>{formatCurrency(card.annualFee)}</td>
-              <td>
-                {card.nextFeeDate === "" ? "N/A" : formatDate(card.nextFeeDate)}
-              </td>
+              <td>{formatDate(card.nextFeeDate)}</td>
               {windowWidth > 1380 && !showCompactTable && (
                 <td>{formatCurrency(card.spendReq)}</td>
               )}
               {windowWidth > 1380 && !showCompactTable && (
-                <td>
-                  {card.spendBy === "" ? "N/A" : formatDate(card.spendBy)}
-                </td>
+                <td>{formatDate(card.spendBy)}</td>
               )}
               {windowWidth > 1070 && !showCompactTable && (
                 <td>
@@ -152,18 +148,13 @@ export default function CardListTable({
                 </td>
               )}
               {windowWidth > 1280 && !showCompactTable && (
-                <td>
-                  {card.bonusEarnDate ? formatDate(card.bonusEarnDate) : "WIP"}
-                </td>
+                <td>{formatDate(card.bonusEarnDate)}</td>
               )}
               <td>{titleCase(card.status)}</td>
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">
-                    <CardAddEditModal
-                      card={card}
-                      setModalOpen={setModalOpen}
-                    />
+                    <CardAddEditModal card={card} setModalOpen={setModalOpen} />
                     <ConfirmDeleteModal
                       data={card}
                       dataType="card"
