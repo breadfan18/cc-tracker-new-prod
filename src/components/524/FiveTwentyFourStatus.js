@@ -10,7 +10,7 @@ export function FiveTwentyFourStatus({ percent, label }) {
         variant={
           percent >= 80
             ? "danger"
-            : percent < 80 && percent > 20
+            : percent < 80 && percent > 40
             ? "warning"
             : "success"
         }
