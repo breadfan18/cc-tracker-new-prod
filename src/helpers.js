@@ -5,6 +5,11 @@ import {
   USERS,
 } from "./constants";
 
+export const pipe =
+  (...fns) =>
+  (x) =>
+    fns.reduce((v, f) => f(v), x);
+
 export function wasCardOpenedWithinLast24Months(appDate) {
   const twoYearsAgoFromToday = Date.parse(
     new Date(new Date().setFullYear(new Date().getFullYear() - 2))

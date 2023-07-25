@@ -29,11 +29,7 @@ function CardTabs({ cards }) {
   });
   return (
     <>
-      <Tabs
-        defaultActiveKey="home"
-        id="uncontrolled-tab-example"
-        className="mb-3"
-      >
+      <Tabs defaultActiveKey="1" id="uncontrolled-tab-example" className="mb-3">
         <Tab eventKey="home" title="All Cards">
           {windowWidth > 1000 ? (
             <CardListTable

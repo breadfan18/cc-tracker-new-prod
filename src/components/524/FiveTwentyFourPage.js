@@ -5,7 +5,11 @@ import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
 import PropTypes from "prop-types";
 import { FiveTwentyFourStatus } from "./FiveTwentyFourStatus";
-import { wasCardOpenedWithinLast24Months } from "../../helpers";
+import {
+  pipe,
+  sortCardsByDate,
+  wasCardOpenedWithinLast24Months,
+} from "../../helpers";
 import FiveTwentyFourAccordion from "./FiveTwentyFourAccordion";
 import SelectInput from "../common/SelectInput";
 import CardList from "../cards/CardListTable";
@@ -33,28 +37,30 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
 
   const users524Status = usersToDisplay.map((user) => {
     const userName = USERS.find((u) => u.id === parseInt(user)).name;
-    const cards524 = cardsByUser[user]
-      .filter(
-        (card) =>
-          wasCardOpenedWithinLast24Months(card.appDate) &&
-          card.cardType !== "Business"
-      )
-      .map((card) => {
-        return { ...card, userName };
-      });
+    const dateSortedCards524 = pipe((cards) => {
+      return cards
+        .filter(
+          (card) =>
+            wasCardOpenedWithinLast24Months(card.appDate) &&
+            card.cardType !== "Business"
+        )
+        .map((card) => {
+          return { ...card, userName };
+        });
+    }, sortCardsByDate)(cardsByUser[user]);
 
     const cardsListComponent =
-      cards524.length > 0 ? (
+      dateSortedCards524.length > 0 ? (
         windowWidth > 1000 ? (
           <CardList
-            cards={cards524}
+            cards={dateSortedCards524}
             showEditDelete={false}
             showUser={false}
             showCompactTable={true}
           />
         ) : (
           <CardListCards
-            cards={cards524}
+            cards={dateSortedCards524}
             showEditDelete={false}
             showUserName={false}
           />
@@ -62,11 +68,11 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
       ) : null;
 
     const five24TrackerElem =
-      cards524.length > 0 ? (
+      dateSortedCards524.length > 0 ? (
         <>
           <FiveTwentyFourStatus
-            percent={(cards524.length / 5) * 100}
-            label={`${cards524.length}/5`}
+            percent={(dateSortedCards524.length / 5) * 100}
+            label={`${dateSortedCards524.length}/5`}
             key={user.id}
           />
         </>
@@ -79,7 +85,7 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
         <FiveTwentyFourAccordion
           five24Cards={cardsListComponent}
           user={userName}
-          showCards={cards524.length > 0}
+          showCards={dateSortedCards524.length > 0}
           fiveTwentyFourStatusElement={five24TrackerElem}
         />
         <br />
