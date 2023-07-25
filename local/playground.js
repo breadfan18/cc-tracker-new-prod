@@ -8,5 +8,3 @@ function getRandomDate(startDate, endDate) {
 const startDate = new Date("2021-08-24");
 const endDate = new Date();
 const randomDate = getRandomDate(startDate, endDate);
-
-console.log(randomDate);
