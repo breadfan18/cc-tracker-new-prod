@@ -39,7 +39,9 @@ export function addUserNameToCard(card) {
 }
 
 export function sortCardsByDate(cards) {
-  return cards.sort((a, b) => Date.parse(b.appDate) - Date.parse(a.appDate));
+  return [...cards].sort(
+    (a, b) => Date.parse(b.appDate) - Date.parse(a.appDate)
+  );
 }
 
 export function sortNotesByDate(notes) {
