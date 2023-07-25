@@ -1,0 +1,11 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "noImplicitAny": false,
+    "outDir": "./dist/",
+    "allowJs": true,
+    "sourceMap": false
+  },
+  "files": ["src/tools/excelDataMigrator.js", "src/ts/createTestCard.js"]
+}
