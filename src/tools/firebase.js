@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
 
@@ -16,7 +15,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
-// const analytics = getAnalytics(app);
 
 // DATABASE FUNCTIONS
 export function getFireBaseData(endpoint, dispatch, dispatchFunc) {
