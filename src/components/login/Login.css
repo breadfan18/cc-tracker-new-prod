@@ -1,0 +1,140 @@
+:root {
+  --mainColor: rgba(88, 57, 133);
+  --lightColor: rgba(88, 57, 133, 0.7);
+  --lighterColor: rgba(88, 57, 133, 0.5);
+  --superlightColor: rgba(88, 57, 133, 0.3);
+  --bodyColor: white;
+  --inputReadOnlyBorder: white;
+  --inputReadOnlyBkgrdColor: white;
+  --light-gray: #d9d7d7;
+  --color-blue: #0080ff;
+}
+
+/* Login Form */
+#loginMain {
+  background-color: rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#loginForm {
+  background-color: rgba(210, 237, 246, 0.6);
+  padding: 3rem;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 0 5px gray;
+  width: clamp(20rem, 33vw, 27rem);
+}
+
+#loginForm h1 {
+  color: var(--color-blue);
+  border-bottom: 2px solid var(--superlightColor);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+}
+
+#socialLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: clamp(10rem, 50vw, 20rem);
+  /* height: clamp(1.5rem, 5vh, 3rem); */
+}
+
+#socialLogin * {
+  width: clamp(10rem, 50vw, 20rem);
+  height: clamp(1.5rem, 5vh, 3rem);
+  margin-bottom: 5px;
+}
+
+#googleLogin {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(234, 67, 53);
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+}
+
+#facebookLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(60, 88, 156);
+  border: none;
+  border-radius: 5px;
+}
+
+#linkedIn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(10, 102, 194);
+  border: none;
+  border-radius: 5px;
+}
+
+#googleIcon,
+#facebookIcon,
+#linkedinIcon {
+  color: white;
+  /* size: 0.3rem; */
+}
+
+#loginOr {
+  text-align: center;
+  color: var(--color-blue);
+}
+
+#userAndPwdForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#userAndPwdForm svg {
+  align-self: center;
+  justify-self: center;
+}
+
+.userAndPwdInput {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.loginLabels {
+  margin: 0;
+  padding: 0;
+  font-size: 1.9rem;
+  color: var(--mainColor);
+  padding-right: 10px;
+  border-right: 1px solid var(--superlightColor);
+}
+
+#loginSubmit {
+  width: clamp(10rem, 50vw, 20rem);
+  height: clamp(1.5rem, 5vh, 3rem);
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.login-form-group {
+  display: flex;
+  border: 1px solid var(--lighterColor);
+  background-color: white;
+  padding-left: 10px;
+  border-radius: 5px;
+  width: 20rem;
+  margin-bottom: 10px;
+}
+
+#togglePwd {
+  margin-left: auto;
+  margin-right: 10px;
+  cursor: pointer;
+  color: var(--mainColor);
+  font-size: 1.3rem;
+}
