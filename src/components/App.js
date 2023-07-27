@@ -14,10 +14,12 @@ import ManageLoyaltyPage from "./loyalty/ManageLoyaltyPage";
 import Test from "./testing/UseEffectTest";
 import Checkbox from "./testing/Checkbox";
 import Login from "./login/Login";
+import { auth } from "../tools/firebase";
 
 export const WindowWidthContext = createContext();
 
 function App() {
+  const [userState, setUserState] = useState({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
@@ -27,10 +29,20 @@ function App() {
         setWindowWidth(window.innerWidth)
       );
   }, []);
-  const user = false;
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) =>
+      setUserState({ user })
+    );
+
+    return function () {
+      unsubscribe();
+    };
+  }, [userState.user]);
+
   return (
     <>
-      {user ? (
+      {userState.user ? (
         <WindowWidthContext.Provider value={windowWidth}>
           <div className="navContainer">
             <Header />

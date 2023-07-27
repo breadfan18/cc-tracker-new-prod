@@ -1,13 +1,24 @@
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
 
 const firebaseConfig = {
+  apiKey: "AIzaSyBUS_jXqW-xQdBzeiiAGmYC-tl1Byzfhw8",
+  authDomain: "cc-tracker-new.firebaseapp.com",
   databaseURL: "https://cc-tracker-new-default-rtdb.firebaseio.com/",
+  projectId: "cc-tracker-new",
+  storageBucket: "cc-tracker-new.appspot.com",
+  messagingSenderId: "278786623631",
+  appId: "1:278786623631:web:918ade05f2772ea64248fa",
+  measurementId: "G-34RE8T9GE9",
 };
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
+// const analytics = getAnalytics(app);
 
+// DATABASE FUNCTIONS
 export function getFireBaseData(endpoint, dispatch, dispatchFunc) {
   onValue(ref(db, `${endpoint}/`), (snap) => {
     const allData = [];
@@ -29,3 +40,16 @@ export function writeToFirebase(endpoint, data, id) {
 export function deleteFromFirebase(endpoint, id) {
   remove(ref(db, `${endpoint}/${id}`));
 }
+
+// AUTH FUNCTIONS
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+function login() {
+  signInWithRedirect(auth, provider);
+}
+
+function logout() {
+  auth.signOut();
+}
+
+export { login, logout, auth };

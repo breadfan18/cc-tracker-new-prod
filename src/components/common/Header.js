@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import Burger from "./Burger";
 import { WindowWidthContext } from "../App";
 import { APP_COLOR_BLUE } from "../../constants";
+import { logout } from "../../tools/firebase";
+import { Button } from "react-bootstrap";
 
 const Header = () => {
   const windowWidth = useContext(WindowWidthContext);
@@ -83,6 +85,9 @@ const Header = () => {
       </NavLink>
       <NavLink to="/loyalty-accounts" activeStyle={activeStyle}>
         Loyalty
+      </NavLink>
+      <NavLink to="/" activeStyle={activeStyle}>
+        <Button onClick={logout}>Sign out</Button>
       </NavLink>
     </nav>
   );

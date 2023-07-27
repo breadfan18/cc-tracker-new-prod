@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { login } from "../../tools/firebase";
 
 export default function SocialLoginButton({
   Icon,
@@ -17,10 +18,9 @@ export default function SocialLoginButton({
         padding: "10px",
       }}
       disabled={btnDisabled}
+      onClick={login}
     >
-      <a href={`/${loginType}/auth`}>
-        <Icon style={{ fontSize: "1.5rem", color: "white" }} />
-      </a>
+      <Icon style={{ fontSize: "1.5rem", color: "white" }} />
     </Button>
   );
 }
