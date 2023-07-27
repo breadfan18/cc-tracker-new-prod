@@ -1,18 +1,14 @@
 :root {
-  --mainColor: rgba(88, 57, 133);
-  --lightColor: rgba(88, 57, 133, 0.7);
-  --lighterColor: rgba(88, 57, 133, 0.5);
-  --superlightColor: rgba(88, 57, 133, 0.3);
-  --bodyColor: white;
-  --inputReadOnlyBorder: white;
-  --inputReadOnlyBkgrdColor: white;
-  --light-gray: #d9d7d7;
   --color-blue: #0080ff;
+  --color-light-blue: rgb(210, 237, 246);
+  --light-gray: #d9d7d7;
+  --light-blue: rgb(210, 237, 246);
+  --black-opacity: rgba(0, 0, 0, 0.09);
 }
 
 /* Login Form */
 #loginMain {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(210, 237, 246, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +16,7 @@
 }
 
 #loginForm {
-  background-color: rgba(210, 237, 246, 0.6);
+  background-color: rgba(0, 0, 0, 0.09);
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 0 5px gray;
@@ -30,7 +26,6 @@
 
 #loginForm h1 {
   color: var(--color-blue);
-  border-bottom: 2px solid var(--superlightColor);
 }
 
 #socialLogin {
@@ -82,7 +77,7 @@
 }
 
 #loginSubmit {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   padding: 10px;
 }
 

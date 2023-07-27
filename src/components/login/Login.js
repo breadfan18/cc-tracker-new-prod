@@ -28,6 +28,7 @@ export default function Login({ windowWidth }) {
       >
         <h1>Credit Card Tracker</h1>
         <div id="socialLogin">
+          <p>Only Google Login is active at this time</p>
           <SocialLoginButton
             Icon={BsGoogle}
             loginType="google"
