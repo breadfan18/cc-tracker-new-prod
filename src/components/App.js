@@ -53,7 +53,7 @@ function App() {
           </div>
         </WindowWidthContext.Provider>
       ) : (
-        <Login />
+        <Login windowWidth={windowWidth} />
       )}
     </>
   );

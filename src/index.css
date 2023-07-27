@@ -83,7 +83,8 @@ nav a {
   cursor: pointer;
 }
 
-a:hover {
+.navFull a:hover,
+.navSmall a:hover {
   background-color: var(--light-blue);
   color: var(--color-blue);
 }

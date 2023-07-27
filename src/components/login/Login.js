@@ -1,21 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { ImEyeBlocked, ImEye } from "react-icons/im";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdPassword } from "react-icons/md";
-import { BsGoogle, BsFacebook, BsLinkedin } from "react-icons/bs";
+import { BsGoogle, BsMeta, BsLinkedin } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import SocialLoginButton from "./SocialLoginButton";
 
-export default function Login() {
+export default function Login({ windowWidth }) {
+  const [showPwd, setShowPwd] = useState(false);
+  const [pwdType, setPwdType] = useState("password");
+
+  function togglePwdDisplay() {
+    if (pwdType === "password") {
+      setPwdType("text");
+      setShowPwd(!showPwd);
+    } else {
+      setPwdType("password");
+      setShowPwd(!showPwd);
+    }
+  }
   return (
     <main id="loginMain">
-      <section id="loginForm">
+      <section
+        id="loginForm"
+        style={{ padding: windowWidth > 450 ? "2rem" : "1rem" }}
+      >
         <h1>Credit Card Tracker</h1>
         <div id="socialLogin">
-          <SocialLoginButton Icon={BsGoogle} loginType="google" />
-          <SocialLoginButton Icon={BsFacebook} loginType="facebook" />
-          <SocialLoginButton Icon={BsLinkedin} loginType="linkedin" />
+          <SocialLoginButton
+            Icon={BsGoogle}
+            loginType="google"
+            btnColor="rgba(234, 67, 53)"
+            btnDisabled={false}
+          />
+          <SocialLoginButton
+            Icon={BsMeta}
+            loginType="facebook"
+            btnColor="rgba(60, 88, 156)"
+            btnDisabled={true}
+          />
+          <SocialLoginButton
+            Icon={BsLinkedin}
+            loginType="linkedin"
+            btnColor="rgba(10, 102, 194)"
+            btnDisabled={true}
+          />
         </div>
         <h2 id="loginOr">OR</h2>
         <form action="" id="userAndPwdForm">
@@ -32,15 +62,19 @@ export default function Login() {
             <input
               id="pwdField"
               className="userAndPwdInput"
-              type="password"
+              type={pwdType}
               placeholder="Password"
             />
-            <ImEye id="togglePwd" />
+            {showPwd ? (
+              <ImEyeBlocked id="togglePwd" onClick={togglePwdDisplay} />
+            ) : (
+              <ImEye id="togglePwd" onClick={togglePwdDisplay} />
+            )}
           </div>
+          <Button id="loginSubmit" className="btn btn-success" disabled>
+            Log In
+          </Button>
         </form>
-        <Button id="loginSubmit" className="btn btn-success">
-          Log In
-        </Button>
       </section>
     </main>
   );
