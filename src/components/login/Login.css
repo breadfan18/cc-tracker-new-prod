@@ -8,7 +8,6 @@
 
 /* Login Form */
 #loginMain {
-  background-color: rgba(210, 237, 246, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +15,7 @@
 }
 
 #loginForm {
-  background-color: rgba(0, 0, 0, 0.09);
+  background-color: var(--color-light-blue);
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 0 5px gray;
@@ -35,6 +34,7 @@
 
 #socialLogin button:hover {
   transform: scale(1.01);
+  background: white;
 }
 
 #loginOr {
