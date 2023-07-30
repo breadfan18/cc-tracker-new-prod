@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
@@ -10,6 +10,17 @@ import { WindowWidthContext } from "../App";
 
 function CardTabs({ cards }) {
   const windowWidth = useContext(WindowWidthContext);
+  const storedUser = JSON.parse(localStorage.getItem("selectedUserTab"));
+  const [selectedUser, setSelectedUser] = useState(storedUser || "1");
+
+  function handleSelect(tabKey) {
+    setSelectedUser(tabKey.toString());
+  }
+
+  useEffect(() => {
+    localStorage.setItem("selectedUserTab", JSON.stringify(selectedUser));
+  }, [selectedUser]);
+
   const userTabs = USERS.map((user) => {
     const cardsForThisUser = cards.filter((card) => card.userId === user.id);
     return (
@@ -29,8 +40,16 @@ function CardTabs({ cards }) {
   });
   return (
     <>
-      <Tabs defaultActiveKey="1" id="uncontrolled-tab-example" className="mb-3">
-        <Tab eventKey="home" title="All Cards">
+      <Tabs
+        defaultActiveKey={selectedUser}
+        className="mb-3"
+        onSelect={handleSelect}
+      >
+        <Tab
+          eventKey="home"
+          title="All Cards"
+          onSelect={() => console.log("foo")}
+        >
           {windowWidth > 1000 ? (
             <CardListTable
               cards={cards}
