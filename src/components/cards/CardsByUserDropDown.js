@@ -15,10 +15,7 @@ export default function CardsByUserDropDown({ cards }) {
     [selectedUser]
   );
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setSelectedUser(value === "" ? "0" : value);
-  };
+  const handleChange = (event) => setSelectedUser(event.target.value || "0");
 
   const cardsForSelectedUser = showAllUsers
     ? cards
