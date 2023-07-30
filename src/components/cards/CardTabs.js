@@ -10,15 +10,12 @@ import { WindowWidthContext } from "../App";
 
 function CardTabs({ cards }) {
   const windowWidth = useContext(WindowWidthContext);
-  const storedUser = JSON.parse(localStorage.getItem("selectedUserTab"));
+  const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "1");
-
-  function handleSelect(tabKey) {
-    setSelectedUser(tabKey.toString());
-  }
+  const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
 
   useEffect(() => {
-    localStorage.setItem("selectedUserTab", JSON.stringify(selectedUser));
+    localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
   }, [selectedUser]);
 
   const userTabs = USERS.map((user) => {
@@ -43,13 +40,9 @@ function CardTabs({ cards }) {
       <Tabs
         defaultActiveKey={selectedUser}
         className="mb-3"
-        onSelect={handleSelect}
+        onSelect={handleSelectTab}
       >
-        <Tab
-          eventKey="home"
-          title="All Cards"
-          onSelect={() => console.log("foo")}
-        >
+        <Tab eventKey="0" title="All Cards">
           {windowWidth > 1000 ? (
             <CardListTable
               cards={cards}
