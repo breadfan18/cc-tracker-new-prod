@@ -1,28 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SelectInput from "../common/SelectInput";
 import CardListCards from "./CardListCards";
 import { USERS } from "../../constants";
 import PropTypes from "prop-types";
 
 export default function CardsByUserDropDown({ cards }) {
-  const [selectedUser, setSelectedUser] = useState();
-  const showAllUsers = isNaN(selectedUser) || selectedUser === undefined;
+  const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
+  const [selectedUser, setSelectedUser] = useState(storedUser || "1");
+  const showAllUsers =
+    isNaN(selectedUser) || selectedUser === undefined || selectedUser === "0";
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setSelectedUser(name === "id" ? parseInt(value, 10) : value);
-  }
+  useEffect(
+    () => localStorage.setItem("selectedUser", JSON.stringify(selectedUser)),
+    [selectedUser]
+  );
+
+  const handleChange = (event) => setSelectedUser(event.target.value || "0");
 
   const cardsForSelectedUser = showAllUsers
     ? cards
-    : cards.filter((card) => card.userId === selectedUser);
+    : cards.filter((card) => card.userId === parseInt(selectedUser));
 
   return (
     <>
       <SelectInput
         name="id"
         label="Select User"
-        value={selectedUser}
+        value={parseInt(selectedUser)}
         defaultOption="All Users"
         options={USERS.map((user) => ({
           value: user.id,
@@ -36,7 +40,9 @@ export default function CardsByUserDropDown({ cards }) {
         {showAllUsers
           ? "All Cards"
           : `${
-              USERS.find((user) => user.id === selectedUser).name.split(" ")[0]
+              USERS.find(
+                (user) => user.id === parseInt(selectedUser)
+              ).name.split(" ")[0]
             }'s cards`}
       </label>
       <CardListCards cards={cardsForSelectedUser} showUserName={showAllUsers} />
