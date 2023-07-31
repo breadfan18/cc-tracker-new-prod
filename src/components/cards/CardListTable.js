@@ -81,7 +81,8 @@ export default function CardListTable({
           )}
           {windowWidth > 1550 && <th className="tableHeader">Credit Pull</th>}
           <th className="tableHeader">
-            Annual Fee <FaSort onClick={() => requestSort("annualFee")} />
+            Annual Fee{" "}
+            <FaSort onClick={() => requestSort(CARD_DATA_KEYS.annualFee)} />
           </th>
           <th className="tableHeader">Next Fee Date</th>
           {windowWidth > 1380 && !showCompactTable && (
