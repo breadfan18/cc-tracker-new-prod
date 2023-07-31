@@ -86,9 +86,7 @@ const Header = () => {
       <NavLink to="/loyalty-accounts" activeStyle={activeStyle}>
         Loyalty
       </NavLink>
-      <NavLink to="/" activeStyle={activeStyle}>
-        <Button onClick={logout}>Sign out</Button>
-      </NavLink>
+      <Button onClick={logout}>Sign out</Button>
     </nav>
   );
 };
