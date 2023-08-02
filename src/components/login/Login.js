@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { ImEyeBlocked, ImEye } from "react-icons/im";
-import { AiOutlineUser } from "react-icons/ai";
-import { MdPassword } from "react-icons/md";
+import { AiOutlineUser, AiFillLock } from "react-icons/ai";
 import { BsGoogle, BsMeta, BsLinkedin } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import SocialLoginButton from "./SocialLoginButton";
@@ -59,7 +58,7 @@ export default function Login({ windowWidth }) {
             />
           </div>
           <div className="login-form-group">
-            <MdPassword className="loginLabels" />
+            <AiFillLock className="loginLabels" />
             <input
               id="pwdField"
               className="userAndPwdInput"
