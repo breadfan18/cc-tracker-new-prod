@@ -16,6 +16,7 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.9.0",
     "react-redux": "7.2.4",
+    "react-redux-firebase": "^3.11.0",
     "react-router-dom": "5.2.0",
     "react-scripts": "^5.0.1",
     "react-toastify": "7.0.4",
@@ -32,7 +33,6 @@
     "eject": "react-scripts eject",
     "basedata": "tsc && node dist/tools/excelDataMigrator.js",
     "test-card": "tsc && node dist/ts/createTestCard.js"
-
   },
   "eslintConfig": {
     "extends": [
