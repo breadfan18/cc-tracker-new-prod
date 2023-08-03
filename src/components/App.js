@@ -15,6 +15,7 @@ import Test from "./testing/UseEffectTest";
 import Checkbox from "./testing/Checkbox";
 import Login from "./login/Login";
 import { auth } from "../tools/firebase";
+import { Spinner } from "./common/Spinner";
 
 export const WindowWidthContext = createContext();
 
@@ -42,7 +43,9 @@ function App() {
 
   return (
     <>
-      {userState.user ? (
+      {userState.user === undefined ? (
+        <Spinner />
+      ) : userState.user ? (
         <WindowWidthContext.Provider value={windowWidth}>
           <Header user={userState.user} />
           <div className="container-fluid">

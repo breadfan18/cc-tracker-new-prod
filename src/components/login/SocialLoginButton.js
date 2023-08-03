@@ -1,13 +1,16 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { login } from "../../tools/firebase";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function SocialLoginButton({
-  Icon,
-  loginType,
-  btnColor,
-  btnDisabled,
-}) {
+export default function SocialLoginButton({ Icon, btnColor, btnDisabled }) {
+  // The handle login function specifically uses the google login function right now
+  // In the future, when more sign in features are implemented, we need to change this.
+  const history = useHistory();
+  function handleLogin() {
+    login();
+    history.push("/cards");
+  }
   return (
     <Button
       style={{
@@ -18,7 +21,7 @@ export default function SocialLoginButton({
         padding: "10px",
       }}
       disabled={btnDisabled}
-      onClick={login}
+      onClick={handleLogin}
     >
       <Icon style={{ fontSize: "1.5rem", color: "white" }} />
     </Button>
