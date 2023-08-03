@@ -3,10 +3,9 @@ import { NavLink } from "react-router-dom";
 import Burger from "./Burger";
 import { WindowWidthContext } from "../App";
 import { APP_COLOR_BLUE } from "../../constants";
-import { logout } from "../../tools/firebase";
-import { Button } from "react-bootstrap";
+import UserProfileSection from "./UserProfileSection";
 
-const Header = () => {
+const Header = ({ user }) => {
   const windowWidth = useContext(WindowWidthContext);
   const [open, setOpen] = useState(false);
   const activeStyle = { backgroundColor: "white", color: APP_COLOR_BLUE };
@@ -24,12 +23,13 @@ const Header = () => {
   });
 
   return windowWidth < 650 ? (
-    <>
-      <div id="burgerContainer">
+    <main className="smallNavContainer">
+      <div id="smallNavTopHeader">
         <Burger open={open} setOpen={setOpen} />
+        <UserProfileSection user={user} windowWidth={windowWidth} />
       </div>
       {open && (
-        <nav className="navSmall" ref={navRef}>
+        <nav className="navSmallContent" ref={navRef}>
           <NavLink
             to="/"
             activeStyle={activeStyle}
@@ -68,26 +68,28 @@ const Header = () => {
           </NavLink>
         </nav>
       )}
-    </>
+    </main>
   ) : (
-    <nav className="navFull">
-      <NavLink to="/" activeStyle={activeStyle} exact>
-        Home
-      </NavLink>
-      <NavLink to="/about" activeStyle={activeStyle}>
-        About
-      </NavLink>
-      <NavLink to="/cards" activeStyle={activeStyle}>
-        Cards
-      </NavLink>
-      <NavLink to="/524" activeStyle={activeStyle}>
-        5/24
-      </NavLink>
-      <NavLink to="/loyalty-accounts" activeStyle={activeStyle}>
-        Loyalty
-      </NavLink>
-      <Button onClick={logout}>Sign out</Button>
-    </nav>
+    <main className="navContainer">
+      <nav className="navFull">
+        <NavLink to="/" activeStyle={activeStyle} exact>
+          Home
+        </NavLink>
+        <NavLink to="/about" activeStyle={activeStyle}>
+          About
+        </NavLink>
+        <NavLink to="/cards" activeStyle={activeStyle}>
+          Cards
+        </NavLink>
+        <NavLink to="/524" activeStyle={activeStyle}>
+          5/24
+        </NavLink>
+        <NavLink to="/loyalty-accounts" activeStyle={activeStyle}>
+          Loyalty
+        </NavLink>
+      </nav>
+      <UserProfileSection user={user} />
+    </main>
   );
 };
 

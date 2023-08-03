@@ -44,9 +44,7 @@ function App() {
     <>
       {userState.user ? (
         <WindowWidthContext.Provider value={windowWidth}>
-          <div className="navContainer">
-            <Header />
-          </div>
+          <Header user={userState.user} />
           <div className="container-fluid">
             <Switch>
               <Route exact path="/" component={HomePage} />

@@ -41,6 +41,22 @@ body {
   padding: 0;
   margin-bottom: 10px;
   min-height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.smallNavContainer {
+  background-color: var(--color-blue);
+  padding: 0;
+  margin-bottom: 10px;
+  min-height: 3rem;
+}
+
+#smallNavTopHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navFull {
@@ -49,12 +65,13 @@ body {
   color: var(--light-blue);
   display: flex;
   justify-content: center;
-  width: 100%;
+  /* width: 100%; */
 }
 
-.navSmall {
+.navSmallContent {
   display: flex;
   flex-direction: column;
+  background-color: var(--color-blue);
 }
 
 nav a {
@@ -66,13 +83,15 @@ nav a {
   border-radius: 10px;
 }
 
-.navSmall a {
+.navSmallContent a {
   margin-bottom: 5px;
 }
 
 #burgerContainer {
   display: flex;
-  justify-content: flex-end;
+  background: var(--color-blue);
+  align-items: center;
+  justify-content: space-between;
 }
 
 #burger {
@@ -84,11 +103,20 @@ nav a {
 }
 
 .navFull a:hover,
-.navSmall a:hover {
+.navSmallContent a:hover {
   background-color: var(--light-blue);
   color: var(--color-blue);
 }
 
+.userInfo {
+  color: white;
+  padding: 0 10px;
+}
+
+#userDisplayName {
+  height: 100%;
+  margin: 0;
+}
 .sectionHeaders {
   display: flex;
   justify-content: space-between;

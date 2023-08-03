@@ -7,7 +7,7 @@ function Burger({ open, setOpen }) {
   return (
     <button id="burger" onClick={() => setOpen(!open)}>
       {open ? (
-        <MdClose style={{ color: "white", fontSize: "2.5rem" }} />
+        <MdClose style={{ color: "white", fontSize: "2rem" }} />
       ) : (
         <GiHamburgerMenu style={{ color: "white", fontSize: "2rem" }} />
       )}
