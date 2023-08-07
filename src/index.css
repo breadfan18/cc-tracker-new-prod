@@ -108,6 +108,11 @@ a:hover {
   font-weight: bold;
 }
 
+.cardsDropDownContainer .labels {
+  background-color: var(--light-blue);
+  color: var(--color-blue);
+}
+
 .field input,
 .form-group select {
   border-radius: 0 0 10px 10px;
@@ -293,4 +298,25 @@ form {
 #five24AccordionHeader .accordion-button {
   font-size: 0.9rem;
   background-color: var(--black-opacity);
+}
+
+#cardFilterContainer {
+  display: flex;
+  box-shadow: 0 0 3px;
+  border-radius: 10px;
+}
+
+#cardFilterLabel {
+  width: clamp(8rem, 10rem, 20rem);
+  padding: 10px;
+  background-color: rgb(210, 237, 246);
+  border-radius: 10px 0 0 10px;
+  color: var(--color-blue);
+}
+
+#cardFilterInput {
+  border: none;
+  flex: 1;
+  border-radius: 10px;
+  padding-left: 10px;
 }
