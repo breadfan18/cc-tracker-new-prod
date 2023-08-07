@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithRedirect,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
 
 const firebaseConfig = {
@@ -50,4 +55,4 @@ function logout() {
   auth.signOut();
 }
 
-export { login, logout, auth };
+export { login, logout, auth, onAuthStateChanged };
