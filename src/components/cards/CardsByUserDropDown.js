@@ -3,6 +3,7 @@ import SelectInput from "../common/SelectInput";
 import CardListCards from "./CardListCards";
 import { USERS } from "../../constants";
 import PropTypes from "prop-types";
+import { Form } from "react-bootstrap";
 
 export default function CardsByUserDropDown({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
@@ -43,29 +44,21 @@ export default function CardsByUserDropDown({ cards }) {
 
   return (
     <div className="cardsDropDownContainer">
-      <SelectInput
-        name="id"
-        label="Select User"
-        value={parseInt(selectedUser)}
-        defaultOption="All Users"
-        options={USERS.map((user) => ({
-          value: user.id,
-          text: user.name,
-        }))}
-        onChange={handleUserChange}
-        // error={errors.author}
-      />
-      <hr />
       <div id="cardFilterContainer">
-        <label id="cardFilterLabel">
-          {showAllUsers
-            ? "All Cards"
-            : `${
-                USERS.find(
-                  (user) => user.id === parseInt(selectedUser)
-                ).name.split(" ")[0]
-              }'s cards`}
-        </label>
+        <Form.Select
+          id="cardFilterUserSelect"
+          onChange={handleUserChange}
+          value={selectedUser}
+        >
+          <option value="">All Users</option>
+          {USERS.map((user) => {
+            return (
+              <option key={user.id} value={parseInt(user.id)}>
+                {user.name}
+              </option>
+            );
+          })}
+        </Form.Select>
         <input
           type="search"
           value={filter.query}
@@ -74,7 +67,7 @@ export default function CardsByUserDropDown({ cards }) {
           id="cardFilterInput"
         />
       </div>
-      <br />
+      <hr />
       <CardListCards cards={filter.cardList} showUserName={showAllUsers} />
     </div>
   );
