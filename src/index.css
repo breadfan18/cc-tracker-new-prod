@@ -328,7 +328,3 @@ form {
   height: 2.67rem;
   border-radius: 10px 10px 10px 0;
 }
-
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: searchfield-cancel-button;
-}
