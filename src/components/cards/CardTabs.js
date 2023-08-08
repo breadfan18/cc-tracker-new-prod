@@ -7,15 +7,21 @@ import { connect } from "react-redux";
 import { USERS } from "../../constants";
 import CardListCards from "./CardListCards";
 import { WindowWidthContext } from "../App";
+import { useFilteredData } from "../../hooks/filterCards";
 
 function CardTabs({ cards }) {
   const windowWidth = useContext(WindowWidthContext);
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "1");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
+  const { filter, setFilter, handleFilter } = useFilteredData(cards);
 
   useEffect(() => {
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
+    setFilter({
+      query: "",
+      cardList: [...cards],
+    });
   }, [selectedUser]);
 
   const filterWidth =
@@ -50,8 +56,8 @@ function CardTabs({ cards }) {
     <>
       <input
         type="search"
-        value={""}
-        onChange={() => {}}
+        value={filter.query}
+        onChange={handleFilter}
         placeholder="Filter by card name.."
         id="cardTabsFilterInput"
         style={{ width: filterWidth }}
@@ -64,14 +70,14 @@ function CardTabs({ cards }) {
         <Tab eventKey="0" title="All Cards">
           {windowWidth > 1000 ? (
             <CardListTable
-              cards={cards}
+              cards={filter.cardList}
               showEditDelete={true}
               showUser={true}
               showCompactTable={false}
             />
           ) : (
             <CardListCards
-              cards={cards}
+              cards={filter.cardList}
               windowWidth={windowWidth}
               showUserName={true}
             />
