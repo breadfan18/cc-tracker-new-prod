@@ -18,6 +18,17 @@ function CardTabs({ cards }) {
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
   }, [selectedUser]);
 
+  const filterWidth =
+    windowWidth >= 750
+      ? "32vw"
+      : windowWidth < 750 && windowWidth >= 727
+      ? "30vw"
+      : windowWidth < 727 && windowWidth >= 680
+      ? "25vw"
+      : windowWidth < 680 && windowWidth >= 661
+      ? "23vw"
+      : "21vw";
+
   const userTabs = USERS.map((user) => {
     const cardsForThisUser = cards.filter((card) => card.userId === user.id);
     return (
@@ -37,6 +48,14 @@ function CardTabs({ cards }) {
   });
   return (
     <>
+      <input
+        type="search"
+        value={""}
+        onChange={() => {}}
+        placeholder="Filter by card name.."
+        id="cardTabsFilterInput"
+        style={{ width: filterWidth }}
+      />
       <Tabs
         defaultActiveKey={selectedUser}
         className="mb-3"

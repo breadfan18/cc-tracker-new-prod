@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SelectInput from "../common/SelectInput";
 import CardListCards from "./CardListCards";
 import { USERS } from "../../constants";
 import PropTypes from "prop-types";

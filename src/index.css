@@ -320,3 +320,15 @@ form {
   border-radius: 0 10px 10px 0;
   padding-left: 10px;
 }
+
+#cardTabsFilterInput {
+  padding-left: 10px;
+  border: 2px solid var(--light-gray);
+  float: right;
+  height: 2.67rem;
+  border-radius: 10px 10px 10px 0;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
