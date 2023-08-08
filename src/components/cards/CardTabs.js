@@ -14,11 +14,12 @@ function CardTabs({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "1");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
-  const { filter, setFilter, handleFilter } = useFilteredData(cards);
+  const { cardsFilter, setCardsFilter, handleCardsFilter } =
+    useFilteredData(cards);
 
   useEffect(() => {
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
-    setFilter({
+    setCardsFilter({
       query: "",
       cardList: [...cards],
     });
@@ -56,8 +57,8 @@ function CardTabs({ cards }) {
     <>
       <input
         type="search"
-        value={filter.query}
-        onChange={handleFilter}
+        value={cardsFilter.query}
+        onChange={handleCardsFilter}
         placeholder="Filter by card name.."
         id="cardTabsFilterInput"
         style={{ width: filterWidth }}
@@ -70,14 +71,14 @@ function CardTabs({ cards }) {
         <Tab eventKey="0" title="All Cards">
           {windowWidth > 1000 ? (
             <CardListTable
-              cards={filter.cardList}
+              cards={cardsFilter.cardList}
               showEditDelete={true}
               showUser={true}
               showCompactTable={false}
             />
           ) : (
             <CardListCards
-              cards={filter.cardList}
+              cards={cardsFilter.cardList}
               windowWidth={windowWidth}
               showUserName={true}
             />

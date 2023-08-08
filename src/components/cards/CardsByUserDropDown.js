@@ -15,12 +15,12 @@ export default function CardsByUserDropDown({ cards }) {
     ? cards
     : cards.filter((card) => card.userId === parseInt(selectedUser));
 
-  const { filter, setFilter, handleFilter } =
+  const { cardsFilter, setCardsFilter, handleCardsFilter } =
     useFilteredData(cardsForSelectedUser);
 
   useEffect(() => {
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
-    setFilter({
+    setCardsFilter({
       query: "",
       cardList: [...cardsForSelectedUser],
     });
@@ -48,14 +48,14 @@ export default function CardsByUserDropDown({ cards }) {
         </Form.Select>
         <input
           type="search"
-          value={filter.query}
-          onChange={handleFilter}
+          value={cardsFilter.query}
+          onChange={handleCardsFilter}
           placeholder="Filter by card name.."
           id="cardFilterInput"
         />
       </div>
       <hr />
-      <CardListCards cards={filter.cardList} showUserName={showAllUsers} />
+      <CardListCards cards={cardsFilter.cardList} showUserName={showAllUsers} />
     </div>
   );
 }
