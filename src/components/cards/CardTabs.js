@@ -23,7 +23,6 @@ function CardTabs({ cards }) {
     useFilteredData(cardsForSelectedUser);
 
   useEffect(() => {
-    console.log("I run");
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
 
     if (cardsFilter.query !== "") {
