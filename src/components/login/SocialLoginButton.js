@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { login } from "../../tools/firebase";
+import { auth, login } from "../../tools/firebase";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function SocialLoginButton({ Icon, btnColor, btnDisabled }) {
@@ -8,7 +8,7 @@ export default function SocialLoginButton({ Icon, btnColor, btnDisabled }) {
   // In the future, when more sign in features are implemented, we need to change this.
   const history = useHistory();
   function handleLogin() {
-    login();
+    login(auth);
     history.push("/cards");
   }
   return (

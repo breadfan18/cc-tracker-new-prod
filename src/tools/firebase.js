@@ -1,13 +1,8 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  signInWithRedirect,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyBUS_jXqW-xQdBzeiiAGmYC-tl1Byzfhw8",
   authDomain: "cc-tracker-new.firebaseapp.com",
   databaseURL: "https://cc-tracker-new-default-rtdb.firebaseio.com/",
@@ -46,13 +41,12 @@ export function deleteFromFirebase(endpoint, id) {
 
 // AUTH FUNCTIONS
 const provider = new GoogleAuthProvider();
-const auth = getAuth();
-function login() {
-  signInWithRedirect(auth, provider);
-}
+const auth = getAuth(app);
 
-function logout() {
-  auth.signOut();
-}
+const login = async (auth) => {
+  await signInWithPopup(auth, provider);
+};
 
-export { login, logout, auth, onAuthStateChanged };
+const logout = (auth) => auth.signOut();
+
+export { login, logout, auth };

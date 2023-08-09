@@ -1,13 +1,13 @@
 import React from "react";
-import { logout } from "../../tools/firebase";
+import { auth, logout } from "../../tools/firebase";
 import { GoSignOut } from "react-icons/go";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function UserProfileSection({ user, windowWidth }) {
+export default function UserProfileSection({ user }) {
   const history = useHistory();
 
   function handleSignOut() {
-    logout();
+    logout(auth);
     history.push("/signin");
   }
   return (
