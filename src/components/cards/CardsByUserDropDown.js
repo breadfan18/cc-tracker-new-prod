@@ -15,16 +15,25 @@ export default function CardsByUserDropDown({ cards }) {
     ? cards
     : cards.filter((card) => card.userId === parseInt(selectedUser));
 
-  const { cardsFilter, setCardsFilter, handleCardsFilter } =
+  const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
     useFilteredData(cardsForSelectedUser);
 
   useEffect(() => {
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
-    setCardsFilter({
-      query: "",
-      cardList: [...cardsForSelectedUser],
-    });
-  }, [selectedUser]);
+
+    if (cardsFilter.query !== "") {
+      const filteredCards = filterCards(cardsFilter.query);
+      setCardsFilter({
+        query: cardsFilter.query,
+        cardList: filteredCards,
+      });
+    } else {
+      setCardsFilter({
+        query: "",
+        cardList: [...cardsForSelectedUser],
+      });
+    }
+  }, [selectedUser, cards]);
 
   const handleUserChange = (event) =>
     setSelectedUser(event.target.value || "0");

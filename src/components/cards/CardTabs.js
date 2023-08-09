@@ -14,16 +14,25 @@ function CardTabs({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "1");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
-  const { cardsFilter, setCardsFilter, handleCardsFilter } =
+  const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
     useFilteredData(cards);
 
   useEffect(() => {
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
-    setCardsFilter({
-      query: "",
-      cardList: [...cards],
-    });
-  }, [selectedUser]);
+
+    if (cardsFilter.query !== "") {
+      const filteredCards = filterCards(cardsFilter.query);
+      setCardsFilter({
+        query: cardsFilter.query,
+        cardList: filteredCards,
+      });
+    } else {
+      setCardsFilter({
+        query: "",
+        cardList: [...cards],
+      });
+    }
+  }, [selectedUser, cards]);
 
   const filterWidth =
     windowWidth >= 750
