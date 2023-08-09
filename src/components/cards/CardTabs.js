@@ -8,16 +8,22 @@ import { USERS } from "../../constants";
 import CardListCards from "./CardListCards";
 import { WindowWidthContext } from "../App";
 import { useFilteredData } from "../../hooks/filterCards";
-
 function CardTabs({ cards }) {
   const windowWidth = useContext(WindowWidthContext);
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "1");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
+
+  const cardsForSelectedUser =
+    selectedUser === "0"
+      ? cards
+      : cards.filter((card) => card.userId === parseInt(selectedUser));
+
   const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
-    useFilteredData(cards);
+    useFilteredData(cardsForSelectedUser);
 
   useEffect(() => {
+    console.log("I run");
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
 
     if (cardsFilter.query !== "") {
@@ -29,7 +35,7 @@ function CardTabs({ cards }) {
     } else {
       setCardsFilter({
         query: "",
-        cardList: [...cards],
+        cardList: [...cardsForSelectedUser],
       });
     }
   }, [selectedUser, cards]);
@@ -46,18 +52,17 @@ function CardTabs({ cards }) {
       : "21vw";
 
   const userTabs = USERS.map((user) => {
-    const cardsForThisUser = cards.filter((card) => card.userId === user.id);
     return (
       <Tab eventKey={user.id} title={user.name.split(" ")[0]} key={user.id}>
         {windowWidth > 1000 ? (
           <CardListTable
-            cards={cardsForThisUser}
+            cards={cardsFilter.cardList}
             showEditDelete={true}
             showUser={false}
             showCompactTable={false}
           />
         ) : (
-          <CardListCards cards={cardsForThisUser} showUserName={false} />
+          <CardListCards cards={cardsFilter.cardList} showUserName={false} />
         )}
       </Tab>
     );
