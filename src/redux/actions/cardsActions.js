@@ -40,10 +40,10 @@ function deleteCardNotesSuccess(cardNote) {
   return { type: DELETE_CARD_NOTES_SUCCESS, cardNote };
 }
 
-export function loadCardsFromFirebase() {
+export function loadCardsFromFirebase(firebaseUid) {
   return (dispatch) => {
     dispatch(beginApiCall());
-    getFireBaseData("cards", dispatch, loadCardsSuccess);
+    getFireBaseData("cards", dispatch, loadCardsSuccess, firebaseUid);
   };
 }
 

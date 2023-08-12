@@ -8,15 +8,17 @@ import { addUserNameToCard, sortCardsByDate } from "../../helpers";
 import CardsByUserDropDown from "./CardsByUserDropDown";
 import CardAddEditModal from "./CardAddEditModal";
 import { WindowWidthContext } from "../App";
+import { useUser } from "reactfire";
 
 const CardsPage = ({ cards, loadCards, loading }) => {
   const windowWidth = useContext(WindowWidthContext);
+  const { status, data: user } = useUser();
 
   useEffect(() => {
-    if (cards.length === 0) {
-      loadCards();
+    if (cards.length === 0 && status !== "loading" && user !== null) {
+      loadCards(user.uid);
     }
-  }, []);
+  }, [status, user]);
 
   return (
     <div className="cardsContainer">

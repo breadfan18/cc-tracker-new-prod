@@ -27,10 +27,15 @@ function deleteLoyaltyAccSuccess(loyalty) {
   return { type: DELETE_LOYALTY_ACC_SUCCESS, loyalty };
 }
 
-export function loadloyaltyDataFromFirebase() {
+export function loadloyaltyDataFromFirebase(firebaseUid) {
   return (dispatch) => {
     dispatch(beginApiCall());
-    getFireBaseData("loyaltyData", dispatch, loadLoyaltyDataSuccess);
+    getFireBaseData(
+      "loyaltyData",
+      dispatch,
+      loadLoyaltyDataSuccess,
+      firebaseUid
+    );
   };
 }
 

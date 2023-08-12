@@ -17,8 +17,8 @@ const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 
 // DATABASE FUNCTIONS
-export function getFireBaseData(endpoint, dispatch, dispatchFunc) {
-  onValue(ref(db, `${endpoint}/`), (snap) => {
+export function getFireBaseData(endpoint, dispatch, dispatchFunc, firebaseUid) {
+  onValue(ref(db, `/users/${firebaseUid}/${endpoint}`), (snap) => {
     const allData = [];
     snap.forEach((data) => {
       const childData = data.val();

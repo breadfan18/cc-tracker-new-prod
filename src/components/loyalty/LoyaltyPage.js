@@ -6,13 +6,17 @@ import { Spinner } from "../common/Spinner";
 import LoyaltyTabs from "./LoyaltyTabs";
 import { addUserNameToCard } from "../../helpers";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
+import { useUser } from "reactfire";
 
 const LoyaltyPage = ({ loyaltyData, loadloyaltyData, loading }) => {
+  const { status, data: user } = useUser();
+
   useEffect(() => {
-    if (loyaltyData.length === 0) {
-      loadloyaltyData();
+    if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
+      loadloyaltyData(user.uid);
     }
-  }, []);
+  }, [status, user]);
+
   return (
     <div className="loyaltyContainer">
       <section className="sectionHeaders">
