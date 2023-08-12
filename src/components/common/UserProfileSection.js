@@ -1,13 +1,15 @@
 import React from "react";
-import { auth, logout } from "../../tools/firebase";
+import { auth } from "../../tools/firebase";
 import { GoSignOut } from "react-icons/go";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { userLogout } from "../../redux/actions/authActions";
+import { connect } from "react-redux";
 
-export default function UserProfileSection({ user }) {
+function UserProfileSection({ user, userLogout }) {
   const history = useHistory();
 
   function handleSignOut() {
-    logout(auth);
+    userLogout(auth);
     history.push("/signin");
   }
   return (
@@ -34,3 +36,9 @@ export default function UserProfileSection({ user }) {
     </section>
   );
 }
+
+const mapDispatchToProps = {
+  userLogout,
+};
+
+export default connect(null, mapDispatchToProps)(UserProfileSection);
