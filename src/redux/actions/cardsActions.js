@@ -62,9 +62,9 @@ export function saveCardToFirebase(card, firebaseUid) {
   };
 }
 
-export function deleteCardFromFirebase(card) {
+export function deleteCardFromFirebase(card, firebaseUid) {
   return (dispatch) => {
-    deleteFromFirebase("cards", card.id);
+    deleteFromFirebase("cards", card.id, firebaseUid);
     dispatch(deleteCardSuccess(card));
   };
 }

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { DeleteButton } from "./DeleteButton";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import { useUser } from "reactfire";
 function ConfirmDeleteModal({
   data,
   dataType,
@@ -20,14 +20,15 @@ function ConfirmDeleteModal({
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
   const history = useHistory();
+  const { data: user } = useUser();
 
   function handleDelete(data) {
     if (dataType === "card") {
-      deleteCardFromFirebase(data);
+      deleteCardFromFirebase(data, user?.uid);
       toast.success("Card deleted");
       if (redirect) history.push("/cards");
     } else if (dataType === "loyaltyAcc") {
-      deleteLoyaltyDataFromFirebase(data);
+      deleteLoyaltyDataFromFirebase(data, user?.uid);
       toast.success("Loyalty Account Deleted");
     }
 
@@ -40,7 +41,7 @@ function ConfirmDeleteModal({
     try {
       setModalOpen(true);
     } catch (err) {
-      console.log('setModalOpen func is not passed for this component');
+      console.log("setModalOpen func is not passed for this component");
     }
   }
 
@@ -49,7 +50,7 @@ function ConfirmDeleteModal({
     try {
       setModalOpen(false);
     } catch (err) {
-      console.log('setModalOpen func is not passed for this component');
+      console.log("setModalOpen func is not passed for this component");
     }
   }
 

@@ -9,6 +9,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { LOYALTY_DATA_KEYS, PROGRAMS } from "../../constants";
 import { maskPwd } from "../../helpers";
 import LoyaltyForm from "./LoyaltyForm";
+import { useUser } from "reactfire";
 
 const newLoyaltyAcc = {
   id: null,
@@ -26,6 +27,8 @@ function LoyaltyAddEditModal({ loyaltyAcc, saveLoyaltyDataToFirebase }) {
   );
   const [programsFilteredByType, setFilteredPrograms] = useState([]);
   const [show, setShow] = useState(false);
+  const { data: user } = useUser();
+
   const toggleShow = () => setShow(!show);
 
   const handleChange = (event) => {
@@ -53,7 +56,7 @@ function LoyaltyAddEditModal({ loyaltyAcc, saveLoyaltyDataToFirebase }) {
     event.preventDefault();
     loyaltyAccForModal.password = maskPwd(loyaltyAccForModal.password);
 
-    saveLoyaltyDataToFirebase(loyaltyAccForModal);
+    saveLoyaltyDataToFirebase(loyaltyAccForModal, user?.uid);
 
     toast.success(
       loyaltyAccForModal?.id === null

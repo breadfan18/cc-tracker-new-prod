@@ -39,25 +39,25 @@ export function loadloyaltyDataFromFirebase(firebaseUid) {
   };
 }
 
-export function saveLoyaltyDataToFirebase(loyaltyAcc) {
+export function saveLoyaltyDataToFirebase(loyaltyAcc, firebaseUid) {
   return async (dispatch) => {
     dispatch(beginApiCall());
 
-    const uuid =
+    const loyaltyId =
       loyaltyAcc.id === null
         ? slugify(
             loyaltyAcc.program.name + "-" + loyaltyAcc.userId + "-" + uid()
           )
         : loyaltyAcc.id;
 
-    writeToFirebase("loyaltyData", loyaltyAcc, uuid);
+    writeToFirebase("loyaltyData", loyaltyAcc, loyaltyId, firebaseUid);
     dispatch(createLoyaltyAccSuccess(loyaltyAcc));
   };
 }
 
-export function deleteLoyaltyDataFromFirebase(loyaltyAcc) {
+export function deleteLoyaltyDataFromFirebase(loyaltyAcc, firebaseUid) {
   return (dispatch) => {
-    deleteFromFirebase("loyaltyData", loyaltyAcc.id);
+    deleteFromFirebase("loyaltyData", loyaltyAcc.id, firebaseUid);
     dispatch(deleteLoyaltyAccSuccess(loyaltyAcc));
   };
 }
