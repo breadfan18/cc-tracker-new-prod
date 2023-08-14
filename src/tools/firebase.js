@@ -41,6 +41,7 @@ export function deleteFromFirebase(endpoint, id) {
 
 // AUTH FUNCTIONS
 const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
 const auth = getAuth(app);
 
 const login = async (auth) => {
