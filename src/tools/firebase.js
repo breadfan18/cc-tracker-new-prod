@@ -28,10 +28,10 @@ export function getFireBaseData(endpoint, dispatch, dispatchFunc, firebaseUid) {
   });
 }
 
-export function writeToFirebase(endpoint, data, id) {
-  set(ref(db, `${endpoint}/${id}`), {
+export function writeToFirebase(endpoint, data, cardId, firebaseUid) {
+  set(ref(db, `/users/${firebaseUid}/${endpoint}/${cardId}`), {
     ...data,
-    id,
+    id: cardId,
   });
 }
 

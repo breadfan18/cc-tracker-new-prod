@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { ISSUERS, NEW_CARD } from "../../constants";
 import { WindowWidthContext } from "../App";
+import { useUser } from "reactfire";
 
 function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
   const [cardForModal, setCardForModal] = useState(
@@ -22,6 +23,7 @@ function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
   const windowWidth = useContext(WindowWidthContext);
+  const { data: user } = useUser();
 
   function handleChange(event) {
     const { name, value, checked } = event.target;
@@ -56,7 +58,7 @@ function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
       if (inquiries[i] === null) inquiries[i] = false;
     }
     const finalCard = { ...cardForModal, inquiries: inquiries };
-    saveCardToFirebase(finalCard);
+    saveCardToFirebase(finalCard, user?.uid);
     toast.success(cardForModal.id === null ? "Card Created" : "Card Updated");
     toggleModal();
   }

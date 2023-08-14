@@ -47,17 +47,17 @@ export function loadCardsFromFirebase(firebaseUid) {
   };
 }
 
-export function saveCardToFirebase(card) {
+export function saveCardToFirebase(card, firebaseUid) {
   return (dispatch) => {
     dispatch(beginApiCall());
-    const uuid =
+    const cardId =
       card.id === null
         ? slugify(
             card.issuer.name + " " + card.card + " " + card.userId + " " + uid()
           )
         : card.id;
 
-    writeToFirebase("cards", card, uuid);
+    writeToFirebase("cards", card, cardId, firebaseUid);
     dispatch(createCardSuccess(card));
   };
 }

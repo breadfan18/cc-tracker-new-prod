@@ -50,4 +50,4 @@ const uuid = slugify(
     uid()
 );
 
-writeToFirebase("cards", testCard, uuid);
+writeToFirebase("cards", testCard, uuid, "8r0cFCOL9XWYE2zq4l37Vficfwf1");
