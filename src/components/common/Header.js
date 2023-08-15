@@ -39,13 +39,6 @@ const Header = ({ user }) => {
             Home
           </NavLink>
           <NavLink
-            to="/about"
-            activeStyle={activeStyle}
-            onClick={() => setOpen(false)}
-          >
-            About
-          </NavLink>
-          <NavLink
             to="/cards"
             activeStyle={activeStyle}
             onClick={() => setOpen(false)}
@@ -66,6 +59,13 @@ const Header = ({ user }) => {
           >
             Loyalty
           </NavLink>
+          <NavLink
+            to="/card-holders"
+            activeStyle={activeStyle}
+            onClick={() => setOpen(false)}
+          >
+            Card Holders
+          </NavLink>
         </nav>
       )}
     </main>
@@ -75,9 +75,6 @@ const Header = ({ user }) => {
         <NavLink to="/" activeStyle={activeStyle} exact>
           Home
         </NavLink>
-        <NavLink to="/about" activeStyle={activeStyle}>
-          About
-        </NavLink>
         <NavLink to="/cards" activeStyle={activeStyle}>
           Cards
         </NavLink>
@@ -86,6 +83,9 @@ const Header = ({ user }) => {
         </NavLink>
         <NavLink to="/loyalty-accounts" activeStyle={activeStyle}>
           Loyalty
+        </NavLink>
+        <NavLink to="/card-holders" activeStyle={activeStyle}>
+          Card Holders
         </NavLink>
       </nav>
       <UserProfileSection user={user} />

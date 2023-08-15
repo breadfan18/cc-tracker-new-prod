@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
+import { slugify } from "../helpers";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBUS_jXqW-xQdBzeiiAGmYC-tl1Byzfhw8",
@@ -28,15 +29,27 @@ export function getFireBaseData(endpoint, dispatch, dispatchFunc, firebaseUid) {
   });
 }
 
-export function writeToFirebase(endpoint, data, cardId, firebaseUid) {
-  set(ref(db, `/users/${firebaseUid}/${endpoint}/${cardId}`), {
+export function writeToFirebase(endpoint, data, id, firebaseUid) {
+  set(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`), {
     ...data,
-    id: cardId,
+    id,
   });
 }
+export function foo(data) {
+  set(
+    ref(
+      db,
+      `/users/iXoAbxO0hMNBUUCzMnpnSydNKZg1/cardHolders/${slugify(data.name)}`
+    ),
+    {
+      ...data,
+      id: slugify(data.name),
+    }
+  );
+}
 
-export function deleteFromFirebase(endpoint, cardId, firebaseUid) {
-  remove(ref(db, `/users/${firebaseUid}/${endpoint}/${cardId}`));
+export function deleteFromFirebase(endpoint, id, firebaseUid) {
+  remove(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`));
 }
 
 // AUTH FUNCTIONS

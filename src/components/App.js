@@ -1,7 +1,7 @@
 import React, { useEffect, useState, createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
-import AboutPage from "./about/AboutPage";
+import CardHoldersPage from "./cardholders/CardHoldersPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import CardsPage from "./cards/CardsPage";
@@ -43,7 +43,7 @@ function App() {
         <div className="container-fluid">
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/about" component={AboutPage} />
+            <Route path="/card-holders" component={CardHoldersPage} />
             <Route path="/cards" component={CardsPage} />
             <Route path="/card/:id" component={CardDetailsPage} />
             <Route path="/524" component={FiveTwentyFourPage} />

@@ -16,7 +16,8 @@ body {
 
 .fiveTwentyFourContainer,
 .loyaltyContainer,
-.cardDetailsContainer {
+.cardDetailsContainer,
+.cardHoldersContainer {
   max-width: 1000px;
   margin: 0 auto;
 }
