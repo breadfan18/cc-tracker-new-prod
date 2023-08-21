@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import { stringify } from "csv-stringify";
 import { uid } from "uid";
 import _ from "lodash";
-import { PROGRAMS, ISSUERS } from "../constants";
+import { PROGRAMS, ISSUERS, USERS } from "../constants";
 import { slugify } from "../helpers";
 
 function formatDate(dateStr) {
@@ -67,12 +67,30 @@ const fooFile = jsonFile(
   "/Users/su23140/Developer/personal/projects/cc-tracker-deploy/assets/foo.json"
 );
 const baseData = jsonFile(
-  "/Users/su23140/Developer/personal/projects/cc-tracker-deploy/assets/baseData.json"
+  "/Users/su23140/Developer/personal/projects/cc-tracker-deploy/assets/backup-data/allData_with_users_08162023.json"
 );
 
 const test = baseData.read();
 
-console.log(test.length);
+const foo = _.values(
+  test.users["iXoAbxO0hMNBUUCzMnpnSydNKZg1"].loyaltyData
+).map((loyalty) => {
+  const thisUser = USERS.find((u) => u.id === loyalty.userId).name;
+  const newUserId = slugify(thisUser);
+  console.log(newUserId);
+
+  if (loyalty.cardholder === undefined) {
+    return {
+      ...loyalty,
+      userId: newUserId,
+      cardholder: thisUser,
+    };
+  }
+  return {
+    ...loyalty,
+    userId: newUserId,
+  };
+});
 
 // const withUid = test.map(card => {
 //   const keysSorted = _.chain(card).toPairs().sortBy(0).fromPairs().value()
@@ -96,20 +114,20 @@ console.log(test.length);
 //   }
 // })
 
-const loyaltyWithUid = test.map((loyalty) => {
-  const keysSorted = _.chain(loyalty).toPairs().sortBy(0).fromPairs().value();
+// const loyaltyWithUid = test.map((loyalty) => {
+//   const keysSorted = _.chain(loyalty).toPairs().sortBy(0).fromPairs().value();
 
-  const programObj = PROGRAMS.find((p) => p.id === keysSorted.program);
+//   const programObj = PROGRAMS.find((p) => p.id === keysSorted.program);
 
-  const id = slugify(programObj.name + "-" + loyalty.userId + "-" + uid());
+//   const id = slugify(programObj.name + "-" + loyalty.userId + "-" + uid());
 
-  console.log({ id });
+//   console.log({ id });
 
-  return {
-    ...keysSorted,
-    program: programObj,
-    id,
-  };
-});
+//   return {
+//     ...keysSorted,
+//     program: programObj,
+//     id,
+//   };
+// });
 
-fooFile.write(_.keyBy(loyaltyWithUid, "id"));
+fooFile.write(_.keyBy(foo, "id"));
