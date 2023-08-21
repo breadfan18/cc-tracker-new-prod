@@ -22,7 +22,7 @@ const CardsPage = ({
   const { status, data: user } = useUser();
 
   useEffect(() => {
-    if (cards.length === 0 && status !== "loading") {
+    if (cards.length === 0 && status !== "loading" && user !== null) {
       loadCards(user.uid);
     }
 

@@ -4,6 +4,7 @@ import { connect, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { useUser } from "reactfire";
 import { foo } from "../../tools/firebase";
+import { USERS } from "../../constants";
 
 const CardHoldersPage = ({ loadCardholdersFromFirebase }) => {
   const { data: user } = useUser();
