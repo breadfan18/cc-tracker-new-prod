@@ -7,7 +7,6 @@ import {
 import PropTypes from "prop-types";
 import { Spinner } from "../common/Spinner";
 import {
-  USERS,
   NEW_CARD,
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_BLUE,
@@ -28,21 +27,21 @@ import _ from "lodash";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { CardReminderContainer } from "./CardReminderContainer";
 import CreditBureauIcons from "../common/CreditBureauIcons";
-
+import { useUser } from "reactfire";
 function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
   const [card, setCard] = useState({ ...props.card });
-  const [cardholder, setCardholder] = useState("");
   const windowWidth = useContext(WindowWidthContext);
+  const { status, data: user } = useUser();
+  console.log(status);
 
   useEffect(() => {
-    if (cards.length === 0) {
-      loadCardsFromFirebase();
+    if (cards.length === 0 && status === "success") {
+      loadCardsFromFirebase(user?.uid);
     } else {
       // Need to understand this logic..
       setCard({ ...props.card });
-      setCardholder(USERS.find((user) => user.id === props.card.userId));
     }
-  }, [props.card]);
+  }, [props.card, user]);
 
   return loading ? (
     <Spinner />
@@ -90,7 +89,7 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
                   {card.issuer.name} {card.card}
                 </Card.Title>
                 <Card.Title style={{ fontSize: "clamp(0.7rem, 4vw, 1rem)" }}>
-                  {cardholder.name}
+                  {card.cardholder}
                 </Card.Title>
               </div>
               <div>
@@ -136,7 +135,11 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
                   >
                     Next Fee Date:
                   </td>
-                  <td>{props.card.nextFeeDate !== "" ? formatDate(props.card.nextFeeDate) : "N/A"}</td>
+                  <td>
+                    {props.card.nextFeeDate !== ""
+                      ? formatDate(props.card.nextFeeDate)
+                      : "N/A"}
+                  </td>
                 </tr>
                 <tr>
                   <td
@@ -181,7 +184,11 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
                   >
                     Spend By:
                   </td>
-                  <td>{props.card.spendBy !== "" ? formatDate(props.card.spendBy) : "N/A"}</td>
+                  <td>
+                    {props.card.spendBy !== ""
+                      ? formatDate(props.card.spendBy)
+                      : "N/A"}
+                  </td>
                 </tr>
                 <tr>
                   <td
@@ -221,8 +228,11 @@ export function getCardById(cards, id) {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
+
   const card =
     id && state.cards.length > 0 ? getCardById(state.cards, id) : NEW_CARD;
+
+  console.log(card);
   return {
     card,
     cards: state.cards,
