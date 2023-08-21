@@ -35,17 +35,11 @@ export function writeToFirebase(endpoint, data, id, firebaseUid) {
     id,
   });
 }
-export function foo(data) {
-  set(
-    ref(
-      db,
-      `/users/iXoAbxO0hMNBUUCzMnpnSydNKZg1/cardHolders/${slugify(data.name)}`
-    ),
-    {
-      ...data,
-      id: slugify(data.name),
-    }
-  );
+export function foo(data, firebaseUid) {
+  set(ref(db, `/users/${firebaseUid}/cardHolders/${data.id}`), {
+    ...data,
+    id: data.id,
+  });
 }
 
 export function deleteFromFirebase(endpoint, id, firebaseUid) {
