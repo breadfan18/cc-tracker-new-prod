@@ -43,7 +43,7 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
                   borderRadius: "5px 5px 0 0 ",
                 }}
               >
-                {USERS.find((user) => user.id === card.userId).name}
+                {card.cardholder}
               </Card.Title>
             )}
             <Card.Subtitle

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import CardListCards from "./CardListCards";
-import { USERS } from "../../constants";
 import PropTypes from "prop-types";
 import { Form } from "react-bootstrap";
 import { useFilteredData } from "../../hooks/filterCards";
+import { connect } from "react-redux";
 
-export default function CardsByUserDropDown({ cards }) {
+function CardsByUserDropDown({ cards, cardholders }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
-  const [selectedUser, setSelectedUser] = useState(storedUser || "1");
+  const [selectedUser, setSelectedUser] = useState(storedUser);
   const showAllUsers =
-    isNaN(selectedUser) || selectedUser === undefined || selectedUser === "0";
+    selectedUser === undefined || selectedUser === "all-cards";
 
   const cardsForSelectedUser = showAllUsers
     ? cards
-    : cards.filter((card) => card.userId === parseInt(selectedUser));
+    : cards.filter((card) => card.userId === selectedUser);
 
   const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
     useFilteredData(cardsForSelectedUser);
@@ -36,7 +36,7 @@ export default function CardsByUserDropDown({ cards }) {
   }, [selectedUser, cards]);
 
   const handleUserChange = (event) =>
-    setSelectedUser(event.target.value || "0");
+    setSelectedUser(event.target.value || "all-cards");
 
   return (
     <div className="cardsDropDownContainer">
@@ -47,10 +47,10 @@ export default function CardsByUserDropDown({ cards }) {
           value={selectedUser}
         >
           <option value="">All Users</option>
-          {USERS.map((user) => {
+          {cardholders.map((holder) => {
             return (
-              <option key={user.id} value={parseInt(user.id)}>
-                {user.name}
+              <option key={holder.id} value={holder.id}>
+                {holder.name}
               </option>
             );
           })}
@@ -71,4 +71,16 @@ export default function CardsByUserDropDown({ cards }) {
 
 CardsByUserDropDown.propTypes = {
   cards: PropTypes.array.isRequired,
+  cardholders: PropTypes.array.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  cardholders: state.cardholders,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardsByUserDropDown);
