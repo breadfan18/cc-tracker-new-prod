@@ -4,13 +4,20 @@ import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
 import PropTypes from "prop-types";
 import CardTabs from "./CardTabs";
-import { addUserNameToCard, sortCardsByDate } from "../../helpers";
+import { sortCardsByDate } from "../../helpers";
 import CardsByUserDropDown from "./CardsByUserDropDown";
 import CardAddEditModal from "./CardAddEditModal";
 import { WindowWidthContext } from "../App";
+import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { useUser } from "reactfire";
 
-const CardsPage = ({ cards, loadCards, loading }) => {
+const CardsPage = ({
+  cards,
+  loadCards,
+  loading,
+  cardholders,
+  loadCardholdersFromFirebase,
+}) => {
   const windowWidth = useContext(WindowWidthContext);
   const { status, data: user } = useUser();
 
@@ -18,7 +25,11 @@ const CardsPage = ({ cards, loadCards, loading }) => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
       loadCards(user.uid);
     }
-  }, [status, user]);
+
+    if (cardholders.length === 0 && user) {
+      loadCardholdersFromFirebase(user.uid);
+    }
+  }, [status, user, cardholders]);
 
   return (
     <div className="cardsContainer">
@@ -44,17 +55,16 @@ CardsPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const cards = sortCardsByDate(state.cards).map((card) =>
-    addUserNameToCard(card)
-  );
   return {
-    cards,
+    cards: sortCardsByDate(state.cards),
     loading: state.apiCallsInProgress > 0,
+    cardholders: state.cardholders,
   };
 }
 
 const mapDispatchToProps = {
   loadCards: loadCardsFromFirebase,
+  loadCardholdersFromFirebase,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);

@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CardHolderAddEditModal from "./CardHolderAddEditModal";
 import { connect, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
+import { useUser } from "reactfire";
+import { foo } from "../../tools/firebase";
+
 const CardHoldersPage = ({ loadCardholdersFromFirebase }) => {
+  const { data: user } = useUser();
+
+  // USERS.map((u) => foo(u, user?.uid));
+
   const cardholders = useSelector((state) => state.cardholders);
 
   const elems = cardholders?.map((holder) => <p>{holder.name}</p>);
 
   useEffect(() => {
-    if (cardholders.length === 0) {
-      loadCardholdersFromFirebase("iXoAbxO0hMNBUUCzMnpnSydNKZg1");
+    if (cardholders.length === 0 && user) {
+      loadCardholdersFromFirebase(user.uid);
     }
   }, [cardholders]);
 

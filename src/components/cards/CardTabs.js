@@ -4,20 +4,19 @@ import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
 import CardListTable from "./CardListTable";
 import { connect } from "react-redux";
-import { USERS } from "../../constants";
 import CardListCards from "./CardListCards";
 import { WindowWidthContext } from "../App";
 import { useFilteredData } from "../../hooks/filterCards";
-function CardTabs({ cards }) {
+function CardTabs({ cards, cardholders }) {
   const windowWidth = useContext(WindowWidthContext);
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
-  const [selectedUser, setSelectedUser] = useState(storedUser || "1");
+  const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
 
   const cardsForSelectedUser =
-    selectedUser === "0"
+    selectedUser === "all-cards"
       ? cards
-      : cards.filter((card) => card.userId === parseInt(selectedUser));
+      : cards.filter((card) => card.userId === selectedUser);
 
   const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
     useFilteredData(cardsForSelectedUser);
@@ -50,7 +49,7 @@ function CardTabs({ cards }) {
       ? "23vw"
       : "21vw";
 
-  const userTabs = USERS.map((user) => {
+  const userTabs = cardholders.map((user) => {
     return (
       <Tab eventKey={user.id} title={user.name.split(" ")[0]} key={user.id}>
         {windowWidth > 1000 ? (
@@ -81,7 +80,7 @@ function CardTabs({ cards }) {
         className="mb-3"
         onSelect={handleSelectTab}
       >
-        <Tab eventKey="0" title="All Cards">
+        <Tab eventKey="all-cards" title="All Cards">
           {windowWidth > 1000 ? (
             <CardListTable
               cards={cardsFilter.cardList}
@@ -110,6 +109,7 @@ CardTabs.propTypes = {
 function mapStateToProps(state) {
   return {
     state,
+    cardholders: state.cardholders,
   };
 }
 
