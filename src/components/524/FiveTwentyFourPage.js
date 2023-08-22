@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { USERS } from "../../constants";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
 import PropTypes from "prop-types";
@@ -15,39 +14,47 @@ import SelectInput from "../common/SelectInput";
 import CardList from "../cards/CardListTable";
 import { WindowWidthContext } from "../App";
 import CardListCards from "../cards/CardListCards";
+import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
+import { useUser } from "reactfire";
 
-const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
+const FiveTwentyFourPage = ({
+  cards,
+  loadCards,
+  loading,
+  cardsByHolder,
+  cardholders,
+  loadCardholdersFromFirebase,
+}) => {
   const windowWidth = useContext(WindowWidthContext);
-  const [selectedUser, setSelectedUser] = useState();
+  const [selectedCardHolder, setSelectedCardholder] = useState();
+  const { status, data: user } = useUser();
 
   useEffect(() => {
-    if (cards.length === 0) {
-      loadCards();
+    if (cards.length === 0 && status !== "loading" && user !== null) {
+      loadCards(user.uid);
     }
-  }, []);
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setSelectedUser(name === "id" ? parseInt(value, 10) : value);
-  }
+    if (cardholders.length === 0 && user) {
+      loadCardholdersFromFirebase(user.uid);
+    }
+  }, [status, user, cardholders]);
 
-  const usersToDisplay = isNaN(selectedUser)
-    ? USERS.map((user) => user.id)
-    : [selectedUser];
+  const handleChange = (e) => setSelectedCardholder(e.target.value);
 
-  const users524Status = usersToDisplay.map((user) => {
-    const userName = USERS.find((u) => u.id === parseInt(user)).name;
+  const cardholdersToDisplay =
+    selectedCardHolder === undefined || selectedCardHolder === ""
+      ? cardholders.map((holder) => holder.id)
+      : [selectedCardHolder];
+
+  const cardholders524Status = cardholdersToDisplay.map((holder) => {
+    const cardholderName = cardholders.find((u) => u.id === holder).name;
     const dateSortedCards524 = pipe((cards) => {
-      return cards
-        .filter(
-          (card) =>
-            wasCardOpenedWithinLast24Months(card.appDate) &&
-            card.cardType !== "Business"
-        )
-        .map((card) => {
-          return { ...card, userName };
-        });
-    }, sortCardsByDate)(cardsByUser[user]);
+      return cards.filter(
+        (card) =>
+          wasCardOpenedWithinLast24Months(card.appDate) &&
+          card.cardType !== "Business"
+      );
+    }, sortCardsByDate)(cardsByHolder[holder]);
 
     const cardsListComponent =
       dateSortedCards524.length > 0 ? (
@@ -73,7 +80,7 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
           <FiveTwentyFourStatus
             percent={(dateSortedCards524.length / 5) * 100}
             label={`${dateSortedCards524.length}/5`}
-            key={user.id}
+            key={holder.id}
           />
         </>
       ) : (
@@ -84,7 +91,7 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
       <>
         <FiveTwentyFourAccordion
           five24Cards={cardsListComponent}
-          user={userName}
+          user={cardholderName}
           showCards={dateSortedCards524.length > 0}
           fiveTwentyFourStatusElement={five24TrackerElem}
         />
@@ -103,9 +110,9 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
           <SelectInput
             name="id"
             label="Select User to View"
-            value={selectedUser}
+            value={selectedCardHolder}
             defaultOption="All Users"
-            options={USERS.map((user) => ({
+            options={cardholders.map((user) => ({
               value: user.id,
               text: user.name,
             }))}
@@ -113,7 +120,7 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
             // error={errors.author}
           />
           <hr />
-          {users524Status}
+          {cardholders524Status}
         </>
       )}
     </div>
@@ -122,15 +129,18 @@ const FiveTwentyFourPage = ({ cards, loadCards, loading, cardsByUser }) => {
 
 FiveTwentyFourPage.propTypes = {
   cards: PropTypes.array.isRequired,
-  cardsByUser: PropTypes.object.isRequired,
+  cardsByHolder: PropTypes.object.isRequired,
   loadCards: PropTypes.func.isRequired,
+  cardholders: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
+  loadCardholdersFromFirebase: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     cards: state.cards,
-    cardsByUser: USERS.reduce((obj, user) => {
+    cardholders: state.cardholders,
+    cardsByHolder: state.cardholders.reduce((obj, user) => {
       obj[user.id] = state.cards.filter((card) => card.userId === user.id);
       return obj;
     }, {}),
@@ -140,6 +150,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   loadCards: loadCardsFromFirebase,
+  loadCardholdersFromFirebase,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiveTwentyFourPage);
