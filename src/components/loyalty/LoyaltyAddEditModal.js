@@ -19,6 +19,7 @@ const newLoyaltyAcc = {
   loginId: "",
   password: "",
   userId: null,
+  accountHolder: null,
 };
 
 function LoyaltyAddEditModal({
@@ -38,13 +39,20 @@ function LoyaltyAddEditModal({
   const handleChange = (event) => {
     const { name, value } = event.target;
 
+    console.log({ name, value });
+
     if (name === LOYALTY_DATA_KEYS.loyaltyType) {
       const filteredPrograms = PROGRAMS.filter(
         (program) => program.type === value
       );
       setFilteredPrograms(filteredPrograms);
+    } else if (name === "userId") {
+      setLoyaltyAccForModal((prevAcc) => ({
+        ...prevAcc,
+        accountHolder: cardholders.find((holder) => holder.id === value).name,
+        userId: value,
+      }));
     }
-
     setLoyaltyAccForModal((prevValue) => ({
       ...prevValue,
       [name]:

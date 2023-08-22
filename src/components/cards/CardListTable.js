@@ -63,7 +63,7 @@ export default function CardListTable({
           </th>
           {showUser && (
             <th className="tableHeader">
-              User
+              Card Holder
               <FaSort onClick={() => requestSort(CARD_DATA_KEYS.cardholder)} />
             </th>
           )}

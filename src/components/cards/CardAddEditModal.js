@@ -42,6 +42,12 @@ function CardAddEditModal({
         : value === "transunion"
         ? setInquiries((prev) => ({ ...prev, [value]: checked }))
         : null;
+    } else if (name === "userId") {
+      setCardForModal((prevCard) => ({
+        ...prevCard,
+        cardholder: cardholders.find((holder) => holder.id === value).name,
+        userId: value,
+      }));
     } else {
       setCardForModal((prevCard) => ({
         ...prevCard,

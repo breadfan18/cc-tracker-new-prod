@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
-import {
-  CARD_DATA_KEYS,
-  USERS,
-  APP_COLOR_BLACK_OPACITY,
-} from "../../constants";
+import { CARD_DATA_KEYS, APP_COLOR_BLACK_OPACITY } from "../../constants";
 import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import CardAddEditModal from "./CardAddEditModal";
