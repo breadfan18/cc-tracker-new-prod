@@ -4,24 +4,34 @@ import { connect } from "react-redux";
 import { loadloyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
 import { Spinner } from "../common/Spinner";
 import LoyaltyTabs from "./LoyaltyTabs";
-import { addUserNameToCard } from "../../helpers";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import { useUser } from "reactfire";
+import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 
-const LoyaltyPage = ({ loyaltyData, loadloyaltyData, loading }) => {
+const LoyaltyPage = ({
+  loyaltyData,
+  loadloyaltyData,
+  loading,
+  cardholders,
+  loadCardholdersFromFirebase,
+}) => {
   const { status, data: user } = useUser();
 
   useEffect(() => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
       loadloyaltyData(user.uid);
     }
-  }, [status, user]);
+
+    if (cardholders.length === 0 && user) {
+      loadCardholdersFromFirebase(user.uid);
+    }
+  }, [status, user, cardholders]);
 
   return (
     <div className="loyaltyContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Loyalty Accounts</h2>
-        <LoyaltyAddEditModal />
+        <LoyaltyAddEditModal cardholders={cardholders} />
       </section>
       {loading ? (
         <Spinner />
@@ -36,15 +46,19 @@ LoyaltyPage.propTypes = {
   loyaltyData: PropTypes.array.isRequired,
   loadloyaltyData: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  cardholders: PropTypes.array.isRequired,
+  loadCardholdersFromFirebase: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   loyaltyData: state.loyaltyData,
   loading: state.apiCallsInProgress > 0,
+  cardholders: state.cardholders,
 });
 
 const mapDispatchToProps = {
   loadloyaltyData: loadloyaltyDataFromFirebase,
+  loadCardholdersFromFirebase,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoyaltyPage);

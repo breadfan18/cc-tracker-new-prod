@@ -7,19 +7,19 @@ import { foo } from "../../tools/firebase";
 import { USERS } from "../../constants";
 
 const CardHoldersPage = ({ loadCardholdersFromFirebase }) => {
-  const { data: user } = useUser();
+  const { status, data: user } = useUser();
 
   // USERS.map((u) => foo(u, user?.uid));
 
   const cardholders = useSelector((state) => state.cardholders);
 
-  const elems = cardholders?.map((holder) => <p>{holder.name}</p>);
-
   useEffect(() => {
-    if (cardholders.length === 0 && user) {
+    if (cardholders.length === 0 && status !== "loading") {
       loadCardholdersFromFirebase(user.uid);
     }
-  }, [cardholders]);
+  }, [user]);
+
+  const elems = cardholders?.map((holder) => <p>{holder.name}</p>);
 
   return (
     <div className="cardHoldersContainer">

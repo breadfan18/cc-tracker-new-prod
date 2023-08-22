@@ -19,6 +19,7 @@ const CardFormResponsive = ({
   onSave,
   onChange,
   saving,
+  cardholders,
   errors = {},
 }) => {
   return (
@@ -61,7 +62,7 @@ const CardFormResponsive = ({
           label="Card Holder"
           value={card.userId || ""}
           defaultOption="Select Card Holder"
-          options={USERS.map((user) => ({
+          options={cardholders.map((user) => ({
             value: user.id,
             text: user.name,
           }))}

@@ -7,7 +7,6 @@ import {
   CARD_DATA_KEYS,
   CARD_TYPE,
   ISSUERS,
-  USERS,
 } from "../../constants";
 import DateInput from "../common/DateInput";
 import RadioInput from "../common/RadioInput";
@@ -16,7 +15,14 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { formDisabledCheck, titleCase } from "../../helpers";
 
-const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
+const CardForm = ({
+  card,
+  onSave,
+  onChange,
+  saving,
+  cardholders,
+  errors = {},
+}) => {
   return (
     <>
       <Form onSubmit={onSave}>
@@ -61,7 +67,7 @@ const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
               label="Card Holder"
               value={card.userId || ""}
               defaultOption="Select Card Holder"
-              options={USERS.map((user) => ({
+              options={cardholders.map((user) => ({
                 value: user.id,
                 text: user.name,
               }))}

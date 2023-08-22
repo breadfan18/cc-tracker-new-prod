@@ -2,12 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
-import {
-  ACCOUNT_TYPE,
-  LOYALTY_DATA_KEYS,
-  PROGRAMS,
-  USERS,
-} from "../../constants";
+import { ACCOUNT_TYPE, LOYALTY_DATA_KEYS, PROGRAMS } from "../../constants";
 import { titleCase } from "../../helpers";
 
 const LoyaltyForm = ({
@@ -15,6 +10,7 @@ const LoyaltyForm = ({
   onSave,
   onChange,
   filteredPrograms,
+  cardholders,
   errors = {},
 }) => {
   const programsToDisplay =
@@ -38,12 +34,12 @@ const LoyaltyForm = ({
       )}
       <SelectInput
         name={LOYALTY_DATA_KEYS.userId}
-        label="User"
+        label="Account Holder"
         value={loyaltyAcc.userId || ""}
-        defaultOption="Select User"
-        options={USERS.map((user) => ({
-          value: user.id,
-          text: user.name,
+        defaultOption="Select Account Holder"
+        options={cardholders.map((holder) => ({
+          value: holder.id,
+          text: holder.name,
         }))}
         onChange={onChange}
         // error={errors.author}

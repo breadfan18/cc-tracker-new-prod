@@ -21,7 +21,11 @@ const newLoyaltyAcc = {
   userId: null,
 };
 
-function LoyaltyAddEditModal({ loyaltyAcc, saveLoyaltyDataToFirebase }) {
+function LoyaltyAddEditModal({
+  cardholders,
+  loyaltyAcc,
+  saveLoyaltyDataToFirebase,
+}) {
   const [loyaltyAccForModal, setLoyaltyAccForModal] = useState(
     loyaltyAcc ? { ...loyaltyAcc } : newLoyaltyAcc
   );
@@ -44,7 +48,7 @@ function LoyaltyAddEditModal({ loyaltyAcc, saveLoyaltyDataToFirebase }) {
     setLoyaltyAccForModal((prevValue) => ({
       ...prevValue,
       [name]:
-        name === "id" || name === "userId"
+        name === "id"
           ? parseInt(value, 10)
           : name === LOYALTY_DATA_KEYS.program
           ? PROGRAMS.find((program) => program.id === parseInt(value))
@@ -103,6 +107,7 @@ function LoyaltyAddEditModal({ loyaltyAcc, saveLoyaltyDataToFirebase }) {
             onSave={handleSave}
             onChange={handleChange}
             filteredPrograms={programsFilteredByType}
+            cardholders={cardholders}
             // errors={errors}
           />
         </Modal.Body>

@@ -15,7 +15,12 @@ import { ISSUERS, NEW_CARD } from "../../constants";
 import { WindowWidthContext } from "../App";
 import { useUser } from "reactfire";
 
-function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
+function CardAddEditModal({
+  card,
+  saveCardToFirebase,
+  setModalOpen,
+  cardholders,
+}) {
   const [cardForModal, setCardForModal] = useState(
     card ? { ...card } : NEW_CARD
   );
@@ -41,9 +46,7 @@ function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
       setCardForModal((prevCard) => ({
         ...prevCard,
         [name]:
-          name === "userId"
-            ? parseInt(value, 10)
-            : name === "bonusEarned"
+          name === "bonusEarned"
             ? checked
             : name === "issuer"
             ? ISSUERS.find((issuer) => issuer.name === value)
@@ -149,6 +152,7 @@ function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
               card={cardForModal}
               onSave={handleSaveForFirebase}
               onChange={handleChange}
+              cardholders={cardholders}
               // toggle={toggle}
               // errors={errors}
             />
@@ -157,6 +161,7 @@ function CardAddEditModal({ card, saveCardToFirebase, setModalOpen }) {
               card={cardForModal}
               onSave={handleSaveForFirebase}
               onChange={handleChange}
+              cardholders={cardholders}
             />
           )}
         </Modal.Body>
