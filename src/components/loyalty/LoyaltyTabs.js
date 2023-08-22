@@ -20,8 +20,6 @@ function LoyaltyTabs({ loyaltyData }) {
     const loyaltyTypePerUser = _.groupBy(loyaltyTypeData, (o) => o.userId);
     const userCards = Object.keys(loyaltyTypePerUser).map((user) => {
       const loyaltyAccsForThisUser = loyaltyTypePerUser[user];
-
-      console.log({ loyaltyAccsForThisUser });
       const loyaltyList =
         windowWidth > 800 ? (
           <LoyaltyList
