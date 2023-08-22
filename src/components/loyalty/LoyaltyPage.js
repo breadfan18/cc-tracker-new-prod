@@ -39,7 +39,7 @@ LoyaltyPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  loyaltyData: state.loyaltyData.map((l) => addUserNameToCard(l)),
+  loyaltyData: state.loyaltyData,
   loading: state.apiCallsInProgress > 0,
 });
 

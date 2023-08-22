@@ -20,6 +20,8 @@ function LoyaltyTabs({ loyaltyData }) {
     const loyaltyTypePerUser = _.groupBy(loyaltyTypeData, (o) => o.userId);
     const userCards = Object.keys(loyaltyTypePerUser).map((user) => {
       const loyaltyAccsForThisUser = loyaltyTypePerUser[user];
+
+      console.log({ loyaltyAccsForThisUser });
       const loyaltyList =
         windowWidth > 800 ? (
           <LoyaltyList
@@ -29,14 +31,14 @@ function LoyaltyTabs({ loyaltyData }) {
         ) : (
           <LoyaltyCards loyaltyData={loyaltyAccsForThisUser} />
         );
-      const thisUserName = USERS.find((u) => u.id === parseInt(user)).name;
+      const accountHolderName = loyaltyAccsForThisUser[0].accountHolder;
       return (
         <>
           <LoyaltyAccordion
             accordionBody={loyaltyList}
             dataType={"Accounts"}
             windowWidth={windowWidth}
-            user={thisUserName}
+            user={accountHolderName}
           />
           <br />
         </>
