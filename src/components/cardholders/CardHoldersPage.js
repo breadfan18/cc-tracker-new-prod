@@ -4,12 +4,9 @@ import { connect, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { useUser } from "reactfire";
 import { foo } from "../../tools/firebase";
-import { USERS } from "../../constants";
 
 const CardHoldersPage = ({ loadCardholdersFromFirebase }) => {
   const { status, data: user } = useUser();
-
-  // USERS.map((u) => foo(u, user?.uid));
 
   const cardholders = useSelector((state) => state.cardholders);
 

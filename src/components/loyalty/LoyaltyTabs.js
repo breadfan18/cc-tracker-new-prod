@@ -4,7 +4,7 @@ import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
 import LoyaltyList from "./LoyaltyList";
 import { connect } from "react-redux";
-import { ACCOUNT_TYPE, USERS } from "../../constants";
+import { ACCOUNT_TYPE } from "../../constants";
 import { titleCase } from "../../helpers";
 import LoyaltyAccordion from "./LoyaltyAccordion";
 import _ from "lodash";

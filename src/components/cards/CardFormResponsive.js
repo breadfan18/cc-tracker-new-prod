@@ -7,7 +7,6 @@ import {
   CARD_DATA_KEYS,
   CARD_TYPE,
   ISSUERS,
-  USERS,
 } from "../../constants";
 import DateInput from "../common/DateInput";
 import RadioInput from "../common/RadioInput";

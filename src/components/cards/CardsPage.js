@@ -52,6 +52,7 @@ CardsPage.propTypes = {
   cards: PropTypes.array.isRequired,
   loadCards: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  cardholders: PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {
