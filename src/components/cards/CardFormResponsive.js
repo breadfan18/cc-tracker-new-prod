@@ -12,6 +12,7 @@ import DateInput from "../common/DateInput";
 import RadioInput from "../common/RadioInput";
 import Form from "react-bootstrap/Form";
 import { formDisabledCheck, titleCase } from "../../helpers";
+import { connect } from "react-redux";
 
 const CardFormResponsive = ({
   card,
@@ -182,4 +183,10 @@ CardFormResponsive.propTypes = {
   saving: PropTypes.bool,
 };
 
-export default CardFormResponsive;
+const mapStateToProps = (state) => ({
+  cardholders: state.cardholders,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardFormResponsive);

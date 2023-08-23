@@ -25,7 +25,9 @@ const SelectInput = ({
         className="form-control"
         style={{ backgroundColor: `${bkgrdColor}` }}
       >
-        <option value="">{defaultOption}</option>
+        <option value="" disabled>
+          {defaultOption}
+        </option>
         {options.map((option) => {
           return (
             <option key={option.value} value={option.value}>

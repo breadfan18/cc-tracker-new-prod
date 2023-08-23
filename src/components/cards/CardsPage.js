@@ -35,7 +35,7 @@ const CardsPage = ({
     <div className="cardsContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Wallet</h2>
-        <CardAddEditModal cardholders={cardholders} />
+        <CardAddEditModal />
       </section>
       {loading ? (
         <Spinner />

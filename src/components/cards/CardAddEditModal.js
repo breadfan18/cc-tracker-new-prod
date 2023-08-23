@@ -158,7 +158,6 @@ function CardAddEditModal({
               card={cardForModal}
               onSave={handleSaveForFirebase}
               onChange={handleChange}
-              cardholders={cardholders}
               // toggle={toggle}
               // errors={errors}
             />
@@ -167,7 +166,6 @@ function CardAddEditModal({
               card={cardForModal}
               onSave={handleSaveForFirebase}
               onChange={handleChange}
-              cardholders={cardholders}
             />
           )}
         </Modal.Body>
@@ -184,7 +182,7 @@ CardAddEditModal.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    state: state,
+    cardholders: state.cardholders,
   };
 }
 

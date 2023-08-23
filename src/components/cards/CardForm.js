@@ -14,6 +14,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { formDisabledCheck, titleCase } from "../../helpers";
+import { connect } from "react-redux";
 
 const CardForm = ({
   card,
@@ -220,4 +221,10 @@ CardForm.propTypes = {
   saving: PropTypes.bool,
 };
 
-export default CardForm;
+const mapStateToProps = (state) => ({
+  cardholders: state.cardholders,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
