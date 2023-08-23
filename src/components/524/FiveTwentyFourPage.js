@@ -117,6 +117,7 @@ const FiveTwentyFourPage = ({
               text: user.name,
             }))}
             onChange={handleChange}
+            disableDefaultOption={false}
             // error={errors.author}
           />
           <hr />

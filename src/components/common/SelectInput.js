@@ -11,6 +11,7 @@ const SelectInput = ({
   error,
   options,
   bkgrdColor,
+  disableDefaultOption = true,
 }) => {
   return (
     <div className="form-group">
@@ -25,7 +26,7 @@ const SelectInput = ({
         className="form-control"
         style={{ backgroundColor: `${bkgrdColor}` }}
       >
-        <option value="" disabled>
+        <option value="" disabled={disableDefaultOption}>
           {defaultOption}
         </option>
         {options.map((option) => {
@@ -52,6 +53,7 @@ SelectInput.propTypes = {
   error: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object),
   bkgrdColor: PropTypes.string,
+  disableDefaultOption: PropTypes.bool,
 };
 
 export default SelectInput;
