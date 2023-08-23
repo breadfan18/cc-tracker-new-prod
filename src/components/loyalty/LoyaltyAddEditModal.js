@@ -129,8 +129,10 @@ LoyaltyAddEditModal.propTypes = {
   saveLoyaltyDataToFirebase: PropTypes.func.isRequired,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    cardholders: state.cardholders,
+  };
 }
 
 const mapDispatchToProps = {
