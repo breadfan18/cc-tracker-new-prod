@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 function CardsByUserDropDown({ cards, cardholders }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
-  const [selectedUser, setSelectedUser] = useState(storedUser);
+  const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
   const showAllUsers =
     selectedUser === undefined || selectedUser === "all-cards";
 
