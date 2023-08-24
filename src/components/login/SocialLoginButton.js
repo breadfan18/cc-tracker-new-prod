@@ -8,8 +8,9 @@ export default function SocialLoginButton({ Icon, btnColor, btnDisabled }) {
   // In the future, when more sign in features are implemented, we need to change this.
   const history = useHistory();
   function handleLogin() {
-    login(auth);
-    history.push("/cards");
+    login(auth).then(() => {
+      history.push("/");
+    });
   }
   return (
     <Button

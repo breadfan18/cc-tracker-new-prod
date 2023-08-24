@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
-import { slugify } from "../helpers";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBUS_jXqW-xQdBzeiiAGmYC-tl1Byzfhw8",
@@ -33,12 +32,6 @@ export function writeToFirebase(endpoint, data, id, firebaseUid) {
   set(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`), {
     ...data,
     id,
-  });
-}
-export function foo(data, firebaseUid) {
-  set(ref(db, `/users/${firebaseUid}/cardHolders/${data.id}`), {
-    ...data,
-    id: data.id,
   });
 }
 

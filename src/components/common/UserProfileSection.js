@@ -10,6 +10,7 @@ function UserProfileSection({ user, userLogout }) {
 
   function handleSignOut() {
     userLogout(auth);
+    localStorage.removeItem("selectedUser");
     history.push("/signin");
   }
   return (
