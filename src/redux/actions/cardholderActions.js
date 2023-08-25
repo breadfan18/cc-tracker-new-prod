@@ -20,9 +20,7 @@ function loadCardholdersSuccess(cardholders) {
 function createCardholderSuccess(cardholder) {
   return { type: CREATE_CARDHOLDER_SUCCESS, cardholder };
 }
-function updateCardholderSuccess(cardholder) {
-  return { type: UPDATE_CARDHOLDER_SUCCESS, cardholder };
-}
+
 function deleteCardholderSuccess(cardholder) {
   return { type: DELETE_CARDHOLDER_SUCCESS, cardholder };
 }
@@ -39,25 +37,21 @@ export function loadCardholdersFromFirebase(firebaseUid) {
   };
 }
 
-// export function saveLoyaltyDataToFirebase(loyaltyAcc, firebaseUid) {
-//   return async (dispatch) => {
-//     dispatch(beginApiCall());
+export function saveCardholderToFirebase(cardholder, firebaseUid) {
+  return async (dispatch) => {
+    dispatch(beginApiCall());
 
-//     const loyaltyId =
-//       loyaltyAcc.id === null
-//         ? slugify(
-//             loyaltyAcc.program.name + "-" + loyaltyAcc.userId + "-" + uid()
-//           )
-//         : loyaltyAcc.id;
+    const cardholderId =
+      cardholder.id === null ? slugify(cardholder.name) : cardholder.id;
 
-//     writeToFirebase("loyaltyData", loyaltyAcc, loyaltyId, firebaseUid);
-//     dispatch(createCardholderSuccess(loyaltyAcc));
-//   };
-// }
+    writeToFirebase("cardHolders", cardholder, cardholderId, firebaseUid);
+    dispatch(createCardholderSuccess(cardholder));
+  };
+}
 
-// export function deleteLoyaltyDataFromFirebase(loyaltyAcc, firebaseUid) {
-//   return (dispatch) => {
-//     deleteFromFirebase("loyaltyData", loyaltyAcc.id, firebaseUid);
-//     dispatch(deleteCardholderSuccess(loyaltyAcc));
-//   };
-// }
+export function deleteCardholderFromFirebase(cardholder, firebaseUid) {
+  return (dispatch) => {
+    deleteFromFirebase("cardHolders", cardholder.id, firebaseUid);
+    dispatch(deleteCardholderSuccess(cardholder));
+  };
+}
