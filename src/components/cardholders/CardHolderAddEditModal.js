@@ -2,23 +2,29 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { saveLoyaltyDataToFirebase } from "../../redux/actions/loyaltyActions";
+import { saveCardholderToFirebase } from "../../redux/actions/cardholderActions";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
-import { LOYALTY_DATA_KEYS, PROGRAMS } from "../../constants";
-import { maskPwd } from "../../helpers";
-import LoyaltyForm from "../loyalty/LoyaltyForm";
 import { useUser } from "reactfire";
+import CardholderForm from "../loyalty/CardholderForm";
+import { titleCase } from "../../helpers";
 
-const newCardHolder = {
+const newCardholder = {
   id: null,
-  name: "",
+  firstName: "",
+  lastName: "",
+  img: null,
 };
-
-function LoyaltyAddEditModal({ cardHolder, saveLoyaltyDataToFirebase }) {
+function CardholderAddEditModal({ cardholder, saveCardholderToFirebase }) {
   const [cardHolderForModal, setCardHolderForModal] = useState(
-    cardHolder ? { ...cardHolder } : newCardHolder
+    cardholder
+      ? {
+          id: cardholder.id,
+          firstName: cardholder.name.split(" ")[0],
+          lastName: cardholder.name.split(" ")[1],
+        }
+      : newCardholder
   );
   const [show, setShow] = useState(false);
   const { data: user } = useUser();
@@ -28,39 +34,35 @@ function LoyaltyAddEditModal({ cardHolder, saveLoyaltyDataToFirebase }) {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === LOYALTY_DATA_KEYS.loyaltyType) {
-      const filteredPrograms = PROGRAMS.filter(
-        (program) => program.type === value
-      );
-    }
-
     setCardHolderForModal((prevValue) => ({
       ...prevValue,
-      [name]:
-        name === "id" || name === "userId"
-          ? parseInt(value, 10)
-          : name === LOYALTY_DATA_KEYS.program
-          ? PROGRAMS.find((program) => program.id === parseInt(value))
-          : value,
+      [name]: value.trim(" "),
     }));
   };
 
-  const handleSave = (event) => {
-    event.preventDefault();
-    cardHolderForModal.password = maskPwd(cardHolderForModal.password);
+  const handleSave = (e) => {
+    e.preventDefault();
 
-    saveLoyaltyDataToFirebase(cardHolderForModal, user?.uid);
+    const finalCardholder = {
+      name:
+        titleCase(cardHolderForModal.firstName) +
+        " " +
+        titleCase(cardHolderForModal.lastName),
+      id: cardHolderForModal.id,
+      img: cardHolderForModal.img || "",
+    };
+    saveCardholderToFirebase(finalCardholder, user?.uid);
 
     toast.success(
       cardHolderForModal?.id === null
-        ? "Loyalty Account Created"
-        : "Loyalty Account Updated"
+        ? "Card Holder Created"
+        : "Card Holder Updated"
     );
     toggleShow();
   };
 
-  function clearLoyaltyAccState() {
-    setCardHolderForModal(newCardHolder);
+  function clearCardholderState() {
+    setCardHolderForModal(newCardholder);
     toggleShow();
   }
 
@@ -77,7 +79,7 @@ function LoyaltyAddEditModal({ cardHolder, saveLoyaltyDataToFirebase }) {
       ) : (
         <Button
           variant="primary"
-          onClick={clearLoyaltyAccState}
+          onClick={clearCardholderState}
           className="addButton"
         >
           Add Card Holder
@@ -87,12 +89,12 @@ function LoyaltyAddEditModal({ cardHolder, saveLoyaltyDataToFirebase }) {
       <Modal show={show} onHide={toggleShow} centered>
         <Modal.Header className="modalHeader" closeButton>
           <Modal.Title>
-            {cardHolderForModal.id ? "Edit" : "Add"} Account
+            {cardHolderForModal.id ? "Edit" : "Add"} Card Holder
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <LoyaltyForm
-            loyaltyAcc={cardHolderForModal}
+          <CardholderForm
+            cardholder={cardHolderForModal}
             onSave={handleSave}
             onChange={handleChange}
             // errors={errors}
@@ -103,8 +105,8 @@ function LoyaltyAddEditModal({ cardHolder, saveLoyaltyDataToFirebase }) {
   );
 }
 
-LoyaltyAddEditModal.propTypes = {
-  loyaltyAcc: PropTypes.object,
+CardholderAddEditModal.propTypes = {
+  cardholder: PropTypes.object,
   saveLoyaltyDataToFirebase: PropTypes.func.isRequired,
 };
 
@@ -113,10 +115,10 @@ function mapStateToProps() {
 }
 
 const mapDispatchToProps = {
-  saveLoyaltyDataToFirebase,
+  saveCardholderToFirebase,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoyaltyAddEditModal);
+)(CardholderAddEditModal);

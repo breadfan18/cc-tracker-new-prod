@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CardHolderAddEditModal from "./CardHolderAddEditModal";
 import { connect, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { useUser } from "reactfire";
-import { foo } from "../../tools/firebase";
-import { Button, Form } from "react-bootstrap";
-import SelectInput from "../common/SelectInput";
-import TextInput from "../common/TextInput";
+import CardholdersList from "./CardholdersList";
+import { Spinner } from "../common/Spinner";
 
 const CardHoldersPage = ({ loadCardholdersFromFirebase }) => {
   const { status, data: user } = useUser();
   const cardholders = useSelector((state) => state.cardholders);
-
-  const handleChange = (e) => {
-    console.log("fdoo");
-  };
+  const loading = useSelector((state) => state.apiCallsInProgress > 0);
 
   useEffect(() => {
     if (cardholders.length === 0 && status !== "loading") {
@@ -22,32 +17,19 @@ const CardHoldersPage = ({ loadCardholdersFromFirebase }) => {
     }
   }, [user]);
 
-  const elems = cardholders?.map((holder) => <p>{holder.name}</p>);
-
   return (
     <div className="cardHoldersContainer">
       <h2 className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Manage Card Holders</h2>
+        <CardHolderAddEditModal />
       </h2>
-      {elems}
-      <TextInput
-        name="Test"
-        label="Card Holder Name"
-        value={""}
-        onChange={handleChange}
-        // error={errors.title}
-      />
-      <Button className="addButton" onClick={() => {}}>
-        Add
-      </Button>
+      {loading ? <Spinner /> : <CardholdersList cardholders={cardholders} />}
     </div>
   );
 };
-
-const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
   loadCardholdersFromFirebase,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardHoldersPage);
+export default connect(null, mapDispatchToProps)(CardHoldersPage);

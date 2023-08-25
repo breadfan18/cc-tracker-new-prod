@@ -17,6 +17,7 @@ function HomePage({ cardholders, loadCardholdersFromFirebase }) {
       setUserData({
         id: slugify(user.displayName),
         name: user.displayName,
+        img: user.photoURL,
       });
     }
   }, [user]);
