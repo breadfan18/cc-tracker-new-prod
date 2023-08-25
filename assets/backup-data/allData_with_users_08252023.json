@@ -15,7 +15,7 @@
           "bonusEarned": "true",
           "card": "Blue Cash",
           "cardType": "Personal",
-          "cardholder": "Lisandro Martinez",
+          "cardholder": "Swaroop Uprety",
           "creditLine": 21900,
           "id": "amex-amex-blue-cash-2-062fb50688f",
           "inquiries": {
@@ -32,7 +32,7 @@
           "spendBy": "2021-02-24",
           "spendReq": 2000,
           "status": "open",
-          "userId": "lisandro-martinez"
+          "userId": "swaroop-uprety"
         },
         "capone-test-card-5-3ba39984559": {
           "annualFee": "95",
@@ -63,7 +63,7 @@
       },
       "loyaltyData": {
         "etihad-guest-5-63ba3998455": {
-          "accountHolder": "Lisandro Martinez",
+          "accountHolder": "Swaroop Uprety",
           "id": "etihad-guest-5-63ba3998455",
           "loginId": "testacc",
           "loyaltyType": "airlines",
@@ -75,7 +75,7 @@
             "name": "Etihad Guest",
             "type": "airlines"
           },
-          "userId": "lisandro-martinez"
+          "userId": "swaroop-uprety"
         }
       }
     },
