@@ -13,6 +13,7 @@ import { DELETE_COLOR_RED, NEW_NOTE } from "../../constants";
 import { AiFillDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
 import EmptyList from "../common/EmptyList";
+import { useUser } from "reactfire";
 
 function CardNotes({
   cardId,
@@ -22,6 +23,7 @@ function CardNotes({
   loading,
 }) {
   const [note, setNote] = useState(NEW_NOTE);
+  const { data: user } = useUser();
 
   function handleChange(e) {
     setNote({
@@ -32,20 +34,20 @@ function CardNotes({
 
   function handleSave(e) {
     e.preventDefault();
-    saveCardNoteToFirebase(note, cardId);
+    saveCardNoteToFirebase(note, cardId, user?.uid);
     toast.success("Note Added");
     setNote(NEW_NOTE);
   }
 
   function handleDelete(note) {
-    deleteCardNoteFromFirebase(note, cardId);
+    deleteCardNoteFromFirebase(note, cardId, user?.uid);
     toast.success("Note Deleted");
   }
 
   function handleSaveOnEnter(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
-      saveCardNoteToFirebase(note, cardId);
+      saveCardNoteToFirebase(note, cardId, user?.uid);
       toast.success("Note Added");
       setNote(NEW_NOTE);
     }

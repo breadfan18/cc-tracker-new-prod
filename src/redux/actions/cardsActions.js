@@ -69,18 +69,18 @@ export function deleteCardFromFirebase(card, firebaseUid) {
   };
 }
 
-export function saveCardNoteToFirebase(note, cardId) {
+export function saveCardNoteToFirebase(note, cardId, firebaseUid) {
   return (dispatch) => {
     dispatch(beginApiCall());
     const uuid = note.id === null || note.id === undefined ? uid() : note.id;
-    writeToFirebase(`cards/${cardId}/cardNotes`, note, uuid);
+    writeToFirebase(`cards/${cardId}/cardNotes`, note, uuid, firebaseUid);
     dispatch(createCardNotesSuccess(note));
   };
 }
 
-export function deleteCardNoteFromFirebase(note, cardId) {
+export function deleteCardNoteFromFirebase(note, cardId, firebaseUid) {
   return (dispatch) => {
-    deleteFromFirebase(`cards/${cardId}/cardNotes`, note.id);
+    deleteFromFirebase(`cards/${cardId}/cardNotes`, note.id, firebaseUid);
     dispatch(deleteCardNotesSuccess(note));
   };
 }
