@@ -13,11 +13,11 @@ export default function loyaltyReducer(
   switch (action.type) {
     case LOAD_CARDHOLDERS_SUCCESS:
       return action.cardholders;
-    // case CREATE_CARDHOLDER_SUCCESS:
-    //   /* This is just returning state instead of [...state, { ...action.loyalty }]
-    //   because Firebase real time database adds new data immediately..
-    //   so it's already available in state */
-    //   return state;
+    case CREATE_CARDHOLDER_SUCCESS:
+      /* This is just returning state instead of [...state, { ...action.cardholder }]
+      because Firebase real time database adds new data immediately..
+      so it's already available in state */
+      return state;
     // case UPDATE_CARDHOLDER_SUCCESS:
     //   return state.map((loyaltyAcc) =>
     //     loyaltyAcc.id === action.loyalty.id ? action.loyalty : loyaltyAcc
