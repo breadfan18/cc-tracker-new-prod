@@ -1,9 +1,7 @@
-import { apiCallError, beginApiCall } from "./apiStatusActions";
-import * as loyaltyApi from "../../api/loyaltyApi";
+import { beginApiCall } from "./apiStatusActions";
 import {
   CREATE_CARDHOLDER_SUCCESS,
   LOAD_CARDHOLDERS_SUCCESS,
-  UPDATE_CARDHOLDER_SUCCESS,
   DELETE_CARDHOLDER_SUCCESS,
 } from "./actionTypes";
 import {
@@ -12,7 +10,6 @@ import {
   writeToFirebase,
 } from "../../tools/firebase";
 import { slugify } from "../../helpers";
-import { uid } from "uid";
 
 function loadCardholdersSuccess(cardholders) {
   return { type: LOAD_CARDHOLDERS_SUCCESS, cardholders };
