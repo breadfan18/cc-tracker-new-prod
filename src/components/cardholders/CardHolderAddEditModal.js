@@ -23,6 +23,7 @@ function CardholderAddEditModal({ cardholder, saveCardholderToFirebase }) {
           id: cardholder.id,
           firstName: cardholder.name.split(" ")[0],
           lastName: cardholder.name.split(" ")[1],
+          img: cardholder.img,
         }
       : newCardholder
   );
