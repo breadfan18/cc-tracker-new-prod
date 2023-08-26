@@ -22,8 +22,8 @@ export default function loyaltyReducer(
     //   return state.map((loyaltyAcc) =>
     //     loyaltyAcc.id === action.loyalty.id ? action.loyalty : loyaltyAcc
     //   );
-    // case DELETE_CARDHOLDER_SUCCESS:
-    //   return state.filter((loyaltyAcc) => loyaltyAcc.id !== action.loyalty.id);
+    case DELETE_CARDHOLDER_SUCCESS:
+      return state.filter((holder) => holder.id !== action.cardholder.id);
     default:
       return state;
   }

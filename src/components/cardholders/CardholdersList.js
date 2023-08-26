@@ -21,7 +21,6 @@ const CardholdersList = ({ cardholders }) => {
       </thead>
       <tbody className="align-middle">
         {cardholders.map((holder) => {
-          console.log(holder);
           return (
             <tr key={holder.id}>
               <td style={{ textAlign: "center", padding: "10px" }}>
@@ -40,7 +39,7 @@ const CardholdersList = ({ cardholders }) => {
               <td>{holder.name.split(" ")[1]}</td>
               <td className="editDeleteCard">
                 <CardHolderAddEditModal cardholder={holder} />
-                <ConfirmDeleteModal data={holder} dataType="card holder" />
+                <ConfirmDeleteModal data={holder} dataType="cardHolder" />
               </td>
             </tr>
           );

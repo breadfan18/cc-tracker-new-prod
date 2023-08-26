@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { deleteCardFromFirebase } from "../../redux/actions/cardsActions";
 import { deleteLoyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
+import { deleteCardholderFromFirebase } from "../../redux/actions/cardholderActions";
 import { toast } from "react-toastify";
 import { DeleteButton } from "./DeleteButton";
 import PropTypes from "prop-types";
@@ -14,6 +15,7 @@ function ConfirmDeleteModal({
   dataType,
   deleteCardFromFirebase,
   deleteLoyaltyDataFromFirebase,
+  deleteCardholderFromFirebase,
   setModalOpen,
   redirect,
 }) {
@@ -22,14 +24,36 @@ function ConfirmDeleteModal({
   const history = useHistory();
   const { data: user } = useUser();
 
+  function setDataText() {
+    switch (dataType) {
+      case "card":
+        return "card";
+      case "loyaltyAcc":
+        return "loyalty account";
+      case "cardHolder":
+        return "card holder";
+      default:
+        break;
+    }
+  }
+
   function handleDelete(data) {
-    if (dataType === "card") {
-      deleteCardFromFirebase(data, user?.uid);
-      toast.success("Card deleted");
-      if (redirect) history.push("/cards");
-    } else if (dataType === "loyaltyAcc") {
-      deleteLoyaltyDataFromFirebase(data, user?.uid);
-      toast.success("Loyalty Account Deleted");
+    switch (dataType) {
+      case "card":
+        deleteCardFromFirebase(data, user?.uid);
+        toast.success("Card deleted");
+        if (redirect) history.push("/cards");
+        break;
+      case "loyaltyAcc":
+        deleteLoyaltyDataFromFirebase(data, user?.uid);
+        toast.success("Loyalty Account Deleted");
+        break;
+      case "cardHolder":
+        deleteCardholderFromFirebase(data, user?.uid);
+        toast.success("Card Holder Deleted");
+        break;
+      default:
+        break;
     }
 
     toggleModal();
@@ -54,6 +78,8 @@ function ConfirmDeleteModal({
     }
   }
 
+  const dataText = setDataText();
+
   return (
     <>
       <DeleteButton onClick={handleDeleteButtonClick} />
@@ -62,8 +88,7 @@ function ConfirmDeleteModal({
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to permanently delete this{" "}
-          {dataType === "card" ? "card" : "loyalty account"}?
+          Are you sure you want to permanently delete this {dataText}?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={toggleShow}>
@@ -83,19 +108,15 @@ ConfirmDeleteModal.propTypes = {
   dataType: PropTypes.string.isRequired,
   deleteCardFromFirebase: PropTypes.func.isRequired,
   deleteLoyaltyDataFromFirebase: PropTypes.func.isRequired,
+  deleteCardholderFromFirebase: PropTypes.func.isRequired,
   setModalOpen: PropTypes.func || undefined,
   redirect: PropTypes.bool,
 };
 
-function mapStateToProps(state) {
-  return {
-    state: state,
-  };
-}
-
 const mapDispatchToProps = {
   deleteCardFromFirebase,
   deleteLoyaltyDataFromFirebase,
+  deleteCardholderFromFirebase,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmDeleteModal);
+export default connect(null, mapDispatchToProps)(ConfirmDeleteModal);
