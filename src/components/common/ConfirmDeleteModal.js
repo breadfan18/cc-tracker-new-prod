@@ -18,6 +18,7 @@ function ConfirmDeleteModal({
   deleteCardholderFromFirebase,
   setModalOpen,
   redirect,
+  disableBtn = false,
 }) {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
@@ -82,7 +83,7 @@ function ConfirmDeleteModal({
 
   return (
     <>
-      <DeleteButton onClick={handleDeleteButtonClick} />
+      <DeleteButton onClick={handleDeleteButtonClick} disableBtn={disableBtn} />
       <Modal show={show} onHide={toggleModal} centered>
         <Modal.Header className="modalHeader" closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>

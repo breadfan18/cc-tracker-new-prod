@@ -39,7 +39,11 @@ const CardholdersList = ({ cardholders }) => {
               <td>{holder.name.split(" ")[1]}</td>
               <td className="editDeleteCard">
                 <CardHolderAddEditModal cardholder={holder} />
-                <ConfirmDeleteModal data={holder} dataType="cardHolder" />
+                <ConfirmDeleteModal
+                  data={holder}
+                  dataType="cardHolder"
+                  disableBtn={holder.hasCards || holder.hasLoyalty}
+                />
               </td>
             </tr>
           );
