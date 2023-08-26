@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
@@ -53,15 +52,8 @@ const CardholdersList = ({ cardholders }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    state,
-    ownProps,
-  };
-};
-
 CardholdersList.propTypes = {
   cardholders: PropTypes.array.isRequired,
 };
 
-export default connect(mapStateToProps)(CardholdersList);
+export default CardholdersList;
