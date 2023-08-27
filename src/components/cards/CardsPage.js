@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
 import PropTypes from "prop-types";
@@ -11,23 +11,22 @@ import { WindowWidthContext } from "../App";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { useUser } from "reactfire";
 
-const CardsPage = ({
-  cards,
-  loadCards,
-  loading,
-  cardholders,
-  loadCardholdersFromFirebase,
-}) => {
+const CardsPage = () => {
   const windowWidth = useContext(WindowWidthContext);
+  const dispatch = useDispatch();
   const { status, data: user } = useUser();
+
+  const cardholders = useSelector((state) => state.cardholders);
+  const cards = useSelector((state) => sortCardsByDate(state.cards));
+  const loading = useSelector((state) => state.apiCallsInProgress > 0);
 
   useEffect(() => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
-      loadCards(user.uid);
+      dispatch(loadCardsFromFirebase(user.uid));
     }
 
     if (cardholders.length === 0 && user) {
-      loadCardholdersFromFirebase(user.uid);
+      dispatch(loadCardholdersFromFirebase(user.uid));
     }
   }, [status, user, cardholders]);
 
@@ -55,17 +54,4 @@ CardsPage.propTypes = {
   cardholders: PropTypes.array.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    cards: sortCardsByDate(state.cards),
-    loading: state.apiCallsInProgress > 0,
-    cardholders: state.cardholders,
-  };
-}
-
-const mapDispatchToProps = {
-  loadCards: loadCardsFromFirebase,
-  loadCardholdersFromFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);
+export default CardsPage;
