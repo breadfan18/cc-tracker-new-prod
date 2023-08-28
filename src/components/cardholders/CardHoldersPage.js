@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import CardHolderAddEditModal from "./CardHolderAddEditModal";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { loadloyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
@@ -9,30 +9,29 @@ import CardholdersList from "./CardholdersList";
 import { Spinner } from "../common/Spinner";
 import _ from "lodash";
 
-const CardHoldersPage = ({
-  loadCardholdersFromFirebase,
-  loadCardsFromFirebase,
-  loadloyaltyDataFromFirebase,
-}) => {
+const CardHoldersPage = () => {
+  const dispatch = useDispatch();
   const { status, data: user } = useUser();
-  const cardholders = useSelector((state) => state.cardholders);
+  const cardholders = useSelector((state) =>
+    _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
   const loading = useSelector((state) => state.apiCallsInProgress > 0);
   const cards = useSelector((state) => state.cards);
   const loyaltyData = useSelector((state) => state.loyaltyData);
 
   useEffect(() => {
     if (cardholders.length === 0 && status !== "loading") {
-      loadCardholdersFromFirebase(user.uid);
+      dispatch(loadCardholdersFromFirebase(user.uid));
     }
   }, [user]);
 
   useEffect(() => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
-      loadCardsFromFirebase(user.uid);
+      dispatch(loadCardsFromFirebase(user.uid));
     }
 
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
-      loadloyaltyDataFromFirebase(user.uid);
+      dispatch(loadloyaltyDataFromFirebase(user.uid));
     }
   }, [cardholders]);
 
@@ -73,10 +72,4 @@ const CardHoldersPage = ({
   );
 };
 
-const mapDispatchToProps = {
-  loadCardholdersFromFirebase,
-  loadCardsFromFirebase,
-  loadloyaltyDataFromFirebase,
-};
-
-export default connect(null, mapDispatchToProps)(CardHoldersPage);
+export default CardHoldersPage;

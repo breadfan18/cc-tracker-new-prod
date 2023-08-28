@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
-import PropTypes from "prop-types";
 import { FiveTwentyFourStatus } from "./FiveTwentyFourStatus";
 import {
   pipe,
@@ -16,28 +15,33 @@ import { WindowWidthContext } from "../App";
 import CardListCards from "../cards/CardListCards";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { useUser } from "reactfire";
+import _ from "lodash";
 
-const FiveTwentyFourPage = ({
-  cards,
-  loadCards,
-  loading,
-  cardsByHolder,
-  cardholders,
-  loadCardholdersFromFirebase,
-}) => {
+const FiveTwentyFourPage = () => {
+  const dispatch = useDispatch();
   const windowWidth = useContext(WindowWidthContext);
   const [selectedCardHolder, setSelectedCardholder] = useState();
   const { status, data: user } = useUser();
+  const cards = useSelector((state) => sortCardsByDate(state.cards));
+  const loading = useSelector((state) => state.apiCallsInProgress > 0);
+  const cardholders = useSelector((state) =>
+    _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
+
+  const cardsByHolder = cardholders.reduce((obj, holder) => {
+    obj[holder.id] = cards.filter((card) => card.userId === holder.id);
+    return obj;
+  }, {});
 
   useEffect(() => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
-      loadCards(user.uid);
+      dispatch(loadCardsFromFirebase(user.uid));
     }
 
     if (cardholders.length === 0 && user) {
-      loadCardholdersFromFirebase(user.uid);
+      dispatch(loadCardholdersFromFirebase(user.uid));
     }
-  }, [status, user, cardholders]);
+  }, [status, user]);
 
   const handleChange = (e) => setSelectedCardholder(e.target.value);
 
@@ -128,30 +132,4 @@ const FiveTwentyFourPage = ({
   );
 };
 
-FiveTwentyFourPage.propTypes = {
-  cards: PropTypes.array.isRequired,
-  cardsByHolder: PropTypes.object.isRequired,
-  loadCards: PropTypes.func.isRequired,
-  cardholders: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  loadCardholdersFromFirebase: PropTypes.func.isRequired,
-};
-
-function mapStateToProps(state) {
-  return {
-    cards: state.cards,
-    cardholders: state.cardholders,
-    cardsByHolder: state.cardholders.reduce((obj, user) => {
-      obj[user.id] = state.cards.filter((card) => card.userId === user.id);
-      return obj;
-    }, {}),
-    loading: state.apiCallsInProgress > 0,
-  };
-}
-
-const mapDispatchToProps = {
-  loadCards: loadCardsFromFirebase,
-  loadCardholdersFromFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FiveTwentyFourPage);
+export default FiveTwentyFourPage;

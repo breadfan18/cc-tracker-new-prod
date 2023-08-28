@@ -3,11 +3,16 @@ import CardListCards from "./CardListCards";
 import PropTypes from "prop-types";
 import { Form } from "react-bootstrap";
 import { useFilteredData } from "../../hooks/filterCards";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import _ from "lodash";
 
-function CardsByUserDropDown({ cards, cardholders }) {
+function CardsByUserDropDown({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
+  const cardholders = useSelector((state) =>
+    _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
+
   const showAllUsers =
     selectedUser === undefined || selectedUser === "all-cards";
 
@@ -74,13 +79,4 @@ CardsByUserDropDown.propTypes = {
   cardholders: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  cardholders: state.cardholders,
-});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardsByUserDropDown);
+export default CardsByUserDropDown;

@@ -3,15 +3,20 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
 import CardListTable from "./CardListTable";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import CardListCards from "./CardListCards";
 import { WindowWidthContext } from "../App";
 import { useFilteredData } from "../../hooks/filterCards";
-function CardTabs({ cards, cardholders }) {
+import _ from "lodash";
+
+function CardTabs({ cards }) {
   const windowWidth = useContext(WindowWidthContext);
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
+  const cardholders = useSelector((state) =>
+    _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
 
   const cardsForSelectedUser =
     selectedUser === "all-cards"
@@ -106,13 +111,4 @@ CardTabs.propTypes = {
   cards: PropTypes.array.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    state,
-    cardholders: state.cardholders,
-  };
-}
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardTabs);
+export default CardTabs;

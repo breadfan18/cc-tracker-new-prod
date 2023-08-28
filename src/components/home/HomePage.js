@@ -18,6 +18,7 @@ function HomePage({ cardholders, loadCardholdersFromFirebase }) {
         id: slugify(user.displayName),
         name: user.displayName,
         img: user.photoURL,
+        isPrimary: true,
       });
     }
   }, [user]);
