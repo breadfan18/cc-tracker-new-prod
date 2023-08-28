@@ -16,7 +16,11 @@ const newCardholder = {
   lastName: "",
   img: null,
 };
-function CardholderAddEditModal({ cardholder, saveCardholderToFirebase }) {
+function CardholderAddEditModal({
+  cardholder,
+  saveCardholderToFirebase,
+  disableBtn,
+}) {
   const [cardHolderForModal, setCardHolderForModal] = useState(
     cardholder
       ? {
@@ -74,6 +78,7 @@ function CardholderAddEditModal({ cardholder, saveCardholderToFirebase }) {
           variant="success"
           onClick={toggleShow}
           className="rounded-circle"
+          disabled={disableBtn}
         >
           <MdModeEditOutline />
         </Button>
