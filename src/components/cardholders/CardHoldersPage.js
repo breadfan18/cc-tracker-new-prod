@@ -23,9 +23,6 @@ const CardHoldersPage = () => {
     if (cardholders.length === 0 && status !== "loading") {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
-  }, [user]);
-
-  useEffect(() => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
       dispatch(loadCardsFromFirebase(user.uid));
     }
@@ -33,7 +30,7 @@ const CardHoldersPage = () => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
       dispatch(loadloyaltyDataFromFirebase(user.uid));
     }
-  }, [cardholders]);
+  }, [user]);
 
   const cardsByHolder = _.groupBy(cards, (o) => o.userId);
   const loyaltyByHolder = _.groupBy(loyaltyData, (o) => o.userId);

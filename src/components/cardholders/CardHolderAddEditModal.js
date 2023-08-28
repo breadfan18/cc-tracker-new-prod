@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveCardholderToFirebase } from "../../redux/actions/cardholderActions";
+import { saveCardToFirebase } from "../../redux/actions/cardsActions";
+import { saveLoyaltyDataToFirebase } from "../../redux/actions/loyaltyActions";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { useUser } from "reactfire";
 import CardholderForm from "../loyalty/CardholderForm";
 import { titleCase } from "../../helpers";
+import _ from "lodash";
 
 const newCardholder = {
   id: null,
@@ -16,11 +19,7 @@ const newCardholder = {
   lastName: "",
   img: null,
 };
-function CardholderAddEditModal({
-  cardholder,
-  saveCardholderToFirebase,
-  disableBtn,
-}) {
+function CardholderAddEditModal({ cardholder, disableBtn }) {
   const [cardHolderForModal, setCardHolderForModal] = useState(
     cardholder
       ? {
@@ -31,14 +30,17 @@ function CardholderAddEditModal({
         }
       : newCardholder
   );
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const { data: user } = useUser();
-
   const toggleShow = () => setShow(!show);
+  const { data: user } = useUser();
+  const cards = useSelector((state) => _.groupBy(state.cards, (o) => o.userId));
+  const loyaltyData = useSelector((state) =>
+    _.groupBy(state.loyaltyData, (o) => o.userId)
+  );
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setCardHolderForModal((prevValue) => ({
       ...prevValue,
       [name]: value.trim(" "),
@@ -56,7 +58,33 @@ function CardholderAddEditModal({
       id: cardHolderForModal.id,
       img: cardHolderForModal.img || "",
     };
-    saveCardholderToFirebase(finalCardholder, user?.uid);
+
+    dispatch(saveCardholderToFirebase(finalCardholder, user?.uid));
+
+    if (cardHolderForModal?.id !== null) {
+      const cardsForThisHolder = cards[cardHolderForModal.id];
+      const loyaltyForThisHolder = loyaltyData[cardHolderForModal.id];
+
+      if (cardsForThisHolder) {
+        cardsForThisHolder.forEach((card) => {
+          const updatedCard = {
+            ...card,
+            cardholder: finalCardholder.name,
+          };
+          dispatch(saveCardToFirebase(updatedCard, user?.uid));
+        });
+      }
+
+      if (loyaltyForThisHolder) {
+        loyaltyForThisHolder.forEach((acc) => {
+          const updatedAcc = {
+            ...acc,
+            accountHolder: finalCardholder.name,
+          };
+          dispatch(saveLoyaltyDataToFirebase(updatedAcc, user?.uid));
+        });
+      }
+    }
 
     toast.success(
       cardHolderForModal?.id === null
@@ -116,15 +144,4 @@ CardholderAddEditModal.propTypes = {
   saveLoyaltyDataToFirebase: PropTypes.func.isRequired,
 };
 
-function mapStateToProps() {
-  return {};
-}
-
-const mapDispatchToProps = {
-  saveCardholderToFirebase,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardholderAddEditModal);
+export default CardholderAddEditModal;
