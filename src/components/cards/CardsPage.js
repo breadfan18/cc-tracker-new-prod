@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
-import PropTypes from "prop-types";
 import CardTabs from "./CardTabs";
 import { sortCardsByDate } from "../../helpers";
 import CardsByUserDropDown from "./CardsByUserDropDown";
@@ -15,7 +14,6 @@ const CardsPage = () => {
   const windowWidth = useContext(WindowWidthContext);
   const dispatch = useDispatch();
   const { status, data: user } = useUser();
-
   const cardholders = useSelector((state) => state.cardholders);
   const cards = useSelector((state) => sortCardsByDate(state.cards));
   const loading = useSelector((state) => state.apiCallsInProgress > 0);
@@ -45,13 +43,6 @@ const CardsPage = () => {
       )}
     </div>
   );
-};
-
-CardsPage.propTypes = {
-  cards: PropTypes.array.isRequired,
-  loadCards: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  cardholders: PropTypes.array.isRequired,
 };
 
 export default CardsPage;

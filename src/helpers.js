@@ -33,13 +33,13 @@ export function isDateApproaching(card, dataType, numberOfDays) {
   return today >= ninetyDaysBeforeNextFeeDate && today <= parsedNextFeeDate;
 }
 
-export function addUserNameToCard(cardholders, card) {
+export function addUserNameToCard(card, cardholders) {
   const cardholder = cardholders.find((holder) => holder.id === card.userId);
-  if (cardholder.name !== card.cardholder) {
+  if (cardholder?.name !== card?.cardholder) {
     return {
       ...card,
-      cardholder: cardholder.name,
-      userId: cardholder.id,
+      cardholder: cardholder?.name,
+      userId: cardholder?.id,
     };
   }
   return card;
