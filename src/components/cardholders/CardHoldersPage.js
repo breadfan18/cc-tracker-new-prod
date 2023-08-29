@@ -63,7 +63,11 @@ const CardHoldersPage = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <CardholdersList cardholders={cardholdersFinal} />
+        <CardholdersList
+          cardsByHolder={cardsByHolder}
+          loyaltyByHolder={loyaltyByHolder}
+          cardholders={cardholdersFinal}
+        />
       )}
     </div>
   );

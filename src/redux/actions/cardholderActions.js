@@ -48,6 +48,7 @@ export function saveCardholderToFirebase(cardholder, firebaseUid) {
 
 export function deleteCardholderFromFirebase(cardholder, firebaseUid) {
   return (dispatch) => {
+    dispatch(beginApiCall());
     deleteFromFirebase("cardHolders", cardholder.id, firebaseUid);
     dispatch(deleteCardholderSuccess(cardholder));
   };

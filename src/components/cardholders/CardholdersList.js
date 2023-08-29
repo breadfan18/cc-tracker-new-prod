@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import CardHolderAddEditModal from "./CardHolderAddEditModal";
 
-const CardholdersList = ({ cardholders }) => {
+const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
   return cardholders.length === 0 ? (
     <EmptyList dataType={"card holders"} />
   ) : (
@@ -13,8 +13,10 @@ const CardholdersList = ({ cardholders }) => {
       <thead>
         <tr>
           <th className="tableHeader"></th>
-          <th className="tableHeader">First Name </th>
-          <th className="tableHeader">Last Name </th>
+          <th className="tableHeader">First Name</th>
+          <th className="tableHeader">Last Name</th>
+          <th className="tableHeader">Cards</th>
+          <th className="tableHeader">Loyalty Accounts</th>
           <th className="tableHeader"></th>
         </tr>
       </thead>
@@ -36,6 +38,8 @@ const CardholdersList = ({ cardholders }) => {
               </td>
               <td>{holder.name.split(" ")[0]}</td>
               <td>{holder.name.split(" ")[1]}</td>
+              <td>{cardsByHolder[holder.id]?.length || 0}</td>
+              <td>{loyaltyByHolder[holder.id]?.length || 0}</td>
               <td className="editDeleteCard">
                 <CardHolderAddEditModal
                   cardholder={holder}
