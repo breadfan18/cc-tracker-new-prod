@@ -16,7 +16,7 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
           <th className="tableHeader">First Name</th>
           <th className="tableHeader">Last Name</th>
           <th className="tableHeader">Cards</th>
-          <th className="tableHeader">Loyalty Accounts</th>
+          <th className="tableHeader">Loyalty</th>
           <th className="tableHeader"></th>
         </tr>
       </thead>

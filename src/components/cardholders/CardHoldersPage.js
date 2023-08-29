@@ -46,7 +46,7 @@ const CardHoldersPage = () => {
   return (
     <div className="cardHoldersContainer">
       <h2 className="sectionHeaders">
-        <h2 style={{ marginBottom: 0 }}>Manage Card Holders</h2>
+        <h2 style={{ marginBottom: 0 }}>Card Holders</h2>
         <CardHolderAddEditModal />
       </h2>
       <p
