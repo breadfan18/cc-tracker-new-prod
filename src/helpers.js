@@ -2,7 +2,6 @@ import {
   CARD_COLOR_CLOSED,
   CARD_COLOR_DOWNGRADED,
   CREDIT_BUREAUS,
-  USERS,
 } from "./constants";
 
 export const pipe =

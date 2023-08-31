@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveLoyaltyDataToFirebase } from "../../redux/actions/loyaltyActions";
@@ -22,17 +22,15 @@ const newLoyaltyAcc = {
   accountHolder: null,
 };
 
-function LoyaltyAddEditModal({
-  cardholders,
-  loyaltyAcc,
-  saveLoyaltyDataToFirebase,
-}) {
+function LoyaltyAddEditModal({ loyaltyAcc }) {
+  const dispatch = useDispatch();
   const [loyaltyAccForModal, setLoyaltyAccForModal] = useState(
     loyaltyAcc ? { ...loyaltyAcc } : newLoyaltyAcc
   );
   const [programsFilteredByType, setFilteredPrograms] = useState([]);
   const [show, setShow] = useState(false);
   const { data: user } = useUser();
+  const cardholders = useSelector((state) => state.cardholders);
 
   const toggleShow = () => setShow(!show);
 
@@ -66,7 +64,7 @@ function LoyaltyAddEditModal({
     event.preventDefault();
     loyaltyAccForModal.password = maskPwd(loyaltyAccForModal.password);
 
-    saveLoyaltyDataToFirebase(loyaltyAccForModal, user?.uid);
+    dispatch(saveLoyaltyDataToFirebase(loyaltyAccForModal, user?.uid));
 
     toast.success(
       loyaltyAccForModal?.id === null
@@ -124,20 +122,6 @@ function LoyaltyAddEditModal({
 
 LoyaltyAddEditModal.propTypes = {
   loyaltyAcc: PropTypes.object,
-  saveLoyaltyDataToFirebase: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    cardholders: state.cardholders,
-  };
-}
-
-const mapDispatchToProps = {
-  saveLoyaltyDataToFirebase,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoyaltyAddEditModal);
+export default LoyaltyAddEditModal;
