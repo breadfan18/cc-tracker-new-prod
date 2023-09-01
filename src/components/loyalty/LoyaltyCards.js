@@ -6,7 +6,7 @@ import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { WindowWidthContext } from "../App";
 import LoyaltyCardText from "./LoyaltyCardText";
-import { LOYALTY_DATA_KEYS } from "../../constants";
+import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
 
 export default function LoyaltyCards({ loyaltyData }) {
   const windowWidth = useContext(WindowWidthContext);
@@ -57,7 +57,10 @@ export default function LoyaltyCards({ loyaltyData }) {
 
           <div className="editDeleteCard editDeleteOnCards">
             <LoyaltyAddEditModal loyaltyAcc={acc} />
-            <ConfirmDeleteModal data={acc} dataType="loyaltyAcc" />
+            <ConfirmDeleteModal
+              data={acc}
+              dataType={DELETE_MODAL_TYPES.loyaltyAcc}
+            />
           </div>
         </Card.Body>
       </Card>

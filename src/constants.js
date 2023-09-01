@@ -284,3 +284,9 @@ export const CREDIT_BUREAUS = [
     img: "https://i.imgur.com/4NwVzht.png",
   },
 ];
+
+export const DELETE_MODAL_TYPES = {
+  card: "card",
+  loyaltyAcc: "loyaltyAcc",
+  cardholder: "cardholder",
+};

@@ -10,6 +10,7 @@ import {
   NEW_CARD,
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_BLUE,
+  DELETE_MODAL_TYPES,
 } from "../../constants";
 import { Card, Table } from "react-bootstrap";
 import CardAddEditModal from "./CardAddEditModal";
@@ -51,7 +52,11 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
         <h2 style={{ marginBottom: 0 }}>Card Details</h2>
         <div className="editDeleteCard">
           <CardAddEditModal card={props.card} />
-          <ConfirmDeleteModal data={card} dataType="card" redirect={true} />
+          <ConfirmDeleteModal
+            data={card}
+            dataType={DELETE_MODAL_TYPES.card}
+            redirect={true}
+          />
         </div>
       </section>
       <div className="cardDetailsBody">

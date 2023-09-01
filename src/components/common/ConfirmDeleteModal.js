@@ -10,6 +10,7 @@ import { DeleteButton } from "./DeleteButton";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useUser } from "reactfire";
+import { DELETE_MODAL_TYPES } from "../../constants";
 function ConfirmDeleteModal({
   data,
   dataType,
@@ -27,11 +28,11 @@ function ConfirmDeleteModal({
 
   function setDataText() {
     switch (dataType) {
-      case "card":
+      case DELETE_MODAL_TYPES.card:
         return "card";
-      case "loyaltyAcc":
+      case DELETE_MODAL_TYPES.loyaltyAcc:
         return "loyalty account";
-      case "cardHolder":
+      case DELETE_MODAL_TYPES.cardholder:
         return "card holder";
       default:
         break;

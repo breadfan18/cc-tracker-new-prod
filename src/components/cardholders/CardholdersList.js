@@ -4,6 +4,7 @@ import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import CardHolderAddEditModal from "./CardHolderAddEditModal";
+import { DELETE_MODAL_TYPES } from "../../constants";
 
 const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
   return cardholders.length === 0 ? (
@@ -47,7 +48,7 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
                 />
                 <ConfirmDeleteModal
                   data={holder}
-                  dataType="cardHolder"
+                  dataType={DELETE_MODAL_TYPES.cardholder}
                   disableBtn={
                     holder.hasCards || holder.hasLoyalty || holder.isPrimary
                   }

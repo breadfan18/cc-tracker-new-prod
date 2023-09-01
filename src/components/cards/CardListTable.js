@@ -14,7 +14,7 @@ import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { WindowWidthContext } from "../App";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { CARD_DATA_KEYS } from "../../constants";
+import { CARD_DATA_KEYS, DELETE_MODAL_TYPES } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 
@@ -158,7 +158,7 @@ export default function CardListTable({
                     <CardAddEditModal card={card} setModalOpen={setModalOpen} />
                     <ConfirmDeleteModal
                       data={card}
-                      dataType="card"
+                      dataType={DELETE_MODAL_TYPES.card}
                       setModalOpen={setModalOpen}
                     />
                   </td>

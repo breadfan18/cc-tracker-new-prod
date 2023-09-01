@@ -7,7 +7,7 @@ import { FaSort } from "react-icons/fa";
 import { useSortableData } from "../../hooks/sortData";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import { LOYALTY_DATA_KEYS } from "../../constants";
+import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
 
 const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
   const { data, requestSort } = useSortableData(loyaltyData);
@@ -57,7 +57,10 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
                 <>
                   <td className="editDeleteCard">
                     <LoyaltyAddEditModal loyaltyAcc={acc} />
-                    <ConfirmDeleteModal data={acc} dataType="loyaltyAcc" />
+                    <ConfirmDeleteModal
+                      data={acc}
+                      dataType={DELETE_MODAL_TYPES.loyaltyAcc}
+                    />
                   </td>
                 </>
               )}
