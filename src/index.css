@@ -211,7 +211,8 @@ div.alert-danger {
 }
 
 #cardBody,
-#loyaltyCardBody {
+#loyaltyCardBody,
+#cardholderCardBody {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

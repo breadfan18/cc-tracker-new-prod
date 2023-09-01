@@ -21,7 +21,7 @@ export default function LoyaltyCards({ loyaltyData }) {
             }}
           >
             <Card.Subtitle
-              className="mb-1 text-muted"
+              className="mb-0 text-muted"
               style={{
                 padding: "10px 0 10px 10px",
                 borderRadius: "10px",
