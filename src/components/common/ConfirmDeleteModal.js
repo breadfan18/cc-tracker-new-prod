@@ -50,7 +50,7 @@ function ConfirmDeleteModal({
         deleteLoyaltyDataFromFirebase(data, user?.uid);
         toast.success("Loyalty Account Deleted");
         break;
-      case "cardHolder":
+      case "cardholder":
         deleteCardholderFromFirebase(data, user?.uid);
         toast.success("Card Holder Deleted");
         break;
