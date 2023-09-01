@@ -49,6 +49,13 @@ export function loadCardsFromFirebase(firebaseUid) {
 
 export function saveCardToFirebase(card, firebaseUid) {
   return (dispatch) => {
+    /*
+      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
+      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
+      - This causes apiCallsInProgress to go negative. 
+      - Need to understand why the LOAD action fires on Create/Update
+    */
+    dispatch(beginApiCall());
     dispatch(beginApiCall());
     const cardId =
       card.id === null
@@ -64,6 +71,9 @@ export function saveCardToFirebase(card, firebaseUid) {
 
 export function deleteCardFromFirebase(card, firebaseUid) {
   return (dispatch) => {
+    // Same reason to dispatch apiCall twice here as mentioned above in save function
+    dispatch(beginApiCall());
+    dispatch(beginApiCall());
     deleteFromFirebase("cards", card.id, firebaseUid);
     dispatch(deleteCardSuccess(card));
   };
@@ -71,6 +81,13 @@ export function deleteCardFromFirebase(card, firebaseUid) {
 
 export function saveCardNoteToFirebase(note, cardId, firebaseUid) {
   return (dispatch) => {
+    /*
+      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
+      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
+      - This causes apiCallsInProgress to go negative. 
+      - Need to understand why the LOAD action fires on Create/Update
+    */
+    dispatch(beginApiCall());
     dispatch(beginApiCall());
     const uuid = note.id === null || note.id === undefined ? uid() : note.id;
     writeToFirebase(`cards/${cardId}/cardNotes`, note, uuid, firebaseUid);
@@ -80,6 +97,9 @@ export function saveCardNoteToFirebase(note, cardId, firebaseUid) {
 
 export function deleteCardNoteFromFirebase(note, cardId, firebaseUid) {
   return (dispatch) => {
+    // Same reason to dispatch apiCall twice here as mentioned above in save function
+    dispatch(beginApiCall());
+    dispatch(beginApiCall());
     deleteFromFirebase(`cards/${cardId}/cardNotes`, note.id, firebaseUid);
     dispatch(deleteCardNotesSuccess(note));
   };

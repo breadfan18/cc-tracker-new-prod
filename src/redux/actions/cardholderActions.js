@@ -36,6 +36,13 @@ export function loadCardholdersFromFirebase(firebaseUid) {
 
 export function saveCardholderToFirebase(cardholder, firebaseUid) {
   return async (dispatch) => {
+    /*
+      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
+      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
+      - This causes apiCallsInProgress to go negative. 
+      - Need to understand why the LOAD action fires on Create/Update
+    */
+    dispatch(beginApiCall());
     dispatch(beginApiCall());
 
     const cardholderId =
@@ -48,6 +55,8 @@ export function saveCardholderToFirebase(cardholder, firebaseUid) {
 
 export function deleteCardholderFromFirebase(cardholder, firebaseUid) {
   return (dispatch) => {
+    // Same reason to dispatch apiCall twice here as mentioned above in save function
+    dispatch(beginApiCall());
     dispatch(beginApiCall());
     deleteFromFirebase("cardHolders", cardholder.id, firebaseUid);
     dispatch(deleteCardholderSuccess(cardholder));
