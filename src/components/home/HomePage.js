@@ -10,8 +10,6 @@ function HomePage({ cardholders, loadCardholdersFromFirebase }) {
   const { status, data: user } = useUser();
   const [userData, setUserData] = useState({});
 
-  console.log(user.photoURL);
-
   useEffect(() => {
     if (cardholders.length === 0 && status !== "loading" && user !== null) {
       loadCardholdersFromFirebase(user.uid);

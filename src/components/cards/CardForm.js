@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import {
-  ACC_STATUS,
+  CARD_STATUS,
   CARD_DATA_KEYS,
   CARD_TYPE,
   ISSUERS,
@@ -46,7 +46,7 @@ const CardForm = ({
           label="Account Status"
           value={card.status || ""}
           defaultOption="Select Status"
-          options={ACC_STATUS.map((status) => ({
+          options={CARD_STATUS.map((status) => ({
             value: status,
             text: titleCase(status),
           }))}
