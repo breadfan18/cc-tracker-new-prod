@@ -67,9 +67,9 @@ const CardHoldersPage = () => {
         <Spinner />
       ) : windowWidth > 800 ? (
         <CardholdersList
+          cardholders={cardholdersFinal}
           cardsByHolder={cardsByHolder}
           loyaltyByHolder={loyaltyByHolder}
-          cardholders={cardholdersFinal}
         />
       ) : (
         <CardholderCards

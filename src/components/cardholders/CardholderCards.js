@@ -16,6 +16,9 @@ export default function CardholderCards({
   const windowWidth = useContext(WindowWidthContext);
   const cardWidth = windowWidth < 650 ? windowWidth : "18rem";
   const allCardholders = cardholders.map((holder) => {
+    const cardsForThisHolder = cardsByHolder[holder.id];
+    const loyaltyForThisHolder = loyaltyByHolder[holder.id];
+
     const imgClass =
       windowWidth > 650
         ? "cardholderImg"
@@ -48,14 +51,14 @@ export default function CardholderCards({
               <article>
                 <b style={{ color: "black", marginLeft: "4px" }}>Cards</b>
                 <div>
-                  <CardsDataMiniTable cards={cardsByHolder} />
+                  <CardsDataMiniTable cards={cardsForThisHolder} />
                 </div>
               </article>
               <br />
               <article>
                 <b style={{ color: "black", marginLeft: "4px" }}>Loyalty</b>
                 <div>
-                  <LoyaltyDataMiniTable loyaltyData={loyaltyByHolder} />
+                  <LoyaltyDataMiniTable loyaltyData={loyaltyForThisHolder} />
                 </div>
               </article>
             </div>
