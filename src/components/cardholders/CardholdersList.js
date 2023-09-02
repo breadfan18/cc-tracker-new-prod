@@ -34,7 +34,7 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
                 <img
                   src={holder.img || "https://i.imgur.com/JFgA7EB.png"}
                   alt="AA"
-                  id="cardholderImg"
+                  className="cardholderImg"
                 />
               </td>
               <td>{holder.name.split(" ")[0]}</td>

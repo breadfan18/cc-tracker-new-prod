@@ -6,6 +6,8 @@ import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { WindowWidthContext } from "../App";
 import { DELETE_MODAL_TYPES } from "../../constants";
 import CardholderAddEditModal from "./CardHolderAddEditModal";
+import CardsDataMiniTable from "./CardsDataMiniTable";
+import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
 
 export default function CardholderCards({
   cardholders,
@@ -24,7 +26,7 @@ export default function CardholderCards({
             }}
           >
             <Card.Subtitle
-              className="mb-0 text-muted"
+              className="mb-0"
               style={{
                 padding: "10px 0 10px 10px",
                 borderRadius: "10px",
@@ -37,30 +39,24 @@ export default function CardholderCards({
           </div>
           <section id="cardholderCardBody">
             <div>
-              <p className="mb-0 text-muted">
-                <small>
-                  <b style={{ color: "black" }}>Cards</b>
-                  {": "}
-                  {cardsByHolder[holder.id]?.length || 0}
-                </small>
-              </p>
-              <p className="mb-0 text-muted">
-                <small>
-                  <b style={{ color: "black" }}>Loyalty</b>
-                  {": "}
-                  {loyaltyByHolder[holder.id]?.length || 0}
-                </small>
-              </p>
+              <article>
+                <b style={{ color: "black" }}>Cards</b>
+                <div className="dataTableTd">
+                  <CardsDataMiniTable cards={cardsByHolder} />
+                </div>
+              </article>
+              <br />
+              <article>
+                <b style={{ color: "black" }}>Loyalty</b>
+                <div className="dataTableTd">
+                  <LoyaltyDataMiniTable loyaltyData={loyaltyByHolder} />
+                </div>
+              </article>
             </div>
             <img
               src={holder.img || "https://i.imgur.com/JFgA7EB.png"}
               alt="AA"
-              style={{
-                height: "4rem",
-                width: "4rem",
-                borderRadius: "50%",
-                border: "2px solid gray",
-              }}
+              className="cardholderImg"
             />
           </section>
 
