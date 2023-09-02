@@ -113,9 +113,9 @@ const FiveTwentyFourPage = () => {
         <>
           <SelectInput
             name="id"
-            label="Select User to View"
+            label="Select Card Holder to View"
             value={selectedCardHolder}
-            defaultOption="All Users"
+            defaultOption="All Card Holders"
             options={cardholders.map((user) => ({
               value: user.id,
               text: user.name,
