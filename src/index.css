@@ -409,3 +409,19 @@ input[type="search"]::-webkit-search-cancel-button {
   color: gray;
   text-align: center;
 }
+
+.largeImg {
+  height: inherit;
+  width: 10rem;
+  border-radius: 10px;
+  border: 1px solid var(--light-gray);
+  background-color: var(--light-gray);
+}
+
+.smallImg {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 10px;
+  align-self: center;
+  border: 1px solid var(--light-gray);
+}

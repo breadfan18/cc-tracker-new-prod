@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 import PropTypes from "prop-types";
-import EmptyList from "../common/EmptyList";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { WindowWidthContext } from "../App";
 import { DELETE_MODAL_TYPES } from "../../constants";
@@ -17,6 +16,13 @@ export default function CardholderCards({
   const windowWidth = useContext(WindowWidthContext);
   const cardWidth = windowWidth < 650 ? windowWidth : "18rem";
   const allCardholders = cardholders.map((holder) => {
+    const imgClass =
+      windowWidth > 650
+        ? "cardholderImg"
+        : windowWidth < 650 && windowWidth >= 450
+        ? "largeImg"
+        : "smallImg";
+
     return (
       <Card style={{ width: cardWidth }} key={holder.id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
@@ -38,17 +44,17 @@ export default function CardholderCards({
             </Card.Subtitle>
           </div>
           <section id="cardholderCardBody">
-            <div>
+            <div style={{ flex: 1 }}>
               <article>
-                <b style={{ color: "black" }}>Cards</b>
-                <div className="dataTableTd">
+                <b style={{ color: "black", marginLeft: "4px" }}>Cards</b>
+                <div>
                   <CardsDataMiniTable cards={cardsByHolder} />
                 </div>
               </article>
               <br />
               <article>
-                <b style={{ color: "black" }}>Loyalty</b>
-                <div className="dataTableTd">
+                <b style={{ color: "black", marginLeft: "4px" }}>Loyalty</b>
+                <div>
                   <LoyaltyDataMiniTable loyaltyData={loyaltyByHolder} />
                 </div>
               </article>
@@ -56,7 +62,7 @@ export default function CardholderCards({
             <img
               src={holder.img || "https://i.imgur.com/JFgA7EB.png"}
               alt="AA"
-              className="cardholderImg"
+              className={imgClass}
             />
           </section>
 
@@ -77,11 +83,7 @@ export default function CardholderCards({
       </Card>
     );
   });
-  return cardholders.length === 0 ? (
-    <EmptyList dataType={"card"} />
-  ) : (
-    <div id="cardCardContainer">{allCardholders}</div>
-  );
+  return <div id="cardCardContainer">{allCardholders}</div>;
 }
 
 CardholderCards.propTypes = {
