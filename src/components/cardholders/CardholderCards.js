@@ -14,15 +14,15 @@ export default function CardholderCards({
   loyaltyByHolder,
 }) {
   const windowWidth = useContext(WindowWidthContext);
-  const cardWidth = windowWidth < 650 ? windowWidth : "18rem";
+  const cardWidth = windowWidth < 758 ? windowWidth : "22em";
   const allCardholders = cardholders.map((holder) => {
     const cardsForThisHolder = cardsByHolder[holder.id];
     const loyaltyForThisHolder = loyaltyByHolder[holder.id];
 
     const imgClass =
-      windowWidth > 650
-        ? "cardholderImg"
-        : windowWidth < 650 && windowWidth >= 450
+      windowWidth > 758
+        ? "smallImg"
+        : windowWidth < 758 && windowWidth >= 450
         ? "largeImg"
         : "smallImg";
 
@@ -34,17 +34,17 @@ export default function CardholderCards({
               backgroundColor: "rgba(0,0,0,0.06)",
             }}
           >
-            <Card.Subtitle
+            <Card.Title
               className="mb-0"
               style={{
-                padding: "10px 0 10px 10px",
+                padding: "15px 0 15px 10px",
                 borderRadius: "10px",
                 margin: "0",
                 textDecoration: "bold",
               }}
             >
               {holder.name} {holder.isPrimary && "(Primary)"}
-            </Card.Subtitle>
+            </Card.Title>
           </div>
           <section id="cardholderCardBody">
             <div style={{ flex: 1 }}>

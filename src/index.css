@@ -414,7 +414,7 @@ input[type="search"]::-webkit-search-cancel-button {
   height: inherit;
   width: 10rem;
   border-radius: 10px;
-  border: 1px solid var(--light-gray);
+  border: 2px solid gray;
   background-color: var(--light-gray);
 }
 
@@ -423,5 +423,5 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 6rem;
   border-radius: 10px;
   align-self: center;
-  border: 1px solid var(--light-gray);
+  border: 2px solid gray;
 }
