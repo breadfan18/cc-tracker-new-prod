@@ -12,7 +12,7 @@ import FiveTwentyFourPage from "./524/FiveTwentyFourPage";
 import LoyaltyPage from "./loyalty/LoyaltyPage";
 import ManageLoyaltyPage from "./loyalty/ManageLoyaltyPage";
 import Test from "./testing/UseEffectTest";
-import Checkbox from "./testing/Checkbox";
+import TestPage from "./testing/TestPage";
 import Login from "./login/Login";
 import { Spinner } from "./common/Spinner";
 import { useSigninCheck } from "reactfire";
@@ -51,7 +51,7 @@ function App() {
             <Route path="/loyalty/:id" component={ManageLoyaltyPage} />
             <Route path="/loyalty" component={ManageLoyaltyPage} />
             <Route path="/use-effect" component={Test} />
-            <Route path="/test" component={Checkbox} />
+            <Route path="/test" component={TestPage} />
             <Route component={PageNotFound} />
           </Switch>
           <ToastContainer autoClose={3000} hideProgressBar />
