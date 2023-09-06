@@ -13,8 +13,8 @@ export default function TestPage() {
     const REGION = "US West (N. California) us-west-1";
 
     AWS.config.update({
-      accessKeyId: "AKIAR2TT5OLODYESQ7NQ",
-      secretAccessKey: "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",
+      accessKeyId: "**",
+      secretAccessKey: "**",
     });
     const s3 = new AWS.S3({
       params: { Bucket: S3_BUCKET },
