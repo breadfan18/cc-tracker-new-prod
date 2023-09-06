@@ -20,7 +20,11 @@ export default function CardholderCards({
     const loyaltyForThisHolder = loyaltyByHolder[holder.id];
 
     return (
-      <Card style={{ width: cardWidth }} key={holder.id} className="cardCard">
+      <Card
+        style={{ width: cardWidth }}
+        key={holder.id}
+        className="cardCard cardholderCard"
+      >
         <Card.Body style={{ padding: "0" }}>
           <div
             style={{
@@ -54,7 +58,7 @@ export default function CardholderCards({
             </article>
           </section>
 
-          <div className="editDeleteCard editDeleteOnCards">
+          <div className="editDeleteCard editDeleteOnCards cardholderFooter">
             <CardholderAddEditModal
               cardholder={holder}
               disableBtn={holder.isPrimary}

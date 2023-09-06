@@ -226,18 +226,17 @@ div.alert-danger {
 }
 
 .cardholderCardTitle {
-  padding: 15px 0 15px 10px;
-  border-radius: 10px;
   margin: 0;
   text-decoration: bold;
   display: flex;
   justify-content: center;
   height: 4rem;
+  background-color: var(--light-blue);
 }
 
 #cardholderCardName {
   text-align: center;
-  margin: 10px 0 20px 11px;
+  margin: 10px 0 20px 0px;
   color: var(--color-blue);
   font-size: 18px;
 }
@@ -254,6 +253,7 @@ div.alert-danger {
 #cardCardContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 #cardCardContainer > * {
@@ -401,6 +401,11 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: var(--black-opacity);
 }
 
+.cardholderCard {
+  box-shadow: 0 0 15px gray;
+  border: 10px solid var(--light-blue);
+}
+
 .cardholderImg {
   height: 4rem;
   width: 4rem;
@@ -442,4 +447,9 @@ input[type="search"]::-webkit-search-cancel-button {
   margin-top: 100px;
   margin-bottom: 50px;
   padding: 2px;
+}
+
+.cardholderFooter {
+  background-color: var(--light-blue);
+  border-radius: 0;
 }
