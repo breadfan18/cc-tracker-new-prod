@@ -14,17 +14,10 @@ export default function CardholderCards({
   loyaltyByHolder,
 }) {
   const windowWidth = useContext(WindowWidthContext);
-  const cardWidth = windowWidth < 758 ? windowWidth : "22em";
+  const cardWidth = windowWidth < 650 ? windowWidth : "18em";
   const allCardholders = cardholders.map((holder) => {
     const cardsForThisHolder = cardsByHolder[holder.id];
     const loyaltyForThisHolder = loyaltyByHolder[holder.id];
-
-    const imgClass =
-      windowWidth > 758
-        ? "smallImg"
-        : windowWidth < 758 && windowWidth >= 450
-        ? "largeImg"
-        : "smallImg";
 
     return (
       <Card style={{ width: cardWidth }} key={holder.id} className="cardCard">
@@ -34,39 +27,31 @@ export default function CardholderCards({
               backgroundColor: "rgba(0,0,0,0.06)",
             }}
           >
-            <Card.Title
-              className="mb-0"
-              style={{
-                padding: "15px 0 15px 10px",
-                borderRadius: "10px",
-                margin: "0",
-                textDecoration: "bold",
-              }}
-            >
-              {holder.name} {holder.isPrimary && "(Primary)"}
+            <Card.Title className="mb-0 cardholderCardTitle">
+              <img
+                src={holder.img || "https://i.imgur.com/JFgA7EB.png"}
+                alt="AA"
+                className="cardholderCardImg"
+              />
             </Card.Title>
           </div>
           <section id="cardholderCardBody">
-            <div style={{ flex: 1 }}>
-              <article>
-                <b style={{ color: "black", marginLeft: "4px" }}>Cards</b>
-                <div>
-                  <CardsDataMiniTable cards={cardsForThisHolder} />
-                </div>
-              </article>
-              <br />
-              <article>
-                <b style={{ color: "black", marginLeft: "4px" }}>Loyalty</b>
-                <div>
-                  <LoyaltyDataMiniTable loyaltyData={loyaltyForThisHolder} />
-                </div>
-              </article>
-            </div>
-            <img
-              src={holder.img || "https://i.imgur.com/JFgA7EB.png"}
-              alt="AA"
-              className={imgClass}
-            />
+            <h6 id="cardholderCardName">
+              {holder.name} {holder.isPrimary && "(Primary)"}
+            </h6>
+            <article style={{ textAlign: "center" }}>
+              <b>Cards</b>
+              <div>
+                <CardsDataMiniTable cards={cardsForThisHolder} />
+              </div>
+            </article>
+            <br />
+            <article style={{ textAlign: "center" }}>
+              <b>Loyalty</b>
+              <div>
+                <LoyaltyDataMiniTable loyaltyData={loyaltyForThisHolder} />
+              </div>
+            </article>
           </section>
 
           <div className="editDeleteCard editDeleteOnCards">

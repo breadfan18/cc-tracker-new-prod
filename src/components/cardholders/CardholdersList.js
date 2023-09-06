@@ -40,10 +40,13 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
               <td>{holder.name.split(" ")[0]}</td>
               <td>{holder.name.split(" ")[1]}</td>
               <td className="dataTableTd">
-                <CardsDataMiniTable cards={cardsForThisHolder} />
+                <CardsDataMiniTable cards={cardsForThisHolder} layout="list" />
               </td>
               <td className="dataTableTd">
-                <LoyaltyDataMiniTable loyaltyData={loyaltyForThisHolder} />
+                <LoyaltyDataMiniTable
+                  loyaltyData={loyaltyForThisHolder}
+                  layout="list"
+                />
               </td>
               <td className="editDeleteCard">
                 <CardHolderAddEditModal
