@@ -1,44 +1,38 @@
-import React, { useState } from "react";
-import AWS from "aws-sdk";
+import React, { useState, useEffect } from "react";
+import { storage } from "../../tools/firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { uid } from "uid";
+import { get } from "lodash";
 
 export default function TestPage() {
-  const [file, setFile] = useState(null);
+  const [imgUpload, setImgUpload] = useState(null);
+  const [imgList, setImgList] = useState([]);
+  const imageListRef = ref(storage, "images/");
+
+  useEffect(() => {
+    listAll(imageListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) =>
+          setImgList((prev) => [...prev, url])
+        );
+      });
+    });
+  }, []);
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFile(file);
+    setImgUpload(file);
   };
 
+  const uuid = uid();
   const uploadFile = async () => {
-    const S3_BUCKET = "cc-tracker";
-    const REGION = "US West (N. California) us-west-1";
+    if (imgUpload === null) return;
 
-    AWS.config.update({
-      accessKeyId: "**",
-      secretAccessKey: "**",
-    });
-    const s3 = new AWS.S3({
-      params: { Bucket: S3_BUCKET },
-      region: REGION,
-    });
-
-    const params = {
-      Bucket: S3_BUCKET,
-      Key: file.name,
-      Body: file,
-    };
-
-    var upload = s3
-      .putObject(params)
-      .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
-      })
-      .promise();
-
-    await upload.then((err, data) => {
-      console.log(err);
-      alert("File uploaded successfully.");
+    const imgRef = ref(storage, `images/${imgUpload.name}${uuid}`);
+    uploadBytes(imgRef, imgUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) =>
+        setImgList((prev) => [...prev, url])
+      );
     });
   };
 
@@ -47,6 +41,9 @@ export default function TestPage() {
       <div>
         <input type="file" onChange={handleFileChange} />
         <button onClick={uploadFile}>Upload</button>
+        {imgList.map((img) => (
+          <img src={img} style={{ height: "5rem", width: "5rem" }}></img>
+        ))}
       </div>
     </div>
   );
