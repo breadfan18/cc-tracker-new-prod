@@ -57,6 +57,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     const imgRef = ref(storage, `images/${cardHolderForModal.imgUpload.name}`);
     uploadBytes(imgRef, cardHolderForModal.imgUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
+        // THIS IS WHERE I AM
         // Working on this upload.. need to then dispatch the saveCardholder thunk in here..
         console.log(url);
       });
