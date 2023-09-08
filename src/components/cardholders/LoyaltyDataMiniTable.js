@@ -3,10 +3,14 @@ import { groupBy } from "lodash";
 import { titleCase } from "../../helpers";
 import { ACCOUNT_TYPE } from "../../constants";
 
-export default function LoyaltyDataMiniTable({ loyaltyData }) {
+export default function LoyaltyDataMiniTable({ loyaltyData, layout }) {
   const loyaltyByType = groupBy(loyaltyData, "loyaltyType");
+  const miniDataSectionMarginRight = layout === "list" && "1.5rem";
   return (
-    <section className="cardholderDataSection">
+    <section
+      className="cardholderDataSection"
+      style={{ marginRight: miniDataSectionMarginRight }}
+    >
       <p style={{ textAlign: "center" }}>{loyaltyData?.length || 0}</p>
       <hr />
       <div className="dataTableDataSection">
