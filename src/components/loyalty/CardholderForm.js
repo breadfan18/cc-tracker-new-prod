@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 
-const CardholderForm = ({
-  cardholder,
-  onSave,
-  onChange,
-  cardholders,
-  errors = {},
-}) => {
+const CardholderForm = ({ cardholder, onSave, onChange, errors = {} }) => {
+  const handleFileChange = () => {
+    console.log("foo");
+  };
+
+  const uploadFile = () => {};
+
   return (
     <form onSubmit={onSave}>
       {errors.onSave && (
@@ -31,12 +31,14 @@ const CardholderForm = ({
         // error={errors.title}
       />
       <TextInput
-        name="img"
+        name="imgUrl"
         label="Image URL"
         value={cardholder.img || ""}
         onChange={onChange}
         // error={errors.title}
       />
+      <input type="file" onChange={onChange} name="imgUpload" />
+      {/* <button onClick={onSave}>Upload</button> */}
       <hr />
       <button
         type="submit"

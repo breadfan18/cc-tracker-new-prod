@@ -12,6 +12,9 @@ import { useUser } from "reactfire";
 import CardholderForm from "../loyalty/CardholderForm";
 import { titleCase } from "../../helpers";
 import _ from "lodash";
+import { ref } from "firebase/storage";
+import { storage } from "../../tools/firebase";
+import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 const newCardholder = {
   id: null,
@@ -40,15 +43,24 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
   );
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, files } = event.target;
+
     setCardHolderForModal((prevValue) => ({
       ...prevValue,
-      [name]: value.trim(" "),
+      [name]: name === "imgUpload" ? files[0] : value.trim(" "),
     }));
   };
 
   const handleSave = (e) => {
     e.preventDefault();
+
+    const imgRef = ref(storage, `images/${cardHolderForModal.imgUpload.name}`);
+    uploadBytes(imgRef, cardHolderForModal.imgUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        // Working on this upload.. need to then dispatch the saveCardholder thunk in here..
+        console.log(url);
+      });
+    });
 
     const finalCardholder = {
       name:

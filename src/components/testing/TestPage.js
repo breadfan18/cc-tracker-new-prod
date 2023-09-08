@@ -25,6 +25,7 @@ export default function TestPage() {
   };
 
   const uuid = uid();
+
   const uploadFile = async () => {
     if (imgUpload === null) return;
 
@@ -42,9 +43,19 @@ export default function TestPage() {
         <input type="file" onChange={handleFileChange} />
         <button onClick={uploadFile}>Upload</button>
         {imgList.map((img) => (
-          <img src={img} style={{ height: "5rem", width: "5rem" }}></img>
+          <img
+            src={img}
+            alt="foo"
+            style={{ height: "5rem", width: "5rem" }}
+          ></img>
         ))}
       </div>
     </div>
   );
 }
+/* 
+When user uploads image, 
+- get the url from firebase, and 
+
+
+*/
