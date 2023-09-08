@@ -253,7 +253,6 @@ div.alert-danger {
 #cardCardContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 #cardCardContainer > * {
