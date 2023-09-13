@@ -48,10 +48,10 @@ const CardHoldersPage = () => {
 
   return (
     <div className="cardHoldersContainer">
-      <h2 className="sectionHeaders">
+      <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Card Holders</h2>
         <CardHolderAddEditModal />
-      </h2>
+      </section>
       <p
         style={{
           border: "1px solid gray",

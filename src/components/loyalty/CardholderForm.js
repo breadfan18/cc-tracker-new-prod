@@ -3,12 +3,6 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 
 const CardholderForm = ({ cardholder, onSave, onChange, errors = {} }) => {
-  const handleFileChange = () => {
-    console.log("foo");
-  };
-
-  const uploadFile = () => {};
-
   return (
     <form onSubmit={onSave}>
       {errors.onSave && (
@@ -37,8 +31,7 @@ const CardholderForm = ({ cardholder, onSave, onChange, errors = {} }) => {
         onChange={onChange}
         // error={errors.title}
       />
-      <input type="file" onChange={onChange} name="imgUpload" />
-      {/* <button onClick={onSave}>Upload</button> */}
+      <input type="file" onChange={onChange} name="imgFile" />
       <hr />
       <button
         type="submit"

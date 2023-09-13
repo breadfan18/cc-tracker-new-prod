@@ -16,7 +16,7 @@ export default function LoyaltyDataMiniTable({ loyaltyData, layout }) {
       <div className="dataTableDataSection">
         {ACCOUNT_TYPE.map((loyaltyType) => {
           return (
-            <div>
+            <div key={loyaltyType}>
               <label htmlFor="">{titleCase(loyaltyType)}</label>
               <p>{loyaltyByType[loyaltyType]?.length || 0}</p>
             </div>

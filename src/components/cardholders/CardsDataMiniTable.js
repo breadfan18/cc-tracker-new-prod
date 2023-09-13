@@ -16,7 +16,7 @@ export default function CardsDataMiniTable({ cards, layout }) {
       <div className="dataTableDataSection">
         {CARD_STATUS.map((status) => {
           return (
-            <div>
+            <div key={status}>
               <label htmlFor="">{titleCase(status)}</label>
               <p>{cardsByStatus[status]?.length || 0}</p>
             </div>

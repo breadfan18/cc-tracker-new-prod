@@ -47,21 +47,22 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
 
     setCardHolderForModal((prevValue) => ({
       ...prevValue,
-      [name]: name === "imgUpload" ? files[0] : value.trim(" "),
+      [name]: name === "imgFile" ? files[0] : value.trim(" "),
     }));
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
+  async function getFirebaseImgUrl() {
+    const imgRef = ref(storage, `images/${cardHolderForModal.imgUpload?.name}`);
+    const snapshot = await uploadBytes(imgRef, cardHolderForModal.imgUpload);
+    const url = await getDownloadURL(snapshot.ref);
+    return url;
+  }
 
-    const imgRef = ref(storage, `images/${cardHolderForModal.imgUpload.name}`);
-    uploadBytes(imgRef, cardHolderForModal.imgUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        // THIS IS WHERE I AM
-        // Working on this upload.. need to then dispatch the saveCardholder thunk in here..
-        console.log(url);
-      });
-    });
+  const handleSave = async (e) => {
+    e.preventDefault();
+    let url = "";
+
+    const finalImg = cardHolderForModal.img || (await getFirebaseImgUrl());
 
     const finalCardholder = {
       name:
@@ -69,9 +70,10 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
         " " +
         titleCase(cardHolderForModal.lastName),
       id: cardHolderForModal.id,
-      img: cardHolderForModal.img || "",
+      img: finalImg || url || "",
     };
 
+    console.log(finalCardholder);
     dispatch(saveCardholderToFirebase(finalCardholder, user?.uid));
 
     if (cardHolderForModal?.id !== null) {
@@ -154,7 +156,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
 
 CardholderAddEditModal.propTypes = {
   cardholder: PropTypes.object,
-  saveLoyaltyDataToFirebase: PropTypes.func.isRequired,
+  saveLoyaltyDataToFirebase: PropTypes.func,
 };
 
 export default CardholderAddEditModal;
