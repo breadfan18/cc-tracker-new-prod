@@ -52,17 +52,20 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
   };
 
   async function getFirebaseImgUrl() {
-    const imgRef = ref(storage, `images/${cardHolderForModal.imgUpload?.name}`);
-    const snapshot = await uploadBytes(imgRef, cardHolderForModal.imgUpload);
+    const imgRef = ref(storage, `images/${cardHolderForModal.imgFile?.name}`);
+    const snapshot = await uploadBytes(imgRef, cardHolderForModal.imgFile);
     const url = await getDownloadURL(snapshot.ref);
     return url;
   }
 
   const handleSave = async (e) => {
     e.preventDefault();
-    let url = "";
 
-    const finalImg = cardHolderForModal.img || (await getFirebaseImgUrl());
+    const finalImg = cardHolderForModal.imgFile
+      ? await getFirebaseImgUrl()
+      : cardHolderForModal.img
+      ? cardHolderForModal.img
+      : "";
 
     const finalCardholder = {
       name:
@@ -70,10 +73,9 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
         " " +
         titleCase(cardHolderForModal.lastName),
       id: cardHolderForModal.id,
-      img: finalImg || url || "",
+      img: finalImg,
     };
 
-    console.log(finalCardholder);
     dispatch(saveCardholderToFirebase(finalCardholder, user?.uid));
 
     if (cardHolderForModal?.id !== null) {
@@ -142,12 +144,33 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CardholderForm
-            cardholder={cardHolderForModal}
-            onSave={handleSave}
-            onChange={handleChange}
-            // errors={errors}
-          />
+          <div
+            style={{
+              display: "flex",
+              padding: "5px",
+            }}
+          >
+            <div>
+              <img
+                src={
+                  cardHolderForModal.img || "https://i.imgur.com/JFgA7EB.png"
+                }
+                alt=""
+                style={{
+                  height: "12rem",
+                  width: "10rem",
+                  borderRadius: "5%",
+                  alignSelf: "flex-start",
+                }}
+              />
+            </div>
+            <CardholderForm
+              cardholder={cardHolderForModal}
+              onSave={handleSave}
+              onChange={handleChange}
+              // errors={errors}
+            />
+          </div>
         </Modal.Body>
       </Modal>
     </>

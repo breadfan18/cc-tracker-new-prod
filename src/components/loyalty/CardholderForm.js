@@ -24,13 +24,6 @@ const CardholderForm = ({ cardholder, onSave, onChange, errors = {} }) => {
         onChange={onChange}
         // error={errors.title}
       />
-      <TextInput
-        name="imgUrl"
-        label="Image URL"
-        value={cardholder.img || ""}
-        onChange={onChange}
-        // error={errors.title}
-      />
       <input type="file" onChange={onChange} name="imgFile" />
       <hr />
       <button

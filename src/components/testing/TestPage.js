@@ -42,13 +42,13 @@ export default function TestPage() {
       <div>
         <input type="file" onChange={handleFileChange} />
         <button onClick={uploadFile}>Upload</button>
-        {imgList.map((img) => (
+        {/* {imgList.map((img) => (
           <img
             src={img}
             alt="foo"
             style={{ height: "5rem", width: "5rem" }}
           ></img>
-        ))}
+        ))} */}
       </div>
     </div>
   );
