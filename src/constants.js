@@ -290,3 +290,5 @@ export const DELETE_MODAL_TYPES = {
   loyaltyAcc: "loyaltyAcc",
   cardholder: "cardholder",
 };
+
+export const CARDHOLDER_STOCK_IMG = "https://i.imgur.com/JFgA7EB.png";

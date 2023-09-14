@@ -7,6 +7,7 @@ import { DELETE_MODAL_TYPES } from "../../constants";
 import CardholderAddEditModal from "./CardHolderAddEditModal";
 import CardsDataMiniTable from "./CardsDataMiniTable";
 import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
+import CardholderPhoto from "./CardholderPhoto";
 
 export default function CardholderCards({
   cardholders,
@@ -32,10 +33,10 @@ export default function CardholderCards({
             }}
           >
             <Card.Title className="mb-0 cardholderCardTitle">
-              <img
-                src={holder.img || "https://i.imgur.com/JFgA7EB.png"}
-                alt="AA"
-                className="cardholderCardImg"
+              <CardholderPhoto
+                img={holder.img}
+                heightAndWidth="6rem"
+                imgOnCard={true}
               />
             </Card.Title>
           </div>

@@ -7,6 +7,7 @@ import CardHolderAddEditModal from "./CardHolderAddEditModal";
 import { DELETE_MODAL_TYPES } from "../../constants";
 import CardsDataMiniTable from "./CardsDataMiniTable";
 import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
+import CardholderPhoto from "./CardholderPhoto";
 
 const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
   return cardholders.length === 0 ? (
@@ -31,11 +32,7 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
           return (
             <tr key={holder.id}>
               <td style={{ textAlign: "center", padding: "10px" }}>
-                <img
-                  src={holder.img || "https://i.imgur.com/JFgA7EB.png"}
-                  alt="AA"
-                  className="cardholderImg"
-                />
+                <CardholderPhoto img={holder.img} heightAndWidth="4rem" />
               </td>
               <td>{holder.name.split(" ")[0]}</td>
               <td>{holder.name.split(" ")[1]}</td>

@@ -13,6 +13,7 @@ import CardholderForm from "../loyalty/CardholderForm";
 import { titleCase } from "../../helpers";
 import _ from "lodash";
 import { getFirebaseImgUrl } from "../../tools/firebase";
+import CardholderPhoto from "./CardholderPhoto";
 
 const newCardholder = {
   id: null,
@@ -133,7 +134,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
         </Button>
       )}
 
-      <Modal show={show} onHide={toggleShow} centered>
+      <Modal show={show} onHide={toggleShow} centered size="sm">
         <Modal.Header className="modalHeader" closeButton>
           <Modal.Title>
             {cardHolderForModal.id ? "Edit" : "Add"} Card Holder
@@ -143,21 +144,14 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
           <div
             style={{
               display: "flex",
-              padding: "5px",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <div>
-              <img
-                src={
-                  cardHolderForModal.img || "https://i.imgur.com/JFgA7EB.png"
-                }
-                alt=""
-                style={{
-                  height: "12rem",
-                  width: "10rem",
-                  borderRadius: "5%",
-                  alignSelf: "flex-start",
-                }}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <CardholderPhoto
+                img={cardHolderForModal.img}
+                heightAndWidth="10rem"
               />
             </div>
             <CardholderForm
