@@ -35,6 +35,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
+  const [saving, setSaving] = useState(false);
   const { data: user } = useUser();
   const cards = useSelector((state) => _.groupBy(state.cards, (o) => o.userId));
   const loyaltyData = useSelector((state) =>
@@ -52,6 +53,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    setSaving(true);
 
     const finalImg = cardHolderForModal.imgFile
       ? await getFirebaseImgUrl(cardHolderForModal)
@@ -106,6 +108,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
         : "Card Holder Updated"
     );
     toggleShow();
+    setSaving(false);
   };
 
   function clearCardholderState() {
@@ -158,6 +161,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
               cardholder={cardHolderForModal}
               onSave={handleSave}
               onChange={handleChange}
+              saving={saving}
               // errors={errors}
             />
           </div>

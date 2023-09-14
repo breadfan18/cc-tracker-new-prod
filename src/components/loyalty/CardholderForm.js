@@ -2,7 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 
-const CardholderForm = ({ cardholder, onSave, onChange, errors = {} }) => {
+const CardholderForm = ({
+  cardholder,
+  onSave,
+  onChange,
+  errors = {},
+  saving,
+}) => {
+  const buttonText = saving
+    ? "Saving..."
+    : cardholder.id === null
+    ? "Add Card Holder"
+    : "Save Changes";
+
   return (
     <form onSubmit={onSave}>
       {errors.onSave && (
@@ -28,10 +40,11 @@ const CardholderForm = ({ cardholder, onSave, onChange, errors = {} }) => {
       <hr />
       <button
         type="submit"
-        // disabled={saving}
+        disabled={saving}
         className="btn btn-primary addButton"
+        // onClick={() => setSaving(true)}
       >
-        {cardholder.id === null ? "Add Card Holder" : "Save Changes"}
+        {buttonText}
       </button>
     </form>
   );
