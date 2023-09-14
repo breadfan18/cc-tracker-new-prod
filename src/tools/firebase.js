@@ -1,7 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
-import { getStorage } from "firebase/storage";
+import {
+  getStorage,
+  getDownloadURL,
+  uploadBytes,
+  ref as storageRef,
+} from "firebase/storage";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBUS_jXqW-xQdBzeiiAGmYC-tl1Byzfhw8",
@@ -53,5 +58,12 @@ const logout = (auth) => auth.signOut();
 
 export { login, logout, auth };
 
-// Storage Functions
+// STORAGE FUNCTIONS
 export const storage = getStorage(app);
+
+export const getFirebaseImgUrl = async (cardholder) => {
+  const imgRef = storageRef(storage, `images/${cardholder.imgFile?.name}`);
+  const snapshot = await uploadBytes(imgRef, cardholder.imgFile);
+  const url = await getDownloadURL(snapshot.ref);
+  return url;
+};

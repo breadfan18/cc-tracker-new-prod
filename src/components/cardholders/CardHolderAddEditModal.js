@@ -12,9 +12,7 @@ import { useUser } from "reactfire";
 import CardholderForm from "../loyalty/CardholderForm";
 import { titleCase } from "../../helpers";
 import _ from "lodash";
-import { ref } from "firebase/storage";
-import { storage } from "../../tools/firebase";
-import { getDownloadURL, uploadBytes } from "firebase/storage";
+import { getFirebaseImgUrl } from "../../tools/firebase";
 
 const newCardholder = {
   id: null,
@@ -51,18 +49,11 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     }));
   };
 
-  async function getFirebaseImgUrl() {
-    const imgRef = ref(storage, `images/${cardHolderForModal.imgFile?.name}`);
-    const snapshot = await uploadBytes(imgRef, cardHolderForModal.imgFile);
-    const url = await getDownloadURL(snapshot.ref);
-    return url;
-  }
-
   const handleSave = async (e) => {
     e.preventDefault();
 
     const finalImg = cardHolderForModal.imgFile
-      ? await getFirebaseImgUrl()
+      ? await getFirebaseImgUrl(cardHolderForModal)
       : cardHolderForModal.img
       ? cardHolderForModal.img
       : "";
