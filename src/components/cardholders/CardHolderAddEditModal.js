@@ -69,7 +69,12 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
 
     dispatch(saveCardholderToFirebase(finalCardholder, user?.uid));
 
-    if (cardHolderForModal?.id !== null) {
+    const shouldUpdateCardsAndLoyalty =
+      (cardHolderForModal?.id !== null &&
+        cardholder?.name?.split(" ")[0] !== cardHolderForModal.firstName) ||
+      cardholder?.name?.split(" ")[1] !== cardHolderForModal.lastName;
+
+    if (shouldUpdateCardsAndLoyalty) {
       const cardsForThisHolder = cards[cardHolderForModal.id];
       const loyaltyForThisHolder = loyaltyData[cardHolderForModal.id];
 

@@ -64,6 +64,5 @@ export const storage = getStorage(app);
 export const getFirebaseImgUrl = async (cardholder) => {
   const imgRef = storageRef(storage, `images/${cardholder.imgFile?.name}`);
   const snapshot = await uploadBytes(imgRef, cardholder.imgFile);
-  const url = await getDownloadURL(snapshot.ref);
-  return url;
+  return await getDownloadURL(snapshot.ref);
 };
