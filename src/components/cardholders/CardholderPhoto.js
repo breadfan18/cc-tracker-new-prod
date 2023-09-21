@@ -1,7 +1,13 @@
 import React from "react";
 import { CARDHOLDER_STOCK_IMG } from "../../constants";
+import { TbPhotoEdit } from "react-icons/tb";
 
-export default function CardholderPhoto({ img, heightAndWidth, imgOnCard }) {
+export default function CardholderPhoto({
+  img,
+  heightAndWidth,
+  imgOnCard,
+  editMode,
+}) {
   const baseStyles = {
     height: heightAndWidth,
     width: heightAndWidth,
@@ -22,11 +28,19 @@ export default function CardholderPhoto({ img, heightAndWidth, imgOnCard }) {
     ? { ...baseStyles, ...photoOnCardStyles }
     : baseStyles;
   return (
-    <img
-      src={img || CARDHOLDER_STOCK_IMG}
-      alt="AA"
-      style={{ ...finalStyles }}
-      className={imgOnCard && "cardholderCardImg"}
-    />
+    <>
+      <img
+        src={img || CARDHOLDER_STOCK_IMG}
+        alt="AA"
+        style={{ ...finalStyles }}
+        className={imgOnCard && "cardholderCardImg"}
+      />
+      {editMode && (
+        <TbPhotoEdit
+          className="editPhotoIcon"
+          onClick={() => console.log("foo")}
+        />
+      )}
+    </>
   );
 }

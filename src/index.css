@@ -433,3 +433,17 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: var(--light-blue);
   border-radius: 0;
 }
+
+.editPhotoIcon {
+  position: absolute;
+  width: 2.1rem;
+  height: 2.1rem;
+  background: white;
+  border-radius: 50%;
+  margin-right: -100px;
+  margin-top: 122px;
+  border: 2px solid gray;
+  padding: 2px;
+  color: #0080ff;
+  cursor: pointer;
+}

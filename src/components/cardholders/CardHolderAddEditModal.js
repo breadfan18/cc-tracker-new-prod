@@ -155,6 +155,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
               <CardholderPhoto
                 img={cardHolderForModal.img}
                 heightAndWidth="10rem"
+                editMode
               />
             </div>
             <CardholderForm
