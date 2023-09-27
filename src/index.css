@@ -434,16 +434,38 @@ input[type="search"]::-webkit-search-cancel-button {
   border-radius: 0;
 }
 
-.editPhotoIcon {
+.image-upload {
   position: absolute;
+  width: 2.1rem;
+  height: 2.1rem;
+  /* background: white; */
+  /* border-radius: 50%; */
+  margin-right: -100px;
+  margin-top: 122px;
+  /* border: 2px solid gray; */
+  padding: 2px;
+  color: #0080ff;
+  cursor: pointer;
+}
+
+.editPhotoIcon {
+  /* position: absolute; */
   width: 2.1rem;
   height: 2.1rem;
   background: white;
   border-radius: 50%;
-  margin-right: -100px;
-  margin-top: 122px;
+  /* margin-right: -100px;
+  margin-top: 122px; */
   border: 2px solid gray;
   padding: 2px;
   color: #0080ff;
   cursor: pointer;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type="file"] {
+  color: transparent;
 }

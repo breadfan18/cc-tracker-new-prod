@@ -12,8 +12,13 @@ import { useUser } from "reactfire";
 import CardholderForm from "../loyalty/CardholderForm";
 import { titleCase } from "../../helpers";
 import _ from "lodash";
-import { getFirebaseImgUrl } from "../../tools/firebase";
+import {
+  getFirebaseImgUrl,
+  getFirebaseImgUrlForDataURL,
+} from "../../tools/firebase";
 import CardholderPhoto from "./CardholderPhoto";
+import { TbPhotoEdit } from "react-icons/tb";
+import PhotoEditor from "./PhotoEditor";
 
 const newCardholder = {
   id: null,
@@ -34,7 +39,10 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
   );
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const toggleShow = () => setShow(!show);
+  const toggleShow = () => {
+    setShow(!show);
+    if (cardHolderForModal.imgFile) delete cardHolderForModal.imgFile;
+  };
   const [saving, setSaving] = useState(false);
   const { data: user } = useUser();
   const cards = useSelector((state) => _.groupBy(state.cards, (o) => o.userId));
@@ -51,15 +59,16 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     }));
   };
 
-  const handleSave = async (e) => {
+  const handleSaveCardholder = async (e) => {
     e.preventDefault();
     setSaving(true);
 
-    const finalImg = cardHolderForModal.imgFile
-      ? await getFirebaseImgUrl(cardHolderForModal)
-      : cardHolderForModal.img
-      ? cardHolderForModal.img
-      : "";
+    const finalImg =
+      !newPhotoAdded && cardHolderForModal.imgFile
+        ? await getFirebaseImgUrl(cardHolderForModal)
+        : cardHolderForModal.img
+        ? cardHolderForModal.img
+        : "";
 
     const finalCardholder = {
       name:
@@ -109,11 +118,37 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     );
     toggleShow();
     setSaving(false);
+    setNewPhotoAdded(false);
+    delete cardHolderForModal.imgFile;
+  };
+
+  const [newPhotoAdded, setNewPhotoAdded] = useState(false);
+
+  const handleSavePhoto = async (editor) => {
+    if (editor) {
+      const canvas = editor.getImageScaledToCanvas();
+      const profilePhotoURL = canvas.toDataURL();
+      // setFoo(profilePhotoURL);
+      // const snapshot = await uploadString(storageRef, profilePhotoURL, "data_url");
+      const scaledImgUrl = await getFirebaseImgUrlForDataURL(
+        cardHolderForModal,
+        profilePhotoURL
+      );
+
+      setCardHolderForModal((prev) => ({
+        ...prev,
+        img: scaledImgUrl,
+      }));
+
+      setNewPhotoAdded(true);
+    }
   };
 
   function clearCardholderState() {
     setCardHolderForModal(newCardholder);
     toggleShow();
+    setNewPhotoAdded(false);
+    delete cardHolderForModal.imgFile;
   }
 
   return (
@@ -148,19 +183,41 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
             }}
           >
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <CardholderPhoto
-                img={cardHolderForModal.img}
-                heightAndWidth="10rem"
-                editMode
-              />
+              {cardHolderForModal.imgFile ? (
+                <PhotoEditor
+                  image={cardHolderForModal.imgFile || cardholder.img}
+                  handleSave={handleSavePhoto}
+                />
+              ) : (
+                <CardholderPhoto
+                  img={cardHolderForModal.img}
+                  heightAndWidth="10rem"
+                  editMode
+                  // onEditClick={onPhotoEditClick}
+                />
+              )}
+              {!cardHolderForModal.imgFile && (
+                <div className="image-upload">
+                  <label for="file-input">
+                    <TbPhotoEdit className="editPhotoIcon" />
+                  </label>
+                  <input
+                    id="file-input"
+                    type="file"
+                    title=" "
+                    onChange={handleChange}
+                    name="imgFile"
+                    className="custom-file-input"
+                  />
+                </div>
+              )}
             </div>
             <CardholderForm
               cardholder={cardHolderForModal}
-              onSave={handleSave}
+              onSave={handleSaveCardholder}
               onChange={handleChange}
               saving={saving}
               // errors={errors}

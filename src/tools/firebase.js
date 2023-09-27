@@ -6,6 +6,7 @@ import {
   getDownloadURL,
   uploadBytes,
   ref as storageRef,
+  uploadString,
 } from "firebase/storage";
 
 export const firebaseConfig = {
@@ -64,5 +65,11 @@ export const storage = getStorage(app);
 export const getFirebaseImgUrl = async (cardholder) => {
   const imgRef = storageRef(storage, `images/${cardholder.imgFile?.name}`);
   const snapshot = await uploadBytes(imgRef, cardholder.imgFile);
+  return await getDownloadURL(snapshot.ref);
+};
+
+export const getFirebaseImgUrlForDataURL = async (cardholder, url) => {
+  const imgRef = storageRef(storage, `images/${cardholder.imgFile?.name}`);
+  const snapshot = await uploadString(imgRef, url, "data_url");
   return await getDownloadURL(snapshot.ref);
 };
