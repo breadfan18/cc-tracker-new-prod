@@ -22,11 +22,13 @@ export default function CardholderPhoto({ img, heightAndWidth, imgOnCard }) {
     ? { ...baseStyles, ...photoOnCardStyles }
     : baseStyles;
   return (
-    <img
-      src={img || CARDHOLDER_STOCK_IMG}
-      alt="AA"
-      style={{ ...finalStyles }}
-      className={imgOnCard && "cardholderCardImg"}
-    />
+    <>
+      <img
+        src={img || CARDHOLDER_STOCK_IMG}
+        alt="AA"
+        style={{ ...finalStyles }}
+        className={imgOnCard && "cardholderCardImg"}
+      />
+    </>
   );
 }

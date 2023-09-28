@@ -12,8 +12,10 @@ import { useUser } from "reactfire";
 import CardholderForm from "../loyalty/CardholderForm";
 import { titleCase } from "../../helpers";
 import _ from "lodash";
-import { getFirebaseImgUrl } from "../../tools/firebase";
+import { getFirebaseImgUrlForDataURL } from "../../tools/firebase";
 import CardholderPhoto from "./CardholderPhoto";
+import PhotoEditor from "./PhotoEditor";
+import PhotoEditButton from "../common/PhotoEditButton";
 
 const newCardholder = {
   id: null,
@@ -34,13 +36,17 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
   );
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const toggleShow = () => setShow(!show);
+  const toggleShow = () => {
+    setShow(!show);
+    if (cardHolderForModal.imgFile) delete cardHolderForModal.imgFile;
+  };
   const [saving, setSaving] = useState(false);
   const { data: user } = useUser();
   const cards = useSelector((state) => _.groupBy(state.cards, (o) => o.userId));
   const loyaltyData = useSelector((state) =>
     _.groupBy(state.loyaltyData, (o) => o.userId)
   );
+  const [imgEditor, setImgEditor] = useState(null);
 
   const handleChange = (event) => {
     const { name, value, files } = event.target;
@@ -51,15 +57,24 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     }));
   };
 
-  const handleSave = async (e) => {
+  const handleSavePhoto = async (editor) => {
+    if (editor) {
+      const canvas = editor.getImageScaledToCanvas();
+      const profilePhotoURL = canvas.toDataURL();
+      return await getFirebaseImgUrlForDataURL(
+        cardHolderForModal,
+        profilePhotoURL
+      );
+    }
+  };
+
+  const handleSaveCardholder = async (e) => {
     e.preventDefault();
     setSaving(true);
 
-    const finalImg = cardHolderForModal.imgFile
-      ? await getFirebaseImgUrl(cardHolderForModal)
-      : cardHolderForModal.img
-      ? cardHolderForModal.img
-      : "";
+    const scaledImgUrl = await handleSavePhoto(imgEditor);
+
+    const finalImg = scaledImgUrl || cardHolderForModal.img || "";
 
     const finalCardholder = {
       name:
@@ -109,11 +124,13 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     );
     toggleShow();
     setSaving(false);
+    delete cardHolderForModal.imgFile;
   };
 
   function clearCardholderState() {
     setCardHolderForModal(newCardholder);
     toggleShow();
+    delete cardHolderForModal.imgFile;
   }
 
   return (
@@ -148,18 +165,28 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
             }}
           >
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <CardholderPhoto
-                img={cardHolderForModal.img}
-                heightAndWidth="10rem"
-              />
+              {cardHolderForModal.imgFile ? (
+                <PhotoEditor
+                  image={cardHolderForModal.imgFile || cardholder.img}
+                  handleSave={handleSavePhoto}
+                  setEditor={setImgEditor}
+                />
+              ) : (
+                <CardholderPhoto
+                  img={cardHolderForModal.img}
+                  heightAndWidth="10rem"
+                />
+              )}
+              {!cardHolderForModal.imgFile && (
+                <PhotoEditButton onChange={handleChange} />
+              )}
             </div>
             <CardholderForm
               cardholder={cardHolderForModal}
-              onSave={handleSave}
+              onSave={handleSaveCardholder}
               onChange={handleChange}
               saving={saving}
               // errors={errors}

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 
+import { getStorage, ref, uploadString } from "firebase/storage";
+
+const storage = getStorage();
+const storageRef = ref(storage, "images/thisimg");
+
 const EditProfilePhoto = () => {
   const [editor, setEditor] = useState(null);
   const [image, setImage] = useState(null);
@@ -28,6 +33,10 @@ const EditProfilePhoto = () => {
       const canvas = editor.getImageScaledToCanvas();
       const profilePhotoURL = canvas.toDataURL();
       setFoo(profilePhotoURL);
+
+      uploadString(storageRef, profilePhotoURL, "data_url").then((snapshot) => {
+        console.log("Uploaded a data_url string!");
+      });
       // Send profilePhotoURL to your server for saving
       // Or use it as you need
     }
@@ -45,6 +54,7 @@ const EditProfilePhoto = () => {
               image={image}
               width={250}
               height={250}
+              borderRadius={120}
               // border={50}
               // color={[255, 255, 255, 0.6]} // RGBA
               scale={scale}

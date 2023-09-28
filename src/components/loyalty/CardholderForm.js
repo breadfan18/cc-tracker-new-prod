@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
+import PhotoEditor from "../cardholders/PhotoEditor";
 
 const CardholderForm = ({
   cardholder,
@@ -16,7 +17,7 @@ const CardholderForm = ({
     : "Save Changes";
 
   return (
-    <form onSubmit={onSave}>
+    <form onSubmit={onSave} style={{ margin: 0 }}>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
@@ -36,7 +37,6 @@ const CardholderForm = ({
         onChange={onChange}
         // error={errors.title}
       />
-      <input type="file" onChange={onChange} name="imgFile" />
       <hr />
       <button
         type="submit"
