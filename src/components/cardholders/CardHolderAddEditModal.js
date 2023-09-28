@@ -12,10 +12,7 @@ import { useUser } from "reactfire";
 import CardholderForm from "../loyalty/CardholderForm";
 import { titleCase } from "../../helpers";
 import _ from "lodash";
-import {
-  getFirebaseImgUrl,
-  getFirebaseImgUrlForDataURL,
-} from "../../tools/firebase";
+import { getFirebaseImgUrlForDataURL } from "../../tools/firebase";
 import CardholderPhoto from "./CardholderPhoto";
 import { TbPhotoEdit } from "react-icons/tb";
 import PhotoEditor from "./PhotoEditor";
@@ -49,6 +46,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
   const loyaltyData = useSelector((state) =>
     _.groupBy(state.loyaltyData, (o) => o.userId)
   );
+  const [imgEditor, setImgEditor] = useState(null);
 
   const handleChange = (event) => {
     const { name, value, files } = event.target;
@@ -59,16 +57,24 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     }));
   };
 
+  const handleSavePhoto = async (editor) => {
+    if (editor) {
+      const canvas = editor.getImageScaledToCanvas();
+      const profilePhotoURL = canvas.toDataURL();
+      return await getFirebaseImgUrlForDataURL(
+        cardHolderForModal,
+        profilePhotoURL
+      );
+    }
+  };
+
   const handleSaveCardholder = async (e) => {
     e.preventDefault();
     setSaving(true);
 
-    const finalImg =
-      !newPhotoAdded && cardHolderForModal.imgFile
-        ? await getFirebaseImgUrl(cardHolderForModal)
-        : cardHolderForModal.img
-        ? cardHolderForModal.img
-        : "";
+    const scaledImgUrl = await handleSavePhoto(imgEditor);
+
+    const finalImg = scaledImgUrl || cardHolderForModal.img || "";
 
     const finalCardholder = {
       name:
@@ -118,36 +124,12 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     );
     toggleShow();
     setSaving(false);
-    setNewPhotoAdded(false);
     delete cardHolderForModal.imgFile;
-  };
-
-  const [newPhotoAdded, setNewPhotoAdded] = useState(false);
-
-  const handleSavePhoto = async (editor) => {
-    if (editor) {
-      const canvas = editor.getImageScaledToCanvas();
-      const profilePhotoURL = canvas.toDataURL();
-      // setFoo(profilePhotoURL);
-      // const snapshot = await uploadString(storageRef, profilePhotoURL, "data_url");
-      const scaledImgUrl = await getFirebaseImgUrlForDataURL(
-        cardHolderForModal,
-        profilePhotoURL
-      );
-
-      setCardHolderForModal((prev) => ({
-        ...prev,
-        img: scaledImgUrl,
-      }));
-
-      setNewPhotoAdded(true);
-    }
   };
 
   function clearCardholderState() {
     setCardHolderForModal(newCardholder);
     toggleShow();
-    setNewPhotoAdded(false);
     delete cardHolderForModal.imgFile;
   }
 
@@ -190,6 +172,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
                 <PhotoEditor
                   image={cardHolderForModal.imgFile || cardholder.img}
                   handleSave={handleSavePhoto}
+                  setEditor={setImgEditor}
                 />
               ) : (
                 <CardholderPhoto
