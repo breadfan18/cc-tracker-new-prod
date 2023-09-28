@@ -14,8 +14,8 @@ import { titleCase } from "../../helpers";
 import _ from "lodash";
 import { getFirebaseImgUrlForDataURL } from "../../tools/firebase";
 import CardholderPhoto from "./CardholderPhoto";
-import { TbPhotoEdit } from "react-icons/tb";
 import PhotoEditor from "./PhotoEditor";
+import PhotoEditButton from "../common/PhotoEditButton";
 
 const newCardholder = {
   id: null,
@@ -178,24 +178,10 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
                 <CardholderPhoto
                   img={cardHolderForModal.img}
                   heightAndWidth="10rem"
-                  editMode
-                  // onEditClick={onPhotoEditClick}
                 />
               )}
               {!cardHolderForModal.imgFile && (
-                <div className="image-upload">
-                  <label for="file-input">
-                    <TbPhotoEdit className="editPhotoIcon" />
-                  </label>
-                  <input
-                    id="file-input"
-                    type="file"
-                    title=" "
-                    onChange={handleChange}
-                    name="imgFile"
-                    className="custom-file-input"
-                  />
-                </div>
+                <PhotoEditButton onChange={handleChange} />
               )}
             </div>
             <CardholderForm

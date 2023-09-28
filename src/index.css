@@ -469,3 +469,21 @@ input[type="search"]::-webkit-search-cancel-button {
 input[type="file"] {
   color: transparent;
 }
+
+input[type="range"] {
+  padding: 10px;
+  color: red;
+}
+
+.photoEditZoomer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photoEditContainer {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid gray;
+  border-radius: 0 0 10px 10px;
+}

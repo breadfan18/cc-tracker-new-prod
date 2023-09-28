@@ -11,7 +11,7 @@ const PhotoEditor = ({ image, setEditor }) => {
 
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div className="photoEditContainer">
         <AvatarEditor
           ref={(ref) => setEditor(ref)}
           image={image}
@@ -23,14 +23,18 @@ const PhotoEditor = ({ image, setEditor }) => {
           scale={scale}
           rotate={0}
         />
-        <input
-          type="range"
-          value={scale}
-          min="1"
-          max="2"
-          step="0.01"
-          onChange={handleScaleChange}
-        />
+        <div className="photoEditZoomer">
+          <label htmlFor="photoZoom">Zoom</label>
+          <input
+            name="photoZoom"
+            type="range"
+            value={scale}
+            min="1"
+            max="2"
+            step="0.01"
+            onChange={handleScaleChange}
+          />
+        </div>
       </div>
     </>
   );
