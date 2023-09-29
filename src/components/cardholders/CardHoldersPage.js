@@ -10,6 +10,7 @@ import { Spinner } from "../common/Spinner";
 import _ from "lodash";
 import { WindowWidthContext } from "../App";
 import CardholderCards from "./CardholderCards";
+import { calculateCurrentInquiries } from "../../helpers";
 
 const CardHoldersPage = () => {
   const windowWidth = useContext(WindowWidthContext);
@@ -37,6 +38,7 @@ const CardHoldersPage = () => {
 
   const cardsByHolder = _.groupBy(cards, (o) => o.userId);
   const loyaltyByHolder = _.groupBy(loyaltyData, (o) => o.userId);
+  const inquiriesByHolder = calculateCurrentInquiries(cardsByHolder);
 
   const cardholdersFinal = cardholders.map((holder) => {
     return {
@@ -70,6 +72,7 @@ const CardHoldersPage = () => {
           cardholders={cardholdersFinal}
           cardsByHolder={cardsByHolder}
           loyaltyByHolder={loyaltyByHolder}
+          inquiriesByHolder={inquiriesByHolder}
         />
       ) : (
         <CardholderCards

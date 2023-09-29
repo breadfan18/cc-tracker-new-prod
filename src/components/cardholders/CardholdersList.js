@@ -8,8 +8,14 @@ import { DELETE_MODAL_TYPES } from "../../constants";
 import CardsDataMiniTable from "./CardsDataMiniTable";
 import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
 import CardholderPhoto from "./CardholderPhoto";
+import InquiriesMiniTable from "./InquiriesMiniTable";
 
-const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
+const CardholdersList = ({
+  cardsByHolder,
+  loyaltyByHolder,
+  cardholders,
+  inquiriesByHolder,
+}) => {
   return cardholders.length === 0 ? (
     <EmptyList dataType={"card holders"} />
   ) : (
@@ -21,6 +27,7 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
           <th className="tableHeader">Last Name</th>
           <th className="tableHeader">Cards</th>
           <th className="tableHeader">Loyalty</th>
+          <th className="tableHeader">Inquiries (24 mos)</th>
           <th className="tableHeader"></th>
         </tr>
       </thead>
@@ -28,6 +35,7 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
         {cardholders.map((holder) => {
           const cardsForThisHolder = cardsByHolder[holder.id];
           const loyaltyForThisHolder = loyaltyByHolder[holder.id];
+          const inquiriesForThisHolder = inquiriesByHolder[holder.id];
 
           return (
             <tr key={holder.id}>
@@ -42,6 +50,12 @@ const CardholdersList = ({ cardsByHolder, loyaltyByHolder, cardholders }) => {
               <td className="dataTableTd">
                 <LoyaltyDataMiniTable
                   loyaltyData={loyaltyForThisHolder}
+                  layout="list"
+                />
+              </td>
+              <td className="dataTableTd">
+                <InquiriesMiniTable
+                  inquiries={inquiriesForThisHolder}
                   layout="list"
                 />
               </td>

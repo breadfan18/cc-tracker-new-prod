@@ -156,3 +156,30 @@ export function setColorForCardStatus(componentType, cardStatus) {
       : null;
   }
 }
+
+export function calculateCurrentInquiries(cardsByHolder) {
+  const inquiriesByHolder = { ...cardsByHolder };
+
+  Object.keys(inquiriesByHolder).forEach((holder) => {
+    const totalInq = cardsByHolder[holder]
+      .filter((i) => wasCardOpenedWithinLast24Months(i.appDate))
+      .reduce(
+        (output, i) => {
+          const inquiries = i.inquiries;
+          if (inquiries.experian) output["experian"]++;
+          if (inquiries.equifax) output["equifax"]++;
+          if (inquiries.transunion) output["transunion"]++;
+
+          return output;
+        },
+        {
+          experian: 0,
+          equifax: 0,
+          transunion: 0,
+        }
+      );
+    inquiriesByHolder[holder] = totalInq;
+  });
+
+  return inquiriesByHolder;
+}
