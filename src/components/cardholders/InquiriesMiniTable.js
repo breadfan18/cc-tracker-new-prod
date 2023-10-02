@@ -6,7 +6,6 @@ export default function InquiriesMiniTable({ inquiries, layout }) {
   const totalInquiries = inquiries
     ? Object.keys(inquiries).reduce((total, i) => (total += inquiries[i]), 0)
     : 0;
-  console.log(totalInquiries);
   const miniDataSectionMarginRight = layout === "list" && "1.5rem";
   return (
     <section

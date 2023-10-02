@@ -8,17 +8,20 @@ import CardholderAddEditModal from "./CardHolderAddEditModal";
 import CardsDataMiniTable from "./CardsDataMiniTable";
 import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
 import CardholderPhoto from "./CardholderPhoto";
+import InquiriesMiniTable from "./InquiriesMiniTable";
 
 export default function CardholderCards({
   cardholders,
   cardsByHolder,
   loyaltyByHolder,
+  inquiriesByHolder,
 }) {
   const windowWidth = useContext(WindowWidthContext);
   const cardWidth = windowWidth < 650 ? windowWidth : "18em";
   const allCardholders = cardholders.map((holder) => {
     const cardsForThisHolder = cardsByHolder[holder.id];
     const loyaltyForThisHolder = loyaltyByHolder[holder.id];
+    const inquiriesForThisHolder = inquiriesByHolder[holder.id];
 
     return (
       <Card
@@ -55,6 +58,13 @@ export default function CardholderCards({
               <b>Loyalty</b>
               <div>
                 <LoyaltyDataMiniTable loyaltyData={loyaltyForThisHolder} />
+              </div>
+            </article>
+            <br />
+            <article style={{ textAlign: "center" }}>
+              <b>Inquiries (24 mos)</b>
+              <div>
+                <InquiriesMiniTable inquiries={inquiriesForThisHolder} />
               </div>
             </article>
           </section>

@@ -67,7 +67,7 @@ const CardHoldersPage = () => {
       </p>
       {loading ? (
         <Spinner />
-      ) : windowWidth > 800 ? (
+      ) : windowWidth > 950 ? (
         <CardholdersList
           cardholders={cardholdersFinal}
           cardsByHolder={cardsByHolder}
@@ -79,6 +79,7 @@ const CardHoldersPage = () => {
           cardholders={cardholdersFinal}
           cardsByHolder={cardsByHolder}
           loyaltyByHolder={loyaltyByHolder}
+          inquiriesByHolder={inquiriesByHolder}
         />
       )}
     </div>
