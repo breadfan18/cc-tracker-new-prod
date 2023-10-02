@@ -25,6 +25,7 @@ export default function CardholderPhoto({ img, heightAndWidth, imgOnCard }) {
     <>
       <img
         src={img || CARDHOLDER_STOCK_IMG}
+        onError={(e) => (e.target.src = CARDHOLDER_STOCK_IMG)}
         alt="AA"
         style={{ ...finalStyles }}
         className={imgOnCard && "cardholderCardImg"}
