@@ -63,12 +63,10 @@ export function titleCase(str) {
 }
 
 export function maskPwd(str) {
-  const centerStr = str
-    .split("")
-    .splice(1, str.length - 5)
-    .fill("*")
-    .join("");
-  return str.charAt(0) + centerStr + str.substring(str.length - 4);
+  const centerStr = str.substring(1, str.length - 2);
+  return (
+    str.charAt(0) + "*".repeat(centerStr.length) + str.substring(str.length - 2)
+  );
 }
 
 export function formatDate(dateStr) {
