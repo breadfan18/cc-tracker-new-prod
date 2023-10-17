@@ -20,6 +20,8 @@ const newLoyaltyAcc = {
   password: "",
   userId: null,
   accountHolder: null,
+  rewardsBalance: null,
+  rewardsExpiration: null,
 };
 
 function LoyaltyAddEditModal({ loyaltyAcc }) {

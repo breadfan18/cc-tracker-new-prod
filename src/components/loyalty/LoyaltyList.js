@@ -8,6 +8,7 @@ import { useSortableData } from "../../hooks/sortData";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
+import { formatDate } from "../../helpers";
 
 const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
   const { data, requestSort } = useSortableData(loyaltyData);
@@ -35,6 +36,14 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
             Password{" "}
             <FaSort onClick={() => requestSort(LOYALTY_DATA_KEYS.password)} />
           </th>
+          <th className="tableHeader">
+            Rewards Balance{" "}
+            <FaSort onClick={() => requestSort("rewardsBalance")} />
+          </th>
+          <th className="tableHeader">
+            Expiration{" "}
+            <FaSort onClick={() => requestSort("rewardsExpiration")} />
+          </th>
           {showEditDelete && (
             <>
               <th></th>
@@ -44,6 +53,7 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
       </thead>
       <tbody className="align-middle">
         {data.map((acc) => {
+          console.log(acc);
           return (
             <tr key={acc.id}>
               <td>
@@ -53,6 +63,12 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
               <td>{acc.memberId}</td>
               <td>{acc.loginId}</td>
               <td>{acc.password}</td>
+              <td>{`${Number(acc.rewardsBalance).toLocaleString()} ${
+                acc.program.rewardsTerm || acc.program.type === "airlines"
+                  ? "miles"
+                  : "points"
+              }`}</td>
+              <td>{formatDate(acc.rewardsExpiration)}</td>
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">

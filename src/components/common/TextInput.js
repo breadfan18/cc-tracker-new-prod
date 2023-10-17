@@ -10,13 +10,21 @@ const TextInput = ({
   value,
   error,
   isCurrency,
+  isRewardsBalance,
+  rewardsBalanceText,
 }) => {
   let wrapperClass = "form-group";
   if (error && error.length > 0) {
     wrapperClass += " has-error";
   }
 
-  const fieldBorderRadius = isCurrency ? "0 0 10px 0" : "0 0 10px 10px";
+  console.log(rewardsBalanceText);
+
+  const fieldBorderRadius = isCurrency
+    ? "0 0 10px 0"
+    : isRewardsBalance
+    ? "0 0 0 10px"
+    : "0 0 10px 10px";
 
   return (
     <div className={wrapperClass}>
@@ -50,6 +58,21 @@ const TextInput = ({
             paddingLeft: isCurrency ? "5px" : "12px",
           }}
         />
+        {isRewardsBalance && (
+          <p
+            style={{
+              padding: "0 10px",
+              backgroundColor: APP_COLOR_BLACK_OPACITY,
+              marginBottom: 0,
+              borderRadius: "0 0 10px 0",
+              display: "flex",
+              alignItems: "center",
+              minWidth: "5.5rem",
+            }}
+          >
+            {rewardsBalanceText || ""}
+          </p>
+        )}
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
     </div>

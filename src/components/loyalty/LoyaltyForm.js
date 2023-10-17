@@ -4,6 +4,7 @@ import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import { ACCOUNT_TYPE, LOYALTY_DATA_KEYS, PROGRAMS } from "../../constants";
 import { titleCase } from "../../helpers";
+import DateInput from "../common/DateInput";
 
 const LoyaltyForm = ({
   loyaltyAcc,
@@ -13,6 +14,8 @@ const LoyaltyForm = ({
   cardholders,
   errors = {},
 }) => {
+  console.log(loyaltyAcc);
+
   const programsToDisplay =
     filteredPrograms.length === 0
       ? PROGRAMS.filter(
@@ -85,6 +88,21 @@ const LoyaltyForm = ({
         value={loyaltyAcc.password}
         onChange={onChange}
         // error={errors.title}
+      />
+      <TextInput
+        name="rewardsBalance"
+        label="Rewards Balance"
+        value={loyaltyAcc.rewardsBalance}
+        onChange={onChange}
+        isRewardsBalance={true}
+        rewardsBalanceText={loyaltyAcc.program?.rewardsTerm || "points"}
+        // error={errors.title}
+      />
+      <DateInput
+        name="rewardsExpiration"
+        label="Rewards Expiration"
+        value={loyaltyAcc.rewardsExpiration}
+        onChange={onChange}
       />
       <hr />
       <button
