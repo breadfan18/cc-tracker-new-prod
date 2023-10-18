@@ -63,7 +63,7 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
               <td>{acc.memberId}</td>
               <td>{acc.loginId}</td>
               <td>{acc.password}</td>
-              <td>{`${Number(acc.rewardsBalance).toLocaleString()} ${
+              <td>{`${Number(acc.rewardsBalance || "0").toLocaleString()} ${
                 acc.program.rewardsTerm || acc.program.type === "airlines"
                   ? "miles"
                   : "points"
