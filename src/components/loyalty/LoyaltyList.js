@@ -38,11 +38,15 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
           </th>
           <th className="tableHeader">
             Rewards Balance{" "}
-            <FaSort onClick={() => requestSort("rewardsBalance")} />
+            <FaSort
+              onClick={() => requestSort(LOYALTY_DATA_KEYS.rewardsBalance)}
+            />
           </th>
           <th className="tableHeader">
             Expiration{" "}
-            <FaSort onClick={() => requestSort("rewardsExpiration")} />
+            <FaSort
+              onClick={() => requestSort(LOYALTY_DATA_KEYS.rewardsExpiration)}
+            />
           </th>
           {showEditDelete && (
             <>

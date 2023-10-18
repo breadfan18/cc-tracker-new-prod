@@ -18,8 +18,6 @@ const TextInput = ({
     wrapperClass += " has-error";
   }
 
-  console.log(rewardsBalanceText);
-
   const fieldBorderRadius = isCurrency
     ? "0 0 10px 0"
     : isRewardsBalance

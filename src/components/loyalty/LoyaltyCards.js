@@ -45,6 +45,14 @@ export default function LoyaltyCards({ loyaltyData }) {
                 account={acc}
                 dataType={LOYALTY_DATA_KEYS.password}
               />
+              <LoyaltyCardText
+                account={acc}
+                dataType={LOYALTY_DATA_KEYS.rewardsBalance}
+              />
+              <LoyaltyCardText
+                account={acc}
+                dataType={LOYALTY_DATA_KEYS.rewardsExpiration}
+              />
             </div>
             <div>
               <img

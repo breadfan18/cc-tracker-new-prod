@@ -68,6 +68,8 @@ export const LOYALTY_DATA_KEYS = {
   loginId: "loginId",
   password: "password",
   userId: "userId",
+  rewardsBalance: "rewardsBalance",
+  rewardsExpiration: "rewardsExpiration",
 };
 
 export const ISSUERS = [
@@ -245,6 +247,18 @@ export const PROGRAMS = [
     type: "hotels",
     name: "Hyatt",
     img: "https://i.imgur.com/XbQJMri.png",
+  },
+  {
+    id: 28,
+    type: "misc",
+    name: "Chase Ultimate Rewards",
+    img: "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2Fchase_UR.png?alt=media&token=964ca70a-2bba-47f2-8368-d4c414ac810f&_gl=1*1hr61hr*_ga*MTMyNTkwOTMwOC4xNjkxNDIzMzUw*_ga_CW55HF8NVT*MTY5NzY3Mjc0Ni41NS4xLjE2OTc2NzI3NTQuNTIuMC4w",
+  },
+  {
+    id: 29,
+    type: "misc",
+    name: "Capital One Rewards",
+    img: "https://i.imgur.com/u3Rr8rT.png",
   },
 ];
 

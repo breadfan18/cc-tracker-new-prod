@@ -88,7 +88,7 @@ const LoyaltyForm = ({
         // error={errors.title}
       />
       <TextInput
-        name="rewardsBalance"
+        name={LOYALTY_DATA_KEYS.rewardsBalance}
         label="Rewards Balance"
         value={loyaltyAcc.rewardsBalance}
         onChange={onChange}
@@ -99,7 +99,7 @@ const LoyaltyForm = ({
         // error={errors.title}
       />
       <DateInput
-        name="rewardsExpiration"
+        name={LOYALTY_DATA_KEYS.rewardsExpiration}
         label="Rewards Expiration"
         value={loyaltyAcc.rewardsExpiration}
         onChange={onChange}

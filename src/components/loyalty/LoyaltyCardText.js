@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { LOYALTY_DATA_KEYS } from "../../constants";
+import { formatDate } from "../../helpers";
 
 function LoyaltyCardText({ account, dataType }) {
   const setLoyaltyAccountType = (account, dataType) => {
@@ -19,6 +20,18 @@ function LoyaltyCardText({ account, dataType }) {
         return {
           fieldName: "Password",
           value: account.password,
+        };
+      case LOYALTY_DATA_KEYS.rewardsBalance:
+        return {
+          fieldName: "Rewards Balance",
+          value: `${Number(account.rewardsBalance || "0").toLocaleString()} ${
+            account.program.type === "airlines" ? "miles" : "points"
+          }`,
+        };
+      case LOYALTY_DATA_KEYS.rewardsExpiration:
+        return {
+          fieldName: "Rewards Expiration",
+          value: formatDate(account.rewardsExpiration),
         };
       default:
         break;
