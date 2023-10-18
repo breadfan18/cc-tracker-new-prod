@@ -89,28 +89,24 @@ export const PROGRAMS = [
     type: "airlines",
     name: "American AAdvantage",
     img: "https://i.imgur.com/Pc1I7uX.png",
-    rewardsTerm: "AA Miles",
   },
   {
     id: 2,
     type: "airlines",
     name: "United MileagePlus",
     img: "https://i.imgur.com/znFTwQ1.png",
-    rewardsTerm: "UA Miles",
   },
   {
     id: 3,
     type: "airlines",
     name: "SouthWest",
     img: "https://i.imgur.com/4BseEAn.png",
-    rewardsTerm: "SW Points",
   },
   {
     id: 4,
     type: "airlines",
     name: "Delta",
     img: "https://i.imgur.com/W6lIiX5.png",
-    rewardsTerm: "Sky Miles",
   },
   {
     id: 5,
@@ -129,14 +125,12 @@ export const PROGRAMS = [
     type: "airlines",
     name: "British Airways",
     img: "https://i.imgur.com/KewcSxm.png",
-    rewardsTerm: "Avios",
   },
   {
     id: 8,
     type: "airlines",
     name: "Qatar Airways",
     img: "https://i.imgur.com/nFQMegw.png",
-    rewardsTerm: "Avios",
   },
   {
     id: 9,

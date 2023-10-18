@@ -93,7 +93,9 @@ const LoyaltyForm = ({
         value={loyaltyAcc.rewardsBalance}
         onChange={onChange}
         isRewardsBalance={true}
-        rewardsBalanceText={loyaltyAcc.program?.rewardsTerm || "points"}
+        rewardsBalanceText={
+          loyaltyAcc.program?.type === "airlines" ? "miles" : "points"
+        }
         // error={errors.title}
       />
       <DateInput
