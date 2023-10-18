@@ -14,8 +14,6 @@ const LoyaltyForm = ({
   cardholders,
   errors = {},
 }) => {
-  console.log(loyaltyAcc);
-
   const programsToDisplay =
     filteredPrograms.length === 0
       ? PROGRAMS.filter(

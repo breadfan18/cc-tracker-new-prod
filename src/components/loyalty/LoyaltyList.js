@@ -53,7 +53,6 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
       </thead>
       <tbody className="align-middle">
         {data.map((acc) => {
-          console.log(acc);
           return (
             <tr key={acc.id}>
               <td>
