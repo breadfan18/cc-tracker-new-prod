@@ -7,11 +7,27 @@ import { FaSort } from "react-icons/fa";
 import { useSortableData } from "../../hooks/sortData";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
-import { formatDate } from "../../helpers";
+import {
+  DELETE_COLOR_RED,
+  DELETE_MODAL_TYPES,
+  LOYALTY_DATA_KEYS,
+} from "../../constants";
+import { formatDate, daysTillRewardsExpiration } from "../../helpers";
+import { TbAlertOctagonFilled } from "react-icons/tb";
+import { BsFillBellFill } from "react-icons/bs";
 
 const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
   const { data, requestSort } = useSortableData(loyaltyData);
+
+  const setRewardsExpirationIcon = (numberOfDays) => {
+    return numberOfDays > 30 && numberOfDays <= 90 ? (
+      <BsFillBellFill style={{ color: "orange" }} />
+    ) : numberOfDays <= 30 ? (
+      <TbAlertOctagonFilled style={{ color: DELETE_COLOR_RED }} />
+    ) : (
+      ""
+    );
+  };
 
   return loyaltyData.length === 0 ? (
     <EmptyList dataType={"loyalty account"} />
@@ -25,7 +41,7 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
             <FaSort onClick={() => requestSort(LOYALTY_DATA_KEYS.program)} />
           </th>
           <th className="tableHeader">
-            Member ID{" "}
+            Member ID
             <FaSort onClick={() => requestSort(LOYALTY_DATA_KEYS.memberId)} />
           </th>
           <th className="tableHeader">
@@ -57,6 +73,9 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
       </thead>
       <tbody className="align-middle">
         {data.map((acc) => {
+          const daysForRewardExpiration = daysTillRewardsExpiration(
+            acc.rewardsExpiration
+          );
           return (
             <tr key={acc.id}>
               <td>
@@ -69,7 +88,22 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
               <td>{`${Number(acc.rewardsBalance || "0").toLocaleString()} ${
                 acc.program.type === "airlines" ? "miles" : "points"
               }`}</td>
-              <td>{formatDate(acc.rewardsExpiration)}</td>
+              <td>
+                {daysForRewardExpiration && (
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: "10px",
+                      color:
+                        daysForRewardExpiration <= 90 ? DELETE_COLOR_RED : "",
+                    }}
+                  >
+                    {`Rewards expire in ${daysForRewardExpiration} days`}
+                  </p>
+                )}
+                {setRewardsExpirationIcon(daysForRewardExpiration)}
+                {setRewardsExpirationIcon()} {formatDate(acc.rewardsExpiration)}{" "}
+              </td>
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">

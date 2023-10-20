@@ -18,18 +18,22 @@ export function wasCardOpenedWithinLast24Months(appDate) {
   return parsedAppDate >= twoYearsAgoFromToday && parsedAppDate <= today;
 }
 
-export function isDateApproaching(card, dataType, numberOfDays) {
-  const formattedNextFeeDate = new Date(card[dataType]);
-  const parsedNextFeeDate = Date.parse(card[dataType]);
+export function isDateApproaching(data, dataType, numberOfDays) {
+  if (!data[dataType]) return;
+  const formattedDate = new Date(data[dataType]);
+  const parsedDate = Date.parse(data[dataType]);
   const today = Date.now();
-  const ninetyDaysBeforeNextFeeDate = Date.parse(
-    new Date(
-      formattedNextFeeDate.setDate(
-        formattedNextFeeDate.getDate() - numberOfDays
-      )
-    )
+  const daysBeforeDate = Date.parse(
+    new Date(formattedDate.setDate(formattedDate.getDate() - numberOfDays))
   );
-  return today >= ninetyDaysBeforeNextFeeDate && today <= parsedNextFeeDate;
+  return today >= daysBeforeDate && today <= parsedDate;
+}
+
+export function daysTillRewardsExpiration(rewardsExpirationDate) {
+  if (!rewardsExpirationDate) return;
+  const expirationDate = new Date(rewardsExpirationDate);
+  const todaysDate = Date.now();
+  return Math.round((expirationDate - todaysDate) / (1000 * 60 * 60 * 24));
 }
 
 export function addUserNameToCard(card, cardholders) {
