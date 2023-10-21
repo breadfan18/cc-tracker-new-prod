@@ -103,6 +103,9 @@ const LoyaltyForm = ({
         label="Rewards Expiration"
         value={loyaltyAcc.rewardsExpiration}
         onChange={onChange}
+        disabled={
+          !loyaltyAcc.rewardsBalance || loyaltyAcc.rewardsBalance === "0"
+        }
       />
       <hr />
       <button
