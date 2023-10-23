@@ -26,7 +26,7 @@ export default function LoyaltyCards({ loyaltyData }) {
               backgroundColor: "rgba(0,0,0,0.06)",
             }}
           >
-            <Card.Subtitle className="mb-0 text-muted loyaltyCardTitle">
+            <Card.Subtitle className="mb-0 loyaltyCardTitle">
               <p style={{ margin: 0 }}>{acc.program.name}</p>
               <div>
                 <img

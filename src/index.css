@@ -219,7 +219,8 @@ div.alert-danger {
 }
 
 .loyaltyCardTitle {
-  padding: 5px;
+  padding: 5px 5px 5px 10px;
+  font-size: 1.1rem;
   border-radius: 10px;
   margin: 0;
   display: flex;
