@@ -12,24 +12,13 @@ import {
   DELETE_MODAL_TYPES,
   LOYALTY_DATA_KEYS,
 } from "../../constants";
-import { formatDate, daysTillRewardsExpiration } from "../../helpers";
-import { TbAlertOctagonFilled } from "react-icons/tb";
-import { BsFillBellFill } from "react-icons/bs";
+import { formatDate } from "../../helpers";
 import { WindowWidthContext } from "../App";
+import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
 
 const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
   const windowWidth = useContext(WindowWidthContext);
   const { data, requestSort } = useSortableData(loyaltyData);
-
-  const setRewardsExpirationIcon = (numberOfDays) => {
-    return numberOfDays > 30 && numberOfDays <= 90 ? (
-      <BsFillBellFill style={{ color: "orange" }} />
-    ) : numberOfDays <= 30 ? (
-      <TbAlertOctagonFilled style={{ color: DELETE_COLOR_RED }} />
-    ) : (
-      ""
-    );
-  };
 
   return loyaltyData.length === 0 ? (
     <EmptyList dataType={"loyalty account"} />
@@ -80,9 +69,8 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
       </thead>
       <tbody className="align-middle">
         {data.map((acc) => {
-          const daysForRewardExpiration = daysTillRewardsExpiration(
-            acc.rewardsExpiration
-          );
+          const { daysForRewardExpiration, rewardsExpirationIcon } =
+            getRewardsExpirationStuff(acc);
           return (
             <tr key={acc.id}>
               <td>
@@ -111,7 +99,7 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
                       {`Rewards expire in ${daysForRewardExpiration} days`}
                     </p>
                   )}
-                  {setRewardsExpirationIcon(daysForRewardExpiration)}
+                  {rewardsExpirationIcon}
                   {formatDate(acc.rewardsExpiration)}{" "}
                 </td>
               )}

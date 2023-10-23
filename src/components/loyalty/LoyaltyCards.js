@@ -6,34 +6,17 @@ import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { WindowWidthContext } from "../App";
 import LoyaltyCardText from "./LoyaltyCardText";
-import {
-  DELETE_COLOR_RED,
-  DELETE_MODAL_TYPES,
-  LOYALTY_DATA_KEYS,
-} from "../../constants";
+import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
 import LoyaltyCardExpirationText from "./LoyaltyCardExpirationText";
-import { TbAlertOctagonFilled } from "react-icons/tb";
-import { BsFillBellFill } from "react-icons/bs";
-import { daysTillRewardsExpiration, formatDate } from "../../helpers";
+import { formatDate } from "../../helpers";
+import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
 
 export default function LoyaltyCards({ loyaltyData }) {
   const windowWidth = useContext(WindowWidthContext);
   const cardWidth = windowWidth < 650 ? windowWidth : "19rem";
   const allCards = loyaltyData.map((acc) => {
-    const daysForRewardExpiration = daysTillRewardsExpiration(
-      acc.rewardsExpiration
-    );
-    const setRewardsExpirationIcon = (numberOfDays) => {
-      return numberOfDays > 30 && numberOfDays <= 90 ? (
-        <BsFillBellFill style={{ color: "orange", fontSize: "1.5rem" }} />
-      ) : numberOfDays <= 30 ? (
-        <TbAlertOctagonFilled
-          style={{ color: DELETE_COLOR_RED, fontSize: "1.5rem" }}
-        />
-      ) : (
-        ""
-      );
-    };
+    const { daysForRewardExpiration, rewardsExpirationIcon } =
+      getRewardsExpirationStuff(acc);
 
     return (
       <Card style={{ width: cardWidth }} key={acc.id} className="cardCard">
@@ -77,9 +60,7 @@ export default function LoyaltyCards({ loyaltyData }) {
                 daysForExpiration={daysForRewardExpiration}
               />
             </div>
-            {daysForRewardExpiration && (
-              <div>{setRewardsExpirationIcon(daysForRewardExpiration)}</div>
-            )}
+            {daysForRewardExpiration && <div>{rewardsExpirationIcon}</div>}
           </section>
 
           <div className="editDeleteCard editDeleteOnCards">

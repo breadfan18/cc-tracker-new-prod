@@ -16,7 +16,7 @@ function LoyaltyCardExpirationText({ expirationDate, daysForExpiration }) {
               fontSize: "11px",
               color: daysForExpiration <= 90 ? DELETE_COLOR_RED : "",
             }}
-          >{`(${daysForExpiration} days remaining)`}</p>
+          >{`(Rewards expire in ${daysForExpiration} days)`}</p>
         )}
       </small>
     </div>
