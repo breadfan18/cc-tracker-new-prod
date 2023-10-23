@@ -41,7 +41,7 @@ function LoyaltyCardText({ account, dataType }) {
   const loyaltyAccountType = setLoyaltyAccountType(account, dataType);
   return (
     <p className="mb-0 text-muted">
-      <small>
+      <small style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
         <b style={{ color: "black" }}>{loyaltyAccountType.fieldName}</b>
         {": "}
         {loyaltyAccountType.value}

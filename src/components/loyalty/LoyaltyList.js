@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import EmptyList from "../common/EmptyList";
@@ -15,8 +15,10 @@ import {
 import { formatDate, daysTillRewardsExpiration } from "../../helpers";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
+import { WindowWidthContext } from "../App";
 
 const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
+  const windowWidth = useContext(WindowWidthContext);
   const { data, requestSort } = useSortableData(loyaltyData);
 
   const setRewardsExpirationIcon = (numberOfDays) => {
@@ -32,7 +34,7 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
   return loyaltyData.length === 0 ? (
     <EmptyList dataType={"loyalty account"} />
   ) : (
-    <Table size="sm">
+    <Table>
       <thead>
         <tr>
           <th></th>
@@ -52,18 +54,23 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
             Password{" "}
             <FaSort onClick={() => requestSort(LOYALTY_DATA_KEYS.password)} />
           </th>
-          <th className="tableHeader">
-            Rewards Balance{" "}
-            <FaSort
-              onClick={() => requestSort(LOYALTY_DATA_KEYS.rewardsBalance)}
-            />
-          </th>
-          <th className="tableHeader">
-            Expiration{" "}
-            <FaSort
-              onClick={() => requestSort(LOYALTY_DATA_KEYS.rewardsExpiration)}
-            />
-          </th>
+          {windowWidth > 1030 && (
+            <th className="tableHeader">
+              Rewards{" "}
+              <FaSort
+                onClick={() => requestSort(LOYALTY_DATA_KEYS.rewardsBalance)}
+              />
+            </th>
+          )}
+          {windowWidth > 1030 && (
+            <th className="tableHeader">
+              Expiration{" "}
+              <FaSort
+                onClick={() => requestSort(LOYALTY_DATA_KEYS.rewardsExpiration)}
+              />
+            </th>
+          )}
+
           {showEditDelete && (
             <>
               <th></th>
@@ -85,25 +92,30 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
               <td>{acc.memberId}</td>
               <td>{acc.loginId}</td>
               <td>{acc.password}</td>
-              <td>{`${Number(acc.rewardsBalance || "0").toLocaleString()} ${
-                acc.program.type === "airlines" ? "miles" : "points"
-              }`}</td>
-              <td>
-                {daysForRewardExpiration && (
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: "10px",
-                      color:
-                        daysForRewardExpiration <= 90 ? DELETE_COLOR_RED : "",
-                    }}
-                  >
-                    {`Rewards expire in ${daysForRewardExpiration} days`}
-                  </p>
-                )}
-                {setRewardsExpirationIcon(daysForRewardExpiration)}
-                {setRewardsExpirationIcon()} {formatDate(acc.rewardsExpiration)}{" "}
-              </td>
+              {windowWidth > 1030 && (
+                <td>{`${Number(acc.rewardsBalance || "0").toLocaleString()} ${
+                  acc.program.type === "airlines" ? "miles" : "points"
+                }`}</td>
+              )}
+              {windowWidth > 1030 && (
+                <td>
+                  {daysForRewardExpiration && (
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: "10px",
+                        color:
+                          daysForRewardExpiration <= 90 ? DELETE_COLOR_RED : "",
+                      }}
+                    >
+                      {`Rewards expire in ${daysForRewardExpiration} days`}
+                    </p>
+                  )}
+                  {setRewardsExpirationIcon(daysForRewardExpiration)}
+                  {formatDate(acc.rewardsExpiration)}{" "}
+                </td>
+              )}
+
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">
