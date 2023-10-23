@@ -90,13 +90,13 @@ export const PROGRAMS = [
     id: 1,
     type: "airlines",
     name: "American AAdvantage",
-    img: "https://i.imgur.com/Pc1I7uX.png",
+    img: "https://i.imgur.com/0UD33Y8.png",
   },
   {
     id: 2,
     type: "airlines",
     name: "United MileagePlus",
-    img: "https://i.imgur.com/znFTwQ1.png",
+    img: "https://i.imgur.com/IAWs57y.png",
   },
   {
     id: 3,
