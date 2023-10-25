@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { loadloyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
 import { Spinner } from "../common/Spinner";
 import LoyaltyTabs from "./LoyaltyTabs";
@@ -8,22 +8,20 @@ import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import { useUser } from "reactfire";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 
-const LoyaltyPage = ({
-  loyaltyData,
-  loadloyaltyData,
-  loading,
-  cardholders,
-  loadCardholdersFromFirebase,
-}) => {
+const LoyaltyPage = () => {
   const { status, data: user } = useUser();
+  const dispatch = useDispatch();
+  const loyaltyData = useSelector((state) => state.loyaltyData);
+  const loading = useSelector((state) => state.apiCallsInProgress > 0);
+  const cardholders = useSelector((state) => state.cardholders);
 
   useEffect(() => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
-      loadloyaltyData(user.uid);
+      dispatch(loadloyaltyDataFromFirebase(user.uid));
     }
 
     if (cardholders.length === 0 && user) {
-      loadCardholdersFromFirebase(user.uid);
+      dispatch(loadCardholdersFromFirebase(user.uid));
     }
   }, [status, user, cardholders]);
 
@@ -50,15 +48,4 @@ LoyaltyPage.propTypes = {
   loadCardholdersFromFirebase: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  loyaltyData: state.loyaltyData,
-  loading: state.apiCallsInProgress > 0,
-  cardholders: state.cardholders,
-});
-
-const mapDispatchToProps = {
-  loadloyaltyData: loadloyaltyDataFromFirebase,
-  loadCardholdersFromFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoyaltyPage);
+export default LoyaltyPage;
