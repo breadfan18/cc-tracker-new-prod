@@ -3,7 +3,6 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
 import LoyaltyList from "./LoyaltyList";
-import { connect } from "react-redux";
 import { ACCOUNT_TYPE } from "../../constants";
 import { titleCase } from "../../helpers";
 import LoyaltyAccordion from "./LoyaltyAccordion";
@@ -73,12 +72,4 @@ LoyaltyTabs.propTypes = {
   loyaltyData: PropTypes.array.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    state,
-  };
-}
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoyaltyTabs);
+export default LoyaltyTabs;
