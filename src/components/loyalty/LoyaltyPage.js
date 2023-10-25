@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadloyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
 import { Spinner } from "../common/Spinner";
 import LoyaltyTabs from "./LoyaltyTabs";
@@ -38,14 +37,6 @@ const LoyaltyPage = () => {
       )}
     </div>
   );
-};
-
-LoyaltyPage.propTypes = {
-  loyaltyData: PropTypes.array.isRequired,
-  loadloyaltyData: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  cardholders: PropTypes.array.isRequired,
-  loadCardholdersFromFirebase: PropTypes.func.isRequired,
 };
 
 export default LoyaltyPage;
