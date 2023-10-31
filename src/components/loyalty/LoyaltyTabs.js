@@ -4,7 +4,7 @@ import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
 import LoyaltyList from "./LoyaltyList";
 import { ACCOUNT_TYPE } from "../../constants";
-import { titleCase } from "../../helpers";
+import { sortNumberDesc, titleCase } from "../../helpers";
 import LoyaltyAccordion from "./LoyaltyAccordion";
 import _ from "lodash";
 import LoyaltyCards from "./LoyaltyCards";
@@ -17,8 +17,11 @@ function LoyaltyTabs({ loyaltyData }) {
   const loyaltyTabs = ACCOUNT_TYPE.map((loyaltyType) => {
     const loyaltyTypeData = loyaltyByType[loyaltyType];
     const loyaltyTypePerUser = _.groupBy(loyaltyTypeData, (o) => o.userId);
-    const userCards = Object.keys(loyaltyTypePerUser).map((user) => {
-      const loyaltyAccsForThisUser = loyaltyTypePerUser[user];
+    const userAccounts = Object.keys(loyaltyTypePerUser).map((user) => {
+      const loyaltyAccsForThisUser = loyaltyTypePerUser[user].sort((a, b) =>
+        sortNumberDesc(a.rewardsBalance, b.rewardsBalance)
+      );
+
       const loyaltyList =
         windowWidth > 800 ? (
           <LoyaltyList
@@ -48,10 +51,10 @@ function LoyaltyTabs({ loyaltyData }) {
         title={titleCase(loyaltyType)}
         key={loyaltyType}
       >
-        {userCards.length === 0 ? (
+        {userAccounts.length === 0 ? (
           <EmptyList dataType="loyalty account" />
         ) : (
-          userCards
+          userAccounts
         )}
       </Tab>
     );

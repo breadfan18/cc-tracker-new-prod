@@ -185,3 +185,10 @@ export function calculateCurrentInquiries(cardsByHolder) {
 
   return inquiriesByHolder;
 }
+
+export function sortNumberDesc(num1, num2) {
+  const parsedNum1 = parseInt(num1 || "0");
+  const parsedNum2 = parseInt(num2 || "0");
+
+  return parsedNum2 - parsedNum1;
+}

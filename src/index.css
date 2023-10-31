@@ -385,7 +385,7 @@ form {
   padding-left: 10px;
 }
 
-#cardTabsFilterInput {
+.cardTabsFilterInput {
   padding-left: 10px;
   border: 2px solid var(--light-gray);
   float: right;
