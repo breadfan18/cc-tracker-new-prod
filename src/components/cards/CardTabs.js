@@ -70,6 +70,7 @@ function CardTabs({ cards }) {
       </Tab>
     );
   });
+
   return (
     <>
       <input
@@ -77,7 +78,7 @@ function CardTabs({ cards }) {
         value={cardsFilter.query}
         onChange={handleCardsFilter}
         placeholder="Filter by card name.."
-        id="cardTabsFilterInput"
+        className="cardTabsFilterInput"
         style={{ width: filterWidth }}
       />
       <Tabs

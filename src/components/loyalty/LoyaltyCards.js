@@ -41,6 +41,14 @@ export default function LoyaltyCards({ loyaltyData }) {
             <div>
               <LoyaltyCardText
                 account={acc}
+                dataType={LOYALTY_DATA_KEYS.rewardsBalance}
+              />
+              <LoyaltyCardExpirationText
+                expirationDate={formatDate(acc.rewardsExpiration)}
+                daysForExpiration={daysForRewardExpiration}
+              />
+              <LoyaltyCardText
+                account={acc}
                 dataType={LOYALTY_DATA_KEYS.memberId}
               />
               <LoyaltyCardText
@@ -50,14 +58,6 @@ export default function LoyaltyCards({ loyaltyData }) {
               <LoyaltyCardText
                 account={acc}
                 dataType={LOYALTY_DATA_KEYS.password}
-              />
-              <LoyaltyCardText
-                account={acc}
-                dataType={LOYALTY_DATA_KEYS.rewardsBalance}
-              />
-              <LoyaltyCardExpirationText
-                expirationDate={formatDate(acc.rewardsExpiration)}
-                daysForExpiration={daysForRewardExpiration}
               />
             </div>
             {daysForRewardExpiration && <div>{rewardsExpirationIcon}</div>}
