@@ -8,6 +8,7 @@ import CardListCards from "./CardListCards";
 import { WindowWidthContext } from "../App";
 import { useFilteredData } from "../../hooks/filterCards";
 import _ from "lodash";
+import FilterInput from "../common/FilterInput";
 
 function CardTabs({ cards }) {
   const windowWidth = useContext(WindowWidthContext);
@@ -73,13 +74,19 @@ function CardTabs({ cards }) {
 
   return (
     <>
-      <input
+      {/* <input
         type="search"
         value={cardsFilter.query}
         onChange={handleCardsFilter}
         placeholder="Filter by card name.."
         className="cardTabsFilterInput"
         style={{ width: filterWidth }}
+      /> */}
+      <FilterInput
+        data={cardsForSelectedUser}
+        onChange={handleCardsFilter}
+        dataType="card name"
+        width={filterWidth}
       />
       <Tabs
         defaultActiveKey={selectedUser}
