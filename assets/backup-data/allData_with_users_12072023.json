@@ -253,6 +253,27 @@
           "status": "closed",
           "userId": "swaroop-uprety"
         },
+        "bank-of-america-credit-card-tulasi-uprety-df1f9226f41": {
+          "annualFee": 0,
+          "appDate": "2021-01-01",
+          "card": "Credit Card",
+          "cardholder": "Tulasi Uprety",
+          "creditLine": "5000",
+          "id": "bank-of-america-credit-card-tulasi-uprety-df1f9226f41",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": true
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/PsqVIEx.png",
+            "name": "Bank of America"
+          },
+          "signupBonus": "N/A",
+          "spendReq": 0,
+          "status": "open",
+          "userId": "tulasi-uprety"
+        },
         "barclays-arrival-1-0c780d5c3d3": {
           "annualFee": "89",
           "appDate": "2019-03-01",
@@ -411,6 +432,55 @@
           "status": "closed",
           "userId": "swaroop-uprety"
         },
+        "capital-one-venture-anshu-thapa-f1f9226f415": {
+          "annualFee": "95",
+          "appDate": "2023-10-01",
+          "bonusEarnDate": "2023-11-07",
+          "bonusEarned": true,
+          "card": "Venture",
+          "cardType": "Personal",
+          "cardholder": "Anshu Thapa",
+          "creditLine": "25000",
+          "id": "capital-one-venture-anshu-thapa-f1f9226f415",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": true
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/u3Rr8rT.png",
+            "name": "Capital One"
+          },
+          "nextFeeDate": "2024-10-01",
+          "signupBonus": "75K Miles",
+          "spendBy": "2024-01-01",
+          "spendReq": "4000",
+          "status": "open",
+          "userId": "anshu-thapa"
+        },
+        "capital-one-venture-tulasi-uprety-5b8e0b0edbd": {
+          "annualFee": "95",
+          "appDate": "2023-12-07",
+          "card": "Venture",
+          "cardholder": "Tulasi Uprety",
+          "creditLine": "25000",
+          "id": "capital-one-venture-tulasi-uprety-5b8e0b0edbd",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": true
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/u3Rr8rT.png",
+            "name": "Capital One"
+          },
+          "nextFeeDate": "2024-12-07",
+          "signupBonus": "75K Miles",
+          "spendBy": "2024-03-07",
+          "spendReq": "4000",
+          "status": "open",
+          "userId": "tulasi-uprety"
+        },
         "capone-capone-venture-2-52bd1c9d062": {
           "annualFee": "59",
           "appDate": "2016-08-06",
@@ -484,7 +554,7 @@
           "signupBonus": "50,000 UR",
           "spendBy": "2023-03-06",
           "spendReq": "3000",
-          "status": "open",
+          "status": "downgraded",
           "userId": "lisandro-martinez"
         },
         "capone-savor-1-c780d5c3d36": {
@@ -580,7 +650,7 @@
             "name": "CapOne"
           },
           "nextFeeDate": "2024-06-02",
-          "signupBonus": "75K miles",
+          "signupBonus": "75K Miles",
           "spendBy": "2023-09-02",
           "spendReq": "4000",
           "status": "open",
@@ -897,6 +967,8 @@
         "chase-ink-preferred-1-ea7c84df816": {
           "annualFee": "95",
           "appDate": "2023-07-28",
+          "bonusEarnDate": "2023-10-11",
+          "bonusEarned": true,
           "card": "Ink Preferred",
           "cardType": "Business",
           "cardholder": "Swaroop Uprety",
@@ -1299,7 +1371,7 @@
           "signupBonus": "500",
           "spendBy": "2024-02-03",
           "spendReq": "300",
-          "status": "open",
+          "status": "downgraded",
           "userId": "lisandro-martinez"
         },
         "citi-aadvantage-plat-select-1-5e5a6ac0c78": {
