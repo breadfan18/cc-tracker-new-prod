@@ -84,23 +84,28 @@
         null,
         {
           "id": "swaroop-uprety",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2F1910596_511047669708_4590_n_511047669708.jpg?alt=media&token=51692d39-2146-48b1-af05-b71fc629c116",
           "name": "Swaroop Uprety"
         },
         {
           "id": "anshu-thapa",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FIMG_6027.jpeg?alt=media&token=6584cc91-33aa-427e-84a3-06738e891845",
           "name": "Anshu Thapa"
         },
         {
           "id": "astha-thapa",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FYD0_7782_Original.jpeg?alt=media&token=d7d97287-24fe-487a-9ce7-e348dfc409e6",
           "name": "Astha Thapa"
         },
         {
           "id": "tulasi-uprety",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FIMG_7972.jpeg?alt=media&token=e769cc2e-81bd-41d9-afef-f9d65333c79c",
           "name": "Tulasi Uprety"
         },
         {
-          "id": "lisandro-martinez",
-          "name": "Lisandro Martinez"
+          "id": "bruno-fernandes",
+          "img": "https://i.imgur.com/BjiSBxz.png",
+          "name": "Bruno Fernandes"
         }
       ],
       "cards": {
@@ -257,6 +262,7 @@
           "annualFee": 0,
           "appDate": "2021-01-01",
           "card": "Credit Card",
+          "cardType": "Personal",
           "cardholder": "Tulasi Uprety",
           "creditLine": "5000",
           "id": "bank-of-america-credit-card-tulasi-uprety-df1f9226f41",
@@ -1535,13 +1541,15 @@
           "loginId": "breadfan18@gmail.com",
           "loyaltyType": "airlines",
           "memberId": "92J7LK0",
-          "password": "T*******d*5#",
+          "password": "T*********5#",
           "program": {
             "id": 1,
-            "img": "https://i.imgur.com/Pc1I7uX.png",
+            "img": "https://i.imgur.com/0UD33Y8.png",
             "name": "American AAdvantage",
             "type": "airlines"
           },
+          "rewardsBalance": "35176",
+          "rewardsExpiration": "2024-08-25",
           "userId": "swaroop-uprety"
         },
         "american-aadvantage-2-068559b9ccc": {
@@ -1550,13 +1558,15 @@
           "loginId": "thapa.anshu",
           "loyaltyType": "airlines",
           "memberId": "9U15XH4",
-          "password": "d******15",
+          "password": "D*******5*",
           "program": {
             "id": 1,
-            "img": "https://i.imgur.com/Pc1I7uX.png",
+            "img": "https://i.imgur.com/0UD33Y8.png",
             "name": "American AAdvantage",
             "type": "airlines"
           },
+          "rewardsBalance": "91385",
+          "rewardsExpiration": "2025-10-16",
           "userId": "anshu-thapa"
         },
         "ana-mileage-club-1-b903dc2ce66": {
@@ -1625,13 +1635,15 @@
           "loginId": "breadfan18@gmail.com",
           "loyaltyType": "airlines",
           "memberId": 45669650,
-          "password": "T*******d*5#",
+          "password": "T*********5#",
           "program": {
             "id": 7,
             "img": "https://i.imgur.com/KewcSxm.png",
             "name": "British Airways",
             "type": "airlines"
           },
+          "rewardsBalance": "68973",
+          "rewardsExpiration": "2026-05-25",
           "userId": "swaroop-uprety"
         },
         "british-airways-2-559b9ccc393": {
@@ -1640,14 +1652,64 @@
           "loginId": "thapa.anshu@gmail.com",
           "loyaltyType": "airlines",
           "memberId": 20186433,
-          "password": "De*****15*",
+          "password": "D*******5*",
           "program": {
             "id": 7,
             "img": "https://i.imgur.com/KewcSxm.png",
             "name": "British Airways",
             "type": "airlines"
           },
+          "rewardsBalance": "56124",
+          "rewardsExpiration": "2026-05-25",
           "userId": "anshu-thapa"
+        },
+        "capital-one-rewards-anshu-thapa-3510697eeca": {
+          "accountHolder": "Anshu Thapa",
+          "id": "capital-one-rewards-anshu-thapa-3510697eeca",
+          "loginId": "N/A",
+          "loyaltyType": "misc",
+          "memberId": "N/A",
+          "password": "N/A",
+          "program": {
+            "id": 29,
+            "img": "https://i.imgur.com/u3Rr8rT.png",
+            "name": "Capital One Rewards",
+            "type": "misc"
+          },
+          "rewardsBalance": "83619",
+          "userId": "anshu-thapa"
+        },
+        "capital-one-rewards-swaroop-uprety-73510697eec": {
+          "accountHolder": "Swaroop Uprety",
+          "id": "capital-one-rewards-swaroop-uprety-73510697eec",
+          "loginId": "N/A",
+          "loyaltyType": "misc",
+          "memberId": "N/A",
+          "password": "N/A",
+          "program": {
+            "id": 29,
+            "img": "https://i.imgur.com/u3Rr8rT.png",
+            "name": "Capital One Rewards",
+            "type": "misc"
+          },
+          "rewardsBalance": "128231",
+          "userId": "swaroop-uprety"
+        },
+        "chase-ultimate-rewards-swaroop-uprety-473510697ee": {
+          "accountHolder": "Swaroop Uprety",
+          "id": "chase-ultimate-rewards-swaroop-uprety-473510697ee",
+          "loginId": "N/A",
+          "loyaltyType": "misc",
+          "memberId": "N/A",
+          "password": "N/A",
+          "program": {
+            "id": 28,
+            "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2Fchase_UR.png?alt=media&token=964ca70a-2bba-47f2-8368-d4c414ac810f&_gl=1*1hr61hr*_ga*MTMyNTkwOTMwOC4xNjkxNDIzMzUw*_ga_CW55HF8NVT*MTY5NzY3Mjc0Ni41NS4xLjE2OTc2NzI3NTQuNTIuMC4w",
+            "name": "Chase Ultimate Rewards",
+            "type": "misc"
+          },
+          "rewardsBalance": "720946",
+          "userId": "swaroop-uprety"
         },
         "club-carlson-1-66f5a192e30": {
           "accountHolder": "Swaroop Uprety",
