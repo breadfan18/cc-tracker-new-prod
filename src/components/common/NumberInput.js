@@ -4,9 +4,10 @@ import {
   APP_COLOR_BLACK_OPACITY,
   APP_COLOR_BLUE,
   CANCELLED_COLOR_RED,
+  DELETE_COLOR_RED,
 } from "../../constants";
 
-const TextInput = ({
+const NumberInput = ({
   name,
   label,
   onChange,
@@ -14,44 +15,38 @@ const TextInput = ({
   value,
   error,
   isCurrency,
-  isRewardsBalance,
-  rewardsBalanceText,
-  requiredField,
 }) => {
   let wrapperClass = "form-group";
   if (error && error.length > 0) {
     wrapperClass += " has-error";
   }
 
-  const fieldBorderRadius = isCurrency
-    ? "0 0 10px 0"
-    : isRewardsBalance
-    ? "0 0 0 10px"
-    : "0 0 10px 10px";
-
   return (
     <div className={wrapperClass}>
       <label
         htmlFor={name}
-        className="labels inputLabels"
+        className="inputLabels"
         style={{
           backgroundColor: error ? CANCELLED_COLOR_RED : "",
         }}
       >
         {label}
-        {requiredField && (
+        {error && (
           <p
             style={{
               margin: "0 10px 0 0",
-              fontSize: "0.8rem",
               color: APP_COLOR_BLUE,
+              fontSize: "0.8rem",
             }}
           >
             Required
           </p>
         )}
       </label>
-      <div className="field" style={{ display: "flex" }}>
+      <div
+        className="field transparentPlaceholderField"
+        style={{ display: "flex" }}
+      >
         {isCurrency && (
           <p
             style={{
@@ -67,38 +62,25 @@ const TextInput = ({
           </p>
         )}
         <input
-          type="text"
+          type="number"
+          min="0"
+          inputmode="numeric"
+          pattern="[0-9]*"
           name={name}
           className="form-control"
           placeholder={placeholder}
           value={value}
           onChange={onChange}
           style={{
-            borderRadius: fieldBorderRadius,
-            paddingLeft: isCurrency ? "5px" : "12px",
+            borderRadius: isCurrency && "0 0 10px 0",
           }}
         />
-        {isRewardsBalance && (
-          <p
-            style={{
-              padding: "0 10px",
-              backgroundColor: APP_COLOR_BLACK_OPACITY,
-              marginBottom: 0,
-              borderRadius: "0 0 10px 0",
-              display: "flex",
-              alignItems: "center",
-              minWidth: "5.5rem",
-            }}
-          >
-            {rewardsBalanceText || ""}
-          </p>
-        )}
       </div>
     </div>
   );
 };
 
-TextInput.propTypes = {
+NumberInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -108,4 +90,4 @@ TextInput.propTypes = {
   error: PropTypes.string,
 };
 
-export default TextInput;
+export default NumberInput;

@@ -34,6 +34,10 @@ function CardAddEditModal({
   function handleChange(event) {
     const { name, value, checked } = event.target;
 
+    if (value !== "" || value !== null) {
+      delete errors[name];
+    }
+
     if (name === "inquiries") {
       // eslint-disable-next-line no-unused-expressions
       value === "experian"
@@ -77,6 +81,7 @@ function CardAddEditModal({
 
   function clearCardState() {
     setCardForModal(NEW_CARD);
+    setErrors({});
     toggleShow();
   }
 
@@ -87,25 +92,22 @@ function CardAddEditModal({
       cardholder,
       issuer,
       card,
+      cardType,
       creditLine,
-      annualFee,
-      nextFeeDate,
-      spendReq,
-      spendBy,
-      signupBonus,
-      bonusEarnDate,
       inquiries,
     } = cardForModal;
     const errors = {};
 
     if (!status) errors.status = "Required";
     if (!appDate) errors.appDate = "Required";
-    if (!cardholder) errors.cardholder = "Required";
-    if (!issuer) errors.issuer = "Required";
+    if (!cardholder) errors.userId = "Required";
+    if (!issuer.name) errors.issuer = "Required";
     if (!card) errors.card = "Required";
+    if (!cardType) errors.cardType = "Required";
     if (!creditLine) errors.creditLine = "Required";
-    if (!nextFeeDate) errors.nextFeeDate = "Required";
-    if (!inquiries) errors.inquiries = "Required";
+    if (!Object.values(inquiries).every((i) => i === null)) {
+      errors.inquiries = "Required";
+    }
 
     setErrors(errors);
     // Form is valid if the errors objects has no properties
@@ -150,6 +152,7 @@ function CardAddEditModal({
 
   function toggleModal() {
     toggleShow();
+    setErrors({});
     try {
       setModalOpen(false);
     } catch (err) {

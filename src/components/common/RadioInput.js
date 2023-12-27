@@ -1,8 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form } from "react-bootstrap";
+import {
+  APP_COLOR_BLUE,
+  CANCELLED_COLOR_RED,
+  DELETE_COLOR_RED,
+} from "../../constants";
 
-const RadioInput = ({ name, label, error, inquiriesStatus, onChange }) => {
+const RadioInput = ({
+  name,
+  label,
+  error,
+  inquiriesStatus,
+  onChange,
+  requiredField,
+}) => {
   let wrapperClass = "form-group";
   if (error && error.length > 0) {
     wrapperClass += " has-error";
@@ -10,8 +22,25 @@ const RadioInput = ({ name, label, error, inquiriesStatus, onChange }) => {
 
   return (
     <div className={wrapperClass}>
-      <label htmlFor={name} className="labels">
+      <label
+        htmlFor={name}
+        className="labels inputLabels"
+        style={{
+          backgroundColor: error ? CANCELLED_COLOR_RED : "",
+        }}
+      >
         {label}
+        {requiredField && (
+          <p
+            style={{
+              margin: "0 10px 0 0",
+              fontSize: "0.8rem",
+              color: APP_COLOR_BLUE,
+            }}
+          >
+            Required
+          </p>
+        )}
       </label>
       <div className="field radioField">
         <Form.Check
@@ -42,7 +71,6 @@ const RadioInput = ({ name, label, error, inquiriesStatus, onChange }) => {
           checked={inquiriesStatus.transunion}
           onChange={onChange}
         />
-        {error && <div className="alert alert-danger">{error}</div>}
       </div>
     </div>
   );

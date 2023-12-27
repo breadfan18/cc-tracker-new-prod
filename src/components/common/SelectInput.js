@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { APP_COLOR_BLUE } from "../../constants";
+import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
 
 const SelectInput = ({
   name,
@@ -17,7 +17,13 @@ const SelectInput = ({
 }) => {
   return (
     <div className="form-group">
-      <label htmlFor={name} className="labels inputLabels">
+      <label
+        htmlFor={name}
+        className="labels inputLabels"
+        style={{
+          backgroundColor: error ? CANCELLED_COLOR_RED : "",
+        }}
+      >
         {label}
         {requiredField && (
           <p
@@ -50,9 +56,6 @@ const SelectInput = ({
           );
         })}
       </Form.Select>
-      <div className="field">
-        {error && <div className="alert alert-danger">{error}</div>}
-      </div>
     </div>
   );
 };

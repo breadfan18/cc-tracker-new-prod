@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { APP_COLOR_BLUE } from "../../constants";
+import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
 
 const DateInput = ({
   name,
@@ -19,7 +19,13 @@ const DateInput = ({
 
   return (
     <div className={wrapperClass}>
-      <label htmlFor={name} className="labels inputLabels">
+      <label
+        htmlFor={name}
+        className="labels inputLabels"
+        style={{
+          backgroundColor: error ? CANCELLED_COLOR_RED : "",
+        }}
+      >
         {label}
         {requiredField && (
           <p
@@ -41,7 +47,6 @@ const DateInput = ({
           onChange={onChange}
           disabled={disabled}
         />
-        {error && <div className="alert alert-danger">{error}</div>}
       </div>
     </div>
   );

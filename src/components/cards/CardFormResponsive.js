@@ -7,6 +7,7 @@ import {
   CARD_DATA_KEYS,
   CARD_TYPE,
   ISSUERS,
+  DELETE_COLOR_RED,
 } from "../../constants";
 import DateInput from "../common/DateInput";
 import RadioInput from "../common/RadioInput";
@@ -27,7 +28,7 @@ const CardFormResponsive = ({
     <>
       <Form onSubmit={onSave}>
         {!isEmpty(errors) && (
-          <div className="alert alert-danger" role="alert">
+          <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
             Please fill out required fields
           </div>
         )}
@@ -50,13 +51,16 @@ const CardFormResponsive = ({
             text: titleCase(status),
           }))}
           onChange={onChange}
-          error={errors.author}
+          error={errors.status}
+          requiredField
         />
         <DateInput
           name={CARD_DATA_KEYS.appDate}
           label="Application Date"
           onChange={onChange}
           value={card.appDate}
+          error={errors.appDate}
+          requiredField
         />
         <SelectInput
           name={CARD_DATA_KEYS.userId}
@@ -68,7 +72,8 @@ const CardFormResponsive = ({
             text: user.name,
           }))}
           onChange={onChange}
-          error={errors.author}
+          error={errors.cardholder}
+          requiredField
         />
         <SelectInput
           name={CARD_DATA_KEYS.issuer}
@@ -80,7 +85,8 @@ const CardFormResponsive = ({
             text: issuer.name,
           }))}
           onChange={onChange}
-          error={errors.author}
+          error={errors.issuer}
+          requiredField
         />
 
         <TextInput
@@ -88,7 +94,8 @@ const CardFormResponsive = ({
           label="Card"
           value={card.card || ""}
           onChange={onChange}
-          error={errors.title}
+          error={errors.card}
+          requiredField
         />
         <SelectInput
           name={CARD_DATA_KEYS.cardType}
@@ -100,15 +107,17 @@ const CardFormResponsive = ({
             text: type,
           }))}
           onChange={onChange}
-          error={errors.author}
+          error={errors.cardType}
+          requiredField
         />
         <TextInput
           name={CARD_DATA_KEYS.creditLine}
           label="Credit Line"
           value={card.creditLine || ""}
           onChange={onChange}
-          error={errors.title}
+          error={errors.creditLine}
           isCurrency={true}
+          requiredField
         />
 
         <TextInput
@@ -162,6 +171,7 @@ const CardFormResponsive = ({
           label="Inquiries"
           inquiriesStatus={card.inquiries}
           onChange={onChange}
+          requiredField
         />
         <hr />
         <button

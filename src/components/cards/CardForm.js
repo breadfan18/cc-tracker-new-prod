@@ -7,6 +7,7 @@ import {
   CARD_DATA_KEYS,
   CARD_TYPE,
   ISSUERS,
+  DELETE_COLOR_RED,
 } from "../../constants";
 import DateInput from "../common/DateInput";
 import RadioInput from "../common/RadioInput";
@@ -16,6 +17,7 @@ import Row from "react-bootstrap/Row";
 import { formDisabledCheck, titleCase } from "../../helpers";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
+import NumberInput from "../common/NumberInput";
 
 const CardForm = ({
   card,
@@ -29,7 +31,7 @@ const CardForm = ({
     <>
       <Form onSubmit={onSave}>
         {!isEmpty(errors) && (
-          <div className="alert alert-danger" role="alert">
+          <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
             Please fill out required fields
           </div>
         )}
@@ -52,7 +54,7 @@ const CardForm = ({
             text: titleCase(status),
           }))}
           onChange={onChange}
-          error={errors.author}
+          error={errors.status}
           requiredField
         />
         <Row>
@@ -62,6 +64,7 @@ const CardForm = ({
               label="Application Date"
               onChange={onChange}
               value={card.appDate}
+              error={errors.appDate}
               requiredField
             />
           </Col>
@@ -76,7 +79,7 @@ const CardForm = ({
                 text: user.name,
               }))}
               onChange={onChange}
-              error={errors.author}
+              error={errors.userId}
               requiredField
             />
           </Col>
@@ -86,6 +89,7 @@ const CardForm = ({
             <SelectInput
               name={CARD_DATA_KEYS.issuer}
               label="Issuer"
+              w
               value={card.issuer.name || ""}
               defaultOption="Select Issuer"
               options={ISSUERS.map((issuer) => ({
@@ -93,7 +97,7 @@ const CardForm = ({
                 text: issuer.name,
               }))}
               onChange={onChange}
-              error={errors.author}
+              error={errors.issuer}
               requiredField
             />
           </Col>
@@ -104,7 +108,7 @@ const CardForm = ({
               value={card.card || ""}
               onChange={onChange}
               requiredField
-              // error={errors.card}
+              error={errors.card}
             />
           </Col>
         </Row>
@@ -120,17 +124,17 @@ const CardForm = ({
                 text: type,
               }))}
               onChange={onChange}
-              error={errors.author}
+              error={errors.cardType}
               requiredField
             />
           </Col>
           <Col>
-            <TextInput
+            <NumberInput
               name={CARD_DATA_KEYS.creditLine}
               label="Credit Line"
               value={card.creditLine || ""}
               onChange={onChange}
-              error={errors.title}
+              error={errors.creditLine}
               isCurrency={true}
               requiredField
             />
@@ -205,6 +209,8 @@ const CardForm = ({
               label="Inquiries"
               inquiriesStatus={card.inquiries}
               onChange={onChange}
+              error={errors.inquiries}
+              requiredField
             />
           </Col>
         </Row>
