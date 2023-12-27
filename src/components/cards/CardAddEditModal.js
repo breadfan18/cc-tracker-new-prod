@@ -81,8 +81,9 @@ function CardAddEditModal({
 
   function clearCardState() {
     setCardForModal(NEW_CARD);
-    setErrors({});
     toggleShow();
+    setErrors({});
+    setInquiries(INQUIRIES);
   }
 
   function formIsValid() {
@@ -119,7 +120,6 @@ function CardAddEditModal({
   function toggleModal() {
     toggleShow();
     setErrors({});
-    setInquiries(INQUIRIES);
     try {
       setModalOpen(false);
     } catch (err) {
