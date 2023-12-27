@@ -31,8 +31,6 @@ function CardAddEditModal({
   function handleChange(event) {
     const { name, value, checked } = event.target;
 
-    console.log(name, checked);
-
     if (value !== "" || value !== null) {
       delete errors[name];
     }

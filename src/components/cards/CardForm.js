@@ -117,7 +117,7 @@ const CardForm = ({
             <SelectInput
               name={CARD_DATA_KEYS.cardType}
               label="Card Type"
-              value={card.cardType}
+              value={card.cardType || ""}
               defaultOption="Select Card Type"
               options={CARD_TYPE.map((type) => ({
                 value: type,

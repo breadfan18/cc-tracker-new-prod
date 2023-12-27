@@ -27,6 +27,7 @@ export const NEW_CARD = {
     img: null,
   },
   card: "",
+  cardType: null,
   userId: null,
   inquiries: INQUIRIES,
   annualFee: 0,
