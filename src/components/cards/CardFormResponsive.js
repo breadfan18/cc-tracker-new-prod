@@ -13,6 +13,7 @@ import RadioInput from "../common/RadioInput";
 import Form from "react-bootstrap/Form";
 import { formDisabledCheck, titleCase } from "../../helpers";
 import { connect } from "react-redux";
+import { isEmpty } from "lodash";
 
 const CardFormResponsive = ({
   card,
@@ -25,9 +26,9 @@ const CardFormResponsive = ({
   return (
     <>
       <Form onSubmit={onSave}>
-        {errors.onSave && (
+        {!isEmpty(errors) && (
           <div className="alert alert-danger" role="alert">
-            {errors.onSave}
+            Please fill out required fields
           </div>
         )}
         <Form.Check

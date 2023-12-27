@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { APP_COLOR_BLACK_OPACITY } from "../../constants";
+import { APP_COLOR_BLACK_OPACITY, APP_COLOR_BLUE } from "../../constants";
 
 const TextInput = ({
   name,
@@ -12,6 +12,7 @@ const TextInput = ({
   isCurrency,
   isRewardsBalance,
   rewardsBalanceText,
+  requiredField,
 }) => {
   let wrapperClass = "form-group";
   if (error && error.length > 0) {
@@ -26,8 +27,19 @@ const TextInput = ({
 
   return (
     <div className={wrapperClass}>
-      <label htmlFor={name} className="labels">
+      <label htmlFor={name} className="labels inputLabels">
         {label}
+        {requiredField && (
+          <p
+            style={{
+              margin: "0 10px 0 0",
+              fontSize: "0.8rem",
+              color: APP_COLOR_BLUE,
+            }}
+          >
+            Required
+          </p>
+        )}
       </label>
       <div className="field" style={{ display: "flex" }}>
         {isCurrency && (

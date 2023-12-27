@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
+import { APP_COLOR_BLUE } from "../../constants";
 
 const SelectInput = ({
   name,
@@ -12,11 +13,23 @@ const SelectInput = ({
   options,
   bkgrdColor,
   disableDefaultOption = true,
+  requiredField,
 }) => {
   return (
     <div className="form-group">
-      <label htmlFor={name} className="labels">
+      <label htmlFor={name} className="labels inputLabels">
         {label}
+        {requiredField && (
+          <p
+            style={{
+              margin: "0 10px 0 0",
+              fontSize: "0.8rem",
+              color: APP_COLOR_BLUE,
+            }}
+          >
+            Required
+          </p>
+        )}
       </label>
       <Form.Select
         aria-label={defaultOption}

@@ -489,3 +489,15 @@ input[type="range"] {
   border: 2px solid gray;
   border-radius: 0 0 10px 10px;
 }
+
+.inputLabels {
+  background-color: var(--black-opacity);
+  padding: 5px 5px 5px 10px;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  color: black;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

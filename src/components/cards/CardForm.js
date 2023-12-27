@@ -15,6 +15,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { formDisabledCheck, titleCase } from "../../helpers";
 import { connect } from "react-redux";
+import { isEmpty } from "lodash";
 
 const CardForm = ({
   card,
@@ -27,9 +28,9 @@ const CardForm = ({
   return (
     <>
       <Form onSubmit={onSave}>
-        {errors.onSave && (
+        {!isEmpty(errors) && (
           <div className="alert alert-danger" role="alert">
-            {errors.onSave}
+            Please fill out required fields
           </div>
         )}
         <Form.Check
@@ -52,6 +53,7 @@ const CardForm = ({
           }))}
           onChange={onChange}
           error={errors.author}
+          requiredField
         />
         <Row>
           <Col>
@@ -60,6 +62,7 @@ const CardForm = ({
               label="Application Date"
               onChange={onChange}
               value={card.appDate}
+              requiredField
             />
           </Col>
           <Col>
@@ -74,6 +77,7 @@ const CardForm = ({
               }))}
               onChange={onChange}
               error={errors.author}
+              requiredField
             />
           </Col>
         </Row>
@@ -90,6 +94,7 @@ const CardForm = ({
               }))}
               onChange={onChange}
               error={errors.author}
+              requiredField
             />
           </Col>
           <Col>
@@ -98,7 +103,8 @@ const CardForm = ({
               label="Card"
               value={card.card || ""}
               onChange={onChange}
-              error={errors.title}
+              requiredField
+              // error={errors.card}
             />
           </Col>
         </Row>
@@ -115,6 +121,7 @@ const CardForm = ({
               }))}
               onChange={onChange}
               error={errors.author}
+              requiredField
             />
           </Col>
           <Col>
@@ -125,6 +132,7 @@ const CardForm = ({
               onChange={onChange}
               error={errors.title}
               isCurrency={true}
+              requiredField
             />
           </Col>
         </Row>

@@ -26,6 +26,7 @@ function CardAddEditModal({
   );
   const [inquiries, setInquiries] = useState({ ...cardForModal.inquiries });
   const [show, setShow] = useState(false);
+  const [errors, setErrors] = useState({});
   const toggleShow = () => setShow(!show);
   const windowWidth = useContext(WindowWidthContext);
   const { data: user } = useUser();
@@ -63,6 +64,8 @@ function CardAddEditModal({
 
   function handleSaveForFirebase(event) {
     event.preventDefault();
+    if (!formIsValid()) return;
+
     for (let i in inquiries) {
       if (inquiries[i] === null) inquiries[i] = false;
     }
@@ -75,6 +78,38 @@ function CardAddEditModal({
   function clearCardState() {
     setCardForModal(NEW_CARD);
     toggleShow();
+  }
+
+  function formIsValid() {
+    const {
+      status,
+      appDate,
+      cardholder,
+      issuer,
+      card,
+      creditLine,
+      annualFee,
+      nextFeeDate,
+      spendReq,
+      spendBy,
+      signupBonus,
+      bonusEarnDate,
+      inquiries,
+    } = cardForModal;
+    const errors = {};
+
+    if (!status) errors.status = "Required";
+    if (!appDate) errors.appDate = "Required";
+    if (!cardholder) errors.cardholder = "Required";
+    if (!issuer) errors.issuer = "Required";
+    if (!card) errors.card = "Required";
+    if (!creditLine) errors.creditLine = "Required";
+    if (!nextFeeDate) errors.nextFeeDate = "Required";
+    if (!inquiries) errors.inquiries = "Required";
+
+    setErrors(errors);
+    // Form is valid if the errors objects has no properties
+    return Object.keys(errors).length === 0;
   }
 
   function handleSaveForJsonServer(event) {
@@ -159,13 +194,14 @@ function CardAddEditModal({
               onSave={handleSaveForFirebase}
               onChange={handleChange}
               // toggle={toggle}
-              // errors={errors}
+              errors={errors}
             />
           ) : (
             <CardFormResponsive
               card={cardForModal}
               onSave={handleSaveForFirebase}
               onChange={handleChange}
+              errors={errors}
             />
           )}
         </Modal.Body>
