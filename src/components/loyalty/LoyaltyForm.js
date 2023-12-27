@@ -43,7 +43,8 @@ const LoyaltyForm = ({
           text: holder.name,
         }))}
         onChange={onChange}
-        // error={errors.author}
+        requiredField
+        error={errors.userId}
       />
       <SelectInput
         name={LOYALTY_DATA_KEYS.loyaltyType}
@@ -55,7 +56,8 @@ const LoyaltyForm = ({
           text: titleCase(type),
         }))}
         onChange={onChange}
-        // error={errors.author}
+        requiredField
+        error={errors.loyaltyType}
       />
       <SelectInput
         name={LOYALTY_DATA_KEYS.program}
@@ -64,7 +66,8 @@ const LoyaltyForm = ({
         defaultOption="Select Program"
         options={programsToDisplay}
         onChange={onChange}
-        // error={errors.author}
+        error={errors.program}
+        requiredField
       />
       <TextInput
         name={LOYALTY_DATA_KEYS.memberId}

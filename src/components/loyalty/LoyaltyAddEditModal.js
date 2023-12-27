@@ -14,10 +14,15 @@ import { useUser } from "reactfire";
 const newLoyaltyAcc = {
   id: null,
   loyaltyType: "",
-  program: null,
-  memberId: "",
-  loginId: "",
-  password: "",
+  program: {
+    id: null,
+    type: null,
+    name: null,
+    img: null,
+  },
+  memberId: null,
+  loginId: null,
+  password: null,
   userId: null,
   accountHolder: null,
   rewardsBalance: null,
@@ -33,11 +38,16 @@ function LoyaltyAddEditModal({ loyaltyAcc }) {
   const [show, setShow] = useState(false);
   const { data: user } = useUser();
   const cardholders = useSelector((state) => state.cardholders);
+  const [errors, setErrors] = useState({});
 
   const toggleShow = () => setShow(!show);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    if (value !== "" || value !== null) {
+      delete errors[name];
+    }
 
     if (name === LOYALTY_DATA_KEYS.loyaltyType) {
       const filteredPrograms = PROGRAMS.filter(
@@ -64,9 +74,22 @@ function LoyaltyAddEditModal({ loyaltyAcc }) {
 
   const handleSave = (event) => {
     event.preventDefault();
-    loyaltyAccForModal.password = maskPwd(loyaltyAccForModal.password);
+    if (!formIsValid()) return;
 
-    dispatch(saveLoyaltyDataToFirebase(loyaltyAccForModal, user?.uid));
+    const memberId = loyaltyAccForModal.memberId || "N/A";
+    const loginId = loyaltyAccForModal.loginId || "N/A";
+    const password = loyaltyAccForModal.password
+      ? maskPwd(loyaltyAccForModal.password)
+      : "N/A";
+
+    const finalData = {
+      ...loyaltyAccForModal,
+      memberId,
+      loginId,
+      password,
+    };
+
+    dispatch(saveLoyaltyDataToFirebase(finalData, user?.uid));
 
     toast.success(
       loyaltyAccForModal?.id === null
@@ -76,9 +99,22 @@ function LoyaltyAddEditModal({ loyaltyAcc }) {
     toggleShow();
   };
 
+  function formIsValid() {
+    const { userId, loyaltyType, program } = loyaltyAccForModal;
+    const errors = {};
+    if (!userId) errors.userId = "Required";
+    if (!loyaltyType) errors.loyaltyType = "Required";
+    if (!program.name) errors.program = "Required";
+    setErrors(errors);
+    // Form is valid if the errors objects has no properties
+    return Object.keys(errors).length === 0;
+  }
+
   function clearLoyaltyAccState() {
     setLoyaltyAccForModal(newLoyaltyAcc);
     toggleShow();
+    setErrors({});
+    setFilteredPrograms([]);
   }
 
   return (
@@ -114,7 +150,7 @@ function LoyaltyAddEditModal({ loyaltyAcc }) {
             onChange={handleChange}
             filteredPrograms={programsFilteredByType}
             cardholders={cardholders}
-            // errors={errors}
+            errors={errors}
           />
         </Modal.Body>
       </Modal>
