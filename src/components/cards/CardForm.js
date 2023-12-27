@@ -142,7 +142,7 @@ const CardForm = ({
         </Row>
         <Row>
           <Col>
-            <TextInput
+            <NumberInput
               name={CARD_DATA_KEYS.annualFee}
               label="Annual Fee"
               value={card.annualFee}
@@ -163,7 +163,7 @@ const CardForm = ({
         </Row>
         <Row>
           <Col>
-            <TextInput
+            <NumberInput
               name={CARD_DATA_KEYS.spendReq}
               label="Spending Requirement"
               value={card.spendReq}

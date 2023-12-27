@@ -15,6 +15,7 @@ import Form from "react-bootstrap/Form";
 import { formDisabledCheck, titleCase } from "../../helpers";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
+import NumberInput from "../common/NumberInput";
 
 const CardFormResponsive = ({
   card,
@@ -92,7 +93,7 @@ const CardFormResponsive = ({
         <TextInput
           name={CARD_DATA_KEYS.card}
           label="Card"
-          value={card.card || ""}
+          value={titleCase(card.card) || ""}
           onChange={onChange}
           error={errors.card}
           requiredField
@@ -110,7 +111,7 @@ const CardFormResponsive = ({
           error={errors.cardType}
           requiredField
         />
-        <TextInput
+        <NumberInput
           name={CARD_DATA_KEYS.creditLine}
           label="Credit Line"
           value={card.creditLine || ""}
@@ -120,7 +121,7 @@ const CardFormResponsive = ({
           requiredField
         />
 
-        <TextInput
+        <NumberInput
           name={CARD_DATA_KEYS.annualFee}
           label="Annual Fee"
           value={card.annualFee}
@@ -137,7 +138,7 @@ const CardFormResponsive = ({
           disabled={formDisabledCheck(card.annualFee)}
         />
 
-        <TextInput
+        <NumberInput
           name={CARD_DATA_KEYS.spendReq}
           label="Spending Requirement"
           value={card.spendReq}
