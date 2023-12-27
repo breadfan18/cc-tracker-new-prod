@@ -2,16 +2,13 @@ import React, { useContext, useState } from "react";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import {
-  saveCardToJsonServer,
-  saveCardToFirebase,
-} from "../../redux/actions/cardsActions";
+import { saveCardToFirebase } from "../../redux/actions/cardsActions";
 import CardForm from "./CardForm";
 import CardFormResponsive from "./CardFormResponsive";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
-import { ISSUERS, NEW_CARD } from "../../constants";
+import { INQUIRIES, ISSUERS, NEW_CARD } from "../../constants";
 import { WindowWidthContext } from "../App";
 import { useUser } from "reactfire";
 
@@ -33,6 +30,8 @@ function CardAddEditModal({
 
   function handleChange(event) {
     const { name, value, checked } = event.target;
+
+    console.log(name, checked);
 
     if (value !== "" || value !== null) {
       delete errors[name];
@@ -73,6 +72,7 @@ function CardAddEditModal({
     for (let i in inquiries) {
       if (inquiries[i] === null) inquiries[i] = false;
     }
+
     const finalCard = { ...cardForModal, inquiries: inquiries };
     saveCardToFirebase(finalCard, user?.uid);
     toast.success(cardForModal.id === null ? "Card Created" : "Card Updated");
@@ -86,16 +86,8 @@ function CardAddEditModal({
   }
 
   function formIsValid() {
-    const {
-      status,
-      appDate,
-      cardholder,
-      issuer,
-      card,
-      cardType,
-      creditLine,
-      inquiries,
-    } = cardForModal;
+    const { status, appDate, cardholder, issuer, card, cardType, creditLine } =
+      cardForModal;
     const errors = {};
 
     if (!status) errors.status = "Required";
@@ -105,39 +97,13 @@ function CardAddEditModal({
     if (!card) errors.card = "Required";
     if (!cardType) errors.cardType = "Required";
     if (!creditLine) errors.creditLine = "Required";
-    if (!Object.values(inquiries).every((i) => i === null)) {
+    if (Object.values(inquiries).every((i) => i === null || i === false)) {
       errors.inquiries = "Required";
     }
 
     setErrors(errors);
     // Form is valid if the errors objects has no properties
     return Object.keys(errors).length === 0;
-  }
-
-  function handleSaveForJsonServer(event) {
-    event.preventDefault();
-
-    for (let i in inquiries) {
-      if (inquiries[i] === null) inquiries[i] = false;
-    }
-    const finalCard = { ...cardForModal, inquiries: inquiries };
-    // if (!formIsValid()) return;
-    saveCardToJsonServer(finalCard)
-      .then(() => {
-        toast.success(
-          cardForModal.id === null ? "Card Created" : "Card Updated"
-        );
-        // eslint-disable-next-line no-restricted-globals
-        history.push("/cards");
-      })
-      .catch(() => {
-        // setErrors({
-        //   onSave: error.message,
-        // });
-      });
-
-    toggleShow();
-    setCardForModal(NEW_CARD);
   }
 
   function handleEditButtonClick(e) {
@@ -153,6 +119,7 @@ function CardAddEditModal({
   function toggleModal() {
     toggleShow();
     setErrors({});
+    setInquiries(INQUIRIES);
     try {
       setModalOpen(false);
     } catch (err) {

@@ -105,7 +105,7 @@ const CardForm = ({
             <TextInput
               name={CARD_DATA_KEYS.card}
               label="Card"
-              value={card.card || ""}
+              value={titleCase(card.card) || ""}
               onChange={onChange}
               requiredField
               error={errors.card}

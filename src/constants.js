@@ -14,6 +14,12 @@ export const REMINDERS_TEXT_AF = "Annual Fee is due within 90 days";
 export const REMINDERS_TEXT_BONUS = "Bonus earn deadline is within 30 days";
 
 // Data
+export const INQUIRIES = {
+  experian: null,
+  equifax: null,
+  transunion: null,
+};
+
 export const NEW_CARD = {
   id: null,
   issuer: {
@@ -22,11 +28,7 @@ export const NEW_CARD = {
   },
   card: "",
   userId: null,
-  inquiries: {
-    experian: null,
-    equifax: null,
-    transunion: null,
-  },
+  inquiries: INQUIRIES,
   annualFee: 0,
   nextFeeDate: null,
   creditLine: null,

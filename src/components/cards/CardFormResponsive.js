@@ -72,7 +72,7 @@ const CardFormResponsive = ({
             text: user.name,
           }))}
           onChange={onChange}
-          error={errors.cardholder}
+          error={errors.userId}
           requiredField
         />
         <SelectInput
@@ -170,6 +170,7 @@ const CardFormResponsive = ({
           name={CARD_DATA_KEYS.inquiries}
           label="Inquiries"
           inquiriesStatus={card.inquiries}
+          error={errors.inquiries}
           onChange={onChange}
           requiredField
         />

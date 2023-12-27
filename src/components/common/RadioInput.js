@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form } from "react-bootstrap";
-import {
-  APP_COLOR_BLUE,
-  CANCELLED_COLOR_RED,
-  DELETE_COLOR_RED,
-} from "../../constants";
+import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
 
 const RadioInput = ({
   name,
