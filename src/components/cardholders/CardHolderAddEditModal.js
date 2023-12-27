@@ -47,6 +47,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     _.groupBy(state.loyaltyData, (o) => o.userId)
   );
   const [imgEditor, setImgEditor] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     const { name, value, files } = event.target;
@@ -68,8 +69,19 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
     }
   };
 
+  function formIsValid() {
+    const { firstName, lastName } = cardHolderForModal;
+    const errors = {};
+    if (!firstName) errors.firstName = "Required";
+    if (!lastName) errors.lastName = "Required";
+    setErrors(errors);
+    // Form is valid if the errors objects has no properties
+    return Object.keys(errors).length === 0;
+  }
+
   const handleSaveCardholder = async (e) => {
     e.preventDefault();
+    if (!formIsValid()) return;
     setSaving(true);
 
     const scaledImgUrl = await handleSavePhoto(imgEditor);
@@ -130,6 +142,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
   function clearCardholderState() {
     setCardHolderForModal(newCardholder);
     toggleShow();
+    setErrors({});
     delete cardHolderForModal.imgFile;
   }
 
@@ -189,7 +202,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
               onSave={handleSaveCardholder}
               onChange={handleChange}
               saving={saving}
-              // errors={errors}
+              errors={errors}
             />
           </div>
         </Modal.Body>

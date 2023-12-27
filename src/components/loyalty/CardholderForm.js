@@ -28,14 +28,16 @@ const CardholderForm = ({
         label="First Name"
         value={cardholder.firstName || ""}
         onChange={onChange}
-        // error={errors.title}
+        error={errors.firstName}
+        requiredField
       />
       <TextInput
         name="lastName"
         label="Last Name"
         value={cardholder.lastName || ""}
         onChange={onChange}
-        // error={errors.title}
+        error={errors.lastName}
+        requiredField
       />
       <hr />
       <button
