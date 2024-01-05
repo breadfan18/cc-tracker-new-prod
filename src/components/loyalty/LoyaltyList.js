@@ -76,7 +76,16 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
               <td>
                 <img className="loyaltyLogos" src={acc.program.img} alt="AA" />
               </td>
-              <td>{acc.program.name}</td>
+              <td>
+                <a
+                  href={acc.program.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ textDecoration: "none" }}
+                >
+                  {acc.program.name}
+                </a>
+              </td>
               <td>{acc.memberId}</td>
               <td>{acc.loginId}</td>
               <td>{acc.password}</td>

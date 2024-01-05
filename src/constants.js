@@ -95,18 +95,21 @@ export const PROGRAMS = [
     type: "airlines",
     name: "American AAdvantage",
     img: "https://i.imgur.com/0UD33Y8.png",
+    url: "https://www.aa.com/loyalty/login?uri=%2floyalty%2flogin&previousPage=&bookingPathStateId=&marketId=",
   },
   {
     id: 2,
     type: "airlines",
     name: "United MileagePlus",
     img: "https://i.imgur.com/IAWs57y.png",
+    url: "https://www.united.com/ual/en/us/sso?return_to=wsta",
   },
   {
     id: 3,
     type: "airlines",
     name: "SouthWest",
     img: "https://i.imgur.com/4BseEAn.png",
+    url: "https://www.southwest.com/loyalty/myaccount/",
   },
   {
     id: 4,
@@ -131,12 +134,14 @@ export const PROGRAMS = [
     type: "airlines",
     name: "British Airways",
     img: "https://i.imgur.com/KewcSxm.png",
+    url: "https://www.britishairways.com/travel/home/public/en_us/",
   },
   {
     id: 8,
     type: "airlines",
     name: "Qatar Airways",
     img: "https://i.imgur.com/nFQMegw.png",
+    url: "https://www.qatarairways.com/en-gb/Privilege-Club/loginpage.html",
   },
   {
     id: 9,
@@ -209,6 +214,7 @@ export const PROGRAMS = [
     type: "misc",
     name: "AA eShopping",
     img: "https://i.imgur.com/B7Jvm5b.png",
+    url: "https://www.aadvantageeshopping.com/j____.htm",
   },
   {
     id: 21,
@@ -233,6 +239,7 @@ export const PROGRAMS = [
     type: "hotels",
     name: "Hilton Honors",
     img: "https://i.imgur.com/3A83gV6.png",
+    url: "https://www.hilton.com/en/hilton-honors/login/?forwardPageURI=%252Fen%252Fhilton-honors%252Fguest%252Fmy-account%252F",
   },
   {
     id: 25,
@@ -251,6 +258,7 @@ export const PROGRAMS = [
     type: "hotels",
     name: "Hyatt",
     img: "https://i.imgur.com/XbQJMri.png",
+    url: "https://www.hyatt.com/en-US/member/sign-in",
   },
   {
     id: 28,
