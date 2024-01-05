@@ -27,7 +27,14 @@ export default function LoyaltyCards({ loyaltyData }) {
             }}
           >
             <Card.Subtitle className="mb-0 loyaltyCardTitle">
-              <p style={{ margin: 0 }}>{acc.program.name}</p>
+              <a
+                href={acc.program.url}
+                style={{ textDecoration: "none" }}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {acc.program.name}
+              </a>
               <div>
                 <img
                   src={acc.program.img}
