@@ -1,10 +1,26 @@
 {
   "users": {
+    "7Bh0UfteqsSXLBLb8iR5MpA5QgY2": {
+      "cardHolders": {
+        "dex-pogba": {
+          "id": "dex-pogba",
+          "img": "https://lh3.googleusercontent.com/a/ACg8ocIoWRWkbb_DFlTwB6UQgwZK5vLu0VblHLYXsPvzA6hR=s96-c",
+          "isPrimary": true,
+          "name": "Dex Pogba"
+        }
+      }
+    },
     "8r0cFCOL9XWYE2zq4l37Vficfwf1": {
       "cardHolders": {
-        "swaroop-uprety": {
-          "id": "swaroop-uprety",
-          "name": "Swaroop Uprety"
+        "foo-man": {
+          "id": "foo-man",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FDSC08824.JPG?alt=media&token=31af9530-bbbd-4223-a122-b0fde0c0e434",
+          "name": "Foo Man"
+        },
+        "test-holde": {
+          "id": "test-holde",
+          "img": "",
+          "name": "Test Holde"
         }
       },
       "cards": {
@@ -62,6 +78,37 @@
         }
       },
       "loyaltyData": {
+        "american-aadvantage-swaroop-uprety-5b71d2e988f": {
+          "accountHolder": "Swaroop Uprety",
+          "id": "american-aadvantage-swaroop-uprety-5b71d2e988f",
+          "loginId": "N/A",
+          "loyaltyType": "airlines",
+          "memberId": "N/A",
+          "password": "N/A",
+          "program": {
+            "id": 1,
+            "img": "https://i.imgur.com/0UD33Y8.png",
+            "name": "American AAdvantage",
+            "type": "airlines",
+            "url": "https://www.aa.com/loyalty/login?uri=%2floyalty%2flogin&previousPage=&bookingPathStateId=&marketId="
+          },
+          "userId": "swaroop-uprety"
+        },
+        "club-carlson-swaroop-uprety-bfc465d60d9": {
+          "accountHolder": "Swaroop Uprety",
+          "id": "club-carlson-swaroop-uprety-bfc465d60d9",
+          "loginId": "N/A",
+          "loyaltyType": "hotels",
+          "memberId": "N/A",
+          "password": "N/A",
+          "program": {
+            "id": 25,
+            "img": "https://i.imgur.com/B7Jvm5b.png",
+            "name": "Club Carlson",
+            "type": "hotels"
+          },
+          "userId": "swaroop-uprety"
+        },
         "etihad-guest-5-63ba3998455": {
           "accountHolder": "Swaroop Uprety",
           "id": "etihad-guest-5-63ba3998455",
@@ -76,38 +123,57 @@
             "type": "airlines"
           },
           "userId": "swaroop-uprety"
+        },
+        "qatar-airways-swaroop-uprety-cbfc465d60d": {
+          "accountHolder": "Swaroop Uprety",
+          "id": "qatar-airways-swaroop-uprety-cbfc465d60d",
+          "loginId": "N/A",
+          "loyaltyType": "airlines",
+          "memberId": "N/A",
+          "password": "N/A",
+          "program": {
+            "id": 8,
+            "img": "https://i.imgur.com/nFQMegw.png",
+            "name": "Qatar Airways",
+            "type": "airlines"
+          },
+          "userId": "swaroop-uprety"
         }
       }
     },
     "iXoAbxO0hMNBUUCzMnpnSydNKZg1": {
-      "cardHolders": [
-        null,
-        {
+      "cardHolders": {
+        "1": {
           "id": "swaroop-uprety",
           "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2F1910596_511047669708_4590_n_511047669708.jpg?alt=media&token=51692d39-2146-48b1-af05-b71fc629c116",
           "name": "Swaroop Uprety"
         },
-        {
+        "2": {
           "id": "anshu-thapa",
           "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FIMG_6027.jpeg?alt=media&token=6584cc91-33aa-427e-84a3-06738e891845",
           "name": "Anshu Thapa"
         },
-        {
+        "3": {
           "id": "astha-thapa",
           "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FYD0_7782_Original.jpeg?alt=media&token=d7d97287-24fe-487a-9ce7-e348dfc409e6",
           "name": "Astha Thapa"
         },
-        {
+        "4": {
           "id": "tulasi-uprety",
           "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FIMG_7972.jpeg?alt=media&token=e769cc2e-81bd-41d9-afef-f9d65333c79c",
           "name": "Tulasi Uprety"
         },
-        {
+        "5": {
           "id": "bruno-fernandes",
           "img": "https://i.imgur.com/BjiSBxz.png",
           "name": "Bruno Fernandes"
+        },
+        "poonam-uprety": {
+          "id": "poonam-uprety",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2F1928836_511051047938_9652_n_511051047938.jpg?alt=media&token=32f6a591-6337-4f22-9db1-572660349f59",
+          "name": "Poonam Uprety"
         }
-      ],
+      },
       "cards": {
         "amex-amex-blue-cash-2-062fb50688f": {
           "annualFee": 0,
@@ -545,7 +611,7 @@
             }
           },
           "cardType": "Personal",
-          "cardholder": "Lisandro Martinez",
+          "cardholder": "Bruno Fernandes",
           "creditLine": "5000",
           "id": "capone-foo-5-fedb012dd50",
           "inquiries": {
@@ -562,7 +628,7 @@
           "spendBy": "2023-03-06",
           "spendReq": "3000",
           "status": "downgraded",
-          "userId": "lisandro-martinez"
+          "userId": "bruno-fernandes"
         },
         "capone-savor-1-c780d5c3d36": {
           "annualFee": "95",
@@ -1030,6 +1096,30 @@
           "status": "closed",
           "userId": "anshu-thapa"
         },
+        "chase-ink-preferred-anshu-thapa-9ebc7cdf39c": {
+          "annualFee": "95",
+          "appDate": "2024-01-12",
+          "card": "Ink Preferred",
+          "cardType": "Business",
+          "cardholder": "Anshu Thapa",
+          "creditLine": "6000",
+          "id": "chase-ink-preferred-anshu-thapa-9ebc7cdf39c",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": false
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "nextFeeDate": "2025-01-12",
+          "signupBonus": "100K UR",
+          "spendBy": "2024-04-12",
+          "spendReq": "8000",
+          "status": "open",
+          "userId": "anshu-thapa"
+        },
         "chase-ink-unlimited-1-5c3d36964a7": {
           "annualFee": "0",
           "appDate": "2022-11-28",
@@ -1362,8 +1452,8 @@
           "bonusEarned": true,
           "card": "POOPSI",
           "cardType": "Personal",
-          "cardholder": "Lisandro Martinez",
-          "creditLine": "1000",
+          "cardholder": "Bruno Fernandes",
+          "creditLine": "25000",
           "id": "chase-toosti-5-2a87d1a2a3a",
           "inquiries": {
             "equifax": false,
@@ -1379,7 +1469,7 @@
           "spendBy": "2024-02-03",
           "spendReq": "300",
           "status": "downgraded",
-          "userId": "lisandro-martinez"
+          "userId": "bruno-fernandes"
         },
         "citi-aadvantage-plat-select-1-5e5a6ac0c78": {
           "annualFee": "95",
@@ -1501,9 +1591,26 @@
             "id": 20,
             "img": "https://i.imgur.com/B7Jvm5b.png",
             "name": "AA eShopping",
-            "type": "misc"
+            "type": "misc",
+            "url": "https://www.aadvantageeshopping.com/j____.htm"
           },
           "userId": "swaroop-uprety"
+        },
+        "aa-eshopping-anshu-thapa-721915f3f1e": {
+          "accountHolder": "Anshu Thapa",
+          "id": "aa-eshopping-anshu-thapa-721915f3f1e",
+          "loginId": "9U15XH4",
+          "loyaltyType": "misc",
+          "memberId": "9U15XH4",
+          "password": "d*******15",
+          "program": {
+            "id": 20,
+            "img": "https://i.imgur.com/B7Jvm5b.png",
+            "name": "AA eShopping",
+            "type": "misc",
+            "url": "https://www.aadvantageeshopping.com/j____.htm"
+          },
+          "userId": "anshu-thapa"
         },
         "air-france-flying-blue-1-d11eb903dc2": {
           "accountHolder": "Swaroop Uprety",
@@ -1541,12 +1648,13 @@
           "loginId": "breadfan18@gmail.com",
           "loyaltyType": "airlines",
           "memberId": "92J7LK0",
-          "password": "T*********5#",
+          "password": "T*********5",
           "program": {
             "id": 1,
             "img": "https://i.imgur.com/0UD33Y8.png",
             "name": "American AAdvantage",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.aa.com/loyalty/login?uri=%2floyalty%2flogin&previousPage=&bookingPathStateId=&marketId="
           },
           "rewardsBalance": "35176",
           "rewardsExpiration": "2024-08-25",
@@ -1563,7 +1671,8 @@
             "id": 1,
             "img": "https://i.imgur.com/0UD33Y8.png",
             "name": "American AAdvantage",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.aa.com/loyalty/login?uri=%2floyalty%2flogin&previousPage=&bookingPathStateId=&marketId="
           },
           "rewardsBalance": "91385",
           "rewardsExpiration": "2025-10-16",
@@ -1640,7 +1749,8 @@
             "id": 7,
             "img": "https://i.imgur.com/KewcSxm.png",
             "name": "British Airways",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.britishairways.com/travel/home/public/en_us/"
           },
           "rewardsBalance": "68973",
           "rewardsExpiration": "2026-05-25",
@@ -1657,7 +1767,8 @@
             "id": 7,
             "img": "https://i.imgur.com/KewcSxm.png",
             "name": "British Airways",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.britishairways.com/travel/home/public/en_us/"
           },
           "rewardsBalance": "56124",
           "rewardsExpiration": "2026-05-25",
@@ -1852,13 +1963,15 @@
           "loginId": "breadfan18",
           "loyaltyType": "hotels",
           "memberId": 657943471,
-          "password": "T*******d*5#",
+          "password": "T*********5#",
           "program": {
             "id": 24,
             "img": "https://i.imgur.com/3A83gV6.png",
             "name": "Hilton Honors",
-            "type": "hotels"
+            "type": "hotels",
+            "url": "https://www.hilton.com/en/hilton-honors/login/?forwardPageURI=%252Fen%252Fhilton-honors%252Fguest%252Fmy-account%252F"
           },
+          "rewardsBalance": "74027",
           "userId": "swaroop-uprety"
         },
         "hilton-honors-2-ccc393cd666": {
@@ -1872,7 +1985,8 @@
             "id": 24,
             "img": "https://i.imgur.com/3A83gV6.png",
             "name": "Hilton Honors",
-            "type": "hotels"
+            "type": "hotels",
+            "url": "https://www.hilton.com/en/hilton-honors/login/?forwardPageURI=%252Fen%252Fhilton-honors%252Fguest%252Fmy-account%252F"
           },
           "userId": "anshu-thapa"
         },
@@ -1887,9 +2001,27 @@
             "id": 27,
             "img": "https://i.imgur.com/XbQJMri.png",
             "name": "Hyatt",
-            "type": "hotels"
+            "type": "hotels",
+            "url": "https://www.hyatt.com/en-US/member/sign-in"
           },
           "userId": "swaroop-uprety"
+        },
+        "hyatt-anshu-thapa-c43fa3a5126": {
+          "accountHolder": "Anshu Thapa",
+          "id": "hyatt-anshu-thapa-c43fa3a5126",
+          "loginId": "535866790M",
+          "loyaltyType": "hotels",
+          "memberId": "535866790M",
+          "password": "d*******15",
+          "program": {
+            "id": 27,
+            "img": "https://i.imgur.com/XbQJMri.png",
+            "name": "Hyatt",
+            "type": "hotels",
+            "url": "https://www.hyatt.com/en-US/member/sign-in"
+          },
+          "rewardsBalance": "0",
+          "userId": "anshu-thapa"
         },
         "ihg-1-e666f5a192e": {
           "accountHolder": "Swaroop Uprety",
@@ -1992,7 +2124,8 @@
             "id": 8,
             "img": "https://i.imgur.com/nFQMegw.png",
             "name": "Qatar Airways",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.qatarairways.com/en-gb/Privilege-Club/loginpage.html"
           },
           "userId": "swaroop-uprety"
         },
@@ -2007,7 +2140,8 @@
             "id": 8,
             "img": "https://i.imgur.com/nFQMegw.png",
             "name": "Qatar Airways",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.qatarairways.com/en-gb/Privilege-Club/loginpage.html"
           },
           "userId": "anshu-thapa"
         },
@@ -2037,7 +2171,8 @@
             "id": 3,
             "img": "https://i.imgur.com/Sz5JLMj.png",
             "name": "SouthWest",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.southwest.com/loyalty/myaccount/"
           },
           "userId": "swaroop-uprety"
         },
@@ -2052,7 +2187,8 @@
             "id": 3,
             "img": "https://i.imgur.com/Sz5JLMj.png",
             "name": "SouthWest",
-            "type": "airlines"
+            "type": "airlines",
+            "url": "https://www.southwest.com/loyalty/myaccount/"
           },
           "userId": "anshu-thapa"
         },
@@ -2077,13 +2213,14 @@
           "loginId": "ED768479",
           "loyaltyType": "airlines",
           "memberId": "ED768479",
-          "password": "Me*****8",
+          "password": "M******8",
           "program": {
             "id": 2,
-            "img": "https://i.imgur.com/znFTwQ1.png",
+            "img": "https://i.imgur.com/IAWs57y.png",
             "name": "United MileagePlus",
             "type": "airlines"
           },
+          "rewardsBalance": "895",
           "userId": "swaroop-uprety"
         },
         "united-mileageplus-2-68559b9ccc3": {
