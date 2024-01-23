@@ -54,6 +54,7 @@ export default function CardListTable({
     <Table>
       <thead>
         <tr>
+          <th></th>
           <th className="tableHeader">
             App Date
             <FaSort
@@ -97,9 +98,6 @@ export default function CardListTable({
           {windowWidth > 1280 && !showCompactTable && (
             <th className="tableHeader">Bonus Earn Date</th>
           )}
-          <th className="tableHeader">
-            Status <FaSort onClick={() => requestSort(CARD_DATA_KEYS.status)} />
-          </th>
           {showEditDelete && (
             <>
               <th></th>
@@ -118,6 +116,14 @@ export default function CardListTable({
               style={{ cursor: "pointer" }}
               onClick={() => routeChange(card)}
             >
+              <td>
+                {
+                  <BonusEarnStatusIcon
+                    bonusEarned={card.bonusEarned}
+                    iconSize="2rem"
+                  />
+                }
+              </td>
               <td>{formatDate(card.appDate)}</td>
               {showUser && <td>{card.cardholder}</td>}
               <td>
@@ -140,18 +146,11 @@ export default function CardListTable({
                 <td>{formatDate(card.spendBy)}</td>
               )}
               {windowWidth > 1070 && !showCompactTable && (
-                <td>
-                  <BonusEarnStatusIcon
-                    bonusEarned={card.bonusEarned}
-                    iconSize="1.3rem"
-                  />
-                  {card.signupBonus}
-                </td>
+                <td>{card.signupBonus}</td>
               )}
               {windowWidth > 1280 && !showCompactTable && (
                 <td>{formatDate(card.bonusEarnDate)}</td>
               )}
-              <td>{titleCase(card.status)}</td>
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">
