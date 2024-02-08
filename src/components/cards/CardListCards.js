@@ -75,7 +75,11 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
               </Card.Subtitle>
             )}
           </div>
-          <section id="cardBody" onClick={() => routeChange(card)}>
+          <section
+            id="cardBody"
+            onClick={() => routeChange(card)}
+            style={{ paddingTop: showUserName && 0 }}
+          >
             <div>
               <CardText card={card} dataType={CARD_DATA_KEYS.appDate} />
               <CardText card={card} dataType={CARD_DATA_KEYS.creditLine} />
