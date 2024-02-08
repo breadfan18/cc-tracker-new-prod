@@ -135,16 +135,18 @@ export default function CardListTable({
                   <CreditBureauIcons inquiries={card.inquiries} />
                 </td>
               )}
-              <td style={{ display: "flex", flexDirection: "column" }}>
-                <p>{formatCurrency(card.annualFee)}</p>
-                <small
-                  style={{
-                    color: nextFeeColor,
-                    fontSize: "12px",
-                  }}
-                >
-                  {nextFeeText}
-                </small>
+              <td>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p>{formatCurrency(card.annualFee)}</p>
+                  <small
+                    style={{
+                      color: nextFeeColor,
+                      fontSize: "12px",
+                    }}
+                  >
+                    {nextFeeText}
+                  </small>
+                </div>
               </td>
               {windowWidth > 1380 && !showCompactTable && (
                 <td>{formatCurrency(card.spendReq)}</td>
