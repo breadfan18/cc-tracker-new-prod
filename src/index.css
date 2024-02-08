@@ -504,3 +504,20 @@ input[type="range"] {
   justify-content: space-between;
   align-items: center;
 }
+
+p {
+  margin: 0;
+}
+
+.cardCardTitle {
+  padding: 10px;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardCardSubtitle {
+  padding: 10px;
+  margin: 0;
+}

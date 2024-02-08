@@ -199,6 +199,7 @@ const CardForm = ({
               onChange={onChange}
               value={card.bonusEarnDate}
               disabled={!card.bonusEarned}
+              requiredField={card.bonusEarned}
             />
           </Col>
         </Row>

@@ -13,7 +13,7 @@ import { WindowWidthContext } from "../App";
 import CardText from "./CardText";
 import { setColorForCardStatus } from "../../helpers";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
+import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 export default function CardListCards({ cards, showEditDelete, showUserName }) {
   const windowWidth = useContext(WindowWidthContext);
   const cardWidth = windowWidth < 650 ? windowWidth : "18rem";
@@ -36,44 +36,44 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
           >
             {showUserName && (
               <Card.Title
-                style={{
-                  padding: "10px 0 0 10px",
-                  marginBottom: 0,
-                  backgroundColor: cardTitleColor,
-                  borderRadius: "5px 5px 0 0 ",
-                }}
+                className="cardCardTitle"
+                style={{ backgroundColor: cardTitleColor }}
               >
-                {card.cardholder}
+                <div>
+                  <p>{card.cardholder}</p>
+                  <p
+                    style={{
+                      fontSize: "1rem",
+                      color: "rgba(33, 37, 41, 0.75)",
+                    }}
+                  >{`${card.issuer.name} ${card.card}`}</p>
+                </div>
+                <BonusStatusAndEarnDate card={card} isCardTitle isCard />
               </Card.Title>
             )}
-            <Card.Subtitle
-              style={{
-                padding: "10px",
-                margin: "0",
-                backgroundColor: cardTitleColor,
-                borderRadius: showUserName ? null : "5px 5px 0 0 ",
-                color: showUserName ? "rgba(33, 37, 41, 0.75)" : "black",
-              }}
-            >
-              <div
+            {!showUserName && (
+              <Card.Subtitle
+                className="cardCardSubtitle"
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignContent: "center",
+                  backgroundColor: cardTitleColor,
+                  borderRadius: showUserName ? null : "5px 5px 0 0 ",
+                  color: showUserName ? "rgba(33, 37, 41, 0.75)" : "black",
                 }}
               >
-                <p
-                  style={{ margin: 0 }}
-                >{`${card.issuer.name} ${card.card}`}</p>
-                <p style={{ margin: 0 }}>
-                  {card.signupBonus}{" "}
-                  <BonusEarnStatusIcon
-                    bonusEarned={card.bonusEarned}
-                    iconSize="1.3rem"
-                  />
-                </p>
-              </div>
-            </Card.Subtitle>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignContent: "center",
+                  }}
+                >
+                  <p
+                    style={{ display: "flex", alignItems: "center" }}
+                  >{`${card.issuer.name} ${card.card}`}</p>
+                  <BonusStatusAndEarnDate card={card} isCard />
+                </div>
+              </Card.Subtitle>
+            )}
           </div>
           <section id="cardBody" onClick={() => routeChange(card)}>
             <div>
@@ -81,7 +81,6 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
               <CardText card={card} dataType={CARD_DATA_KEYS.creditLine} />
               <CardText card={card} dataType={CARD_DATA_KEYS.annualFee} />
               <CardText card={card} dataType={CARD_DATA_KEYS.nextFeeDate} />
-              <CardText card={card} dataType={CARD_DATA_KEYS.bonusEarnDate} />
               <CardText card={card} dataType={CARD_DATA_KEYS.cardType} />
             </div>
             <div>

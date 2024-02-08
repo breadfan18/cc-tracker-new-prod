@@ -6,7 +6,6 @@ import { FaSort } from "react-icons/fa";
 import { useSortableData } from "../../hooks/sortData";
 import {
   formatDate,
-  titleCase,
   formatCurrency,
   setColorForCardStatus,
 } from "../../helpers";
@@ -17,6 +16,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { CARD_DATA_KEYS, DELETE_MODAL_TYPES } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import CreditBureauIcons from "../common/CreditBureauIcons";
+import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 
 export default function CardListTable({
   cards,
@@ -95,9 +95,6 @@ export default function CardListTable({
           {windowWidth > 1070 && !showCompactTable && (
             <th className="tableHeader">Bonus</th>
           )}
-          {windowWidth > 1280 && !showCompactTable && (
-            <th className="tableHeader">Bonus Earn Date</th>
-          )}
           {showEditDelete && (
             <>
               <th></th>
@@ -146,10 +143,9 @@ export default function CardListTable({
                 <td>{formatDate(card.spendBy)}</td>
               )}
               {windowWidth > 1070 && !showCompactTable && (
-                <td>{card.signupBonus}</td>
-              )}
-              {windowWidth > 1280 && !showCompactTable && (
-                <td>{formatDate(card.bonusEarnDate)}</td>
+                <td>
+                  <BonusStatusAndEarnDate card={card} />
+                </td>
               )}
               {showEditDelete && (
                 <>
