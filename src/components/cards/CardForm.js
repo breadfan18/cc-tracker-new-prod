@@ -200,6 +200,7 @@ const CardForm = ({
               value={card.bonusEarnDate}
               disabled={!card.bonusEarned}
               requiredField={card.bonusEarned}
+              error={errors.bonusEarnDate}
             />
           </Col>
         </Row>

@@ -85,8 +85,17 @@ function CardAddEditModal({
   }
 
   function formIsValid() {
-    const { status, appDate, cardholder, issuer, card, cardType, creditLine } =
-      cardForModal;
+    const {
+      status,
+      appDate,
+      cardholder,
+      issuer,
+      card,
+      cardType,
+      creditLine,
+      bonusEarned,
+      bonusEarnDate,
+    } = cardForModal;
     const errors = {};
 
     if (!status) errors.status = "Required";
@@ -96,6 +105,7 @@ function CardAddEditModal({
     if (!card) errors.card = "Required";
     if (!cardType) errors.cardType = "Required";
     if (!creditLine) errors.creditLine = "Required";
+    if (bonusEarned && !bonusEarnDate) errors.bonusEarnDate = "Required";
     if (Object.values(inquiries).every((i) => i === null || i === false)) {
       errors.inquiries = "Required";
     }
