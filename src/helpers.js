@@ -2,6 +2,7 @@ import {
   CARD_COLOR_CLOSED,
   CARD_COLOR_DOWNGRADED,
   CREDIT_BUREAUS,
+  DELETE_COLOR_RED,
 } from "./constants";
 
 export const pipe =
@@ -191,4 +192,28 @@ export function sortNumberDesc(num1, num2) {
   const parsedNum2 = parseInt(num2 || "0");
 
   return parsedNum2 - parsedNum1;
+}
+
+export function setNextFeeDataForTable(card) {
+  if (card.nextFeeDate && card.status === "open") {
+    return {
+      nextFeeText: `Next Fee Date: ${formatDate(card.nextFeeDate)}`,
+      nextFeeColor: DELETE_COLOR_RED,
+    };
+  } else if (card.status === "closed") {
+    return {
+      nextFeeText: "Account Closed",
+      nextFeeColor: "black",
+    };
+  } else if (card.status === "downgraded") {
+    return {
+      nextFeeText: "Account Downgraded",
+      nextFeeColor: "black",
+    };
+  } else {
+    return {
+      nextFeeText: "No Annual Fee",
+      nextFeeColor: "green",
+    };
+  }
 }

@@ -8,6 +8,7 @@ import {
   formatDate,
   formatCurrency,
   setColorForCardStatus,
+  setNextFeeDataForTable,
 } from "../../helpers";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
@@ -85,7 +86,6 @@ export default function CardListTable({
             Annual Fee{" "}
             <FaSort onClick={() => requestSort(CARD_DATA_KEYS.annualFee)} />
           </th>
-          <th className="tableHeader">Next Fee Date</th>
           {windowWidth > 1380 && !showCompactTable && (
             <th className="tableHeader">Spend Req</th>
           )}
@@ -104,6 +104,7 @@ export default function CardListTable({
       </thead>
       <tbody className="align-middle">
         {data.map((card) => {
+          const { nextFeeText, nextFeeColor } = setNextFeeDataForTable(card);
           return (
             <tr
               key={card.id}
@@ -134,8 +135,17 @@ export default function CardListTable({
                   <CreditBureauIcons inquiries={card.inquiries} />
                 </td>
               )}
-              <td>{formatCurrency(card.annualFee)}</td>
-              <td>{formatDate(card.nextFeeDate)}</td>
+              <td style={{ display: "flex", flexDirection: "column" }}>
+                <p>{formatCurrency(card.annualFee)}</p>
+                <small
+                  style={{
+                    color: nextFeeColor,
+                    fontSize: "12px",
+                  }}
+                >
+                  {nextFeeText}
+                </small>
+              </td>
               {windowWidth > 1380 && !showCompactTable && (
                 <td>{formatCurrency(card.spendReq)}</td>
               )}
