@@ -197,7 +197,7 @@ export function sortNumberDesc(num1, num2) {
 export function setNextFeeDataForTable(card) {
   if (card.nextFeeDate && card.status === "open") {
     return {
-      nextFeeText: `Next Fee Date: ${formatDate(card.nextFeeDate)}`,
+      nextFeeText: `Next Fee: ${formatDate(card.nextFeeDate)}`,
       nextFeeColor: DELETE_COLOR_RED,
     };
   } else if (card.status === "closed") {
