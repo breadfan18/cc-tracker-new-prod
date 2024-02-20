@@ -11,8 +11,6 @@ import {
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_BLUE,
   DELETE_MODAL_TYPES,
-  EDIT_COLOR_GREEN,
-  APP_COLOR_LIGHT_GRAY,
 } from "../../constants";
 import { Card, Table } from "react-bootstrap";
 import CardAddEditModal from "./CardAddEditModal";
@@ -88,13 +86,8 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
               objectFit: "contain",
             }}
           />
-          <article
-            className="cardDetailsHeaderContainer"
-            style={{
-              backgroundColor: APP_COLOR_LIGHT_GRAY,
-            }}
-          >
-            <div>
+          <article className="cardDetailsHeaderContainer">
+            <div style={{ padding: "10px" }}>
               <Card.Title style={{ fontSize: "clamp(0.9rem, 5vw, 1.5rem)" }}>
                 {card.issuer.name} {card.card}
               </Card.Title>
@@ -102,23 +95,6 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
                 {card.cardholder}
               </Card.Title>
             </div>
-            {/* <div className="cardDetailsStatus">
-              <BonusEarnStatusIcon
-                bonusEarned={card.bonusEarned}
-                iconSize="clamp(1.5rem, 10vw, 3rem)"
-                inverseColor
-              />
-              <small
-                style={{
-                  color: "white",
-                  fontSize: "15px",
-                }}
-              >
-                {card.bonusEarnDate?.includes("-") || card.bonusEarned
-                  ? formatDate(card.bonusEarnDate)
-                  : "In Progress"}
-              </small>
-            </div> */}
             <BonusStatusAndEarnDate
               card={card}
               isCard
@@ -187,15 +163,6 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
                     Inquiries:
                   </td>
                   <td>{<CreditBureauIcons inquiries={card.inquiries} />}</td>
-                </tr>
-                <tr>
-                  <td
-                    style={{ color: APP_COLOR_BLUE }}
-                    className="cardDetailsFieldHeaders"
-                  >
-                    Signup Bonus:
-                  </td>
-                  <td>{card.signupBonus}</td>
                 </tr>
                 <tr>
                   <td

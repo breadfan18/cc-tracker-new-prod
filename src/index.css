@@ -42,7 +42,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  background-color: var(--black-opacity);
 }
 
 .cardDetailsStatus {
@@ -350,6 +350,7 @@ form {
 .cardDetailsFieldHeaders {
   font-weight: bold;
   font-size: clamp(0.9rem, 5vw, 1.2rem);
+  color: var(--color-blue);
 }
 
 .cardHeaders,
