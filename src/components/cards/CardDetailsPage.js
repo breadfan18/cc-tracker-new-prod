@@ -227,7 +227,6 @@ function mapStateToProps(state, ownProps) {
   const card =
     id && state.cards.length > 0 ? getCardById(state.cards, id) : NEW_CARD;
 
-  console.log(card);
   return {
     card,
     cards: state.cards,

@@ -60,7 +60,7 @@ export default function CardListTable({
     <Table>
       <thead>
         <tr>
-          <th></th>
+          {!showCompactTable && <th></th>}
           <th className="tableHeader">
             App Date
             <FaSort
@@ -97,9 +97,7 @@ export default function CardListTable({
           {windowWidth > 1380 && !showCompactTable && (
             <th className="tableHeader">Spend By</th>
           )}
-          {windowWidth > 1070 && !showCompactTable && (
-            <th className="tableHeader">Bonus</th>
-          )}
+          {windowWidth > 1070 && <th className="tableHeader">Bonus</th>}
           {showEditDelete && (
             <>
               <th></th>
@@ -119,26 +117,28 @@ export default function CardListTable({
               style={{ cursor: "pointer" }}
               onClick={() => routeChange(card)}
             >
-              <td style={{ paddingLeft: 0 }}>
-                <div
-                  style={{
-                    backgroundColor: card.bonusEarned
-                      ? EDIT_COLOR_GREEN
-                      : APP_COLOR_BLUE,
-                    borderRadius: "0 15px 15px 0",
-                    padding: "5px 3px",
-                    maxWidth: "40px",
-                  }}
-                >
-                  {
-                    <BonusEarnStatusIcon
-                      bonusEarned={card.bonusEarned}
-                      iconSize="2rem"
-                      inverseColor
-                    />
-                  }
-                </div>
-              </td>
+              {!showCompactTable && (
+                <td style={{ paddingLeft: 0 }}>
+                  <div
+                    style={{
+                      backgroundColor: card.bonusEarned
+                        ? EDIT_COLOR_GREEN
+                        : APP_COLOR_BLUE,
+                      borderRadius: "0 15px 15px 0",
+                      padding: "5px 3px",
+                      maxWidth: "40px",
+                    }}
+                  >
+                    {
+                      <BonusEarnStatusIcon
+                        bonusEarned={card.bonusEarned}
+                        iconSize="2rem"
+                        inverseColor
+                      />
+                    }
+                  </div>
+                </td>
+              )}
               <td>{formatDate(card.appDate)}</td>
               {showUser && <td>{card.cardholder}</td>}
               <td>
@@ -171,7 +171,7 @@ export default function CardListTable({
               {windowWidth > 1380 && !showCompactTable && (
                 <td>{formatDate(card.spendBy)}</td>
               )}
-              {windowWidth > 1070 && !showCompactTable && (
+              {windowWidth > 1070 && (
                 <td>
                   <BonusStatusAndEarnDate card={card} />
                 </td>
