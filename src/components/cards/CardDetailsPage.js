@@ -11,6 +11,8 @@ import {
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_BLUE,
   DELETE_MODAL_TYPES,
+  EDIT_COLOR_GREEN,
+  APP_COLOR_LIGHT_GRAY,
 } from "../../constants";
 import { Card, Table } from "react-bootstrap";
 import CardAddEditModal from "./CardAddEditModal";
@@ -29,6 +31,7 @@ import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { CardReminderContainer } from "./CardReminderContainer";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import { useUser } from "reactfire";
+import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
   const [card, setCard] = useState({ ...props.card });
   const windowWidth = useContext(WindowWidthContext);
@@ -85,25 +88,46 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
               objectFit: "contain",
             }}
           />
+          <article
+            className="cardDetailsHeaderContainer"
+            style={{
+              backgroundColor: APP_COLOR_LIGHT_GRAY,
+            }}
+          >
+            <div>
+              <Card.Title style={{ fontSize: "clamp(0.9rem, 5vw, 1.5rem)" }}>
+                {card.issuer.name} {card.card}
+              </Card.Title>
+              <Card.Title style={{ fontSize: "clamp(0.7rem, 4vw, 1rem)" }}>
+                {card.cardholder}
+              </Card.Title>
+            </div>
+            {/* <div className="cardDetailsStatus">
+              <BonusEarnStatusIcon
+                bonusEarned={card.bonusEarned}
+                iconSize="clamp(1.5rem, 10vw, 3rem)"
+                inverseColor
+              />
+              <small
+                style={{
+                  color: "white",
+                  fontSize: "15px",
+                }}
+              >
+                {card.bonusEarnDate?.includes("-") || card.bonusEarned
+                  ? formatDate(card.bonusEarnDate)
+                  : "In Progress"}
+              </small>
+            </div> */}
+            <BonusStatusAndEarnDate
+              card={card}
+              isCard
+              inverseColor
+              iconSize="clamp(1.5rem, 10vw, 3rem)"
+              isTourDetailsPage
+            />
+          </article>
           <Card.Body>
-            <article
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <div>
-                <Card.Title style={{ fontSize: "clamp(0.9rem, 5vw, 1.5rem)" }}>
-                  {card.issuer.name} {card.card}
-                </Card.Title>
-                <Card.Title style={{ fontSize: "clamp(0.7rem, 4vw, 1rem)" }}>
-                  {card.cardholder}
-                </Card.Title>
-              </div>
-              <div>
-                <BonusEarnStatusIcon
-                  bonusEarned={card.bonusEarned}
-                  iconSize="clamp(1.5rem, 10vw, 3rem)"
-                />
-              </div>
-            </article>
             <Table className={setColorForCardStatus("cardTable", card.status)}>
               <tbody className="align-middle">
                 <tr>

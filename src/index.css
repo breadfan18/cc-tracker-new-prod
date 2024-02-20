@@ -5,6 +5,7 @@
   --light-gray: #d9d7d7;
   --light-blue: rgb(210, 237, 246);
   --black-opacity: rgba(0, 0, 0, 0.09);
+  --edit-color-green: #198754;
   --url-white-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --url-black-bkgrd: url("https://i.imgur.com/nK3V6T8.jpg");
 }
@@ -35,6 +36,20 @@ body {
 #cardDetailsSectionRight .card {
   margin-bottom: 1rem;
   flex: 1;
+}
+
+.cardDetailsHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.cardDetailsStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 10px;
 }
 
 .navContainer {

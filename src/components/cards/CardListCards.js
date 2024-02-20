@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 export default function CardListCards({ cards, showEditDelete, showUserName }) {
   const windowWidth = useContext(WindowWidthContext);
-  const cardWidth = windowWidth < 650 ? windowWidth : "18rem";
+  const cardWidth = windowWidth < 650 ? windowWidth : "20rem";
   const history = useHistory();
 
   const routeChange = (card) => {
@@ -48,7 +48,13 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
                     }}
                   >{`${card.issuer.name} ${card.card}`}</p>
                 </div>
-                <BonusStatusAndEarnDate card={card} isCardTitle isCard />
+                <BonusStatusAndEarnDate
+                  card={card}
+                  isCardTitle
+                  isCard
+                  iconSize="2rem"
+                  inverseColor
+                />
               </Card.Title>
             )}
             {!showUserName && (
@@ -70,7 +76,12 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
                   <p
                     style={{ display: "flex", alignItems: "center" }}
                   >{`${card.issuer.name} ${card.card}`}</p>
-                  <BonusStatusAndEarnDate card={card} isCard />
+                  <BonusStatusAndEarnDate
+                    card={card}
+                    isCard
+                    iconSize="2rem"
+                    inverseColor
+                  />
                 </div>
               </Card.Subtitle>
             )}

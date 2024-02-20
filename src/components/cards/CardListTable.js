@@ -14,7 +14,12 @@ import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { WindowWidthContext } from "../App";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { CARD_DATA_KEYS, DELETE_MODAL_TYPES } from "../../constants";
+import {
+  APP_COLOR_BLUE,
+  CARD_DATA_KEYS,
+  DELETE_MODAL_TYPES,
+  EDIT_COLOR_GREEN,
+} from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
@@ -114,13 +119,25 @@ export default function CardListTable({
               style={{ cursor: "pointer" }}
               onClick={() => routeChange(card)}
             >
-              <td>
-                {
-                  <BonusEarnStatusIcon
-                    bonusEarned={card.bonusEarned}
-                    iconSize="2rem"
-                  />
-                }
+              <td style={{ paddingLeft: 0 }}>
+                <div
+                  style={{
+                    backgroundColor: card.bonusEarned
+                      ? EDIT_COLOR_GREEN
+                      : APP_COLOR_BLUE,
+                    borderRadius: "0 15px 15px 0",
+                    padding: "5px 3px",
+                    maxWidth: "40px",
+                  }}
+                >
+                  {
+                    <BonusEarnStatusIcon
+                      bonusEarned={card.bonusEarned}
+                      iconSize="2rem"
+                      inverseColor
+                    />
+                  }
+                </div>
               </td>
               <td>{formatDate(card.appDate)}</td>
               {showUser && <td>{card.cardholder}</td>}
