@@ -31,7 +31,10 @@ export default function BonusStatusAndEarnDate({
     : APP_COLOR_BLUE;
 
   return (
-    <div className="bonusInfoContainer" style={{ backgroundColor }}>
+    <div
+      className="bonusInfoContainer"
+      style={{ backgroundColor, paddingRight: isTourDetailsPage && "27px" }}
+    >
       {isCard && (
         <BonusEarnStatusIcon
           bonusEarned={card.bonusEarned}

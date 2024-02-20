@@ -25,7 +25,6 @@ import {
 import CardNotes from "./CardNotes";
 import { WindowWidthContext } from "../App";
 import _ from "lodash";
-import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { CardReminderContainer } from "./CardReminderContainer";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import { useUser } from "reactfire";
@@ -87,7 +86,7 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
             }}
           />
           <article className="cardDetailsHeaderContainer">
-            <div style={{ padding: "10px" }}>
+            <div style={{ padding: "10px 16px" }}>
               <Card.Title style={{ fontSize: "clamp(0.9rem, 5vw, 1.5rem)" }}>
                 {card.issuer.name} {card.card}
               </Card.Title>

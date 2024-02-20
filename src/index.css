@@ -540,6 +540,7 @@ p {
   display: flex;
   padding: 5px;
   border-radius: 15px 0 0 15px;
+  min-width: 8.2rem;
 }
 
 .bonusInfoTextSection {
