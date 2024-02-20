@@ -39,7 +39,7 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
                 className="cardCardTitle"
                 style={{ backgroundColor: cardTitleColor }}
               >
-                <div>
+                <div style={{ padding: "10px" }}>
                   <p>{card.cardholder}</p>
                   <p
                     style={{
@@ -64,25 +64,24 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
                   backgroundColor: cardTitleColor,
                   borderRadius: showUserName ? null : "5px 5px 0 0 ",
                   color: showUserName ? "rgba(33, 37, 41, 0.75)" : "black",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <div
+                <p
                   style={{
                     display: "flex",
-                    justifyContent: "space-between",
-                    alignContent: "center",
+                    alignItems: "center",
+                    padding: "22px 10px",
                   }}
-                >
-                  <p
-                    style={{ display: "flex", alignItems: "center" }}
-                  >{`${card.issuer.name} ${card.card}`}</p>
-                  <BonusStatusAndEarnDate
-                    card={card}
-                    isCard
-                    iconSize="2rem"
-                    inverseColor
-                  />
-                </div>
+                >{`${card.issuer.name} ${card.card}`}</p>
+                <BonusStatusAndEarnDate
+                  card={card}
+                  isCard
+                  iconSize="2rem"
+                  inverseColor
+                />
               </Card.Subtitle>
             )}
           </div>

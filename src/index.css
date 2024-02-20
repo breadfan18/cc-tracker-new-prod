@@ -525,7 +525,6 @@ p {
 }
 
 .cardCardTitle {
-  padding: 10px;
   border-radius: 5px 5px 0 0;
   display: flex;
   justify-content: space-between;
@@ -533,6 +532,17 @@ p {
 }
 
 .cardCardSubtitle {
-  padding: 10px;
   margin: 0;
+}
+
+.bonusInfoContainer {
+  display: flex;
+  padding: 5px;
+  border-radius: 15px 0 0 15px;
+}
+
+.bonusInfoTextSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
