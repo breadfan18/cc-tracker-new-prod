@@ -33,7 +33,6 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
   const [card, setCard] = useState({ ...props.card });
   const windowWidth = useContext(WindowWidthContext);
   const { status, data: user } = useUser();
-  console.log(status);
 
   useEffect(() => {
     if (cards.length === 0 && status === "success") {

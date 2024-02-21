@@ -9,6 +9,7 @@
   --edit-color-green: #198754;
   --url-white-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --url-black-bkgrd: url("https://i.imgur.com/nK3V6T8.jpg");
+  --bonus-ribbon-effect: "block";
 }
 
 body {
@@ -572,15 +573,9 @@ p {
   background-color: gray;
   height: 28px;
   width: 28px;
-  top: 216px;
-  right: -7.5px;
+  top: var(--foo-top);
+  right: var(--foo-right);
   transform: rotate(51deg);
   z-index: -1;
+  display: var(--bonus-ribbon-effect);
 }
-
-/* 
-- adjust padding around cards container in mobile view
-- Fix the bonus earn container in card table? absolute values are throwing it off
-- Style the card details page properly
-- Bonus info container dynamic background color.
-*/

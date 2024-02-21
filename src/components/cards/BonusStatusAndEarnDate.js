@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { formatDate } from "../../helpers";
 import {
@@ -6,6 +6,7 @@ import {
   APP_COLOR_BLUE_OPACITY,
   EDIT_COLOR_GREEN_OPACITY,
 } from "../../constants";
+import { WindowWidthContext } from "../App";
 
 export default function BonusStatusAndEarnDate({
   card,
@@ -15,7 +16,7 @@ export default function BonusStatusAndEarnDate({
   iconSize,
   isTourDetailsPage,
 }) {
-  // const [dynamicValue, setDynamicValue] = useState("initialValue");
+  const windowWidth = useContext(WindowWidthContext);
   const hasBonusEarnDate =
     card.bonusEarnDate?.includes("-") || card.bonusEarned;
 
@@ -25,28 +26,20 @@ export default function BonusStatusAndEarnDate({
     ? EDIT_COLOR_GREEN_OPACITY
     : APP_COLOR_BLUE_OPACITY;
 
-  // console.log("Background Color", backgroundColor);
-
-  // useEffect(() => {
-
-  //   setDynamicValue(backgroundColor);
-
-  //   document.documentElement.style.setProperty(
-  //     "--bonus-info-container-bkgrd",
-  //     !isCard
-  //       ? "none"
-  //       : hasBonusEarnDate
-  //       ? EDIT_COLOR_GREEN_OPACITY
-  //       : APP_COLOR_BLUE_OPACITY
-  //   );
-
-  //   console.log(
-  //     "Set Property",
-  //     document.documentElement.style.getPropertyValue(
-  //       "--bonus-info-container-bkgrd"
-  //     )
-  //   );
-  // }, [isCard, hasBonusEarnDate]);
+  useEffect(() => {
+    if (isTourDetailsPage && windowWidth < 500) {
+      document.documentElement.style.setProperty(
+        "--bonus-ribbon-effect",
+        "none"
+      );
+      document.documentElement.style.setProperty("--foo-right", "-8.5px");
+    } else if (isTourDetailsPage) {
+      document.documentElement.style.setProperty(
+        "--bonus-ribbon-effect",
+        "block"
+      );
+    }
+  }, [windowWidth]);
 
   const bonusStatusTextColor = inverseColor
     ? "white"
@@ -62,6 +55,8 @@ export default function BonusStatusAndEarnDate({
         backgroundColor,
         paddingRight: isTourDetailsPage && "27px",
         padding: isCard && "5px",
+        borderBottomRightRadius:
+          isTourDetailsPage && windowWidth < 500 && "15px",
       }}
     >
       {isCard && (
