@@ -34,56 +34,31 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
               backgroundColor: APP_COLOR_BLACK_OPACITY,
             }}
           >
-            {showUserName && (
-              <Card.Title
-                className="cardCardTitle"
-                style={{ backgroundColor: cardTitleColor }}
-              >
-                <div style={{ padding: "10px" }}>
-                  <p>{card.cardholder}</p>
-                  <p
-                    style={{
-                      fontSize: "1rem",
-                      color: "rgba(33, 37, 41, 0.75)",
-                    }}
-                  >{`${card.issuer.name} ${card.card}`}</p>
-                </div>
-                <BonusStatusAndEarnDate
-                  card={card}
-                  isCardTitle
-                  isCard
-                  iconSize="2rem"
-                  inverseColor
-                />
-              </Card.Title>
-            )}
-            {!showUserName && (
-              <Card.Subtitle
-                className="cardCardSubtitle"
-                style={{
-                  backgroundColor: cardTitleColor,
-                  borderRadius: showUserName ? null : "5px 5px 0 0 ",
-                  color: showUserName ? "rgba(33, 37, 41, 0.75)" : "black",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
+            <Card.Title
+              className="cardCardTitle"
+              style={{ backgroundColor: cardTitleColor }}
+            >
+              <div style={{ padding: "10px" }}>
+                <p>{showUserName ? card.cardholder : card.issuer.name}</p>
                 <p
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    padding: "22px 10px",
+                    fontSize: "1rem",
+                    color: "rgba(33, 37, 41, 0.75)",
                   }}
-                >{`${card.issuer.name} ${card.card}`}</p>
-                <BonusStatusAndEarnDate
-                  card={card}
-                  isCard
-                  iconSize="2rem"
-                  inverseColor
-                />
-              </Card.Subtitle>
-            )}
+                >
+                  {!showUserName
+                    ? card.card
+                    : `${card.issuer.name} ${card.card}`}
+                </p>
+              </div>
+              <BonusStatusAndEarnDate
+                card={card}
+                isCardTitle
+                isCard
+                iconSize="2rem"
+                inverseColor
+              />
+            </Card.Title>
           </div>
           <section
             id="cardBody"
