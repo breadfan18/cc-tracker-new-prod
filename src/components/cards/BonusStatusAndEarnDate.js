@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { formatDate } from "../../helpers";
 import {
@@ -15,6 +15,7 @@ export default function BonusStatusAndEarnDate({
   iconSize,
   isTourDetailsPage,
 }) {
+  // const [dynamicValue, setDynamicValue] = useState("initialValue");
   const hasBonusEarnDate =
     card.bonusEarnDate?.includes("-") || card.bonusEarned;
 
@@ -23,6 +24,28 @@ export default function BonusStatusAndEarnDate({
     : hasBonusEarnDate
     ? EDIT_COLOR_GREEN_OPACITY
     : APP_COLOR_BLUE_OPACITY;
+  console.log("Background Color", backgroundColor);
+
+  // useEffect(() => {
+
+  //   setDynamicValue(backgroundColor);
+
+  //   document.documentElement.style.setProperty(
+  //     "--bonus-info-container-bkgrd",
+  //     !isCard
+  //       ? "none"
+  //       : hasBonusEarnDate
+  //       ? EDIT_COLOR_GREEN_OPACITY
+  //       : APP_COLOR_BLUE_OPACITY
+  //   );
+
+  //   console.log(
+  //     "Set Property",
+  //     document.documentElement.style.getPropertyValue(
+  //       "--bonus-info-container-bkgrd"
+  //     )
+  //   );
+  // }, [isCard, hasBonusEarnDate]);
 
   const bonusStatusTextColor = inverseColor
     ? "white"
@@ -33,7 +56,11 @@ export default function BonusStatusAndEarnDate({
   return (
     <div
       className="bonusInfoContainer"
-      style={{ backgroundColor, paddingRight: isTourDetailsPage && "27px" }}
+      style={{
+        // "--bonus-info-container-bkgrd": backgroundColor,
+        backgroundColor,
+        paddingRight: isTourDetailsPage && "27px",
+      }}
     >
       {isCard && (
         <BonusEarnStatusIcon
