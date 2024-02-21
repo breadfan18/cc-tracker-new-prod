@@ -28,6 +28,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   font-size: clamp(0.6rem, 5vw, 1rem);
+  gap: 8px;
 }
 
 #cardDetailsSectionRight {
@@ -282,7 +283,7 @@ div.alert-danger {
 #cardCardContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 22px;
+  gap: 28px;
   padding: 0 10px 0 0;
 }
 
@@ -560,6 +561,18 @@ p {
   height: 28px;
   width: 28px;
   top: 37px;
+  right: -7.5px;
+  transform: rotate(51deg);
+  z-index: -1;
+}
+
+.cardDetailsBody #cardDetailsCard::before {
+  position: absolute;
+  content: "";
+  background-color: gray;
+  height: 28px;
+  width: 28px;
+  top: 216px;
   right: -7.5px;
   transform: rotate(51deg);
   z-index: -1;

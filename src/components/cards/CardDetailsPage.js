@@ -59,8 +59,12 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
           />
         </div>
       </section>
-      <div className="cardDetailsBody">
+      <div
+        className="cardDetailsBody"
+        style={{ padding: windowWidth < 800 && "0 10px" }}
+      >
         <Card
+          id="cardDetailsCard"
           style={{
             width: windowWidth > 800 ? "30rem" : windowWidth,
             backgroundColor: setColorForCardStatus("cardCard", card.status),
