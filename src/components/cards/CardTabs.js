@@ -99,6 +99,7 @@ function CardTabs({ cards }) {
               cards={cardsFilter.cardList}
               windowWidth={windowWidth}
               showUserName={true}
+              showBonusInfo
             />
           )}
         </Tab>

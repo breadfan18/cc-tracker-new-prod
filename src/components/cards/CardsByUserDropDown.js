@@ -69,7 +69,11 @@ function CardsByUserDropDown({ cards }) {
         />
       </div>
       <hr />
-      <CardListCards cards={cardsFilter.cardList} showUserName={showAllUsers} />
+      <CardListCards
+        cards={cardsFilter.cardList}
+        showUserName={showAllUsers}
+        showBonusInfo
+      />
     </div>
   );
 }

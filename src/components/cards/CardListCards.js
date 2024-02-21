@@ -14,7 +14,12 @@ import CardText from "./CardText";
 import { setColorForCardStatus } from "../../helpers";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
-export default function CardListCards({ cards, showEditDelete, showUserName }) {
+export default function CardListCards({
+  cards,
+  showEditDelete,
+  showUserName,
+  showBonusInfo,
+}) {
   const windowWidth = useContext(WindowWidthContext);
   const cardWidth = windowWidth < 650 ? windowWidth : "20rem";
   const history = useHistory();
@@ -51,13 +56,15 @@ export default function CardListCards({ cards, showEditDelete, showUserName }) {
                     : `${card.issuer.name} ${card.card}`}
                 </p>
               </div>
-              <BonusStatusAndEarnDate
-                card={card}
-                isCardTitle
-                isCard
-                iconSize="2rem"
-                inverseColor
-              />
+              {showBonusInfo && (
+                <BonusStatusAndEarnDate
+                  card={card}
+                  isCardTitle
+                  isCard
+                  iconSize="2rem"
+                  inverseColor
+                />
+              )}
             </Card.Title>
           </div>
           <section
@@ -103,4 +110,5 @@ CardListCards.propTypes = {
   cards: PropTypes.array.isRequired,
   showEditDelete: PropTypes.bool,
   showUserName: PropTypes.bool,
+  showBonusInfo: PropTypes.bool,
 };
