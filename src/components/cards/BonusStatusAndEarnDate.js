@@ -24,7 +24,8 @@ export default function BonusStatusAndEarnDate({
     : hasBonusEarnDate
     ? EDIT_COLOR_GREEN_OPACITY
     : APP_COLOR_BLUE_OPACITY;
-  console.log("Background Color", backgroundColor);
+
+  // console.log("Background Color", backgroundColor);
 
   // useEffect(() => {
 

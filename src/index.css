@@ -283,6 +283,7 @@ div.alert-danger {
   display: flex;
   flex-wrap: wrap;
   gap: 22px;
+  padding: 0 10px 0 0;
 }
 
 .editDeleteOnCards {
@@ -563,7 +564,8 @@ p {
 }
 
 /* 
-- Bonus info container dynamic background color.
+- adjust padding around cards container in mobile view
 - Fix the bonus earn container in card table? absolute values are throwing it off
 - Style the card details page properly
+- Bonus info container dynamic background color.
 */
