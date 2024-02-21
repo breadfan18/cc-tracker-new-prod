@@ -56,11 +56,12 @@ export default function BonusStatusAndEarnDate({
 
   return (
     <div
-      className="bonusInfoContainer"
+      className={`bonusInfoContainer ${isCard && "bonusInforContainerCard"}`}
       style={{
         // "--bonus-info-container-bkgrd": backgroundColor,
         backgroundColor,
         paddingRight: isTourDetailsPage && "27px",
+        padding: isCard && "5px",
       }}
     >
       {isCard && (

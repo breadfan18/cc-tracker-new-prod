@@ -4,7 +4,7 @@
   --color-blue: #0080ff;
   --light-gray: #d9d7d7;
   --light-blue: rgb(210, 237, 246);
-  --bonus-info-container-bkgrd: gray;
+  --bonus-info-container-bkgrd: "";
   --black-opacity: rgba(0, 0, 0, 0.09);
   --edit-color-green: #198754;
   --url-white-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
@@ -537,10 +537,12 @@ p {
 
 .bonusInfoContainer {
   display: flex;
-  padding: 5px;
   border-radius: 15px 15px 0 15px;
   min-width: 8.5rem;
   background-color: var(--bonus-info-container-bkgrd);
+}
+
+.bonusInforContainerCard {
   position: absolute;
   right: -14px;
 }
