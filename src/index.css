@@ -573,8 +573,8 @@ p {
   background-color: gray;
   height: 28px;
   width: 28px;
-  top: var(--foo-top);
-  right: var(--foo-right);
+  top: 216px;
+  right: -7.5px;
   transform: rotate(51deg);
   z-index: -1;
   display: var(--bonus-ribbon-effect);
