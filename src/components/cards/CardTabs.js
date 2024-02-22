@@ -65,7 +65,11 @@ function CardTabs({ cards }) {
             showCompactTable={false}
           />
         ) : (
-          <CardListCards cards={cardsFilter.cardList} showUserName={false} />
+          <CardListCards
+            cards={cardsFilter.cardList}
+            showUserName={false}
+            showBonusInfo
+          />
         )}
       </Tab>
     );
