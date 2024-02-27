@@ -7,10 +7,10 @@
           "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FDSC08824.JPG?alt=media&token=31af9530-bbbd-4223-a122-b0fde0c0e434",
           "name": "Foo Man"
         },
-        "test-hold": {
-          "id": "test-hold",
+        "test-holde": {
+          "id": "test-holde",
           "img": "",
-          "name": "Test Hold"
+          "name": "Test Holde"
         }
       },
       "cards": {
@@ -162,11 +162,6 @@
           "id": "tulasi-uprety",
           "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FIMG_7972.jpeg?alt=media&token=e769cc2e-81bd-41d9-afef-f9d65333c79c",
           "name": "Tulasi Uprety"
-        },
-        "5": {
-          "id": "bruno-fernandes",
-          "img": "https://i.imgur.com/BjiSBxz.png",
-          "name": "Bruno Fernandes"
         },
         "samay-upretythapa": {
           "id": "samay-upretythapa",
@@ -593,44 +588,6 @@
           "spendReq": 3000,
           "status": "closed",
           "userId": "anshu-thapa"
-        },
-        "capone-foo-5-fedb012dd50": {
-          "annualFee": "96",
-          "appDate": "2022-09-06",
-          "bonusEarnDate": "2023-10-20",
-          "bonusEarned": true,
-          "card": "FOOLING",
-          "cardNotes": {
-            "9712c557cfe": {
-              "date": "2023-07-27",
-              "id": "9712c557cfe",
-              "note": "From ipad"
-            },
-            "b59edb1d445": {
-              "date": "2023-07-25",
-              "id": "b59edb1d445",
-              "note": "ttt"
-            }
-          },
-          "cardType": "Personal",
-          "cardholder": "Bruno Fernandes",
-          "creditLine": "5000",
-          "id": "capone-foo-5-fedb012dd50",
-          "inquiries": {
-            "equifax": true,
-            "experian": false,
-            "transunion": false
-          },
-          "issuer": {
-            "img": "https://i.imgur.com/u3Rr8rT.png",
-            "name": "CapOne"
-          },
-          "nextFeeDate": "2023-09-06",
-          "signupBonus": "50,000 UR",
-          "spendBy": "2023-03-06",
-          "spendReq": "3000",
-          "status": "downgraded",
-          "userId": "bruno-fernandes"
         },
         "capone-savor-1-c780d5c3d36": {
           "annualFee": "95",
@@ -1485,32 +1442,6 @@
           "spendReq": 4000,
           "status": "closed",
           "userId": "anshu-thapa"
-        },
-        "chase-toosti-5-2a87d1a2a3a": {
-          "annualFee": "65",
-          "appDate": "2022-10-01",
-          "bonusEarnDate": "2023-08-10",
-          "bonusEarned": true,
-          "card": "POOPSI",
-          "cardType": "Personal",
-          "cardholder": "Bruno Fernandes",
-          "creditLine": "25000",
-          "id": "chase-toosti-5-2a87d1a2a3a",
-          "inquiries": {
-            "equifax": false,
-            "experian": true,
-            "transunion": true
-          },
-          "issuer": {
-            "img": "https://i.imgur.com/3xnhXZo.png",
-            "name": "Citi"
-          },
-          "nextFeeDate": "0024-01-12",
-          "signupBonus": "500",
-          "spendBy": "2024-02-03",
-          "spendReq": "300",
-          "status": "downgraded",
-          "userId": "bruno-fernandes"
         },
         "citi-aadvantage-plat-select-1-5e5a6ac0c78": {
           "annualFee": "95",
