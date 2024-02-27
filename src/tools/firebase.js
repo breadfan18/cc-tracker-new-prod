@@ -20,7 +20,19 @@ export const firebaseConfig = {
   measurementId: "G-34RE8T9GE9",
 };
 
-const app = initializeApp(firebaseConfig);
+export const firebaseTestConfig = {
+  apiKey: "AIzaSyDU34N5OsvpKodyplM_mYOmSw-_p0dlI3A",
+  authDomain: "cc-tracker-test.firebaseapp.com",
+  databaseURL: "https://cc-tracker-test-default-rtdb.firebaseio.com",
+  projectId: "cc-tracker-test",
+  storageBucket: "cc-tracker-test.appspot.com",
+  messagingSenderId: "462167618482",
+  appId: "1:462167618482:web:23d082063439e5206beaab",
+};
+
+export const isTest = process.env.REACT_APP_ENV_TEST === "test";
+
+const app = initializeApp(isTest ? firebaseTestConfig : firebaseConfig);
 export const db = getDatabase(app);
 
 // DATABASE FUNCTIONS

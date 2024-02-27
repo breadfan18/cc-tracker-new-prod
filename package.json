@@ -31,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:start": "REACT_APP_ENV_TEST=test react-scripts start",
     "eject": "react-scripts eject",
     "basedata": "tsc && node dist/tools/excelDataMigrator.js",
     "test-card": "tsc && node dist/ts/createTestCard.js"

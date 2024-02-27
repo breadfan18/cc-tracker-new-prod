@@ -7,14 +7,21 @@ import "./index.css";
 import configureStore from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 import { FirebaseAppProvider, AuthProvider } from "reactfire";
-import { auth, firebaseConfig } from "./tools/firebase";
+import {
+  auth,
+  firebaseConfig,
+  firebaseTestConfig,
+  isTest,
+} from "./tools/firebase";
 
 const store = configureStore();
 
 render(
   <ReduxProvider store={store}>
     <Router>
-      <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+      <FirebaseAppProvider
+        firebaseConfig={isTest ? firebaseTestConfig : firebaseConfig}
+      >
         <AuthProvider sdk={auth}>
           <App />
         </AuthProvider>
