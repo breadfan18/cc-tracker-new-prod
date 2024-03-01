@@ -15,6 +15,7 @@ import {
 import { formatDate } from "../../helpers";
 import { WindowWidthContext } from "../App";
 import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
+import CopyIcon from "../common/CopyIcon";
 
 const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
   const windowWidth = useContext(WindowWidthContext);
@@ -86,8 +87,14 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
                   {acc.program.name}
                 </a>
               </td>
-              <td>{acc.memberId}</td>
-              <td>{acc.loginId}</td>
+              <td>
+                <CopyIcon dataToCopy={acc.memberId} />
+                {acc.memberId}
+              </td>
+              <td>
+                <CopyIcon dataToCopy={acc.loginId} />
+                {acc.loginId}
+              </td>
               <td>{acc.password}</td>
               {windowWidth > 1030 && (
                 <td>{`${Number(acc.rewardsBalance || "0").toLocaleString()} ${

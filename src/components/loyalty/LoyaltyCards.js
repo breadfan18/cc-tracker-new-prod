@@ -48,6 +48,12 @@ export default function LoyaltyCards({ loyaltyData }) {
             <div>
               <LoyaltyCardText
                 account={acc}
+                dataType={LOYALTY_DATA_KEYS.memberId}
+                showCopyIcon
+                dataToCopy={acc.memberId}
+              />
+              <LoyaltyCardText
+                account={acc}
                 dataType={LOYALTY_DATA_KEYS.rewardsBalance}
               />
               <LoyaltyCardExpirationText
@@ -56,11 +62,9 @@ export default function LoyaltyCards({ loyaltyData }) {
               />
               <LoyaltyCardText
                 account={acc}
-                dataType={LOYALTY_DATA_KEYS.memberId}
-              />
-              <LoyaltyCardText
-                account={acc}
                 dataType={LOYALTY_DATA_KEYS.loginId}
+                showCopyIcon
+                dataToCopy={acc.loginId}
               />
               <LoyaltyCardText
                 account={acc}

@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { LOYALTY_DATA_KEYS } from "../../constants";
 import { formatDate } from "../../helpers";
+import CopyIcon from "../common/CopyIcon";
 
-function LoyaltyCardText({ account, dataType }) {
+function LoyaltyCardText({ account, dataType, showCopyIcon, dataToCopy }) {
   const setLoyaltyAccountType = (account, dataType) => {
     switch (dataType) {
       case LOYALTY_DATA_KEYS.memberId:
@@ -45,6 +46,7 @@ function LoyaltyCardText({ account, dataType }) {
         <b style={{ color: "black" }}>{loyaltyAccountType.fieldName}</b>
         {": "}
         {loyaltyAccountType.value}
+        {showCopyIcon && <CopyIcon dataToCopy={dataToCopy} />}
       </small>
     </p>
   );
