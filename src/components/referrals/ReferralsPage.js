@@ -12,6 +12,7 @@ import _ from "lodash";
 import { WindowWidthContext } from "../App";
 // import CardholderCards from "../cardholders/CardholderCards";
 import { calculateCurrentInquiries } from "../../helpers";
+import ReferralAddEditModal from "./ReferralAddEditModal";
 
 const ReferralsPage = () => {
   const windowWidth = useContext(WindowWidthContext);
@@ -35,10 +36,6 @@ const ReferralsPage = () => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
       dispatch(loadCardsFromFirebase(user.uid));
     }
-
-    if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
-      dispatch(loadloyaltyDataFromFirebase(user.uid));
-    }
   }, [user]);
 
   const cardsByHolder = _.groupBy(cards, (o) => o.userId);
@@ -57,7 +54,7 @@ const ReferralsPage = () => {
     <div className="cardHoldersContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Card Holders</h2>
-        <CardHolderAddEditModal />
+        <ReferralAddEditModal />
       </section>
       {loading ? (
         <Spinner />
@@ -89,5 +86,7 @@ THINGS TO DO
 - Setup firebase functions for referrals
 - Setup redux
 - Code the components
-
+- Create the referral add edit modal 
+- Create referral form
+- Referral form error handling
 */
