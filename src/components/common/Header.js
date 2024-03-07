@@ -66,6 +66,13 @@ const Header = ({ user }) => {
           >
             Card Holders
           </NavLink>
+          <NavLink
+            to="/referrals"
+            activeStyle={activeStyle}
+            onClick={() => setOpen(false)}
+          >
+            Referrals
+          </NavLink>
         </nav>
       )}
     </main>
@@ -86,6 +93,9 @@ const Header = ({ user }) => {
         </NavLink>
         <NavLink to="/card-holders" activeStyle={activeStyle}>
           Card Holders
+        </NavLink>
+        <NavLink to="/referrals" activeStyle={activeStyle}>
+          Referrals
         </NavLink>
       </nav>
       <UserProfileSection user={user} />
