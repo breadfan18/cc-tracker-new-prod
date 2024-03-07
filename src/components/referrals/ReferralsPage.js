@@ -63,10 +63,11 @@ const ReferralsPage = () => {
         <Spinner />
       ) : windowWidth > 950 ? (
         <ReferralsList
-          cardholders={cardholdersFinal}
-          cardsByHolder={cardsByHolder}
-          loyaltyByHolder={loyaltyByHolder}
-          inquiriesByHolder={inquiriesByHolder}
+          referrals={referrals}
+          // cardholders={cardholdersFinal}
+          // cardsByHolder={cardsByHolder}
+          // loyaltyByHolder={loyaltyByHolder}
+          // inquiriesByHolder={inquiriesByHolder}
         />
       ) : (
         // <CardholderCards
