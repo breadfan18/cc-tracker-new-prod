@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { loadloyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
+import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
 import { useUser } from "reactfire";
-import CardholdersList from "../cardholders/CardholdersList";
+import ReferralsList from "./ReferralsList";
 import { Spinner } from "../common/Spinner";
 import _ from "lodash";
 import { WindowWidthContext } from "../App";
-import CardholderCards from "../cardholders/CardholderCards";
+// import CardholderCards from "../cardholders/CardholderCards";
 import { calculateCurrentInquiries } from "../../helpers";
 
 const ReferralsPage = () => {
@@ -22,8 +23,12 @@ const ReferralsPage = () => {
   const loading = useSelector((state) => state.apiCallsInProgress > 0);
   const cards = useSelector((state) => state.cards);
   const loyaltyData = useSelector((state) => state.loyaltyData);
+  const referrals = useSelector((state) => state.referrals);
 
   useEffect(() => {
+    if (referrals.length === 0 && status !== "loading") {
+      dispatch(loadReferralsFromFirebase(user.uid));
+    }
     if (cardholders.length === 0 && status !== "loading") {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
@@ -54,36 +59,34 @@ const ReferralsPage = () => {
         <h2 style={{ marginBottom: 0 }}>Card Holders</h2>
         <CardHolderAddEditModal />
       </section>
-      <p
-        style={{
-          border: "1px solid gray",
-          padding: "10px",
-          borderRadius: "10px",
-          color: "gray",
-        }}
-      >
-        NOTE - Card Holders with existing cards or loyalty accounts cannot be
-        deleted. Please delete all their cards and/or loyalty accounts first.
-      </p>
       {loading ? (
         <Spinner />
       ) : windowWidth > 950 ? (
-        <CardholdersList
+        <ReferralsList
           cardholders={cardholdersFinal}
           cardsByHolder={cardsByHolder}
           loyaltyByHolder={loyaltyByHolder}
           inquiriesByHolder={inquiriesByHolder}
         />
       ) : (
-        <CardholderCards
-          cardholders={cardholdersFinal}
-          cardsByHolder={cardsByHolder}
-          loyaltyByHolder={loyaltyByHolder}
-          inquiriesByHolder={inquiriesByHolder}
-        />
+        // <CardholderCards
+        //   cardholders={cardholdersFinal}
+        //   cardsByHolder={cardsByHolder}
+        //   loyaltyByHolder={loyaltyByHolder}
+        //   inquiriesByHolder={inquiriesByHolder}
+        // />
+        <div>Referrals Cards</div>
       )}
     </div>
   );
 };
 
 export default ReferralsPage;
+
+/* 
+THINGS TO DO
+- Setup firebase functions for referrals
+- Setup redux
+- Code the components
+
+*/
