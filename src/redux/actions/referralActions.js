@@ -41,8 +41,6 @@ export function saveReferralToFirebase(referral, firebaseUid) {
     dispatch(beginApiCall());
 
     const referralId = referral.id === null ? `referral-${uid()}` : referral.id;
-
-    debugger;
     writeToFirebase("referrals", referral, referralId, firebaseUid);
     dispatch(createReferralSuccess(referral));
   };

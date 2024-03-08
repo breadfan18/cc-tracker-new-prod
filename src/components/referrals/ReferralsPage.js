@@ -53,7 +53,7 @@ const ReferralsPage = () => {
   return (
     <div className="cardHoldersContainer">
       <section className="sectionHeaders">
-        <h2 style={{ marginBottom: 0 }}>Card Holders</h2>
+        <h2 style={{ marginBottom: 0 }}>Referrals</h2>
         <ReferralAddEditModal />
       </section>
       {loading ? (
@@ -61,8 +61,8 @@ const ReferralsPage = () => {
       ) : windowWidth > 950 ? (
         <ReferralsList
           referrals={referrals}
-          // cardholders={cardholdersFinal}
-          // cardsByHolder={cardsByHolder}
+          cardholders={cardholdersFinal}
+          cardsByHolder={cardsByHolder}
           // loyaltyByHolder={loyaltyByHolder}
           // inquiriesByHolder={inquiriesByHolder}
         />

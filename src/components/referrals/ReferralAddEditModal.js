@@ -18,8 +18,9 @@ const NEW_REFERRAL = {
   id: null,
   referralBonus: null,
   referralLink: null,
-  referrer: null,
-  referringCard: null,
+  referrerId: null,
+  referringCardId: null,
+  referralBonusEarned: null,
 };
 function ReferralAddEditModal({ referral }) {
   const [referralForModal, setReferralForModal] = useState(
@@ -41,10 +42,9 @@ function ReferralAddEditModal({ referral }) {
 
     console.log({ name, value });
 
-    if (name === "referrer") {
+    if (name === "referrerId") {
       setFilteredCards(cards.filter((card) => card.userId === value));
     }
-
     setReferralForModal((prevValue) => ({
       ...prevValue,
       [name]: value,
@@ -75,8 +75,6 @@ function ReferralAddEditModal({ referral }) {
     // };
 
     console.log(referralForModal);
-
-    debugger;
     dispatch(saveReferralToFirebase(referralForModal, user?.uid));
 
     // const shouldUpdateCardsAndLoyalty =

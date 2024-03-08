@@ -9,12 +9,13 @@ import CardsDataMiniTable from "../cardholders/CardsDataMiniTable";
 import LoyaltyDataMiniTable from "../cardholders/LoyaltyDataMiniTable";
 import CardholderPhoto from "../cardholders/CardholderPhoto";
 import InquiriesMiniTable from "../cardholders/InquiriesMiniTable";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 const ReferralsList = ({
   referrals,
-  // cardsByHolder,
+  cardholders,
+  cardsByHolder,
   // loyaltyByHolder,
-  // cardholders,
   // inquiriesByHolder,
 }) => {
   return referrals.length === 0 ? (
@@ -31,16 +32,43 @@ const ReferralsList = ({
         </tr>
       </thead>
       <tbody className="align-middle">
-        {referrals.map((referral) => {
-          return (
-            <tr key={referral.id}>
-              <td>{referral.referrer}</td>
-              <td>{referral.referringCard}</td>
-              <td>{referral.referralLink}</td>
-              <td>{referral.referralBonus}</td>
-            </tr>
-          );
-        })}
+        {referrals.map(
+          ({
+            id,
+            referrerId,
+            referralLink,
+            referralBonus,
+            referringCardId,
+          }) => {
+            const cardsForReferrer = cardsByHolder[referrerId];
+
+            console.log(cardsForReferrer);
+            const referringCard = cardsForReferrer.find(
+              (card) => referringCardId === card.id
+            );
+
+            console.log(referringCard);
+            return (
+              <tr key={id}>
+                <td>
+                  {cardholders.find((holder) => holder.id === referrerId).name}
+                </td>
+                <td>
+                  <img
+                    className="issuerLogos"
+                    src={referringCard.issuer.img}
+                    alt=""
+                  />{" "}
+                  <Link to={`/card/${referringCard?.id}`}>
+                    {referringCard?.card}
+                  </Link>
+                </td>
+                <td>{referralLink}</td>
+                <td>{referralBonus}</td>
+              </tr>
+            );
+          }
+        )}
       </tbody>
     </Table>
   );

@@ -27,9 +27,9 @@ const ReferralForm = ({
         </div>
       )}
       <SelectInput
-        name="referrer"
+        name="referrerId"
         label="Referrer"
-        value={referral.referrer || ""}
+        value={referral.referrerId || ""}
         defaultOption="Select Referring User"
         options={cardholders.map((user) => ({
           value: user.id,
@@ -40,9 +40,9 @@ const ReferralForm = ({
         requiredField
       />
       <SelectInput
-        name="referringCard"
+        name="referringCardId"
         label="Referring Card"
-        value={referral.referringCard || ""}
+        value={referral.referringCardId || ""}
         defaultOption="Select Referring Card"
         options={filteredCards.map((card) => ({
           value: card.id,
