@@ -11,12 +11,14 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useUser } from "reactfire";
 import { DELETE_MODAL_TYPES } from "../../constants";
+import { deleteReferralFromFirebase } from "../../redux/actions/referralActions";
 function ConfirmDeleteModal({
   data,
   dataType,
   deleteCardFromFirebase,
   deleteLoyaltyDataFromFirebase,
   deleteCardholderFromFirebase,
+  deleteReferralFromFirebase,
   setModalOpen,
   redirect,
   disableBtn = false,
@@ -34,6 +36,8 @@ function ConfirmDeleteModal({
         return "loyalty account";
       case DELETE_MODAL_TYPES.cardholder:
         return "card holder";
+      case DELETE_MODAL_TYPES.referral:
+        return "referral";
       default:
         break;
     }
@@ -53,6 +57,10 @@ function ConfirmDeleteModal({
       case "cardholder":
         deleteCardholderFromFirebase(data, user?.uid);
         toast.success("Card Holder Deleted");
+        break;
+      case "referral":
+        deleteReferralFromFirebase(data, user?.uid);
+        toast.success("Referral Deleted");
         break;
       default:
         break;
@@ -119,6 +127,7 @@ const mapDispatchToProps = {
   deleteCardFromFirebase,
   deleteLoyaltyDataFromFirebase,
   deleteCardholderFromFirebase,
+  deleteReferralFromFirebase,
 };
 
 export default connect(null, mapDispatchToProps)(ConfirmDeleteModal);

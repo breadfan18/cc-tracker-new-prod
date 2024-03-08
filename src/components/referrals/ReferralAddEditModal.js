@@ -32,7 +32,7 @@ function ReferralAddEditModal({ referral }) {
   const toggleShow = () => setShow(!show);
   const [saving, setSaving] = useState(false);
   const { data: user } = useUser();
-  const cards = useSelector((state) => state.cards);
+  const cards = useSelector((state) => _.groupBy(state.cards, (o) => o.userId));
   const cardholders = useSelector((state) => state.cardholders);
   const [filteredCards, setFilteredCards] = useState([]);
   const [errors, setErrors] = useState({});
@@ -43,7 +43,7 @@ function ReferralAddEditModal({ referral }) {
     console.log({ name, value });
 
     if (name === "referrerId") {
-      setFilteredCards(cards.filter((card) => card.userId === value));
+      setFilteredCards(cards[value].filter((card) => card.status === "open"));
     }
     setReferralForModal((prevValue) => ({
       ...prevValue,
@@ -76,25 +76,6 @@ function ReferralAddEditModal({ referral }) {
 
     console.log(referralForModal);
     dispatch(saveReferralToFirebase(referralForModal, user?.uid));
-
-    // const shouldUpdateCardsAndLoyalty =
-    //   (referralForModal?.id !== null &&
-    //     referral?.name?.split(" ")[0] !== referralForModal.firstName) ||
-    //   referral?.name?.split(" ")[1] !== referralForModal.lastName;
-
-    // if (shouldUpdateCardsAndLoyalty) {
-    //   const cardsForThisHolder = cards[referralForModal.id];
-
-    //   if (cardsForThisHolder) {
-    //     cardsForThisHolder.forEach((card) => {
-    //       const updatedCard = {
-    //         ...card,
-    //         referral: finalCardholder.name,
-    //       };
-    //       dispatch(saveCardToFirebase(updatedCard, user?.uid));
-    //     });
-    //   }
-    // }
 
     toast.success(
       referralForModal?.id === null
