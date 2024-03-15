@@ -8,7 +8,7 @@ import ReferralsList from "./ReferralsList";
 import { Spinner } from "../common/Spinner";
 import _ from "lodash";
 import { WindowWidthContext } from "../App";
-import { calculateCurrentInquiries } from "../../helpers";
+import { calculateCurrentInquiries, sortReferralsByDate } from "../../helpers";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 
 const ReferralsPage = () => {
@@ -20,8 +20,9 @@ const ReferralsPage = () => {
   );
   const loading = useSelector((state) => state.apiCallsInProgress > 0);
   const cards = useSelector((state) => state.cards);
-  const loyaltyData = useSelector((state) => state.loyaltyData);
-  const referrals = useSelector((state) => state.referrals);
+  const referrals = useSelector((state) =>
+    sortReferralsByDate(state.referrals)
+  );
 
   useEffect(() => {
     if (referrals.length === 0 && status !== "loading") {
@@ -36,16 +37,6 @@ const ReferralsPage = () => {
   }, [user]);
 
   const cardsByHolder = _.groupBy(cards, (o) => o.userId);
-  const loyaltyByHolder = _.groupBy(loyaltyData, (o) => o.userId);
-  const inquiriesByHolder = calculateCurrentInquiries(cardsByHolder);
-
-  const cardholdersFinal = cardholders.map((holder) => {
-    return {
-      ...holder,
-      hasCards: cardsByHolder.hasOwnProperty(holder.id),
-      hasLoyalty: loyaltyByHolder.hasOwnProperty(holder.id),
-    };
-  });
 
   return (
     <div className="cardHoldersContainer">
@@ -58,10 +49,8 @@ const ReferralsPage = () => {
       ) : windowWidth > 950 ? (
         <ReferralsList
           referrals={referrals}
-          cardholders={cardholdersFinal}
+          cardholders={cardholders}
           cardsByHolder={cardsByHolder}
-          // loyaltyByHolder={loyaltyByHolder}
-          // inquiriesByHolder={inquiriesByHolder}
         />
       ) : (
         // <CardholderCards

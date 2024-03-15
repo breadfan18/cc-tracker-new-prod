@@ -9,14 +9,17 @@ import { MdModeEditOutline } from "react-icons/md";
 import { useUser } from "reactfire";
 import _ from "lodash";
 import ReferralForm from "./ReferralForm";
+import { REFERRAL_DATA_KEYS } from "../../constants";
 
 const NEW_REFERRAL = {
   id: null,
+  referralDate: null,
   referralBonus: null,
   referralLink: null,
   referrerId: null,
   referringCardId: null,
   referralBonusEarned: null,
+  referralEarnDate: null,
 };
 function ReferralAddEditModal({ referral }) {
   const [referralForModal, setReferralForModal] = useState(
@@ -34,14 +37,16 @@ function ReferralAddEditModal({ referral }) {
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, checked } = event.target;
 
-    if (name === "referrerId") {
+    console.log(name, value);
+
+    if (name === REFERRAL_DATA_KEYS.referrerId) {
       setFilteredCards(cards[value].filter((card) => card.status === "open"));
     }
     setReferralForModal((prevValue) => ({
       ...prevValue,
-      [name]: value,
+      [name]: name === REFERRAL_DATA_KEYS.referralBonusEarned ? checked : value,
     }));
   };
 

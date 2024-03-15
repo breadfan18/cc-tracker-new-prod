@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
-import { CARD_DATA_KEYS, REFERRAL_DATA_KEYS } from "../../constants";
+import { REFERRAL_DATA_KEYS } from "../../constants";
 import SelectInput from "../common/SelectInput";
 import { useSelector } from "react-redux";
+import DateInput from "../common/DateInput";
+import Form from "react-bootstrap/Form";
 
 const ReferralForm = ({
   referral,
@@ -43,6 +45,23 @@ const ReferralForm = ({
           {errors.onSave}
         </div>
       )}
+      <Form.Check
+        name={REFERRAL_DATA_KEYS.referralBonusEarned}
+        type="switch"
+        label="Earned"
+        value={referral.referralBonusEarned || null}
+        checked={referral.referralBonusEarned}
+        onChange={onChange}
+        style={{ float: "right" }}
+      />
+      <DateInput
+        name={REFERRAL_DATA_KEYS.referralDate}
+        label="Referral Date"
+        value={referral.referralDate}
+        onChange={onChange}
+        error={errors.referralDate}
+        requiredField
+      />
       <SelectInput
         name={REFERRAL_DATA_KEYS.referrerId}
         label="Referrer"
@@ -81,6 +100,15 @@ const ReferralForm = ({
         onChange={onChange}
         error={errors.referralBonus}
         requiredField
+      />
+      <DateInput
+        name={REFERRAL_DATA_KEYS.referralEarnDate}
+        label="Referral Earn Date"
+        value={referral.referralEarnDate}
+        onChange={onChange}
+        error={errors.referralEarnDate}
+        requiredField
+        disabled={!referral.referralBonusEarned}
       />
       <hr />
       <button

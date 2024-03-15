@@ -3,28 +3,18 @@ import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import CardHolderAddEditModal from "../cardholders/CardHolderAddEditModal";
-import { DELETE_MODAL_TYPES } from "../../constants";
-import CardsDataMiniTable from "../cardholders/CardsDataMiniTable";
-import LoyaltyDataMiniTable from "../cardholders/LoyaltyDataMiniTable";
-import CardholderPhoto from "../cardholders/CardholderPhoto";
-import InquiriesMiniTable from "../cardholders/InquiriesMiniTable";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import ReferralAddEditModal from "./ReferralAddEditModal";
+import { formatDate } from "../../helpers";
 
-const ReferralsList = ({
-  referrals,
-  cardholders,
-  cardsByHolder,
-  // loyaltyByHolder,
-  // inquiriesByHolder,
-}) => {
+const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
   return referrals.length === 0 ? (
     <EmptyList dataType={"referrals"} />
   ) : (
     <Table size="sm">
       <thead>
         <tr>
+          <th className="tableHeader">Referral Date</th>
           <th className="tableHeader">Referrer</th>
           <th className="tableHeader">Referring Card</th>
           <th className="tableHeader">Referral Link</th>
@@ -40,6 +30,7 @@ const ReferralsList = ({
             referralLink,
             referralBonus,
             referringCardId,
+            referralDate,
           } = referral;
           const cardsForReferrer = cardsByHolder[referrerId];
           const referringCard = cardsForReferrer.find(
@@ -48,6 +39,7 @@ const ReferralsList = ({
 
           return (
             <tr key={id}>
+              <td>{formatDate(referralDate)}</td>
               <td>
                 {cardholders.find((holder) => holder.id === referrerId).name}
               </td>
