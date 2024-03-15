@@ -6,6 +6,8 @@ import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 import { formatDate } from "../../helpers";
+import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
+import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 
 const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
   return referrals.length === 0 ? (
@@ -14,6 +16,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
     <Table size="sm">
       <thead>
         <tr>
+          <th className="tableHeader">Status</th>
           <th className="tableHeader">Referral Date</th>
           <th className="tableHeader">Referrer</th>
           <th className="tableHeader">Referring Card</th>
@@ -39,6 +42,26 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
 
           return (
             <tr key={id}>
+              <td>
+                <div
+                  style={{
+                    backgroundColor: referral.referralBonusEarned
+                      ? EDIT_COLOR_GREEN
+                      : APP_COLOR_BLUE,
+                    borderRadius: "0 15px 15px 0",
+                    padding: "5px 3px",
+                    maxWidth: "40px",
+                  }}
+                >
+                  {
+                    <BonusEarnStatusIcon
+                      bonusEarned={referral.referralBonusEarned}
+                      iconSize="2rem"
+                      inverseColor
+                    />
+                  }
+                </div>
+              </td>
               <td>{formatDate(referralDate)}</td>
               <td>
                 {cardholders.find((holder) => holder.id === referrerId).name}
