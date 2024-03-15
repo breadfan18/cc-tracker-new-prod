@@ -3,14 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveReferralToFirebase } from "../../redux/actions/referralActions";
-import { saveCardToFirebase } from "../../redux/actions/cardsActions";
-import { saveLoyaltyDataToFirebase } from "../../redux/actions/loyaltyActions";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { useUser } from "reactfire";
-import CardholderForm from "../loyalty/CardholderForm";
-import { titleCase } from "../../helpers";
 import _ from "lodash";
 import ReferralForm from "./ReferralForm";
 
@@ -40,8 +36,6 @@ function ReferralAddEditModal({ referral }) {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    console.log({ name, value });
-
     if (name === "referrerId") {
       setFilteredCards(cards[value].filter((card) => card.status === "open"));
     }
@@ -51,36 +45,25 @@ function ReferralAddEditModal({ referral }) {
     }));
   };
 
-  function formIsValid() {
-    const { firstName, lastName } = referralForModal;
-    const errors = {};
-    if (!firstName) errors.firstName = "Required";
-    if (!lastName) errors.lastName = "Required";
-    setErrors(errors);
-    // Form is valid if the errors objects has no properties
-    return Object.keys(errors).length === 0;
-  }
+  // function formIsValid() {
+  //   const { firstName, lastName } = referralForModal;
+  //   const errors = {};
+  //   if (!firstName) errors.firstName = "Required";
+  //   if (!lastName) errors.lastName = "Required";
+  //   setErrors(errors);
+  //   // Form is valid if the errors objects has no properties
+  //   return Object.keys(errors).length === 0;
+  // }
 
   const handleSaveReferral = async (e) => {
     e.preventDefault();
     // if (!formIsValid()) return;
     setSaving(true);
 
-    // const finalCardholder = {
-    //   name:
-    //     titleCase(referralForModal.firstName) +
-    //     " " +
-    //     titleCase(referralForModal.lastName),
-    //   id: referralForModal.id,
-    // };
-
-    console.log(referralForModal);
     dispatch(saveReferralToFirebase(referralForModal, user?.uid));
 
     toast.success(
-      referralForModal?.id === null
-        ? "Card Holder Created"
-        : "Card Holder Updated"
+      referralForModal?.id === null ? "Referral Created" : "Referral Updated"
     );
     toggleShow();
     setSaving(false);

@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
-import { CARD_DATA_KEYS } from "../../constants";
+import { CARD_DATA_KEYS, REFERRAL_DATA_KEYS } from "../../constants";
 import SelectInput from "../common/SelectInput";
+import { useSelector } from "react-redux";
 
 const ReferralForm = ({
   referral,
@@ -19,6 +20,22 @@ const ReferralForm = ({
     ? "Add Referral"
     : "Save Changes";
 
+  const cards = useSelector((state) => state.cards);
+  const filteredCardsToDisplay = referral.id
+    ? cards
+        .filter(
+          (card) =>
+            card.userId === referral.referrerId && card.status === "open"
+        )
+        .map((card) => ({
+          value: card.id,
+          text: `${card.issuer.name} - ${card.card}`,
+        }))
+    : filteredCards.map((card) => ({
+        value: card.id,
+        text: `${card.issuer.name} - ${card.card}`,
+      }));
+
   return (
     <form onSubmit={onSave} style={{ margin: 0 }}>
       {errors.onSave && (
@@ -27,7 +44,7 @@ const ReferralForm = ({
         </div>
       )}
       <SelectInput
-        name="referrerId"
+        name={REFERRAL_DATA_KEYS.referrerId}
         label="Referrer"
         value={referral.referrerId || ""}
         defaultOption="Select Referring User"
@@ -40,20 +57,17 @@ const ReferralForm = ({
         requiredField
       />
       <SelectInput
-        name="referringCardId"
+        name={REFERRAL_DATA_KEYS.referringCardId}
         label="Referring Card"
         value={referral.referringCardId || ""}
         defaultOption="Select Referring Card"
-        options={filteredCards.map((card) => ({
-          value: card.id,
-          text: `${card.issuer.name} - ${card.card}`,
-        }))}
+        options={filteredCardsToDisplay}
         onChange={onChange}
         error={errors.userId}
         requiredField
       />
       <TextInput
-        name="referralLink"
+        name={REFERRAL_DATA_KEYS.referralLink}
         label="Referral Link"
         value={referral.referralLink || ""}
         onChange={onChange}
@@ -61,7 +75,7 @@ const ReferralForm = ({
         requiredField
       />
       <TextInput
-        name="referralBonus"
+        name={REFERRAL_DATA_KEYS.referralBonus}
         label="Referral Bonus"
         value={referral.referralBonus || ""}
         onChange={onChange}

@@ -78,6 +78,13 @@ export const LOYALTY_DATA_KEYS = {
   rewardsExpiration: "rewardsExpiration",
 };
 
+export const REFERRAL_DATA_KEYS = {
+  referralBonus: "referralBonus",
+  referralLink: "referralLink",
+  referrerId: "referrerId",
+  referringCardId: "referringCardId",
+};
+
 export const ISSUERS = [
   { name: "Chase", img: "https://i.imgur.com/AsfYKFY.png" },
   { name: "Amex", img: "https://i.imgur.com/1XOuPt8.png" },

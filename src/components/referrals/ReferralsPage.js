@@ -1,16 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import CardHolderAddEditModal from "../cardholders/CardHolderAddEditModal";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
-import { loadloyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
 import { useUser } from "reactfire";
 import ReferralsList from "./ReferralsList";
 import { Spinner } from "../common/Spinner";
 import _ from "lodash";
 import { WindowWidthContext } from "../App";
-// import CardholderCards from "../cardholders/CardholderCards";
 import { calculateCurrentInquiries } from "../../helpers";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 
@@ -83,10 +80,10 @@ export default ReferralsPage;
 
 /* 
 THINGS TO DO
-- Setup firebase functions for referrals
-- Setup redux
-- Code the components
+- Setup firebase functions for referrals - DONE
+- Setup redux - DONE
 - Create the referral add edit modal 
 - Create referral form
+- Code the components
 - Referral form error handling
 */
