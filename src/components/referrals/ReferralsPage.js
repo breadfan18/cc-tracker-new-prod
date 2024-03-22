@@ -46,20 +46,12 @@ const ReferralsPage = () => {
       </section>
       {loading ? (
         <Spinner />
-      ) : windowWidth > 950 ? (
+      ) : (
         <ReferralsList
           referrals={referrals}
           cardholders={cardholders}
           cardsByHolder={cardsByHolder}
         />
-      ) : (
-        // <CardholderCards
-        //   cardholders={cardholdersFinal}
-        //   cardsByHolder={cardsByHolder}
-        //   loyaltyByHolder={loyaltyByHolder}
-        //   inquiriesByHolder={inquiriesByHolder}
-        // />
-        <div>Referrals Cards</div>
       )}
     </div>
   );
