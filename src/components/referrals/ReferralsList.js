@@ -33,7 +33,6 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
             id,
             referrerId,
             referralLink,
-            referralBonus,
             referringCardId,
             referralDate,
           } = referral;
