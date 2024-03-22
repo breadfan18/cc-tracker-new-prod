@@ -14,7 +14,7 @@ export default function BonusStatusAndEarnDate({
   isCard,
   inverseColor,
   iconSize,
-  isTourDetailsPage,
+  isCardDetailsPage,
 }) {
   const windowWidth = useContext(WindowWidthContext);
   const hasBonusEarnDate =
@@ -27,13 +27,13 @@ export default function BonusStatusAndEarnDate({
     : APP_COLOR_BLUE_OPACITY;
 
   useEffect(() => {
-    if (isTourDetailsPage && windowWidth < 500) {
+    if (isCardDetailsPage && windowWidth < 500) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
         "none"
       );
       document.documentElement.style.setProperty("--foo-right", "-8.5px");
-    } else if (isTourDetailsPage) {
+    } else if (isCardDetailsPage) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
         "block"
@@ -53,10 +53,10 @@ export default function BonusStatusAndEarnDate({
       style={{
         // "--bonus-info-container-bkgrd": backgroundColor,
         backgroundColor,
-        paddingRight: isTourDetailsPage && "27px",
+        paddingRight: isCardDetailsPage && "27px",
         padding: isCard && "5px",
         borderBottomRightRadius:
-          isTourDetailsPage && windowWidth < 500 && "15px",
+          isCardDetailsPage && windowWidth < 500 && "15px",
       }}
     >
       {isCard && (
