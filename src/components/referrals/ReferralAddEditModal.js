@@ -103,7 +103,7 @@ function ReferralAddEditModal({ referral }) {
         </Button>
       )}
 
-      <Modal show={show} onHide={toggleShow} centered size="sm">
+      <Modal show={show} onHide={toggleShow} centered>
         <Modal.Header className="modalHeader" closeButton>
           <Modal.Title>
             {referralForModal.id ? "Edit" : "Add"} Referral

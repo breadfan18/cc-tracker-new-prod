@@ -579,3 +579,12 @@ p {
   z-index: -1;
   display: var(--bonus-ribbon-effect);
 }
+
+#referralLink {
+  font-size: 2.4rem;
+  margin-right: 10px;
+  background: var(--light-gray);
+  border-radius: 60%;
+  padding: 5px;
+  color: var(--color-blue);
+}

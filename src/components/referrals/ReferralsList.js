@@ -8,6 +8,8 @@ import ReferralAddEditModal from "./ReferralAddEditModal";
 import { formatDate } from "../../helpers";
 import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
+import { FaLink } from "react-icons/fa6";
+import { FiExternalLink } from "react-icons/fi";
 
 const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
   return referrals.length === 0 ? (
@@ -20,9 +22,8 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
           <th className="tableHeader">Referral Date</th>
           <th className="tableHeader">Referrer</th>
           <th className="tableHeader">Referring Card</th>
-          <th className="tableHeader">Referral Link</th>
           <th className="tableHeader">Referral Bonus</th>
-          <th className="tableHeader"></th>
+          <th className="tableHeader">Referral Link | Edit | Delete</th>
         </tr>
       </thead>
       <tbody className="align-middle">
@@ -72,13 +73,16 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                   src={referringCard.issuer.img}
                   alt=""
                 />{" "}
+                {referringCard?.card}{" "}
                 <Link to={`/card/${referringCard?.id}`}>
-                  {referringCard?.card}
+                  <FiExternalLink style={{ color: APP_COLOR_BLUE }} />
                 </Link>
               </td>
-              <td>{referralLink}</td>
               <td>{referralBonus}</td>
               <td className="editDeleteCard">
+                <a href={referralLink} target="_blank" rel="noreferrer">
+                  <FaLink id="referralLink" />
+                </a>
                 <ReferralAddEditModal referral={referral} />
                 <ConfirmDeleteModal data={referral} dataType="referral" />
               </td>
