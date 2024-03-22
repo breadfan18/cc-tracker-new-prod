@@ -59,6 +59,12 @@ export function sortNotesByDate(notes) {
   return notes.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 }
 
+export function sortReferralsByDate(referrals) {
+  return [...referrals].sort(
+    (a, b) => Date.parse(b.referralDate) - Date.parse(a.referralDate)
+  );
+}
+
 export function titleCase(str) {
   return str
     .toLowerCase()

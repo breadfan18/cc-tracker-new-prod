@@ -102,7 +102,7 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
               isCard
               inverseColor
               iconSize="clamp(1.5rem, 10vw, 3rem)"
-              isTourDetailsPage
+              isCardDetailsPage
             />
           </article>
           <Card.Body>

@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import cards from "./cardsReducer";
 import loyaltyData from "./loyaltyReducer";
 import cardholders from "./cardholdersReducer";
+import referrals from "./referralsReducer";
 import apiCallsInProgress from "./apiStatusReducer";
 import { USER_LOGOUT_SUCCESS } from "../actions/actionTypes";
 
@@ -10,6 +11,7 @@ const appReducer = combineReducers({
   loyaltyData,
   apiCallsInProgress,
   cardholders,
+  referrals,
 });
 
 const rootReducer = (state, action) => {

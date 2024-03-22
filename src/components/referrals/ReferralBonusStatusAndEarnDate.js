@@ -8,42 +8,37 @@ import {
 } from "../../constants";
 import { WindowWidthContext } from "../App";
 
-export default function BonusStatusAndEarnDate({
-  card,
+export default function ReferralsBonusStatusAndEarnDate({
+  referral,
   isCardTitle,
   isCard,
   inverseColor,
   iconSize,
-  isCardDetailsPage,
+  // isCardDetailsPage,
 }) {
   const windowWidth = useContext(WindowWidthContext);
-  const hasBonusEarnDate =
-    card.bonusEarnDate?.includes("-") || card.bonusEarned;
+  const hasEarnDate =
+    referral.referralEarnDate?.includes("-") && referral.referralBonusEarned;
 
   const backgroundColor = !isCard
     ? "none"
-    : hasBonusEarnDate
+    : hasEarnDate
     ? EDIT_COLOR_GREEN_OPACITY
     : APP_COLOR_BLUE_OPACITY;
 
   useEffect(() => {
-    if (isCardDetailsPage && windowWidth < 500) {
+    if (windowWidth < 500) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
         "none"
       );
       document.documentElement.style.setProperty("--foo-right", "-8.5px");
-    } else if (isCardDetailsPage) {
-      document.documentElement.style.setProperty(
-        "--bonus-ribbon-effect",
-        "block"
-      );
     }
   }, [windowWidth]);
 
   const bonusStatusTextColor = inverseColor
     ? "white"
-    : hasBonusEarnDate
+    : hasEarnDate
     ? "green"
     : APP_COLOR_BLUE;
 
@@ -53,15 +48,14 @@ export default function BonusStatusAndEarnDate({
       style={{
         // "--bonus-info-container-bkgrd": backgroundColor,
         backgroundColor,
-        paddingRight: isCardDetailsPage && "27px",
+        // paddingRight: isCardDetailsPage && "27px",
         padding: isCard && "5px",
-        borderBottomRightRadius:
-          isCardDetailsPage && windowWidth < 500 && "15px",
+        borderBottomRightRadius: windowWidth < 500 && "15px",
       }}
     >
       {isCard && (
         <BonusEarnStatusIcon
-          bonusEarned={card.bonusEarned}
+          bonusEarned={referral.bonusEarned}
           iconSize={iconSize}
           inverseColor={inverseColor}
         />
@@ -73,11 +67,11 @@ export default function BonusStatusAndEarnDate({
             color: inverseColor ? "white" : "black",
           }}
         >
-          {card.signupBonus}{" "}
+          {referral.referralBonus}{" "}
         </p>
         <small style={{ color: bonusStatusTextColor, fontSize: "12px" }}>
-          {hasBonusEarnDate
-            ? `Earned ${formatDate(card.bonusEarnDate)}`
+          {hasEarnDate
+            ? `Earned ${formatDate(referral.referralEarnDate)}`
             : "Bonus In Progress"}
         </small>
       </div>

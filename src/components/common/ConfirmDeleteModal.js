@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { deleteCardFromFirebase } from "../../redux/actions/cardsActions";
@@ -11,12 +11,10 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useUser } from "reactfire";
 import { DELETE_MODAL_TYPES } from "../../constants";
-function ConfirmDeleteModal({
+import { deleteReferralFromFirebase } from "../../redux/actions/referralActions";
+export default function ConfirmDeleteModal({
   data,
   dataType,
-  deleteCardFromFirebase,
-  deleteLoyaltyDataFromFirebase,
-  deleteCardholderFromFirebase,
   setModalOpen,
   redirect,
   disableBtn = false,
@@ -25,6 +23,7 @@ function ConfirmDeleteModal({
   const toggleShow = () => setShow(!show);
   const history = useHistory();
   const { data: user } = useUser();
+  const dispatch = useDispatch();
 
   function setDataText() {
     switch (dataType) {
@@ -34,6 +33,8 @@ function ConfirmDeleteModal({
         return "loyalty account";
       case DELETE_MODAL_TYPES.cardholder:
         return "card holder";
+      case DELETE_MODAL_TYPES.referral:
+        return "referral";
       default:
         break;
     }
@@ -42,17 +43,21 @@ function ConfirmDeleteModal({
   function handleDelete(data) {
     switch (dataType) {
       case "card":
-        deleteCardFromFirebase(data, user?.uid);
+        dispatch(deleteCardFromFirebase(data, user?.uid));
         toast.success("Card deleted");
         if (redirect) history.push("/cards");
         break;
       case "loyaltyAcc":
-        deleteLoyaltyDataFromFirebase(data, user?.uid);
+        dispatch(deleteLoyaltyDataFromFirebase(data, user?.uid));
         toast.success("Loyalty Account Deleted");
         break;
       case "cardholder":
-        deleteCardholderFromFirebase(data, user?.uid);
+        dispatch(deleteCardholderFromFirebase(data, user?.uid));
         toast.success("Card Holder Deleted");
+        break;
+      case "referral":
+        dispatch(deleteReferralFromFirebase(data, user?.uid));
+        toast.success("Referral Deleted");
         break;
       default:
         break;
@@ -108,17 +113,6 @@ function ConfirmDeleteModal({
 ConfirmDeleteModal.propTypes = {
   data: PropTypes.object.isRequired,
   dataType: PropTypes.string.isRequired,
-  deleteCardFromFirebase: PropTypes.func.isRequired,
-  deleteLoyaltyDataFromFirebase: PropTypes.func.isRequired,
-  deleteCardholderFromFirebase: PropTypes.func.isRequired,
   setModalOpen: PropTypes.func || undefined,
   redirect: PropTypes.bool,
 };
-
-const mapDispatchToProps = {
-  deleteCardFromFirebase,
-  deleteLoyaltyDataFromFirebase,
-  deleteCardholderFromFirebase,
-};
-
-export default connect(null, mapDispatchToProps)(ConfirmDeleteModal);

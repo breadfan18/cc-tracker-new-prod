@@ -3,6 +3,7 @@ const initialState = {
   loyaltyData: [],
   apiCallsInProgress: 0,
   cardholders: [],
+  referrals: [],
 };
 
 export default initialState;

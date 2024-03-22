@@ -78,6 +78,16 @@ export const LOYALTY_DATA_KEYS = {
   rewardsExpiration: "rewardsExpiration",
 };
 
+export const REFERRAL_DATA_KEYS = {
+  referralDate: "referralDate",
+  referralBonus: "referralBonus",
+  referralLink: "referralLink",
+  referrerId: "referrerId",
+  referringCardId: "referringCardId",
+  referralBonusEarned: "referralBonusEarned",
+  referralEarnDate: "referralEarnDate",
+};
+
 export const ISSUERS = [
   { name: "Chase", img: "https://i.imgur.com/AsfYKFY.png" },
   { name: "Amex", img: "https://i.imgur.com/1XOuPt8.png" },
@@ -318,6 +328,7 @@ export const DELETE_MODAL_TYPES = {
   card: "card",
   loyaltyAcc: "loyaltyAcc",
   cardholder: "cardholder",
+  referral: "referral",
 };
 
 export const CARDHOLDER_STOCK_IMG = "https://i.imgur.com/JFgA7EB.png";

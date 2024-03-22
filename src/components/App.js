@@ -16,6 +16,7 @@ import TestPage from "./testing/TestPage";
 import Login from "./login/Login";
 import { Spinner } from "./common/Spinner";
 import { useSigninCheck } from "reactfire";
+import ReferralsPage from "./referrals/ReferralsPage";
 export const WindowWidthContext = createContext();
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
             <Route path="/loyalty-accounts" component={LoyaltyPage} />
             <Route path="/loyalty/:id" component={ManageLoyaltyPage} />
             <Route path="/loyalty" component={ManageLoyaltyPage} />
+            <Route path="/referrals" component={ReferralsPage} />
             <Route path="/use-effect" component={Test} />
             <Route path="/test" component={TestPage} />
             <Route component={PageNotFound} />
