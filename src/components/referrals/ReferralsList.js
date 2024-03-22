@@ -10,6 +10,7 @@ import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
+import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 
 const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
   return referrals.length === 0 ? (
@@ -78,7 +79,9 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                   <FiExternalLink style={{ color: APP_COLOR_BLUE }} />
                 </Link>
               </td>
-              <td>{referralBonus}</td>
+              <td>
+                <ReferralsBonusStatusAndEarnDate referral={referral} />
+              </td>
               <td className="editDeleteCard">
                 <a href={referralLink} target="_blank" rel="noreferrer">
                   <FaLink id="referralLink" />
