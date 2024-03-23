@@ -588,3 +588,8 @@ p {
   padding: 5px;
   color: var(--color-blue);
 }
+
+.linkDisabled {
+  pointer-events: none;
+  cursor: default;
+}

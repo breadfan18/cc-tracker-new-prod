@@ -86,8 +86,16 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                 <ReferralsBonusStatusAndEarnDate referral={referral} />
               </td>
               <td className="editDeleteCard">
-                <a href={referralLink} target="_blank" rel="noreferrer">
-                  <FaLink id="referralLink" />
+                <a
+                  href={referralLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={referralLink === "" && "linkDisabled"}
+                >
+                  <FaLink
+                    id="referralLink"
+                    style={{ color: referralLink === "" && "gray" }}
+                  />
                 </a>
                 <ReferralAddEditModal referral={referral} />
                 <ConfirmDeleteModal data={referral} dataType="referral" />
