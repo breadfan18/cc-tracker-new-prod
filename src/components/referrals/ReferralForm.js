@@ -90,7 +90,7 @@ const ReferralForm = ({
         value={referral.referredCard || ""}
         onChange={onChange}
         error={errors.referredCard}
-        requiredField={referral.issuer.name && true}
+        // requiredField={referral.issuer.name && true}
       />
       <SelectInput
         name={REFERRAL_DATA_KEYS.referrerId}
