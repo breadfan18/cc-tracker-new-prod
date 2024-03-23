@@ -20,6 +20,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
       <thead>
         <tr>
           <th className="tableHeader">Referral For</th>
+          <th className="tableHeader">Card</th>
           <th className="tableHeader">Referral Date</th>
           <th className="tableHeader">Referrer</th>
           <th className="tableHeader">Referring Card</th>
@@ -32,10 +33,12 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
           const {
             id,
             referralFor,
+            referredCard,
             referrerId,
             referralLink,
             referringCardId,
             referralDate,
+            issuer,
           } = referral;
           const cardsForReferrer = cardsByHolder[referrerId];
           const referringCard = cardsForReferrer.find(
@@ -66,6 +69,21 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                   }
                   <p style={{ marginLeft: "5px" }}>{titleCase(referralFor)}</p>
                 </div>
+              </td>
+              <td>
+                {!referredCard || referredCard === "" ? (
+                  "Unknown"
+                ) : (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      className="issuerLogos"
+                      src={issuer.img}
+                      alt=""
+                      style={{ marginRight: "4px" }}
+                    />
+                    <p>{referredCard}</p>
+                  </div>
+                )}
               </td>
               <td>{formatDate(referralDate)}</td>
               <td>

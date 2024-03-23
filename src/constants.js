@@ -81,6 +81,8 @@ export const LOYALTY_DATA_KEYS = {
 export const REFERRAL_DATA_KEYS = {
   referralFor: "referralFor",
   referralDate: "referralDate",
+  issuer: "issuer",
+  referredCard: "referredCard",
   referralBonus: "referralBonus",
   referralLink: "referralLink",
   referrerId: "referrerId",

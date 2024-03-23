@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
-import { DELETE_COLOR_RED, REFERRAL_DATA_KEYS } from "../../constants";
+import { DELETE_COLOR_RED, ISSUERS, REFERRAL_DATA_KEYS } from "../../constants";
 import SelectInput from "../common/SelectInput";
 import { useSelector } from "react-redux";
 import DateInput from "../common/DateInput";
@@ -69,6 +69,27 @@ const ReferralForm = ({
         value={referral.referralDate}
         onChange={onChange}
         error={errors.referralDate}
+        requiredField
+      />
+      <SelectInput
+        name={REFERRAL_DATA_KEYS.issuer}
+        label="Issuer"
+        value={referral.issuer.name || ""}
+        defaultOption="Select Issuer"
+        options={ISSUERS.map((issuer) => ({
+          value: issuer.name,
+          text: issuer.name,
+        }))}
+        onChange={onChange}
+        error={errors.issuer}
+        requiredField
+      />
+      <TextInput
+        name={REFERRAL_DATA_KEYS.referredCard}
+        label="Card"
+        value={referral.referredCard || ""}
+        onChange={onChange}
+        error={errors.referredCard}
         requiredField
       />
       <SelectInput

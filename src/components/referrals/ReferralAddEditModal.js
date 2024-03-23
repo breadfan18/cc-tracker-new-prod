@@ -9,12 +9,17 @@ import { MdModeEditOutline } from "react-icons/md";
 import { useUser } from "reactfire";
 import _ from "lodash";
 import ReferralForm from "./ReferralForm";
-import { REFERRAL_DATA_KEYS } from "../../constants";
+import { ISSUERS, REFERRAL_DATA_KEYS } from "../../constants";
 
 const NEW_REFERRAL = {
   id: null,
   referralFor: null,
   referralDate: null,
+  issuer: {
+    name: null,
+    img: null,
+  },
+  referredCard: null,
   referralBonus: null,
   referralLink: null,
   referrerId: null,
@@ -44,14 +49,17 @@ function ReferralAddEditModal({ referral }) {
       delete errors[name];
     }
 
-    console.log(name, value);
-
     if (name === REFERRAL_DATA_KEYS.referrerId) {
       setFilteredCards(cards[value].filter((card) => card.status === "open"));
     }
     setReferralForModal((prevValue) => ({
       ...prevValue,
-      [name]: name === REFERRAL_DATA_KEYS.referralBonusEarned ? checked : value,
+      [name]:
+        name === REFERRAL_DATA_KEYS.referralBonusEarned
+          ? checked
+          : name === "issuer"
+          ? ISSUERS.find((issuer) => issuer.name === value)
+          : value,
     }));
   };
 

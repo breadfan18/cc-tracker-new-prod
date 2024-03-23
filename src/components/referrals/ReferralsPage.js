@@ -39,7 +39,7 @@ const ReferralsPage = () => {
   const cardsByHolder = _.groupBy(cards, (o) => o.userId);
 
   return (
-    <div className="cardHoldersContainer">
+    <div style={{ maxWidth: "1600px", margin: "0 auto" }}>
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Referrals</h2>
         <ReferralAddEditModal />
