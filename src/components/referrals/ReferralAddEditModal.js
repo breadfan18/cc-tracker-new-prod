@@ -40,6 +40,10 @@ function ReferralAddEditModal({ referral }) {
   const handleChange = (event) => {
     const { name, value, checked } = event.target;
 
+    if (value !== "" || value !== null) {
+      delete errors[name];
+    }
+
     console.log(name, value);
 
     if (name === REFERRAL_DATA_KEYS.referrerId) {
@@ -51,19 +55,32 @@ function ReferralAddEditModal({ referral }) {
     }));
   };
 
-  // function formIsValid() {
-  //   const { firstName, lastName } = referralForModal;
-  //   const errors = {};
-  //   if (!firstName) errors.firstName = "Required";
-  //   if (!lastName) errors.lastName = "Required";
-  //   setErrors(errors);
-  //   // Form is valid if the errors objects has no properties
-  //   return Object.keys(errors).length === 0;
-  // }
+  function formIsValid() {
+    const {
+      referralFor,
+      referralDate,
+      referralBonus,
+      referrerId,
+      referringCardId,
+      referralBonusEarned,
+      referralEarnDate,
+    } = referralForModal;
+    const errors = {};
+    if (!referralFor) errors.referralFor = "Required";
+    if (!referralDate) errors.referralDate = "Required";
+    if (!referrerId) errors.referrerId = "Required";
+    if (!referringCardId) errors.referringCardId = "Required";
+    if (!referralBonus) errors.referralBonus = "Required";
+    if (referralBonusEarned && !referralEarnDate)
+      errors.referralEarnDate = "Required";
+    setErrors(errors);
+    // Form is valid if the errors objects has no properties
+    return Object.keys(errors).length === 0;
+  }
 
   const handleSaveReferral = async (e) => {
     e.preventDefault();
-    // if (!formIsValid()) return;
+    if (!formIsValid()) return;
     setSaving(true);
 
     dispatch(saveReferralToFirebase(referralForModal, user?.uid));

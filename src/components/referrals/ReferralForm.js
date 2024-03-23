@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
-import { REFERRAL_DATA_KEYS } from "../../constants";
+import { DELETE_COLOR_RED, REFERRAL_DATA_KEYS } from "../../constants";
 import SelectInput from "../common/SelectInput";
 import { useSelector } from "react-redux";
 import DateInput from "../common/DateInput";
 import Form from "react-bootstrap/Form";
+import { isEmpty } from "lodash";
 
 const ReferralForm = ({
   referral,
@@ -40,9 +41,9 @@ const ReferralForm = ({
 
   return (
     <form onSubmit={onSave} style={{ margin: 0 }}>
-      {errors.onSave && (
-        <div className="alert alert-danger" role="alert">
-          {errors.onSave}
+      {!isEmpty(errors) && (
+        <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
+          Please fill out required fields
         </div>
       )}
       <Form.Check
@@ -80,7 +81,7 @@ const ReferralForm = ({
           text: user.name,
         }))}
         onChange={onChange}
-        error={errors.userId}
+        error={errors.referrerId}
         requiredField
       />
       <SelectInput
@@ -90,7 +91,7 @@ const ReferralForm = ({
         defaultOption="Select Referring Card"
         options={filteredCardsToDisplay}
         onChange={onChange}
-        error={errors.userId}
+        error={errors.referringCardId}
         requiredField
       />
       <TextInput
@@ -98,8 +99,8 @@ const ReferralForm = ({
         label="Referral Link"
         value={referral.referralLink || ""}
         onChange={onChange}
-        error={errors.referralLink}
-        requiredField
+        // error={errors.referralLink}
+        // requiredField
       />
       <TextInput
         name={REFERRAL_DATA_KEYS.referralBonus}
@@ -115,8 +116,8 @@ const ReferralForm = ({
         value={referral.referralEarnDate}
         onChange={onChange}
         error={errors.referralEarnDate}
-        requiredField
         disabled={!referral.referralBonusEarned}
+        requiredField={referral.referralBonusEarned}
       />
       <hr />
       <button
