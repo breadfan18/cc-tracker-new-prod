@@ -74,7 +74,7 @@ const ReferralForm = ({
       <SelectInput
         name={REFERRAL_DATA_KEYS.issuer}
         label="Issuer"
-        value={referral.issuer.name || ""}
+        value={""}
         defaultOption="Select Issuer"
         options={ISSUERS.map((issuer) => ({
           value: issuer.name,
