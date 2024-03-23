@@ -54,6 +54,14 @@ const ReferralForm = ({
         onChange={onChange}
         style={{ float: "right" }}
       />
+      <TextInput
+        name={REFERRAL_DATA_KEYS.referralFor}
+        label="Referral For"
+        value={referral.referralFor || ""}
+        onChange={onChange}
+        error={errors.referralFor}
+        requiredField
+      />
       <DateInput
         name={REFERRAL_DATA_KEYS.referralDate}
         label="Referral Date"

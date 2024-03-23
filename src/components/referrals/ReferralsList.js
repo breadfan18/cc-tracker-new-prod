@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import ReferralAddEditModal from "./ReferralAddEditModal";
-import { formatDate } from "../../helpers";
+import { formatDate, titleCase } from "../../helpers";
 import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { FaLink } from "react-icons/fa6";
@@ -19,7 +19,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
     <Table size="sm">
       <thead>
         <tr>
-          <th className="tableHeader">Status</th>
+          <th className="tableHeader">Referral For</th>
           <th className="tableHeader">Referral Date</th>
           <th className="tableHeader">Referrer</th>
           <th className="tableHeader">Referring Card</th>
@@ -31,6 +31,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
         {referrals.map((referral) => {
           const {
             id,
+            referralFor,
             referrerId,
             referralLink,
             referringCardId,
@@ -43,7 +44,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
 
           return (
             <tr key={id}>
-              <td>
+              <td style={{ paddingRight: "15px" }}>
                 <div
                   style={{
                     backgroundColor: referral.referralBonusEarned
@@ -51,7 +52,9 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                       : APP_COLOR_BLUE,
                     borderRadius: "0 15px 15px 0",
                     padding: "5px 3px",
-                    maxWidth: "40px",
+                    display: "flex",
+                    color: "white",
+                    alignItems: "center",
                   }}
                 >
                   {
@@ -61,6 +64,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                       inverseColor
                     />
                   }
+                  <p style={{ marginLeft: "5px" }}>{titleCase(referralFor)}</p>
                 </div>
               </td>
               <td>{formatDate(referralDate)}</td>

@@ -13,6 +13,7 @@ import { REFERRAL_DATA_KEYS } from "../../constants";
 
 const NEW_REFERRAL = {
   id: null,
+  referralFor: null,
   referralDate: null,
   referralBonus: null,
   referralLink: null,
