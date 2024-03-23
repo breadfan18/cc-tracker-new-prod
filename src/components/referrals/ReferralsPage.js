@@ -58,13 +58,3 @@ const ReferralsPage = () => {
 };
 
 export default ReferralsPage;
-
-/* 
-THINGS TO DO
-- Setup firebase functions for referrals - DONE
-- Setup redux - DONE
-- Create referral form - DONE
-- Create the referral add edit modal  - DONE
-- Code the components 
-- Referral form error handling
-*/

@@ -72,6 +72,8 @@ function ReferralAddEditModal({ referral }) {
       referringCardId,
       referralBonusEarned,
       referralEarnDate,
+      issuer,
+      referredCard,
     } = referralForModal;
     const errors = {};
     if (!referralFor) errors.referralFor = "Required";
@@ -81,6 +83,7 @@ function ReferralAddEditModal({ referral }) {
     if (!referralBonus) errors.referralBonus = "Required";
     if (referralBonusEarned && !referralEarnDate)
       errors.referralEarnDate = "Required";
+    if (issuer.name && !referredCard) errors.referredCard = "Required";
     setErrors(errors);
     // Form is valid if the errors objects has no properties
     return Object.keys(errors).length === 0;
