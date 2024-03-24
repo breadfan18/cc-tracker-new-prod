@@ -5,9 +5,8 @@ import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import ReferralAddEditModal from "./ReferralAddEditModal";
-import { formatDate, titleCase } from "../../helpers";
-import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
-import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
+import { formatDate } from "../../helpers";
+import { APP_COLOR_BLUE } from "../../constants";
 import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
@@ -33,7 +32,6 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
         {referrals.map((referral) => {
           const {
             id,
-            referralFor,
             referredCard,
             referrerId,
             referralLink,
