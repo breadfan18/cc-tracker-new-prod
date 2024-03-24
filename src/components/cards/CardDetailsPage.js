@@ -1,14 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
-import {
-  loadCardsFromFirebase,
-  saveCardToFirebase,
-} from "../../redux/actions/cardsActions";
+import React, { useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
-import PropTypes from "prop-types";
 import { Spinner } from "../common/Spinner";
 import {
-  NEW_CARD,
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_BLUE,
   DELETE_MODAL_TYPES,
@@ -32,16 +27,17 @@ import { useUser } from "reactfire";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import CardReferrals from "./CardReferrals";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-function CardDetailsPage({ ...props }) {
-  const [card, setCard] = useState({ ...props.card });
+
+function CardDetailsPage() {
+  const { id } = useParams();
+  const cards = useSelector((state) => state.cards);
+  const card = getCardById(cards, id);
   const windowWidth = useContext(WindowWidthContext);
   const { status, data: user } = useUser();
-  const cards = useSelector((state) => state.cards);
   const referrals = useSelector((state) => state.referrals);
   const referralsForThisCard = referrals.filter(
     (referral) => referral.referringCardId === card.id
   );
-  const { id } = useParams();
   const dispatch = useDispatch();
   const loading = useSelector(
     (state) => state.apiCallsInProgress > 0 || state.cards.length === 0
@@ -52,10 +48,12 @@ function CardDetailsPage({ ...props }) {
       dispatch(loadCardsFromFirebase(user?.uid));
     } else if (referrals.length === 0 && status === "success") {
       dispatch(loadReferralsFromFirebase(user?.uid));
-    } else {
-      setCard(id && cards.length > 0 ? getCardById(cards, id) : NEW_CARD);
     }
-  }, [props.card, user, referrals]);
+  }, [card, user, referrals]);
+
+  function getCardById(cards, id) {
+    return cards?.find((card) => card.id === id) || null;
+  }
 
   return loading ? (
     <Spinner />
@@ -64,7 +62,7 @@ function CardDetailsPage({ ...props }) {
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Card Details</h2>
         <div className="editDeleteCard">
-          <CardAddEditModal card={props.card} />
+          <CardAddEditModal card={card} />
           <ConfirmDeleteModal
             data={card}
             dataType={DELETE_MODAL_TYPES.card}
@@ -129,7 +127,7 @@ function CardDetailsPage({ ...props }) {
                   >
                     App Date:
                   </td>
-                  <td>{formatDate(props.card.appDate)}</td>
+                  <td>{formatDate(card.appDate)}</td>
                 </tr>
                 <tr>
                   <td
@@ -157,8 +155,8 @@ function CardDetailsPage({ ...props }) {
                     Next Fee Date:
                   </td>
                   <td>
-                    {props.card.nextFeeDate !== ""
-                      ? formatDate(props.card.nextFeeDate)
+                    {card.nextFeeDate !== ""
+                      ? formatDate(card.nextFeeDate)
                       : "N/A"}
                   </td>
                 </tr>
@@ -197,9 +195,7 @@ function CardDetailsPage({ ...props }) {
                     Spend By:
                   </td>
                   <td>
-                    {props.card.spendBy !== ""
-                      ? formatDate(props.card.spendBy)
-                      : "N/A"}
+                    {card.spendBy !== "" ? formatDate(card.spendBy) : "N/A"}
                   </td>
                 </tr>
                 <tr>
@@ -209,7 +205,7 @@ function CardDetailsPage({ ...props }) {
                   >
                     Card Status:
                   </td>
-                  <td>{titleCase(props.card.status)}</td>
+                  <td>{titleCase(card.status)}</td>
                 </tr>
               </tbody>
             </Table>
@@ -230,37 +226,4 @@ function CardDetailsPage({ ...props }) {
   );
 }
 
-CardDetailsPage.propTypes = {
-  card: PropTypes.object.isRequired,
-  cards: PropTypes.array.isRequired,
-  loadCardsFromFirebase: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
-
-export function getCardById(cards, id) {
-  return cards.find((card) => card.id === id) || null;
-}
-
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.id;
-
-  const card =
-    id && state.cards.length > 0 ? getCardById(state.cards, id) : NEW_CARD;
-
-  return {
-    card,
-    cards: state.cards,
-    loading: state.apiCallsInProgress > 0 || state.cards.length === 0,
-  };
-}
-
-const mapDispatchToProps = {
-  // loadCardsFromFirebase,
-  // saveCardToFirebase,
-  // loadReferralsFromFirebase,
-  // loadCardsFromFirebase,
-  // saveCardToFirebase,
-  // loadReferralsFromFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardDetailsPage);
+export default CardDetailsPage;
