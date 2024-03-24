@@ -8,6 +8,7 @@ import CardsByUserDropDown from "./CardsByUserDropDown";
 import CardAddEditModal from "./CardAddEditModal";
 import { WindowWidthContext } from "../App";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
+import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
 import { useUser } from "reactfire";
 
 const CardsPage = () => {
@@ -17,6 +18,7 @@ const CardsPage = () => {
   const cardholders = useSelector((state) => state.cardholders);
   const cards = useSelector((state) => sortCardsByDate(state.cards));
   const loading = useSelector((state) => state.apiCallsInProgress > 0);
+  const referrals = useSelector((state) => state.referrals);
 
   useEffect(() => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
@@ -25,6 +27,10 @@ const CardsPage = () => {
 
     if (cardholders.length === 0 && user) {
       dispatch(loadCardholdersFromFirebase(user.uid));
+    }
+
+    if (referrals.length === 0 && user) {
+      dispatch(loadReferralsFromFirebase(user.uid));
     }
   }, [status, user, cardholders]);
 

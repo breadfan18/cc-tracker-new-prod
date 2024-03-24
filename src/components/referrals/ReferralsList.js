@@ -11,6 +11,7 @@ import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
+import ReferralForField from "./ReferralForField";
 
 const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
   return referrals.length === 0 ? (
@@ -48,27 +49,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
           return (
             <tr key={id}>
               <td style={{ paddingRight: "15px" }}>
-                <div
-                  style={{
-                    backgroundColor: referral.referralBonusEarned
-                      ? EDIT_COLOR_GREEN
-                      : APP_COLOR_BLUE,
-                    borderRadius: "0 15px 15px 0",
-                    padding: "5px 3px",
-                    display: "flex",
-                    color: "white",
-                    alignItems: "center",
-                  }}
-                >
-                  {
-                    <BonusEarnStatusIcon
-                      bonusEarned={referral.referralBonusEarned}
-                      iconSize="2rem"
-                      inverseColor
-                    />
-                  }
-                  <p style={{ marginLeft: "5px" }}>{titleCase(referralFor)}</p>
-                </div>
+                <ReferralForField referral={referral} />
               </td>
               <td>
                 {!referredCard || referredCard === "" ? (

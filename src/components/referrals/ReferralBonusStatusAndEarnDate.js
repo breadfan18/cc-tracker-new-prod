@@ -14,7 +14,6 @@ export default function ReferralsBonusStatusAndEarnDate({
   isCard,
   inverseColor,
   iconSize,
-  // isCardDetailsPage,
 }) {
   const windowWidth = useContext(WindowWidthContext);
   const hasEarnDate =

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import {
   loadCardsFromFirebase,
   saveCardToFirebase,
 } from "../../redux/actions/cardsActions";
+import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
 import PropTypes from "prop-types";
 import { Spinner } from "../common/Spinner";
 import {
@@ -29,19 +30,32 @@ import { CardReminderContainer } from "./CardReminderContainer";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import { useUser } from "reactfire";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
-function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
+import CardReferrals from "./CardReferrals";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+function CardDetailsPage({ ...props }) {
   const [card, setCard] = useState({ ...props.card });
   const windowWidth = useContext(WindowWidthContext);
   const { status, data: user } = useUser();
+  const cards = useSelector((state) => state.cards);
+  const referrals = useSelector((state) => state.referrals);
+  const referralsForThisCard = referrals.filter(
+    (referral) => referral.referringCardId === card.id
+  );
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const loading = useSelector(
+    (state) => state.apiCallsInProgress > 0 || state.cards.length === 0
+  );
 
   useEffect(() => {
     if (cards.length === 0 && status === "success") {
-      loadCardsFromFirebase(user?.uid);
+      dispatch(loadCardsFromFirebase(user?.uid));
+    } else if (referrals.length === 0 && status === "success") {
+      dispatch(loadReferralsFromFirebase(user?.uid));
     } else {
-      // Need to understand this logic..
-      setCard({ ...props.card });
+      setCard(id && cards.length > 0 ? getCardById(cards, id) : NEW_CARD);
     }
-  }, [props.card, user]);
+  }, [props.card, user, referrals]);
 
   return loading ? (
     <Spinner />
@@ -207,6 +221,9 @@ function CardDetailsPage({ cards, loadCardsFromFirebase, loading, ...props }) {
             cardNotes={sortNotesByDate(_.values(card.cardNotes))}
           />
           <CardReminderContainer card={card} />
+          {referralsForThisCard.length > 0 && (
+            <CardReferrals cardReferrals={referralsForThisCard} />
+          )}
         </div>
       </div>
     </div>
@@ -238,8 +255,12 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  loadCardsFromFirebase,
-  saveCardToFirebase,
+  // loadCardsFromFirebase,
+  // saveCardToFirebase,
+  // loadReferralsFromFirebase,
+  // loadCardsFromFirebase,
+  // saveCardToFirebase,
+  // loadReferralsFromFirebase,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardDetailsPage);
