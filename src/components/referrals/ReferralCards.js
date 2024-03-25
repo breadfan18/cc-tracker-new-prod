@@ -83,7 +83,7 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
     );
   });
   return referrals.length === 0 ? (
-    <EmptyList dataType={"card"} />
+    <EmptyList dataType={"referral"} />
   ) : (
     <div id="cardCardContainer">{referralsData}</div>
   );
