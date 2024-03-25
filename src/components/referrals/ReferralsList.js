@@ -6,13 +6,14 @@ import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 import { formatDate } from "../../helpers";
-import { APP_COLOR_BLUE } from "../../constants";
+import { APP_COLOR_BLUE, DELETE_MODAL_TYPES } from "../../constants";
 import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferralForField from "./ReferralForField";
+import { getReferralData } from "../../hooks/referralsData";
 
-const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
+const ReferralsList = ({ referrals, cardsByHolder }) => {
   return referrals.length === 0 ? (
     <EmptyList dataType={"referrals"} />
   ) : (
@@ -33,16 +34,12 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
           const {
             id,
             referredCard,
-            referrerId,
             referralLink,
-            referringCardId,
             referralDate,
             issuer,
-          } = referral;
-          const cardsForReferrer = cardsByHolder[referrerId];
-          const referringCard = cardsForReferrer.find(
-            (card) => referringCardId === card.id
-          );
+            referringCard,
+            referringCardholder,
+          } = getReferralData(referral, cardsByHolder);
 
           return (
             <tr key={id}>
@@ -65,9 +62,7 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                 )}
               </td>
               <td>{formatDate(referralDate)}</td>
-              <td>
-                {cardholders.find((holder) => holder.id === referrerId).name}
-              </td>
+              <td>{referringCardholder}</td>
               <td>
                 <img
                   className="issuerLogos"
@@ -95,7 +90,10 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
                   />
                 </a>
                 <ReferralAddEditModal referral={referral} />
-                <ConfirmDeleteModal data={referral} dataType="referral" />
+                <ConfirmDeleteModal
+                  data={referral}
+                  dataType={DELETE_MODAL_TYPES.referral}
+                />
               </td>
             </tr>
           );
@@ -106,7 +104,9 @@ const ReferralsList = ({ referrals, cardholders, cardsByHolder }) => {
 };
 
 ReferralsList.propTypes = {
+  referrals: PropTypes.array.isRequired,
   cardholders: PropTypes.array.isRequired,
+  cardsByHolder: PropTypes.object.isRequired,
 };
 
 export default ReferralsList;

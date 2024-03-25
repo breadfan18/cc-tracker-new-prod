@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { formatDate } from "../../helpers";
 import {
@@ -44,17 +44,11 @@ export default function ReferralsBonusStatusAndEarnDate({
   return (
     <div
       className={`bonusInfoContainer ${isCard && "bonusInforContainerCard"}`}
-      style={{
-        // "--bonus-info-container-bkgrd": backgroundColor,
-        backgroundColor,
-        // paddingRight: isCardDetailsPage && "27px",
-        padding: isCard && "5px",
-        borderBottomRightRadius: windowWidth < 500 && "15px",
-      }}
+      style={{ backgroundColor, padding: isCard && "5px" }}
     >
       {isCard && (
         <BonusEarnStatusIcon
-          bonusEarned={referral.bonusEarned}
+          bonusEarned={referral.referralBonusEarned}
           iconSize={iconSize}
           inverseColor={inverseColor}
         />

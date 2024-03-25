@@ -91,6 +91,12 @@ export const REFERRAL_DATA_KEYS = {
   referralEarnDate: "referralEarnDate",
 };
 
+export const REFERRAL_DATA_IN_CARD_VIEW = {
+  referralDate: "referralDate",
+  referrerId: "referrerId",
+  referringCardId: "referringCardId",
+};
+
 export const ISSUERS = [
   { name: "Chase", img: "https://i.imgur.com/AsfYKFY.png" },
   { name: "Amex", img: "https://i.imgur.com/1XOuPt8.png" },
