@@ -13,7 +13,7 @@ import ReferralCardText from "./ReferralCardText";
 import { getReferralData } from "../../hooks/referralsData";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferralAddEditModal from "./ReferralAddEditModal";
-import { FaLink } from "react-icons/fa";
+import { FaLink } from "react-icons/fa6";
 
 export default function ReferralCards({ referrals, cardsByHolder }) {
   const windowWidth = useContext(WindowWidthContext);
@@ -68,7 +68,7 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
                 id="referralLink"
                 style={{
                   color: referralLink === "" && "gray",
-                  border: "2px solid black",
+                  border: "2px solid gray",
                 }}
               />
             </a>
