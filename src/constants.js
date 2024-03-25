@@ -67,6 +67,14 @@ export const CARD_DATA_KEYS = {
   cardholder: "cardholder",
 };
 
+export const CARD_DATA_IN_CARD_VIEW = {
+  appDate: "appDate",
+  creditLine: "creditLine",
+  annualFee: "annualFee",
+  nextFeeDate: "nextFeeDate",
+  cardType: "cardType",
+};
+
 export const LOYALTY_DATA_KEYS = {
   loyaltyType: "loyaltyType",
   program: "program",

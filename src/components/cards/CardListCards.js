@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 import {
-  CARD_DATA_KEYS,
   APP_COLOR_BLACK_OPACITY,
   DELETE_MODAL_TYPES,
+  CARD_DATA_IN_CARD_VIEW,
 } from "../../constants";
 import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
@@ -67,17 +67,11 @@ export default function CardListCards({
               )}
             </Card.Title>
           </div>
-          <section
-            id="cardBody"
-            onClick={() => routeChange(card)}
-            style={{ paddingTop: showUserName && 0 }}
-          >
+          <section id="cardBody" onClick={() => routeChange(card)}>
             <div>
-              <CardText card={card} dataType={CARD_DATA_KEYS.appDate} />
-              <CardText card={card} dataType={CARD_DATA_KEYS.creditLine} />
-              <CardText card={card} dataType={CARD_DATA_KEYS.annualFee} />
-              <CardText card={card} dataType={CARD_DATA_KEYS.nextFeeDate} />
-              <CardText card={card} dataType={CARD_DATA_KEYS.cardType} />
+              {Object.keys(CARD_DATA_IN_CARD_VIEW).map((key) => (
+                <CardText card={card} dataType={key} />
+              ))}
             </div>
             <div>
               <img src={card.issuer.img} alt="Issuer" className="issuerLogos" />

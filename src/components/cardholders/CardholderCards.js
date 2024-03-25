@@ -27,7 +27,7 @@ export default function CardholderCards({
       <Card
         style={{ width: cardWidth }}
         key={holder.id}
-        className="cardCard cardholderCard"
+        className="cardholderCard"
       >
         <Card.Body style={{ padding: "0" }}>
           <div
@@ -86,7 +86,11 @@ export default function CardholderCards({
       </Card>
     );
   });
-  return <div id="cardCardContainer">{allCardholders}</div>;
+  return (
+    <div id="cardCardContainer" style={{ padding: 0 }}>
+      {allCardholders}
+    </div>
+  );
 }
 
 CardholderCards.propTypes = {

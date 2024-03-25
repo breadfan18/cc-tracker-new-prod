@@ -60,6 +60,7 @@ const CardHoldersPage = () => {
           padding: "10px",
           borderRadius: "10px",
           color: "gray",
+          marginBottom: "15px",
         }}
       >
         NOTE - Card Holders with existing cards or loyalty accounts cannot be
