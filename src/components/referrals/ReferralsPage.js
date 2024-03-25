@@ -8,7 +8,7 @@ import ReferralsList from "./ReferralsList";
 import { Spinner } from "../common/Spinner";
 import _ from "lodash";
 import { WindowWidthContext } from "../App";
-import { calculateCurrentInquiries, sortReferralsByDate } from "../../helpers";
+import { sortReferralsByDate } from "../../helpers";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 
 const ReferralsPage = () => {
@@ -18,10 +18,18 @@ const ReferralsPage = () => {
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
-  const loading = useSelector((state) => state.apiCallsInProgress > 0);
+
   const cards = useSelector((state) => state.cards);
   const referrals = useSelector((state) =>
     sortReferralsByDate(state.referrals)
+  );
+
+  const loading = useSelector(
+    (state) =>
+      state.apiCallsInProgress > 0 ||
+      cardholders.length === 0 ||
+      referrals.length === 0 ||
+      cards.length === 0
   );
 
   useEffect(() => {
