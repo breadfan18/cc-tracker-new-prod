@@ -8,7 +8,6 @@ import {
   formatDate,
   formatCurrency,
   setColorForCardStatus,
-  setNextFeeDataForTable,
 } from "../../helpers";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
@@ -17,12 +16,18 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
   APP_COLOR_BLUE,
   CARD_DATA_KEYS,
+  DELETE_COLOR_RED,
   DELETE_MODAL_TYPES,
   EDIT_COLOR_GREEN,
+  REMINDERS_TEXT_AF,
+  REMINDERS_TEXT_BONUS,
 } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
+import { TbAlertOctagonFilled } from "react-icons/tb";
+import { BsFillBellFill } from "react-icons/bs";
+import { getRemindersData } from "../../hooks/reminderData";
 
 export default function CardListTable({
   cards,
@@ -107,7 +112,15 @@ export default function CardListTable({
       </thead>
       <tbody className="align-middle">
         {data.map((card) => {
-          const { nextFeeText, nextFeeColor } = setNextFeeDataForTable(card);
+          const {
+            nextFeeText,
+            nextFeeColor,
+            isAnnualFeeClose,
+            isSpendByDateClose,
+            spendDaysRemainingText,
+            spendByTextColor,
+          } = getRemindersData(card);
+
           return (
             <tr
               key={card.id}
@@ -130,11 +143,13 @@ export default function CardListTable({
                     }}
                   >
                     {
-                      <BonusEarnStatusIcon
-                        bonusEarned={card.bonusEarned}
-                        iconSize="2rem"
-                        inverseColor
-                      />
+                      <>
+                        <BonusEarnStatusIcon
+                          bonusEarned={card.bonusEarned}
+                          iconSize="2rem"
+                          inverseColor
+                        />
+                      </>
                     }
                   </div>
                 </td>
@@ -153,23 +168,58 @@ export default function CardListTable({
                 </td>
               )}
               <td>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p>{formatCurrency(card.annualFee)}</p>
-                  <small
-                    style={{
-                      color: nextFeeColor,
-                      fontSize: "12px",
-                    }}
-                  >
-                    {nextFeeText}
-                  </small>
+                <div className="flexAndVerticalCenter">
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div className="flexAndVerticalCenter">
+                      {isAnnualFeeClose && (
+                        <TbAlertOctagonFilled
+                          style={{
+                            color: DELETE_COLOR_RED,
+                            fontSize: "1.3rem",
+                            marginRight: "5px",
+                          }}
+                          title={REMINDERS_TEXT_AF}
+                        />
+                      )}
+                      <p>{formatCurrency(card.annualFee)}</p>
+                    </div>
+                    <small
+                      style={{
+                        color: nextFeeColor,
+                        fontSize: "12px",
+                      }}
+                    >
+                      {nextFeeText}
+                    </small>
+                  </div>
                 </div>
               </td>
               {windowWidth > 1380 && !showCompactTable && (
                 <td>{formatCurrency(card.spendReq)}</td>
               )}
               {windowWidth > 1380 && !showCompactTable && (
-                <td>{formatDate(card.spendBy)}</td>
+                <td>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div className="flexAndVerticalCenter">
+                      {isSpendByDateClose && (
+                        <BsFillBellFill
+                          style={{
+                            color: "orange",
+                            fontSize: "1.3rem",
+                            marginRight: "5px",
+                          }}
+                          title={REMINDERS_TEXT_BONUS}
+                        />
+                      )}
+                      <p>{formatDate(card.spendBy)}</p>
+                    </div>
+                    <small
+                      style={{ fontSize: "12px", color: spendByTextColor }}
+                    >
+                      {spendDaysRemainingText}
+                    </small>
+                  </div>
+                </td>
               )}
               {windowWidth > 1070 && (
                 <td>

@@ -3,6 +3,7 @@ import {
   CARD_COLOR_DOWNGRADED,
   CREDIT_BUREAUS,
   DELETE_COLOR_RED,
+  EDIT_COLOR_GREEN,
 } from "./constants";
 
 export const pipe =
@@ -222,4 +223,24 @@ export function setNextFeeDataForTable(card) {
       nextFeeColor: "green",
     };
   }
+}
+
+export function getSpendByRemainingDays(bonusEarned, spendByDate) {
+  if (bonusEarned)
+    return {
+      spendDaysRemaining: null,
+      spendDaysRemainingText: "Bonus Earned 🥳",
+      spendByTextColor: EDIT_COLOR_GREEN,
+    };
+  const currentDate = new Date();
+  const targetDate = new Date(spendByDate);
+  const differenceInMillis = targetDate.getTime() - currentDate.getTime();
+  const daysDifference = differenceInMillis / (1000 * 3600 * 24);
+  const spendDaysRemaining = Math.floor(daysDifference);
+  const spendByTextColor = spendDaysRemaining > 30 ? "black" : "orange";
+  return {
+    spendDaysRemaining,
+    spendDaysRemainingText: `${spendDaysRemaining} days remaining`,
+    spendByTextColor,
+  };
 }

@@ -606,3 +606,8 @@ p {
   text-decoration: none;
   font-size: 15px;
 }
+
+.flexAndVerticalCenter {
+  display: flex;
+  align-items: center;
+}
