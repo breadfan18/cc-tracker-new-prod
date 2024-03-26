@@ -102,7 +102,7 @@ export default function CardListTable({
           {windowWidth > 1380 && !showCompactTable && (
             <th className="tableHeader">Spend By</th>
           )}
-          {windowWidth > 1070 && <th className="tableHeader">Bonus</th>}
+          {/* {windowWidth > 1070 && <th className="tableHeader">Bonus</th>} */}
           {showEditDelete && (
             <>
               <th></th>
@@ -117,6 +117,7 @@ export default function CardListTable({
             nextFeeColor,
             isAnnualFeeClose,
             isSpendByDateClose,
+            spendDaysRemaining,
             spendDaysRemainingText,
             spendByTextColor,
           } = getRemindersData(card);
@@ -137,20 +138,16 @@ export default function CardListTable({
                       backgroundColor: card.bonusEarned
                         ? EDIT_COLOR_GREEN
                         : APP_COLOR_BLUE,
-                      borderRadius: "0 15px 15px 0",
+                      borderRadius: "0 30px 30px 0",
                       padding: "5px 3px",
-                      maxWidth: "40px",
+                      maxWidth: "10rem",
                     }}
                   >
-                    {
-                      <>
-                        <BonusEarnStatusIcon
-                          bonusEarned={card.bonusEarned}
-                          iconSize="2rem"
-                          inverseColor
-                        />
-                      </>
-                    }
+                    <BonusStatusAndEarnDate
+                      card={card}
+                      iconSize="2.5rem"
+                      inverseColor
+                    />
                   </div>
                 </td>
               )}
@@ -201,7 +198,7 @@ export default function CardListTable({
                 <td>
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div className="flexAndVerticalCenter">
-                      {isSpendByDateClose && (
+                      {spendDaysRemaining && isSpendByDateClose && (
                         <BsFillBellFill
                           style={{
                             color: "orange",
@@ -221,11 +218,11 @@ export default function CardListTable({
                   </div>
                 </td>
               )}
-              {windowWidth > 1070 && (
+              {/* {windowWidth > 1070 && (
                 <td>
                   <BonusStatusAndEarnDate card={card} />
                 </td>
-              )}
+              )} */}
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">

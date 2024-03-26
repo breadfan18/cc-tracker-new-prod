@@ -59,13 +59,11 @@ export default function BonusStatusAndEarnDate({
           isCardDetailsPage && windowWidth < 500 && "15px",
       }}
     >
-      {isCard && (
-        <BonusEarnStatusIcon
-          bonusEarned={card.bonusEarned}
-          iconSize={iconSize}
-          inverseColor={inverseColor}
-        />
-      )}
+      <BonusEarnStatusIcon
+        bonusEarned={card.bonusEarned}
+        iconSize={iconSize}
+        inverseColor={inverseColor}
+      />
       <div className="bonusInfoTextSection">
         <p
           style={{

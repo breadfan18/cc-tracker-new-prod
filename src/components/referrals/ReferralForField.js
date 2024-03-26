@@ -13,7 +13,7 @@ export default function ReferrerField({
         backgroundColor: referralBonusEarned
           ? EDIT_COLOR_GREEN
           : APP_COLOR_BLUE,
-        borderRadius: "0 15px 15px 0",
+        borderRadius: "0 30px 30px 0",
         padding: "5px 3px",
         display: "flex",
         color: "white",
