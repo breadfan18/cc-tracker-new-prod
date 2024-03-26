@@ -3,11 +3,14 @@ import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { titleCase } from "../../helpers";
 
-export default function ReferralForField({ referral }) {
+export default function ReferrerField({
+  referralBonusEarned,
+  referringCardholder,
+}) {
   return (
     <div
       style={{
-        backgroundColor: referral.referralBonusEarned
+        backgroundColor: referralBonusEarned
           ? EDIT_COLOR_GREEN
           : APP_COLOR_BLUE,
         borderRadius: "0 15px 15px 0",
@@ -19,12 +22,12 @@ export default function ReferralForField({ referral }) {
     >
       {
         <BonusEarnStatusIcon
-          bonusEarned={referral.referralBonusEarned}
+          bonusEarned={referralBonusEarned}
           iconSize="2rem"
           inverseColor
         />
       }
-      <p style={{ marginLeft: "5px" }}>{titleCase(referral.referralFor)}</p>
+      <p style={{ marginLeft: "5px" }}>{titleCase(referringCardholder)}</p>
     </div>
   );
 }

@@ -5,10 +5,7 @@ import { REFERRAL_DATA_KEYS } from "../../constants";
 import { getReferralData } from "../../hooks/referralsData";
 
 function ReferralCardText({ referral, dataType, cardsByHolder }) {
-  console.log(referral);
-  console.log(dataType);
-
-  const { referringCard, referringCardholder } = getReferralData(
+  const { referringCard, referralFor, referredCard, issuer } = getReferralData(
     referral,
     cardsByHolder
   );
@@ -20,15 +17,15 @@ function ReferralCardText({ referral, dataType, cardsByHolder }) {
           fieldName: "Referral Date",
           value: formatDate(referral.referralDate),
         };
-      case REFERRAL_DATA_KEYS.referrerId:
+      case REFERRAL_DATA_KEYS.referralFor:
         return {
-          fieldName: "Referrer",
-          value: referringCardholder,
+          fieldName: "Referral For",
+          value: referralFor,
         };
-      case REFERRAL_DATA_KEYS.referringCardId:
+      case REFERRAL_DATA_KEYS.referredCard:
         return {
-          fieldName: "Referring Card",
-          value: `${referringCard.issuer.name} ${referringCard.card}`,
+          fieldName: "Referred Card",
+          value: `${issuer.name} ${referredCard}`,
         };
       default:
         break;

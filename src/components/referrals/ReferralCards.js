@@ -19,21 +19,22 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
   const windowWidth = useContext(WindowWidthContext);
   const cardWidth = windowWidth < 650 ? windowWidth : "20rem";
   const referralsData = referrals.map((referral) => {
-    const { id, referralLink } = getReferralData(referral, cardsByHolder);
+    const { id, referralLink, referringCardholder, referringCard } =
+      getReferralData(referral, cardsByHolder);
     return (
       <Card style={{ width: cardWidth }} key={id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
           <div style={{ backgroundColor: APP_COLOR_BLACK_OPACITY }}>
             <Card.Title className="cardCardTitle">
               <div style={{ padding: "10px" }}>
-                <p>{referral.referralFor}</p>
+                <p>{referringCardholder}</p>
                 <p
                   style={{
                     fontSize: "1rem",
                     color: "rgba(33, 37, 41, 0.75)",
                   }}
                 >
-                  {referral.issuer.name} {referral.referredCard}
+                  {referringCard.issuer.name} {referringCard.card}
                 </p>
               </div>
 

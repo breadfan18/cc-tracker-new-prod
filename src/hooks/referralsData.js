@@ -7,6 +7,8 @@ export const getReferralData = (referral, cardsByHolder) => {
     referringCardId,
     referralDate,
     issuer,
+    referralBonusEarned,
+    referralFor,
   } = referral;
   const cardsForReferrer = cardsByHolder[referrerId];
   const referringCard = cardsForReferrer.find(
@@ -24,5 +26,7 @@ export const getReferralData = (referral, cardsByHolder) => {
     cardsForReferrer,
     referringCard,
     referringCardholder: referringCard.cardholder,
+    referralBonusEarned,
+    referralFor,
   };
 };

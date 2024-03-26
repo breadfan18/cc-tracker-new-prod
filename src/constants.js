@@ -101,8 +101,8 @@ export const REFERRAL_DATA_KEYS = {
 
 export const REFERRAL_DATA_IN_CARD_VIEW = {
   referralDate: "referralDate",
-  referrerId: "referrerId",
-  referringCardId: "referringCardId",
+  referralFor: "referralFor",
+  referredCard: "referredCard",
 };
 
 export const ISSUERS = [

@@ -10,7 +10,7 @@ import { APP_COLOR_BLUE, DELETE_MODAL_TYPES } from "../../constants";
 import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
-import ReferralForField from "./ReferralForField";
+import ReferrerField from "./ReferralForField";
 import { getReferralData } from "../../hooks/referralsData";
 
 const ReferralsList = ({ referrals, cardsByHolder }) => {
@@ -20,11 +20,11 @@ const ReferralsList = ({ referrals, cardsByHolder }) => {
     <Table size="sm">
       <thead>
         <tr>
-          <th className="tableHeader">Referral For</th>
-          <th className="tableHeader">Card</th>
-          <th className="tableHeader">Referral Date</th>
           <th className="tableHeader">Referrer</th>
+          <th className="tableHeader">Referral Date</th>
           <th className="tableHeader">Referring Card</th>
+          <th className="tableHeader">Referral For</th>
+          <th className="tableHeader">Referred Card</th>
           <th className="tableHeader">Referral Bonus</th>
           <th className="tableHeader">Referral Link | Edit | Delete</th>
         </tr>
@@ -39,13 +39,31 @@ const ReferralsList = ({ referrals, cardsByHolder }) => {
             issuer,
             referringCard,
             referringCardholder,
+            referralBonusEarned,
+            referralFor,
           } = getReferralData(referral, cardsByHolder);
 
           return (
             <tr key={id}>
               <td style={{ paddingRight: "15px" }}>
-                <ReferralForField referral={referral} />
+                <ReferrerField
+                  referralBonusEarned={referralBonusEarned}
+                  referringCardholder={referringCardholder}
+                />
               </td>
+              <td>{formatDate(referralDate)}</td>
+              <td>
+                <img
+                  className="issuerLogos"
+                  src={referringCard.issuer.img}
+                  alt=""
+                />{" "}
+                {referringCard?.card}{" "}
+                <Link to={`/card/${referringCard?.id}`}>
+                  <FiExternalLink style={{ color: APP_COLOR_BLUE }} />
+                </Link>
+              </td>
+              <td>{referralFor}</td>
               <td>
                 {!referredCard || referredCard === "" ? (
                   "Unknown"
@@ -61,19 +79,7 @@ const ReferralsList = ({ referrals, cardsByHolder }) => {
                   </div>
                 )}
               </td>
-              <td>{formatDate(referralDate)}</td>
-              <td>{referringCardholder}</td>
-              <td>
-                <img
-                  className="issuerLogos"
-                  src={referringCard.issuer.img}
-                  alt=""
-                />{" "}
-                {referringCard?.card}{" "}
-                <Link to={`/card/${referringCard?.id}`}>
-                  <FiExternalLink style={{ color: APP_COLOR_BLUE }} />
-                </Link>
-              </td>
+
               <td>
                 <ReferralsBonusStatusAndEarnDate referral={referral} />
               </td>
