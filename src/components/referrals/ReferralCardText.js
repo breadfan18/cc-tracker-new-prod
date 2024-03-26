@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { formatCurrency, formatDate } from "../../helpers";
+import { formatDate } from "../../helpers";
 import { REFERRAL_DATA_KEYS } from "../../constants";
 import { getReferralData } from "../../hooks/referralsData";
 
 function ReferralCardText({ referral, dataType, cardsByHolder }) {
-  const { referringCard, referralFor, referredCard, issuer } = getReferralData(
+  const { referralFor, referredCard, issuer } = getReferralData(
     referral,
     cardsByHolder
   );
