@@ -73,7 +73,8 @@ export default function LoyaltyCards({ loyaltyData }) {
             </div>
             {daysForRewardExpiration && <div>{rewardsExpirationIcon}</div>}
           </section>
-
+        </Card.Body>
+        <Card.Footer>
           <div className="editDeleteCard editDeleteOnCards">
             <LoyaltyAddEditModal loyaltyAcc={acc} />
             <ConfirmDeleteModal
@@ -81,7 +82,7 @@ export default function LoyaltyCards({ loyaltyData }) {
               dataType={DELETE_MODAL_TYPES.loyaltyAcc}
             />
           </div>
-        </Card.Body>
+        </Card.Footer>
       </Card>
     );
   });

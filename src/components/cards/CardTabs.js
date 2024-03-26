@@ -67,6 +67,7 @@ function CardTabs({ cards }) {
         ) : (
           <CardListCards
             cards={cardsFilter.cardList}
+            // showEditDelete={true}
             showUserName={false}
             showBonusInfo
           />

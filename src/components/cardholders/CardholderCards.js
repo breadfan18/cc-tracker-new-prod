@@ -68,8 +68,9 @@ export default function CardholderCards({
               </div>
             </article>
           </section>
-
-          <div className="editDeleteCard editDeleteOnCards cardholderFooter">
+        </Card.Body>
+        <Card.Footer>
+          <div className="editDeleteCard editDeleteOnCards">
             <CardholderAddEditModal
               cardholder={holder}
               disableBtn={holder.isPrimary}
@@ -82,7 +83,7 @@ export default function CardholderCards({
               }
             />
           </div>
-        </Card.Body>
+        </Card.Footer>
       </Card>
     );
   });

@@ -58,6 +58,8 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
               ))}
             </div>
           </section>
+        </Card.Body>
+        <Card.Footer>
           <div className="editDeleteCard editDeleteOnCards">
             <a
               href={referralLink}
@@ -79,7 +81,7 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
               dataType={DELETE_MODAL_TYPES.referral}
             />
           </div>
-        </Card.Body>
+        </Card.Footer>
       </Card>
     );
   });

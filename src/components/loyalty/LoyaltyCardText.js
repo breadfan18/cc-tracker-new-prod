@@ -45,7 +45,7 @@ function LoyaltyCardText({ account, dataType, showCopyIcon, dataToCopy }) {
       <small style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
         <b style={{ color: "black" }}>{loyaltyAccountType.fieldName}</b>
         {": "}
-        {loyaltyAccountType.value}
+        {loyaltyAccountType.value}{" "}
         {showCopyIcon && <CopyIcon dataToCopy={dataToCopy} />}
       </small>
     </p>
