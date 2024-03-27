@@ -186,10 +186,11 @@ const CardForm = ({
           <Col>
             <TextInput
               name={CARD_DATA_KEYS.signupBonus}
-              label="Signup Bonus"
+              label="Signup Bonus (Max 15 characters)"
               value={card.signupBonus}
               onChange={onChange}
               error={errors.title}
+              length={20}
             />
           </Col>
           <Col>
