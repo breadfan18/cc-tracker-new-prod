@@ -67,13 +67,19 @@ export default function BonusStatusAndEarnDate({
       <div className="bonusInfoTextSection">
         <p
           style={{
-            fontSize: isCardTitle ? "1rem" : null,
+            fontSize: isCard ? "1rem" : "1.3rem",
             color: inverseColor ? "white" : "black",
           }}
         >
           {card.signupBonus}{" "}
         </p>
-        <small style={{ color: bonusStatusTextColor, fontSize: "12px" }}>
+        <small
+          style={{
+            color: bonusStatusTextColor,
+            fontSize: "12px",
+            marginTop: !isCard && "-7px",
+          }}
+        >
           {hasBonusEarnDate
             ? `Earned ${formatDate(card.bonusEarnDate)}`
             : "Bonus In Progress"}

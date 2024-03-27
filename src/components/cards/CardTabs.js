@@ -60,14 +60,14 @@ function CardTabs({ cards }) {
         {windowWidth > 1000 ? (
           <CardListTable
             cards={cardsFilter.cardList}
-            showEditDelete={true}
+            showEditDelete
             showUser={false}
             showCompactTable={false}
           />
         ) : (
           <CardListCards
             cards={cardsFilter.cardList}
-            // showEditDelete={true}
+            showEditDelete
             showUserName={false}
             showBonusInfo
           />
@@ -103,6 +103,7 @@ function CardTabs({ cards }) {
             <CardListCards
               cards={cardsFilter.cardList}
               windowWidth={windowWidth}
+              showEditDelete
               showUserName={true}
               showBonusInfo
             />

@@ -37,7 +37,8 @@ export default function CardListCards({
 
   const allCards = cards.map((card) => {
     const cardTitleColor = setColorForCardStatus("cardCard", card.status);
-    const { isAnnualFeeClose, isSpendByDateClose } = getRemindersData(card);
+    const { isAnnualFeeClose, isSpendByDateClose, spendDaysRemaining } =
+      getRemindersData(card);
     return (
       <Card style={{ width: cardWidth }} key={card.id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
@@ -97,7 +98,7 @@ export default function CardListCards({
                 title={REMINDERS_TEXT_AF}
               />
             )}
-            {isSpendByDateClose && (
+            {spendDaysRemaining && isSpendByDateClose && (
               <BsFillBellFill
                 style={{
                   color: "orange",
@@ -108,7 +109,7 @@ export default function CardListCards({
               />
             )}
           </div>
-          {showEditDelete ?? (
+          {showEditDelete && (
             <div className="editDeleteCard">
               <CardAddEditModal card={card} />
               <ConfirmDeleteModal

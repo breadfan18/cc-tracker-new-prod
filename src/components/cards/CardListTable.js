@@ -22,7 +22,6 @@ import {
   REMINDERS_TEXT_AF,
   REMINDERS_TEXT_BONUS,
 } from "../../constants";
-import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { TbAlertOctagonFilled } from "react-icons/tb";
@@ -102,7 +101,6 @@ export default function CardListTable({
           {windowWidth > 1380 && !showCompactTable && (
             <th className="tableHeader">Spend By</th>
           )}
-          {/* {windowWidth > 1070 && <th className="tableHeader">Bonus</th>} */}
           {showEditDelete && (
             <>
               <th></th>
@@ -140,7 +138,6 @@ export default function CardListTable({
                         : APP_COLOR_BLUE,
                       borderRadius: "0 30px 30px 0",
                       padding: "5px 3px",
-                      maxWidth: "10rem",
                     }}
                   >
                     <BonusStatusAndEarnDate
@@ -218,11 +215,6 @@ export default function CardListTable({
                   </div>
                 </td>
               )}
-              {/* {windowWidth > 1070 && (
-                <td>
-                  <BonusStatusAndEarnDate card={card} />
-                </td>
-              )} */}
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">
