@@ -156,7 +156,7 @@
             "name": "Amex"
           },
           "nextFeeDate": "",
-          "signupBonus": "150K Points",
+          "signupBonus": "150K HHonors",
           "spendBy": "2021-11-15",
           "spendReq": "1000",
           "status": "open",
@@ -205,7 +205,7 @@
             "img": "https://i.imgur.com/PsqVIEx.png",
             "name": "Bank of America"
           },
-          "signupBonus": "N/A",
+          "signupBonus": "0",
           "spendReq": 0,
           "status": "open",
           "userId": "tulasi-uprety"
@@ -1451,7 +1451,7 @@
             "img": "https://i.imgur.com/GJT4lHt.png",
             "name": "WellsFargo"
           },
-          "signupBonus": "N/A",
+          "signupBonus": "0",
           "spendReq": 0,
           "status": "open",
           "userId": "swaroop-uprety"
