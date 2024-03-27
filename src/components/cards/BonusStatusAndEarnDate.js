@@ -4,13 +4,13 @@ import { formatDate } from "../../helpers";
 import {
   APP_COLOR_BLUE,
   APP_COLOR_BLUE_OPACITY,
+  APP_COLOR_LIGHT_BLACK,
   EDIT_COLOR_GREEN_OPACITY,
 } from "../../constants";
 import { WindowWidthContext } from "../App";
 
 export default function BonusStatusAndEarnDate({
   card,
-  isCardTitle,
   isCard,
   inverseColor,
   iconSize,
@@ -19,11 +19,14 @@ export default function BonusStatusAndEarnDate({
   const windowWidth = useContext(WindowWidthContext);
   const hasBonusEarnDate =
     card.bonusEarnDate?.includes("-") || card.bonusEarned;
+  const noBonus = card.signupBonus === undefined || card.signupBonus === "0";
 
   const backgroundColor = !isCard
     ? "none"
     : hasBonusEarnDate
     ? EDIT_COLOR_GREEN_OPACITY
+    : noBonus
+    ? APP_COLOR_LIGHT_BLACK
     : APP_COLOR_BLUE_OPACITY;
 
   useEffect(() => {
@@ -63,6 +66,7 @@ export default function BonusStatusAndEarnDate({
         bonusEarned={card.bonusEarned}
         iconSize={iconSize}
         inverseColor={inverseColor}
+        noBonus={noBonus}
       />
       <div className="bonusInfoTextSection">
         <p
@@ -71,7 +75,7 @@ export default function BonusStatusAndEarnDate({
             color: inverseColor ? "white" : "black",
           }}
         >
-          {card.signupBonus}{" "}
+          {noBonus ? "N/A" : card.signupBonus}{" "}
         </p>
         <small
           style={{
@@ -82,6 +86,8 @@ export default function BonusStatusAndEarnDate({
         >
           {hasBonusEarnDate
             ? `Earned ${formatDate(card.bonusEarnDate)}`
+            : noBonus
+            ? "No Bonus Offered"
             : "Bonus In Progress"}
         </small>
       </div>

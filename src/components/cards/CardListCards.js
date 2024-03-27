@@ -98,7 +98,7 @@ export default function CardListCards({
                 title={REMINDERS_TEXT_AF}
               />
             )}
-            {spendDaysRemaining && isSpendByDateClose && (
+            {card.spendBy && spendDaysRemaining && isSpendByDateClose && (
               <BsFillBellFill
                 style={{
                   color: "orange",

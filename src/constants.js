@@ -2,6 +2,7 @@
 export const APP_COLOR_BLUE = "#0080FF";
 export const APP_COLOR_BLUE_OPACITY = "#4BA5FF";
 export const APP_COLOR_LIGHT_GRAY = "#D9D7D7";
+export const APP_COLOR_LIGHT_BLACK = "rgb(59, 54, 54)";
 export const APP_COLOR_LIGHT_BLUE = "rgb(210, 237, 246)";
 export const APP_COLOR_BLACK_OPACITY = "rgba(0,0,0,0.09)";
 export const EDIT_COLOR_GREEN = "#198754";

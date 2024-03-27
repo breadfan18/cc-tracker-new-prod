@@ -15,6 +15,10 @@ import { WindowWidthContext } from "../App";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
   APP_COLOR_BLUE,
+  APP_COLOR_BLUE_OPACITY,
+  APP_COLOR_LIGHT_BLACK,
+  APP_COLOR_LIGHT_BLUE,
+  APP_COLOR_LIGHT_GRAY,
   CARD_DATA_KEYS,
   DELETE_COLOR_RED,
   DELETE_MODAL_TYPES,
@@ -120,6 +124,9 @@ export default function CardListTable({
             spendByTextColor,
           } = getRemindersData(card);
 
+          const noBonus =
+            card.signupBonus === undefined || card.signupBonus === "0";
+
           return (
             <tr
               key={card.id}
@@ -135,6 +142,8 @@ export default function CardListTable({
                     style={{
                       backgroundColor: card.bonusEarned
                         ? EDIT_COLOR_GREEN
+                        : noBonus
+                        ? APP_COLOR_LIGHT_BLACK
                         : APP_COLOR_BLUE,
                       borderRadius: "0 30px 30px 0",
                       padding: "5px 3px",

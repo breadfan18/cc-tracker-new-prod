@@ -71,6 +71,7 @@ function CardsByUserDropDown({ cards }) {
       <hr />
       <CardListCards
         cards={cardsFilter.cardList}
+        showEditDelete
         showUserName={showAllUsers}
         showBonusInfo
       />
