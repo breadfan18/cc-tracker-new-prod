@@ -195,16 +195,18 @@ export default function CardListTable({
                 <td>
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div className="flexAndVerticalCenter">
-                      {spendDaysRemaining && isSpendByDateClose && (
-                        <BsFillBellFill
-                          style={{
-                            color: "orange",
-                            fontSize: "1.3rem",
-                            marginRight: "5px",
-                          }}
-                          title={REMINDERS_TEXT_BONUS}
-                        />
-                      )}
+                      {card.spendBy &&
+                        spendDaysRemaining &&
+                        isSpendByDateClose && (
+                          <BsFillBellFill
+                            style={{
+                              color: "orange",
+                              fontSize: "1.3rem",
+                              marginRight: "5px",
+                            }}
+                            title={REMINDERS_TEXT_BONUS}
+                          />
+                        )}
                       <p>{formatDate(card.spendBy)}</p>
                     </div>
                     <small
