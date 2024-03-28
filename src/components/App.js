@@ -41,7 +41,7 @@ function App() {
     <>
       <WindowWidthContext.Provider value={windowWidth}>
         <Header user={user} />
-        <div className="container-fluid">
+        <main className="container-fluid">
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/card-holders" component={CardHoldersPage} />
@@ -57,7 +57,7 @@ function App() {
             <Route component={PageNotFound} />
           </Switch>
           <ToastContainer autoClose={3000} hideProgressBar />
-        </div>
+        </main>
       </WindowWidthContext.Provider>
     </>
   ) : (

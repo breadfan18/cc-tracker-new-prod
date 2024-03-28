@@ -23,7 +23,7 @@ const Header = ({ user }) => {
   });
 
   return windowWidth < 650 ? (
-    <main className="smallNavContainer">
+    <header className="smallNavContainer">
       <div id="smallNavTopHeader">
         <Burger open={open} setOpen={setOpen} />
         <UserProfileSection user={user} windowWidth={windowWidth} />
@@ -75,9 +75,9 @@ const Header = ({ user }) => {
           </NavLink>
         </nav>
       )}
-    </main>
+    </header>
   ) : (
-    <main className="navContainer">
+    <header className="navContainer">
       <nav className="navFull">
         <NavLink to="/" activeStyle={activeStyle} exact>
           Home
@@ -99,7 +99,7 @@ const Header = ({ user }) => {
         </NavLink>
       </nav>
       <UserProfileSection user={user} />
-    </main>
+    </header>
   );
 };
 
