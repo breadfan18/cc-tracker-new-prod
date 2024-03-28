@@ -10,19 +10,24 @@ import { APP_COLOR_BLUE, APP_COLOR_LIGHT_BLUE } from "../../constants";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 
-export default function CardDetailsInfo({ windowWidth, card }) {
+export default function CardDetailsInfo({
+  windowWidth,
+  card,
+  isTablet,
+  isMobile,
+}) {
   return (
     <Card
       id="cardDetailsCard"
       style={{
-        width: windowWidth > 800 ? "30rem" : windowWidth,
+        width: windowWidth > 1000 ? "30rem" : windowWidth,
         backgroundColor: setColorForCardStatus("cardCard", card.status),
-        marginRight: windowWidth > 800 ? "15px" : null,
-        marginBottom: windowWidth > 800 ? null : "15px",
+        marginRight: windowWidth > 1000 ? "20px" : null,
         boxShadow:
           card.status === "open"
             ? "2px 0 10px gray"
             : `2px 0 15px ${setColorForCardStatus("cardCard", card.status)}`,
+        alignSelf: "flex-start",
       }}
     >
       <Card.Img

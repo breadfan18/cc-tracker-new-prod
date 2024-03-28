@@ -43,6 +43,9 @@ function CardDetailsPage() {
     return cards?.find((card) => card.id === id) || null;
   }
 
+  const isTablet = windowWidth <= 1000 && windowWidth >= 700;
+  const isMobile = windowWidth < 700;
+
   return loading ? (
     <Spinner />
   ) : (
@@ -59,16 +62,23 @@ function CardDetailsPage() {
         </div>
       </section>
       <div
-        className="cardDetailsBody"
-        style={{ padding: windowWidth < 800 && "0 10px" }}
+        className={`cardDetailsBody ${isTablet && "cardDetailsBodyTablet"}`}
+        style={{ padding: (isTablet || isMobile) && "0 15px" }}
       >
-        <CardDetailsInfo windowWidth={windowWidth} card={card} />
+        <CardDetailsInfo
+          windowWidth={windowWidth}
+          card={card}
+          isTablet={isTablet}
+          isMobile={isMobile}
+        />
         <div id="cardDetailsSectionRight">
-          <CardNotes
-            cardId={card.id}
-            cardNotes={sortNotesByDate(_.values(card.cardNotes))}
-          />
-          <CardReminderContainer card={card} />
+          <section className={`${isTablet && "cardDetailsSectionRightTablet"}`}>
+            <CardNotes
+              cardId={card.id}
+              cardNotes={sortNotesByDate(_.values(card.cardNotes))}
+            />
+            <CardReminderContainer card={card} />
+          </section>
           {referralsForThisCard.length > 0 && (
             <CardReferrals cardReferrals={referralsForThisCard} />
           )}

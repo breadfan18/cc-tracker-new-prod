@@ -29,9 +29,23 @@ body {
   display: flex;
   flex-wrap: wrap;
   font-size: clamp(0.6rem, 5vw, 1rem);
-  gap: 8px;
 }
 
+.cardDetailsBody > .card {
+  margin-bottom: 1rem;
+}
+
+.cardDetailsBodyTablet {
+  flex-direction: column;
+}
+
+.cardDetailsSectionRightTablet {
+  display: flex;
+}
+
+.cardDetailsSectionRightTablet > .card:nth-child(1) {
+  margin-right: 1rem;
+}
 #cardDetailsSectionRight {
   flex: 1;
 }
