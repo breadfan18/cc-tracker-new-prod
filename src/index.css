@@ -36,7 +36,7 @@ body {
 }
 
 .cardDetailsBodyTablet {
-  flex-direction: column;
+  margin-right: 10px;
 }
 
 .cardDetailsSectionRightTablet {
@@ -46,6 +46,7 @@ body {
 .cardDetailsSectionRightTablet > .card:nth-child(1) {
   margin-right: 1rem;
 }
+
 #cardDetailsSectionRight {
   flex: 1;
 }
@@ -627,4 +628,14 @@ p {
   padding: 7px 5px 7px 12px;
   align-items: center;
   /* background: var(--black-opacity); */
+}
+
+#cardReferralsCardSectionRight p span {
+  color: black;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#cardReferralsCardSectionRight p {
+  color: gray;
 }
