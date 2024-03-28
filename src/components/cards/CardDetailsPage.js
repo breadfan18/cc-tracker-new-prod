@@ -3,28 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
 import { Spinner } from "../common/Spinner";
-import {
-  APP_COLOR_BLUE,
-  APP_COLOR_LIGHT_BLUE,
-  DELETE_MODAL_TYPES,
-} from "../../constants";
-import { Card, Table } from "react-bootstrap";
+import { DELETE_MODAL_TYPES } from "../../constants";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import {
-  formatCurrency,
-  formatDate,
-  setColorForCardStatus,
-  sortNotesByDate,
-  titleCase,
-} from "../../helpers";
+import { sortNotesByDate } from "../../helpers";
 import CardNotes from "./CardNotes";
 import { WindowWidthContext } from "../App";
 import _ from "lodash";
 import { CardReminderContainer } from "./CardReminderContainer";
-import CreditBureauIcons from "../common/CreditBureauIcons";
 import { useUser } from "reactfire";
-import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import CardReferrals from "./CardReferrals";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import CardDetailsInfo from "./CardDetailsInfo";
@@ -75,53 +62,7 @@ function CardDetailsPage() {
         className="cardDetailsBody"
         style={{ padding: windowWidth < 800 && "0 10px" }}
       >
-        <Card
-          id="cardDetailsCard"
-          style={{
-            width: windowWidth > 800 ? "30rem" : windowWidth,
-            backgroundColor: setColorForCardStatus("cardCard", card.status),
-            marginRight: windowWidth > 800 ? "15px" : null,
-            marginBottom: windowWidth > 800 ? null : "15px",
-            boxShadow:
-              card.status === "open"
-                ? "2px 0 10px gray"
-                : `2px 0 15px ${setColorForCardStatus(
-                    "cardCard",
-                    card.status
-                  )}`,
-          }}
-        >
-          <Card.Img
-            variant="top"
-            src={card.issuer.img}
-            style={{
-              padding: "2rem",
-              backgroundColor: APP_COLOR_LIGHT_BLUE,
-              maxHeight: "10rem",
-              objectFit: "contain",
-            }}
-          />
-          <article className="cardDetailsHeaderContainer">
-            <div style={{ padding: "10px 16px" }}>
-              <Card.Title style={{ fontSize: "clamp(0.9rem, 5vw, 1.5rem)" }}>
-                {card.issuer.name} {card.card}
-              </Card.Title>
-              <Card.Title style={{ fontSize: "clamp(0.7rem, 4vw, 1rem)" }}>
-                {card.cardholder}
-              </Card.Title>
-            </div>
-            <BonusStatusAndEarnDate
-              card={card}
-              isCard
-              inverseColor
-              iconSize="clamp(1.5rem, 10vw, 3rem)"
-              isCardDetailsPage
-            />
-          </article>
-          <Card.Body>
-            <CardDetailsInfo card={card} />
-          </Card.Body>
-        </Card>
+        <CardDetailsInfo windowWidth={windowWidth} card={card} />
         <div id="cardDetailsSectionRight">
           <CardNotes
             cardId={card.id}
