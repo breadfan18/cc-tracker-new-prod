@@ -24,10 +24,10 @@ const Header = ({ user }) => {
 
   return windowWidth < 650 ? (
     <header className="smallNavContainer">
-      <div id="smallNavTopHeader">
+      <nav id="smallNavTopHeader">
         <Burger open={open} setOpen={setOpen} />
         <UserProfileSection user={user} windowWidth={windowWidth} />
-      </div>
+      </nav>
       {open && (
         <nav className="navSmallContent" ref={navRef}>
           <NavLink
