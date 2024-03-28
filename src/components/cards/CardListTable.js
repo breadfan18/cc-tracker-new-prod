@@ -15,10 +15,7 @@ import { WindowWidthContext } from "../App";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
   APP_COLOR_BLUE,
-  APP_COLOR_BLUE_OPACITY,
   APP_COLOR_LIGHT_BLACK,
-  APP_COLOR_LIGHT_BLUE,
-  APP_COLOR_LIGHT_GRAY,
   CARD_DATA_KEYS,
   DELETE_COLOR_RED,
   DELETE_MODAL_TYPES,
