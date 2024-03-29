@@ -35,7 +35,8 @@ body {
   margin-bottom: 1rem;
 }
 
-.cardDetailsBodyTablet {
+.cardDetailsBodyTablet,
+.cardDetailsBodyMobile {
   margin-right: 10px;
 }
 

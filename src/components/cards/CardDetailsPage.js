@@ -61,7 +61,11 @@ function CardDetailsPage() {
           />
         </div>
       </section>
-      <div className={`cardDetailsBody ${isTablet && "cardDetailsBodyTablet"}`}>
+      <div
+        className={`cardDetailsBody ${isTablet && "cardDetailsBodyTablet"} ${
+          isMobile && "cardDetailsBodyMobile"
+        }`}
+      >
         <CardDetailsInfo
           windowWidth={windowWidth}
           card={card}
