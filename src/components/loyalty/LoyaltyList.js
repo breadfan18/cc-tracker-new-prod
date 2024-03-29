@@ -103,10 +103,15 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
               )}
               {windowWidth > 1030 && (
                 <td>
+                  <div>
+                    {rewardsExpirationIcon}
+                    {formatDate(acc.rewardsExpiration)}{" "}
+                  </div>
                   {daysForRewardExpiration && (
                     <p
                       style={{
                         margin: 0,
+                        marginLeft: "5px",
                         fontSize: "10px",
                         color:
                           daysForRewardExpiration <= 90 ? DELETE_COLOR_RED : "",
@@ -115,8 +120,6 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
                       {`Rewards expire in ${daysForRewardExpiration} days`}
                     </p>
                   )}
-                  {rewardsExpirationIcon}
-                  {formatDate(acc.rewardsExpiration)}{" "}
                 </td>
               )}
 

@@ -10,10 +10,16 @@ export const getRewardsExpirationStuff = (acc) => {
 
   const rewardsExpirationIcon =
     daysForRewardExpiration > 30 && daysForRewardExpiration <= 90 ? (
-      <BsFillBellFill style={{ color: "orange", fontSize: "1.5rem" }} />
+      <BsFillBellFill
+        style={{ color: "orange", fontSize: "1.3rem", marginRight: "5px" }}
+      />
     ) : daysForRewardExpiration <= 30 ? (
       <TbAlertOctagonFilled
-        style={{ color: DELETE_COLOR_RED, fontSize: "1.5rem" }}
+        style={{
+          color: DELETE_COLOR_RED,
+          fontSize: "1.3rem",
+          marginRight: "5px",
+        }}
       />
     ) : (
       ""
