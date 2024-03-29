@@ -31,7 +31,6 @@ function CardDetailsPage() {
     (state) => state.apiCallsInProgress > 0 || state.cards.length === 0
   );
 
-  const cardsByHolder = _.groupBy(cards, (o) => o.userId);
   useEffect(() => {
     if (cards.length === 0 && status === "success") {
       dispatch(loadCardsFromFirebase(user?.uid));
@@ -81,7 +80,6 @@ function CardDetailsPage() {
             <CardReferrals
               cardReferrals={referralsForThisCard}
               windowWidth={windowWidth}
-              cardsByHolder={cardsByHolder}
             />
           )}
         </div>

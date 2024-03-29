@@ -639,3 +639,30 @@ p {
 #cardReferralsCardSectionRight p {
   color: gray;
 }
+
+.cardDetailsReferralCardContainer {
+  background-color: var(--black-opacity);
+  margin: 8px 0;
+  padding: 10px;
+  display: flex;
+  border-radius: 10px;
+}
+
+.cardDetailsReferralCardBonusSection {
+  border-radius: 10px;
+  padding: 5px;
+  min-width: 7rem;
+}
+
+.cardDetailsReferralCardBonusSectionTop {
+  display: flex;
+  align-items: center;
+  margin-bottom: -6px;
+  align-self: flex-start;
+}
+
+.cardDetailsReferralCardBonusText {
+  color: white;
+  font-size: 12px;
+  margin-left: 5px;
+}

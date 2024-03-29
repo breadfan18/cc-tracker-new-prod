@@ -2,24 +2,14 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { Table } from "react-bootstrap";
 import { formatDate, sortReferralsByDate } from "../../helpers";
-import {
-  APP_COLOR_BLACK_OPACITY,
-  APP_COLOR_BLUE,
-  APP_COLOR_BLUE_OPACITY,
-  APP_COLOR_LIGHT_GRAY,
-  EDIT_COLOR_GREEN,
-} from "../../constants";
+import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 import ReferralsBonusStatusAndEarnDate from "../referrals/ReferralBonusStatusAndEarnDate";
 import { FaCheck, FaRunning } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 
-export default function CardReferrals({
-  cardReferrals,
-  windowWidth,
-  cardsByHolder,
-}) {
+export default function CardReferrals({ cardReferrals, windowWidth }) {
   return (
     <Card className="text-center" style={{ boxShadow: `2px 0 10px gray` }}>
       <Card.Header className="cardHeaders referralCardHeader">
@@ -77,40 +67,38 @@ export default function CardReferrals({
         ) : (
           <>
             {sortReferralsByDate(cardReferrals).map((referral) => (
-              <article
-                style={{
-                  backgroundColor: APP_COLOR_BLACK_OPACITY,
-                  margin: "8px 0",
-                  padding: "10px",
-                  display: "flex",
-                  borderRadius: "10px",
-                }}
-              >
+              <article className="cardDetailsReferralCardContainer">
                 <div
+                  className="cardDetailsReferralCardBonusSection"
                   style={{
                     backgroundColor: referral.referralBonusEarned
                       ? EDIT_COLOR_GREEN
                       : APP_COLOR_BLUE,
-                    borderRadius: "10px",
-                    padding: "5px",
                   }}
                 >
-                  <BonusEarnStatusIcon
-                    bonusEarned={referral.referralBonusEarned}
-                    inverseColor
-                    iconSize="3rem"
-                  />
-                  <ReferralsBonusStatusAndEarnDate
-                    referral={referral}
-                    inverseColor
-                  />
+                  <div className="cardDetailsReferralCardBonusSectionTop">
+                    <BonusEarnStatusIcon
+                      bonusEarned={referral.referralBonusEarned}
+                      inverseColor
+                      iconSize="2.5rem"
+                    />
+                    <p style={{ fontSize: "20px", color: "white" }}>
+                      {referral.referralBonus}
+                    </p>
+                  </div>
+                  <small className="cardDetailsReferralCardBonusText">
+                    {referral.referralEarnDate?.includes("-") &&
+                    referral.referralBonusEarned
+                      ? `Earned ${formatDate(referral.referralEarnDate)}`
+                      : "Bonus In Progress"}
+                  </small>
                 </div>
                 <div
                   id="cardReferralsCardSectionRight"
                   style={{ marginLeft: "10px" }}
                 >
                   <p>
-                    <span>Date:</span> {referral.referralDate}
+                    <span>Date:</span> {formatDate(referral.referralDate)}
                   </p>
                   <p>
                     <span>For:</span> {referral.referralFor}
