@@ -111,7 +111,6 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
                     <p
                       style={{
                         margin: 0,
-                        marginLeft: "5px",
                         fontSize: "10px",
                         color:
                           daysForRewardExpiration <= 90 ? DELETE_COLOR_RED : "",
