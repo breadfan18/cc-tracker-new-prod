@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Burger from "./Burger";
-import { WindowWidthContext } from "../App";
 import { APP_COLOR_BLUE } from "../../constants";
 import UserProfileSection from "./UserProfileSection";
 
-const Header = ({ user }) => {
-  const windowWidth = useContext(WindowWidthContext);
+const Header = ({ user, isMobile }) => {
   const [open, setOpen] = useState(false);
   const activeStyle = { backgroundColor: "white", color: APP_COLOR_BLUE };
   let navRef = useRef();
@@ -22,11 +20,11 @@ const Header = ({ user }) => {
     return () => document.removeEventListener("mousedown", navMenuHandler);
   });
 
-  return windowWidth < 700 ? (
+  return isMobile ? (
     <header className="smallNavContainer">
       <nav id="smallNavTopHeader">
         <Burger open={open} setOpen={setOpen} />
-        <UserProfileSection user={user} windowWidth={windowWidth} />
+        <UserProfileSection user={user} />
       </nav>
       {open && (
         <nav className="navSmallContent" ref={navRef}>

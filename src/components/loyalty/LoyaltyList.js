@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import EmptyList from "../common/EmptyList";
@@ -13,12 +13,10 @@ import {
   LOYALTY_DATA_KEYS,
 } from "../../constants";
 import { formatDate } from "../../helpers";
-import { WindowWidthContext } from "../App";
 import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
 import CopyIcon from "../common/CopyIcon";
 
-const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
-  const windowWidth = useContext(WindowWidthContext);
+const LoyaltyList = ({ loyaltyData, showEditDelete, isDesktop }) => {
   const { data, requestSort } = useSortableData(loyaltyData);
 
   return loyaltyData.length === 0 ? (
@@ -44,7 +42,7 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
             Password{" "}
             <FaSort onClick={() => requestSort(LOYALTY_DATA_KEYS.password)} />
           </th>
-          {windowWidth > 1030 && (
+          {isDesktop && (
             <th className="tableHeader">
               Rewards{" "}
               <FaSort
@@ -52,7 +50,7 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
               />
             </th>
           )}
-          {windowWidth > 1030 && (
+          {isDesktop && (
             <th className="tableHeader">
               Expiration{" "}
               <FaSort
@@ -96,12 +94,12 @@ const LoyaltyList = ({ loyaltyData, showEditDelete }) => {
                 {acc.loginId}
               </td>
               <td>{acc.password}</td>
-              {windowWidth > 1030 && (
+              {isDesktop && (
                 <td>{`${Number(acc.rewardsBalance || "0").toLocaleString()} ${
                   acc.program.type === "airlines" ? "miles" : "points"
                 }`}</td>
               )}
-              {windowWidth > 1030 && (
+              {isDesktop && (
                 <td>
                   <div>
                     {rewardsExpirationIcon}

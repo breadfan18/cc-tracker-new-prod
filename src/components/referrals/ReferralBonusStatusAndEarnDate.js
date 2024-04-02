@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { formatDate } from "../../helpers";
 import {
@@ -6,7 +6,7 @@ import {
   APP_COLOR_BLUE_OPACITY,
   EDIT_COLOR_GREEN_OPACITY,
 } from "../../constants";
-import { WindowWidthContext } from "../App";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 export default function ReferralsBonusStatusAndEarnDate({
   referral,
@@ -15,7 +15,7 @@ export default function ReferralsBonusStatusAndEarnDate({
   inverseColor,
   iconSize,
 }) {
-  const windowWidth = useContext(WindowWidthContext);
+  const { windowWidth, isMobileXS } = useWindhowWidth();
   const hasEarnDate =
     referral.referralEarnDate?.includes("-") && referral.referralBonusEarned;
 
@@ -26,7 +26,7 @@ export default function ReferralsBonusStatusAndEarnDate({
     : APP_COLOR_BLUE_OPACITY;
 
   useEffect(() => {
-    if (windowWidth < 500) {
+    if (isMobileXS) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
         "none"

@@ -22,7 +22,7 @@ export const WindowWidthContext = createContext();
 
 function App() {
   const { status, data: signinResult } = useSigninCheck();
-  const { windowWidth } = useWindhowWidth();
+  const { windowWidth, isMobile } = useWindhowWidth();
 
   if (status === "loading") {
     return <Spinner />;
@@ -33,7 +33,7 @@ function App() {
   return signedIn === true ? (
     <>
       <WindowWidthContext.Provider value={windowWidth}>
-        <Header user={user} />
+        <Header user={user} isMobile={isMobile} />
         <main className="container-fluid">
           <Switch>
             <Route exact path="/" component={HomePage} />

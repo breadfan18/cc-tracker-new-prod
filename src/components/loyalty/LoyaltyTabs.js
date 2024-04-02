@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
@@ -9,10 +9,10 @@ import LoyaltyAccordion from "./LoyaltyAccordion";
 import _ from "lodash";
 import LoyaltyCards from "./LoyaltyCards";
 import EmptyList from "../common/EmptyList";
-import { WindowWidthContext } from "../App";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 function LoyaltyTabs({ loyaltyData }) {
-  const windowWidth = useContext(WindowWidthContext);
+  const { windowWidth, isDesktop } = useWindhowWidth();
   const loyaltyByType = _.groupBy(loyaltyData, (o) => o.loyaltyType);
   const loyaltyTabs = ACCOUNT_TYPE.map((loyaltyType) => {
     const loyaltyTypeData = loyaltyByType[loyaltyType];
@@ -27,6 +27,7 @@ function LoyaltyTabs({ loyaltyData }) {
           <LoyaltyList
             loyaltyData={loyaltyAccsForThisUser}
             showEditDelete={true}
+            isDesktop={isDesktop}
           />
         ) : (
           <LoyaltyCards loyaltyData={loyaltyAccsForThisUser} />
@@ -37,7 +38,6 @@ function LoyaltyTabs({ loyaltyData }) {
           <LoyaltyAccordion
             accordionBody={loyaltyList}
             dataType={"Accounts"}
-            windowWidth={windowWidth}
             user={accountHolderName}
           />
           <br />

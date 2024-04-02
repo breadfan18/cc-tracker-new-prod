@@ -14,11 +14,13 @@ export default function useWindhowWidth() {
   const isDesktop = windowWidth > 1000;
   const isTablet = windowWidth <= 1000 && windowWidth >= 700;
   const isMobile = windowWidth < 700;
+  const isMobileXS = windowWidth < 500;
 
   return {
     windowWidth,
     isTablet,
     isMobile,
+    isMobileXS,
     isDesktop,
   };
 }

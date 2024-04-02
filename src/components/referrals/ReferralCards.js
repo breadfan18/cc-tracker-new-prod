@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import {
   APP_COLOR_BLACK_OPACITY,
@@ -8,7 +8,6 @@ import {
 import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import { WindowWidthContext } from "../App";
 import ReferralCardText from "./ReferralCardText";
 import { getReferralData } from "../../hooks/referralsData";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
@@ -16,13 +15,11 @@ import ReferralAddEditModal from "./ReferralAddEditModal";
 import { FaLink } from "react-icons/fa6";
 
 export default function ReferralCards({ referrals, cardsByHolder }) {
-  const windowWidth = useContext(WindowWidthContext);
-  const cardWidth = windowWidth < 650 ? windowWidth : "20rem";
   const referralsData = referrals.map((referral) => {
     const { id, referralLink, referringCardholder, referringCard } =
       getReferralData(referral, cardsByHolder);
     return (
-      <Card style={{ width: cardWidth }} key={id} className="cardCard">
+      <Card key={id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
           <div style={{ backgroundColor: APP_COLOR_BLACK_OPACITY }}>
             <Card.Title className="cardCardTitle">

@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import { WindowWidthContext } from "../App";
 import LoyaltyCardText from "./LoyaltyCardText";
 import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
 import LoyaltyCardExpirationText from "./LoyaltyCardExpirationText";
@@ -12,14 +11,12 @@ import { formatDate } from "../../helpers";
 import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
 
 export default function LoyaltyCards({ loyaltyData }) {
-  const windowWidth = useContext(WindowWidthContext);
-  const cardWidth = windowWidth < 650 ? windowWidth : "19rem";
   const allCards = loyaltyData.map((acc) => {
     const { daysForRewardExpiration, rewardsExpirationIcon } =
       getRewardsExpirationStuff(acc);
 
     return (
-      <Card style={{ width: cardWidth }} key={acc.id} className="cardCard">
+      <Card key={acc.id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
           <div
             style={{

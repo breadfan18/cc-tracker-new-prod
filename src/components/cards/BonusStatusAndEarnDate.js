@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { formatDate } from "../../helpers";
 import {
@@ -7,7 +7,7 @@ import {
   APP_COLOR_LIGHT_BLACK,
   EDIT_COLOR_GREEN_OPACITY,
 } from "../../constants";
-import { WindowWidthContext } from "../App";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 export default function BonusStatusAndEarnDate({
   card,
@@ -16,7 +16,7 @@ export default function BonusStatusAndEarnDate({
   iconSize,
   isCardDetailsPage,
 }) {
-  const windowWidth = useContext(WindowWidthContext);
+  const { windowWidth, isMobileXS } = useWindhowWidth();
   const hasBonusEarnDate =
     card.bonusEarnDate?.includes("-") || card.bonusEarned;
   const noBonus = card.signupBonus === undefined || card.signupBonus === "0";
@@ -30,7 +30,7 @@ export default function BonusStatusAndEarnDate({
     : APP_COLOR_BLUE_OPACITY;
 
   useEffect(() => {
-    if (isCardDetailsPage && windowWidth < 500) {
+    if (isCardDetailsPage && isMobileXS) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
         "none"
@@ -58,8 +58,7 @@ export default function BonusStatusAndEarnDate({
         backgroundColor,
         paddingRight: isCardDetailsPage && "27px",
         padding: isCard && "5px",
-        borderBottomRightRadius:
-          isCardDetailsPage && windowWidth < 500 && "15px",
+        borderBottomRightRadius: isCardDetailsPage && isMobileXS && "15px",
       }}
     >
       <BonusEarnStatusIcon
