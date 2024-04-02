@@ -50,6 +50,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
             showEditDelete
             showUser={false}
             showCompactTable={false}
+            windowWidth={windowWidth}
           />
         ) : (
           <CardListCards
