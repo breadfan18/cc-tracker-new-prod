@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
@@ -8,19 +8,18 @@ import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { sortNotesByDate } from "../../helpers";
 import CardNotes from "./CardNotes";
-import { WindowWidthContext } from "../App";
 import _ from "lodash";
 import { CardReminderContainer } from "./CardReminderContainer";
 import { useUser } from "reactfire";
 import CardReferrals from "./CardReferrals";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import CardDetailsInfo from "./CardDetailsInfo";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 function CardDetailsPage() {
   const { id } = useParams();
   const cards = useSelector((state) => state.cards);
   const card = getCardById(cards, id);
-  const windowWidth = useContext(WindowWidthContext);
   const { status, data: user } = useUser();
   const referrals = useSelector((state) => state.referrals);
   const referralsForThisCard = referrals.filter(
@@ -42,9 +41,7 @@ function CardDetailsPage() {
   function getCardById(cards, id) {
     return cards?.find((card) => card.id === id) || null;
   }
-
-  const isTablet = windowWidth <= 1000 && windowWidth >= 700;
-  const isMobile = windowWidth < 700;
+  const { windowWidth, isTablet, isMobile } = useWindhowWidth();
 
   return loading ? (
     <Spinner />

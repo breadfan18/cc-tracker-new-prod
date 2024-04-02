@@ -12,7 +12,6 @@ import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import { WindowWidthContext } from "../App";
 import CardText from "./CardText";
 import { setColorForCardStatus } from "../../helpers";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -26,8 +25,6 @@ export default function CardListCards({
   showUserName,
   showBonusInfo,
 }) {
-  const windowWidth = useContext(WindowWidthContext);
-  const cardWidth = windowWidth < 650 ? windowWidth : "20rem";
   const history = useHistory();
 
   const routeChange = (card) => {
@@ -40,7 +37,7 @@ export default function CardListCards({
     const { isAnnualFeeClose, isSpendByDateClose, spendDaysRemaining } =
       getRemindersData(card);
     return (
-      <Card style={{ width: cardWidth }} key={card.id} className="cardCard">
+      <Card key={card.id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
           <div
             style={{

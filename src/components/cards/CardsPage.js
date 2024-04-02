@@ -6,13 +6,13 @@ import CardTabs from "./CardTabs";
 import { sortCardsByDate } from "../../helpers";
 import CardsByUserDropDown from "./CardsByUserDropDown";
 import CardAddEditModal from "./CardAddEditModal";
-import { WindowWidthContext } from "../App";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
 import { useUser } from "reactfire";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 const CardsPage = () => {
-  const windowWidth = useContext(WindowWidthContext);
+  const { isDesktop, windowWidth } = useWindhowWidth();
   const dispatch = useDispatch();
   const { status, data: user } = useUser();
   const cardholders = useSelector((state) => state.cardholders);
@@ -45,7 +45,11 @@ const CardsPage = () => {
       ) : windowWidth < 650 ? (
         <CardsByUserDropDown cards={cards} />
       ) : (
-        <CardTabs cards={cards} />
+        <CardTabs
+          cards={cards}
+          windowWidth={windowWidth}
+          isDesktop={isDesktop}
+        />
       )}
     </div>
   );

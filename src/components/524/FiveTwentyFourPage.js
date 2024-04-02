@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
@@ -11,15 +11,15 @@ import {
 import FiveTwentyFourAccordion from "./FiveTwentyFourAccordion";
 import SelectInput from "../common/SelectInput";
 import CardList from "../cards/CardListTable";
-import { WindowWidthContext } from "../App";
 import CardListCards from "../cards/CardListCards";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { useUser } from "reactfire";
 import _ from "lodash";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 const FiveTwentyFourPage = () => {
   const dispatch = useDispatch();
-  const windowWidth = useContext(WindowWidthContext);
+  const { isDesktop } = useWindhowWidth();
   const [selectedCardHolder, setSelectedCardholder] = useState();
   const { status, data: user } = useUser();
   const cards = useSelector((state) => sortCardsByDate(state.cards));
@@ -62,7 +62,7 @@ const FiveTwentyFourPage = () => {
 
     const cardsListComponent =
       dateSortedCards524.length > 0 ? (
-        windowWidth > 1000 ? (
+        isDesktop ? (
           <CardList
             cards={dateSortedCards524}
             showEditDelete={false}

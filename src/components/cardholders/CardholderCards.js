@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import PropTypes from "prop-types";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import { WindowWidthContext } from "../App";
 import { DELETE_MODAL_TYPES } from "../../constants";
 import CardholderAddEditModal from "./CardHolderAddEditModal";
 import CardsDataMiniTable from "./CardsDataMiniTable";
 import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
 import CardholderPhoto from "./CardholderPhoto";
 import InquiriesMiniTable from "./InquiriesMiniTable";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 export default function CardholderCards({
   cardholders,
@@ -16,7 +16,7 @@ export default function CardholderCards({
   loyaltyByHolder,
   inquiriesByHolder,
 }) {
-  const windowWidth = useContext(WindowWidthContext);
+  const { windowWidth } = useWindhowWidth();
   const cardWidth = windowWidth < 650 ? windowWidth : "18em";
   const allCardholders = cardholders.map((holder) => {
     const cardsForThisHolder = cardsByHolder[holder.id];

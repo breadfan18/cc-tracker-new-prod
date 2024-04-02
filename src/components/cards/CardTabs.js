@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
 import CardListTable from "./CardListTable";
 import { useSelector } from "react-redux";
 import CardListCards from "./CardListCards";
-import { WindowWidthContext } from "../App";
 import { useFilteredData } from "../../hooks/filterCards";
 import _ from "lodash";
 
-function CardTabs({ cards }) {
-  const windowWidth = useContext(WindowWidthContext);
+function CardTabs({ cards, windowWidth, isDesktop }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
@@ -43,21 +41,10 @@ function CardTabs({ cards }) {
     }
   }, [selectedUser, cards]);
 
-  const filterWidth =
-    windowWidth >= 750
-      ? "32vw"
-      : windowWidth < 750 && windowWidth >= 727
-      ? "30vw"
-      : windowWidth < 727 && windowWidth >= 680
-      ? "25vw"
-      : windowWidth < 680 && windowWidth >= 661
-      ? "23vw"
-      : "21vw";
-
   const userTabs = cardholders.map((user) => {
     return (
       <Tab eventKey={user.id} title={user.name.split(" ")[0]} key={user.id}>
-        {windowWidth > 1000 ? (
+        {isDesktop ? (
           <CardListTable
             cards={cardsFilter.cardList}
             showEditDelete
@@ -84,7 +71,7 @@ function CardTabs({ cards }) {
         onChange={handleCardsFilter}
         placeholder="Filter by card name.."
         className="cardTabsFilterInput"
-        style={{ width: filterWidth }}
+        style={{ width: "clamp(21vw, 25vw, 32vw)" }}
       />
       <Tabs
         defaultActiveKey={selectedUser}
@@ -92,17 +79,17 @@ function CardTabs({ cards }) {
         onSelect={handleSelectTab}
       >
         <Tab eventKey="all-cards" title="All Cards">
-          {windowWidth > 1000 ? (
+          {isDesktop ? (
             <CardListTable
               cards={cardsFilter.cardList}
               showEditDelete={true}
               showUser={true}
               showCompactTable={false}
+              windowWidth={windowWidth}
             />
           ) : (
             <CardListCards
               cards={cardsFilter.cardList}
-              windowWidth={windowWidth}
               showEditDelete
               showUserName={true}
               showBonusInfo

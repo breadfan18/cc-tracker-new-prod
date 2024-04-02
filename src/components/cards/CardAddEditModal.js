@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -9,8 +9,8 @@ import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { INQUIRIES, ISSUERS, NEW_CARD } from "../../constants";
-import { WindowWidthContext } from "../App";
 import { useUser } from "reactfire";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 function CardAddEditModal({
   card,
@@ -25,7 +25,7 @@ function CardAddEditModal({
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const toggleShow = () => setShow(!show);
-  const windowWidth = useContext(WindowWidthContext);
+  const { isDesktop } = useWindhowWidth();
   const { data: user } = useUser();
 
   function handleChange(event) {
@@ -166,7 +166,7 @@ function CardAddEditModal({
           <Modal.Title>{cardForModal.id ? "Edit" : "Add"} Card</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {windowWidth > 980 ? (
+          {isDesktop ? (
             <CardForm
               card={cardForModal}
               onSave={handleSaveForFirebase}

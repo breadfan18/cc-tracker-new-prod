@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import CardHolderAddEditModal from "./CardHolderAddEditModal";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
@@ -8,12 +8,12 @@ import { useUser } from "reactfire";
 import CardholdersList from "./CardholdersList";
 import { Spinner } from "../common/Spinner";
 import _ from "lodash";
-import { WindowWidthContext } from "../App";
 import CardholderCards from "./CardholderCards";
 import { calculateCurrentInquiries } from "../../helpers";
+import useWindhowWidth from "../../hooks/windowWidth";
 
 const CardHoldersPage = () => {
-  const windowWidth = useContext(WindowWidthContext);
+  const { isDesktop } = useWindhowWidth();
   const dispatch = useDispatch();
   const { status, data: user } = useUser();
   const cardholders = useSelector((state) =>
@@ -68,7 +68,7 @@ const CardHoldersPage = () => {
       </p>
       {loading ? (
         <Spinner />
-      ) : windowWidth > 950 ? (
+      ) : isDesktop ? (
         <CardholdersList
           cardholders={cardholdersFinal}
           cardsByHolder={cardsByHolder}

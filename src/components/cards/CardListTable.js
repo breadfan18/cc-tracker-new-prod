@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
@@ -11,7 +11,6 @@ import {
 } from "../../helpers";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import { WindowWidthContext } from "../App";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
   APP_COLOR_BLUE,
@@ -34,8 +33,8 @@ export default function CardListTable({
   showEditDelete,
   showUser,
   showCompactTable,
+  windowWidth,
 }) {
-  const windowWidth = useContext(WindowWidthContext);
   const { data, requestSort } = useSortableData(cards);
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();

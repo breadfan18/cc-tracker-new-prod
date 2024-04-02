@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import CardHoldersPage from "./cardholders/CardHoldersPage";
@@ -17,19 +17,12 @@ import Login from "./login/Login";
 import { Spinner } from "./common/Spinner";
 import { useSigninCheck } from "reactfire";
 import ReferralsPage from "./referrals/ReferralsPage";
+import useWindhowWidth from "../hooks/windowWidth";
 export const WindowWidthContext = createContext();
 
 function App() {
   const { status, data: signinResult } = useSigninCheck();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
-
-    return () =>
-      window.removeEventListener("resize", () =>
-        setWindowWidth(window.innerWidth)
-      );
-  }, []);
+  const { windowWidth } = useWindhowWidth();
 
   if (status === "loading") {
     return <Spinner />;
