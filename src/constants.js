@@ -14,7 +14,11 @@ export const CANCELLED_COLOR_RED = "#F8D7DA";
 
 // Texts
 export const REMINDERS_TEXT_AF = "Annual Fee is due within 90 days";
+export const REMINDERS_TEXT_AF_DATE_PASSED =
+  "Annual Fee due date has passed. Adjust the Next Fee Date if AF was paid";
 export const REMINDERS_TEXT_BONUS = "Bonus earn deadline is within 30 days";
+export const REMINDERS_TEXT_BONUS_DATE_PASSED =
+  "Bonus earn deadline has passed. Please update bonus status if earned";
 
 // Data
 export const INQUIRIES = {
