@@ -1,5 +1,6 @@
 import { CARD_DATA_KEYS } from "../constants";
 import {
+  dateHasPassed,
   getSpendByRemainingDays,
   isDateApproaching,
   setNextFeeDataForTable,
@@ -26,6 +27,9 @@ export const getRemindersData = (card) => {
   const isLastReminder =
     isAnnualFeeClose && isSpendByDateClose && bonusNotEarned ? false : true;
 
+  const annualFeeDatePassed =
+    dateHasPassed(card.nextFeeDate) && card.status === "open";
+
   return {
     nextFeeText,
     nextFeeColor,
@@ -36,5 +40,6 @@ export const getRemindersData = (card) => {
     spendByTextColor,
     bonusNotEarned,
     isLastReminder,
+    annualFeeDatePassed,
   };
 };

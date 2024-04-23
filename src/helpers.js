@@ -31,6 +31,12 @@ export function isDateApproaching(data, dataType, numberOfDays) {
   return today >= daysBeforeDate && today <= parsedDate;
 }
 
+export function dateHasPassed(dateString) {
+  const givenDate = new Date(dateString);
+  const currentDate = new Date();
+  return givenDate < currentDate ? true : false;
+}
+
 export function daysTillRewardsExpiration(rewardsExpirationDate) {
   if (!rewardsExpirationDate) return;
   const expirationDate = new Date(rewardsExpirationDate);
@@ -203,6 +209,12 @@ export function sortNumberDesc(num1, num2) {
 }
 
 export function setNextFeeDataForTable(card) {
+  if (dateHasPassed(card.nextFeeDate) && card.status === "open") {
+    return {
+      nextFeeText: `AF due date has passed`,
+      nextFeeColor: DELETE_COLOR_RED,
+    };
+  }
   if (card.nextFeeDate && card.status === "open") {
     return {
       nextFeeText: `Next Fee: ${formatDate(card.nextFeeDate)}`,
