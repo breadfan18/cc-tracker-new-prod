@@ -239,12 +239,19 @@ export function getSpendByRemainingDays(bonusEarned, spendByDate) {
   const daysDifference = differenceInMillis / (1000 * 3600 * 24);
   const spendDaysRemaining = Math.floor(daysDifference);
   const spendByTextColor =
-    spendDaysRemaining > 30 || !spendByDate ? "black" : "orange";
+    spendDaysRemaining > 30 || !spendByDate
+      ? "black"
+      : spendDaysRemaining < 0
+      ? "red"
+      : "orange";
   return {
     spendDaysRemaining,
-    spendDaysRemainingText: spendByDate
-      ? `${spendDaysRemaining} days remaining`
-      : "No Spend By date",
+    spendDaysRemainingText:
+      spendDaysRemaining < 0
+        ? "Spend date has passed"
+        : spendByDate
+        ? `${spendDaysRemaining} days remaining`
+        : "No Spend By date",
     spendByTextColor,
   };
 }
