@@ -99,16 +99,17 @@ export default function CardListCards({
                 title={REMINDERS_TEXT_AF}
               />
             )}
-            {card.spendBy && spendDaysRemaining && isSpendByDateClose && (
-              <BsFillBellFill
-                style={{
-                  color: "orange",
-                  fontSize: "1.5rem",
-                  marginRight: "5px",
-                }}
-                title={REMINDERS_TEXT_BONUS}
-              />
-            )}
+            {(card.spendBy && spendDaysRemaining && isSpendByDateClose) ||
+              (spendDaysRemaining < 0 && (
+                <BsFillBellFill
+                  style={{
+                    color: "orange",
+                    fontSize: "1.5rem",
+                    marginRight: "5px",
+                  }}
+                  title={REMINDERS_TEXT_BONUS}
+                />
+              ))}
           </div>
           {showEditDelete && (
             <div className="editDeleteCard">
