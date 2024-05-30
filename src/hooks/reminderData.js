@@ -30,16 +30,18 @@ export const getRemindersData = (card) => {
   const annualFeeDatePassed =
     dateHasPassed(card.nextFeeDate) && card.status === "open";
 
+  const showAnnualFeeDueIcon =
+    (isAnnualFeeClose || annualFeeDatePassed) && card.status === "open";
+
   return {
     nextFeeText,
     nextFeeColor,
-    isAnnualFeeClose,
     isSpendByDateClose,
     spendDaysRemaining,
     spendDaysRemainingText,
     spendByTextColor,
     bonusNotEarned,
     isLastReminder,
-    annualFeeDatePassed,
+    showAnnualFeeDueIcon,
   };
 };

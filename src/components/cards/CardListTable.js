@@ -113,12 +113,11 @@ export default function CardListTable({
           const {
             nextFeeText,
             nextFeeColor,
-            isAnnualFeeClose,
             isSpendByDateClose,
             spendDaysRemaining,
             spendDaysRemainingText,
             spendByTextColor,
-            annualFeeDatePassed,
+            showAnnualFeeDueIcon,
           } = getRemindersData(card);
 
           const noBonus =
@@ -171,7 +170,7 @@ export default function CardListTable({
                 <div className="flexAndVerticalCenter">
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div className="flexAndVerticalCenter">
-                      {(isAnnualFeeClose || annualFeeDatePassed) && (
+                      {showAnnualFeeDueIcon && (
                         <TbAlertOctagonFilled
                           style={{
                             color: DELETE_COLOR_RED,

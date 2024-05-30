@@ -34,12 +34,8 @@ export default function CardListCards({
 
   const allCards = cards.map((card) => {
     const cardTitleColor = setColorForCardStatus("cardCard", card.status);
-    const {
-      isAnnualFeeClose,
-      isSpendByDateClose,
-      spendDaysRemaining,
-      annualFeeDatePassed,
-    } = getRemindersData(card);
+    const { isSpendByDateClose, spendDaysRemaining, showAnnualFeeDueIcon } =
+      getRemindersData(card);
     return (
       <Card key={card.id} className="cardCard">
         <Card.Body style={{ padding: "0" }}>
@@ -89,7 +85,7 @@ export default function CardListCards({
         </Card.Body>
         <Card.Footer className="cardsCardFooter">
           <div>
-            {(isAnnualFeeClose || annualFeeDatePassed) && (
+            {showAnnualFeeDueIcon && (
               <TbAlertOctagonFilled
                 style={{
                   color: DELETE_COLOR_RED,
