@@ -1116,6 +1116,29 @@
           "status": "closed",
           "userId": "anshu-thapa"
         },
+        "chase-ink-unlimited-anshu-thapa-b3b2770dc03": {
+          "annualFee": 0,
+          "appDate": "2024-06-12",
+          "card": "Ink Unlimited",
+          "cardType": "Business",
+          "cardholder": "Anshu Thapa",
+          "creditLine": "5000",
+          "id": "chase-ink-unlimited-anshu-thapa-b3b2770dc03",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": false
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "signupBonus": "75K UR",
+          "spendBy": "2024-09-12",
+          "spendReq": "6000",
+          "status": "open",
+          "userId": "anshu-thapa"
+        },
         "chase-ink-unlimited-tulasi-uprety-950b23dcaa3": {
           "annualFee": "0",
           "appDate": "2024-03-05",
@@ -2202,6 +2225,20 @@
           "referredCard": "Ink Preferred",
           "referrerId": "swaroop-uprety",
           "referringCardId": "chase-ink-preferred-1-ea7c84df816"
+        },
+        "referral-3b2770dc039": {
+          "id": "referral-3b2770dc039",
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "referralBonus": "40K UR",
+          "referralDate": "2024-06-12",
+          "referralFor": "Anshu Thapa",
+          "referralLink": "https://www.referyourchasecard.com/21q/C08RIIJVFF",
+          "referredCard": "Ink Unlimited",
+          "referrerId": "swaroop-uprety",
+          "referringCardId": "chase-ink-unlimited-1-5c3d36964a7"
         },
         "referral-5b3b2770dc0": {
           "id": "referral-5b3b2770dc0",
