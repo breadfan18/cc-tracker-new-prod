@@ -554,7 +554,7 @@
           "signupBonus": "75K Miles",
           "spendBy": "2023-09-02",
           "spendReq": "4000",
-          "status": "open",
+          "status": "closed",
           "userId": "swaroop-uprety"
         },
         "chase-ba-avios-2-62fb50688fa": {
@@ -601,6 +601,11 @@
               "date": "2023-07-20",
               "id": "621e184fdc2",
               "note": "CLOSED on 4/18/2023"
+            },
+            "a536ce3025e": {
+              "date": "2024-05-30",
+              "id": "a536ce3025e",
+              "note": "Able to earn bonus again starting June 2024.. July to be safe."
             }
           },
           "cardType": "Personal",
@@ -699,6 +704,29 @@
           "spendReq": "1000",
           "status": "open",
           "userId": "swaroop-uprety"
+        },
+        "chase-freedom-unlimited-tulasi-uprety-536ce3025e3": {
+          "annualFee": 0,
+          "appDate": "2024-05-29",
+          "card": "Freedom Unlimited",
+          "cardType": "Personal",
+          "cardholder": "Tulasi Uprety",
+          "creditLine": "5500",
+          "id": "chase-freedom-unlimited-tulasi-uprety-536ce3025e3",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": false
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "signupBonus": "20K UR",
+          "spendBy": "2024-08-30",
+          "spendReq": "500",
+          "status": "open",
+          "userId": "tulasi-uprety"
         },
         "chase-ink-cash-1-c0c780d5c3d": {
           "annualFee": "0",
@@ -802,6 +830,8 @@
         "chase-ink-cash-astha-thapa-41687bd652b": {
           "annualFee": 0,
           "appDate": "2024-01-23",
+          "bonusEarnDate": "2024-04-18",
+          "bonusEarned": true,
           "card": "Ink Cash",
           "cardType": "Business",
           "cardholder": "Astha Thapa",
@@ -899,6 +929,11 @@
               "date": "2024-02-07",
               "id": "5a7d9d9666c",
               "note": "Made a referral to Anshu on 1/12/24 for Ink Preferred"
+            },
+            "ceef432a6e4": {
+              "date": "2024-07-22",
+              "id": "ceef432a6e4",
+              "note": "Closed on 7/22/2024"
             }
           },
           "cardType": "Business",
@@ -918,7 +953,7 @@
           "signupBonus": "100K UR",
           "spendBy": "2023-10-28",
           "spendReq": "8000",
-          "status": "open",
+          "status": "closed",
           "userId": "swaroop-uprety"
         },
         "chase-ink-preferred-2-1c9d062fb50": {
@@ -1086,9 +1121,34 @@
           "status": "closed",
           "userId": "anshu-thapa"
         },
+        "chase-ink-unlimited-anshu-thapa-b3b2770dc03": {
+          "annualFee": 0,
+          "appDate": "2024-06-12",
+          "card": "Ink Unlimited",
+          "cardType": "Business",
+          "cardholder": "Anshu Thapa",
+          "creditLine": "5000",
+          "id": "chase-ink-unlimited-anshu-thapa-b3b2770dc03",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": false
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "signupBonus": "75K UR",
+          "spendBy": "2024-09-12",
+          "spendReq": "6000",
+          "status": "open",
+          "userId": "anshu-thapa"
+        },
         "chase-ink-unlimited-tulasi-uprety-950b23dcaa3": {
           "annualFee": "0",
           "appDate": "2024-03-05",
+          "bonusEarnDate": "2024-06-07",
+          "bonusEarned": true,
           "card": "Ink Unlimited",
           "cardNotes": {
             "222d4bd7034": {
@@ -1280,6 +1340,11 @@
               "id": "be4f2c8f446",
               "note": "CSP Bonus earned in June 13 2023"
             },
+            "d21be1471b3": {
+              "date": "2024-06-03",
+              "id": "d21be1471b3",
+              "note": "AF paid 6/2/2024. "
+            },
             "e4f2c8f4466": {
               "date": "2023-07-20",
               "id": "e4f2c8f4466",
@@ -1299,7 +1364,7 @@
             "img": "https://i.imgur.com/AsfYKFY.png",
             "name": "Chase"
           },
-          "nextFeeDate": "2024-05-01",
+          "nextFeeDate": "2025-06-01",
           "signupBonus": "80K UR",
           "spendBy": "2023-08-01",
           "spendReq": 4000,
@@ -1630,7 +1695,7 @@
             "type": "airlines",
             "url": "https://www.britishairways.com/travel/home/public/en_us/"
           },
-          "rewardsBalance": "68973",
+          "rewardsBalance": "42507",
           "rewardsExpiration": "2026-05-25",
           "userId": "swaroop-uprety"
         },
@@ -1889,7 +1954,7 @@
           "loginId": "breadfan18",
           "loyaltyType": "hotels",
           "memberId": "526971755R",
-          "password": "T*********35",
+          "password": "T**********0#",
           "program": {
             "id": 27,
             "img": "https://i.imgur.com/XbQJMri.png",
@@ -1897,7 +1962,7 @@
             "type": "hotels",
             "url": "https://www.hyatt.com/en-US/member/sign-in"
           },
-          "rewardsBalance": "3568",
+          "rewardsBalance": "4124",
           "userId": "swaroop-uprety"
         },
         "hyatt-anshu-thapa-c43fa3a5126": {
@@ -2166,6 +2231,38 @@
           "referrerId": "swaroop-uprety",
           "referringCardId": "chase-ink-preferred-1-ea7c84df816"
         },
+        "referral-3b2770dc039": {
+          "id": "referral-3b2770dc039",
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "referralBonus": "40K UR",
+          "referralBonusEarned": true,
+          "referralDate": "2024-06-12",
+          "referralEarnDate": "2024-07-12",
+          "referralFor": "Anshu Thapa",
+          "referralLink": "https://www.referyourchasecard.com/21q/C08RIIJVFF",
+          "referredCard": "Ink Unlimited",
+          "referrerId": "swaroop-uprety",
+          "referringCardId": "chase-ink-unlimited-1-5c3d36964a7"
+        },
+        "referral-5b3b2770dc0": {
+          "id": "referral-5b3b2770dc0",
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "referralBonus": "5K UR",
+          "referralBonusEarned": true,
+          "referralDate": "2024-05-29",
+          "referralEarnDate": "2024-07-10",
+          "referralFor": "Tulasi Uprety",
+          "referralLink": "https://www.referyourchasecard.com/18j/XW6WQTX1ZA",
+          "referredCard": "Freedom Ultd",
+          "referrerId": "swaroop-uprety",
+          "referringCardId": "chase-freedom-ultd-1-9ea7c84df81"
+        },
         "referral-69f132c3d81": {
           "id": "referral-69f132c3d81",
           "issuer": {
@@ -2189,7 +2286,9 @@
             "name": "Chase"
           },
           "referralBonus": "40K UR",
+          "referralBonusEarned": true,
           "referralDate": "2024-03-05",
+          "referralEarnDate": "2024-04-15",
           "referralFor": "Tulasi Uprety",
           "referralLink": "https://www.referyourchasecard.com/21p/OLWSDRLT94",
           "referredCard": "Ink Ultd",
