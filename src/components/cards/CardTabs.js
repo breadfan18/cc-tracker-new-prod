@@ -19,6 +19,8 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
   const cardsForSelectedUser =
     selectedUser === "all-cards"
       ? cards
+      : selectedUser === "favorites"
+      ? cards.filter((card) => card.isFav)
       : cards.filter((card) => card.userId === selectedUser);
 
   const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
@@ -98,6 +100,24 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
           )}
         </Tab>
         {userTabs}
+        <Tab eventKey="favorites" title="Favorites">
+          {isDesktop ? (
+            <CardListTable
+              cards={cardsFilter.cardList}
+              showEditDelete={true}
+              showUser={true}
+              showCompactTable={false}
+              windowWidth={windowWidth}
+            />
+          ) : (
+            <CardListCards
+              cards={cardsFilter.cardList}
+              showEditDelete
+              showUserName={true}
+              showBonusInfo
+            />
+          )}
+        </Tab>
       </Tabs>
     </>
   );
