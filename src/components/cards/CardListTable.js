@@ -27,6 +27,7 @@ import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { getRemindersData } from "../../hooks/reminderData";
+import CardFavIcon from "./CardFavIcon";
 
 export default function CardListTable({
   cards,
@@ -39,9 +40,9 @@ export default function CardListTable({
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
 
-  const routeChange = (card) => {
+  const routeChange = (card, e) => {
     let path = `/card/${card.id}`;
-    if (!modalOpen) history.push(path);
+    if (!modalOpen && e.target.tagName !== "path") history.push(path);
   };
 
   function handleTrColorOnHover(e) {
@@ -130,7 +131,7 @@ export default function CardListTable({
               onMouseEnter={handleTrColorOnHover}
               onMouseLeave={(e) => handleTrColorReset(e, card)}
               style={{ cursor: "pointer" }}
-              onClick={() => routeChange(card)}
+              onClick={(e) => routeChange(card, e)}
             >
               {!showCompactTable && (
                 <td style={{ paddingLeft: 0 }}>
@@ -226,6 +227,7 @@ export default function CardListTable({
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">
+                    <CardFavIcon card={card} />
                     <CardAddEditModal card={card} setModalOpen={setModalOpen} />
                     <ConfirmDeleteModal
                       data={card}

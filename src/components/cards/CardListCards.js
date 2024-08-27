@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import {
   APP_COLOR_BLACK_OPACITY,
@@ -19,6 +19,7 @@ import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { getRemindersData } from "../../hooks/reminderData";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
+import CardFavIcon from "./CardFavIcon";
 export default function CardListCards({
   cards,
   showEditDelete,
@@ -109,6 +110,7 @@ export default function CardListCards({
           </div>
           {showEditDelete && (
             <div className="editDeleteCard">
+              <CardFavIcon card={card} />
               <CardAddEditModal card={card} />
               <ConfirmDeleteModal
                 data={card}

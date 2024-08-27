@@ -222,6 +222,18 @@ div.alert-danger {
   font-weight: bold;
 }
 
+.nav-tabs .nav-item:last-child .nav-link {
+  background-color: rgba(184, 51, 44, 0.3);
+  color: rgb(184, 51, 44);
+  border-bottom: 2px solid rgb(184, 51, 44);
+}
+
+.nav-tabs .nav-item:last-child .nav-link.active {
+  background-color: rgb(184, 51, 44);
+  color: white;
+  font-weight: bold;
+}
+
 .tableHeader > svg {
   cursor: pointer;
 }
@@ -245,6 +257,12 @@ div.alert-danger {
 .rounded-circle:hover {
   transform: scale(1.1);
   box-shadow: 1px 1px 2px black;
+}
+
+.heart {
+  font-size: 2.5rem;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 #cardBody,

@@ -15,6 +15,7 @@ import CardReferrals from "./CardReferrals";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import CardDetailsInfo from "./CardDetailsInfo";
 import useWindhowWidth from "../../hooks/windowWidth";
+import CardFavIcon from "./CardFavIcon";
 
 function CardDetailsPage() {
   const { id } = useParams();
@@ -50,6 +51,7 @@ function CardDetailsPage() {
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Card Details</h2>
         <div className="editDeleteCard">
+          <CardFavIcon card={card} firebaseUid={user?.uid} />
           <CardAddEditModal card={card} />
           <ConfirmDeleteModal
             data={card}
