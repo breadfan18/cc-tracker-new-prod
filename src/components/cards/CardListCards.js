@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { useUser } from "reactfire";
 import {
   APP_COLOR_BLACK_OPACITY,
   DELETE_MODAL_TYPES,
@@ -28,7 +27,6 @@ export default function CardListCards({
   showBonusInfo,
 }) {
   const history = useHistory();
-  const { data: user } = useUser();
 
   const routeChange = (card) => {
     let path = `/card/${card.id}`;
@@ -112,7 +110,7 @@ export default function CardListCards({
           </div>
           {showEditDelete && (
             <div className="editDeleteCard">
-              <CardFavIcon card={card} firebaseUid={user?.uid} />
+              <CardFavIcon card={card} />
               <CardAddEditModal card={card} />
               <ConfirmDeleteModal
                 data={card}

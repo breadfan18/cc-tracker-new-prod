@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import { FaSort } from "react-icons/fa";
-import { useUser } from "reactfire";
 import { useSortableData } from "../../hooks/sortData";
 import {
   formatDate,
@@ -37,7 +36,6 @@ export default function CardListTable({
   showCompactTable,
   windowWidth,
 }) {
-  const { data: user } = useUser();
   const { data, requestSort } = useSortableData(cards);
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
@@ -229,7 +227,7 @@ export default function CardListTable({
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">
-                    <CardFavIcon card={card} firebaseUid={user?.uid} />
+                    <CardFavIcon card={card} />
                     <CardAddEditModal card={card} setModalOpen={setModalOpen} />
                     <ConfirmDeleteModal
                       data={card}
