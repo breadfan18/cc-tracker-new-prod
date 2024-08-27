@@ -192,8 +192,9 @@ export const PROGRAMS = [
   {
     id: 11,
     type: "airlines",
-    name: "Air France Flying Blue",
-    img: "https://i.imgur.com/B7Jvm5b.png",
+    name: "Flying Blue - AirFrance/KLM",
+    img: "https://i.imgur.com/l9kf8zG.png",
+    url: "https://login.klm.com/login/otp",
   },
   {
     id: 12,
@@ -305,13 +306,6 @@ export const PROGRAMS = [
     type: "misc",
     name: "Capital One Rewards",
     img: "https://i.imgur.com/u3Rr8rT.png",
-  },
-  {
-    id: 30,
-    type: "airlines",
-    name: "Flying Blue - AirFrance/KLM",
-    img: "https://i.imgur.com/l9kf8zG.png",
-    url: "https://login.klm.com/login/otp",
   },
 ];
 
