@@ -37,7 +37,7 @@ export default function CardListTable({
   showCompactTable,
   windowWidth,
 }) {
-  const { status, data: user } = useUser();
+  const { data: user } = useUser();
   const { data, requestSort } = useSortableData(cards);
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
