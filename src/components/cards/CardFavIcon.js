@@ -14,12 +14,9 @@ export default function CardFavIcon({ card, firebaseUid }) {
           saveCardToFirebase({ ...card, isFav: !card.isFav }, firebaseUid)
         )
       }
-      style={{
-        fontSize: "2.5rem",
-        color: card.isFav ? "#b8332c" : APP_COLOR_BLACK_OPACITY,
-        marginRight: "5px",
-      }}
+      style={{ color: card.isFav ? "#b8332c" : APP_COLOR_BLACK_OPACITY }}
       title={`${card.isFav ? "Remove from" : "Add to"} Favorites`}
+      className="heart rounded-circle"
     />
   );
 }
