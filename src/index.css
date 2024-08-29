@@ -279,13 +279,13 @@ div.alert-danger {
   font-weight: bold;
 }
 
-.nav-tabs .nav-item:last-child .nav-link {
+.cardsContainer .nav-tabs .nav-item:last-child .nav-link {
   background-color: rgba(184, 51, 44, 0.3);
   color: var(--fav-red);
   border-bottom: 2px solid var(--fav-red);
 }
 
-.nav-tabs .nav-item:last-child .nav-link.active {
+.cardsContainer .nav-tabs .nav-item:last-child .nav-link.active {
   background-color: var(--fav-red);
   color: white;
   font-weight: bold;
