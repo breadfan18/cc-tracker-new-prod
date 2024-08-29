@@ -5,8 +5,6 @@ import { Form, Button } from "react-bootstrap";
 import { useFilteredData } from "../../hooks/filterCards";
 import { useSelector } from "react-redux";
 import _ from "lodash";
-import { AiFillHeart } from "react-icons/ai";
-
 function CardsByUserDropDown({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
@@ -75,12 +73,10 @@ function CardsByUserDropDown({ cards }) {
       <Button
         className="cardByDropDownFavButton"
         onClick={() => setSelectedUser("favorites")}
+        active={selectedUser === "favorites"}
       >
         Favorites
       </Button>
-      {selectedUser === "favorites" && (
-        <AiFillHeart className="cardsByDropDownHeart" />
-      )}
       <hr />
       <CardListCards
         cards={cardsFilter.cardList}

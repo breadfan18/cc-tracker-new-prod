@@ -215,6 +215,19 @@ nav a {
   font-weight: bold;
 }
 
+.cardByDropDownFavButton:hover {
+  color: white;
+  background-color: var(--fav-red);
+  border: 1px solid var(--fav-red);
+  cursor: pointer;
+}
+
+.cardByDropDownFavButton.active {
+  color: white;
+  background-color: var(--fav-red);
+  border: 1px solid var(--fav-red);
+}
+
 .cardsByDropDownHeart {
   color: var(--fav-red);
   font-size: 2.5rem;
