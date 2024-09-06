@@ -31,6 +31,7 @@ function UserProfileSection({ user, userLogout }) {
           fontSize: "1.8rem",
           cursor: "pointer",
           marginLeft: "5px",
+          color: "black",
         }}
         title="Sign Out"
       />

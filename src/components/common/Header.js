@@ -6,7 +6,7 @@ import UserProfileSection from "./UserProfileSection";
 
 const Header = ({ user, isMobile }) => {
   const [open, setOpen] = useState(false);
-  const activeStyle = { backgroundColor: "white", color: APP_COLOR_BLUE };
+  const activeStyle = { backgroundColor: APP_COLOR_BLUE, color: "white" };
   let navRef = useRef();
 
   useEffect(() => {
