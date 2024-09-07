@@ -20,7 +20,7 @@ function UserProfileSection({ user, userLogout }) {
     }
   };
 
-  const hideUserOptionsOnDocumentClick = (event) => {
+  const hideShowMenuOnDocumentClick = (event) => {
     if (!showMenuRef.current?.contains(event.target)) {
       setShowMenu(false);
     }
@@ -29,11 +29,11 @@ function UserProfileSection({ user, userLogout }) {
   const toggleShowMenu = () => setShowMenu(!showMenu);
 
   useEffect(() => {
-    document.addEventListener("mousedown", hideUserOptionsOnDocumentClick);
+    document.addEventListener("mousedown", hideShowMenuOnDocumentClick);
     document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener("mousedown", hideUserOptionsOnDocumentClick);
+      document.removeEventListener("mousedown", hideShowMenuOnDocumentClick);
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, []);
