@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../tools/firebase";
 import { GoSignOut } from "react-icons/go";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -11,7 +11,32 @@ import useWindhowWidth from "../../hooks/windowWidth";
 function UserProfileSection({ user, userLogout }) {
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
+  const showMenuRef = useRef(null);
   const { isMobile } = useWindhowWidth();
+
+  const handleEscapeKey = (event) => {
+    if (event.key === "Escape") {
+      setShowMenu(false);
+    }
+  };
+
+  const hideUserOptionsOnDocumentClick = (event) => {
+    if (!showMenuRef.current?.contains(event.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  const toggleShowMenu = () => setShowMenu(!showMenu);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", hideUserOptionsOnDocumentClick);
+    document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("mousedown", hideUserOptionsOnDocumentClick);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
 
   function handleSignOut() {
     userLogout(auth);
@@ -52,7 +77,7 @@ function UserProfileSection({ user, userLogout }) {
             cursor: "pointer",
             color: isMobile ? "white" : "black",
           }}
-          onClick={() => setShowMenu(!showMenu)}
+          onClick={toggleShowMenu}
         />
       ) : (
         <FaAngleDown
@@ -62,12 +87,12 @@ function UserProfileSection({ user, userLogout }) {
             cursor: "pointer",
             color: isMobile ? "white" : "black",
           }}
-          onClick={() => setShowMenu(!showMenu)}
+          onClick={toggleShowMenu}
         />
       )}
       {showMenu && (
         <div>
-          <div className="userProfileMenu">
+          <div className="userProfileMenu" ref={showMenuRef}>
             <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
               <li
                 style={{
