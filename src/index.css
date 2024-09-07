@@ -164,8 +164,8 @@ nav a {
 
 .navSmallContent a:hover {
   color: var(--color-blue);
-  background-color: "white";
-  border-radius: "5px";
+  background-color: var(--light-gray);
+  border-radius: 5px;
 }
 
 #userSection {
@@ -188,6 +188,16 @@ nav a {
   background-color: white;
   box-shadow: black 0px 4px 8px -6px;
   border-radius: 4px;
+}
+
+.userProfileMenu li:hover {
+  background-color: var(--light-gray);
+}
+
+.userMenuOptions {
+  padding: 10px;
+  box-shadow: -4px 0 8px -6px rgb(59, 54, 54);
+  color: gray;
 }
 
 .sectionHeaders {
@@ -229,7 +239,7 @@ nav a {
 #cardFilterUserSelect {
   width: clamp(9rem, 11rem, 20rem);
   padding: 10px;
-  background-color: rgb(210, 237, 246);
+  background-color: var(--light-blue);
   border-radius: 10px 0 0 10px;
   color: var(--color-blue);
 }

@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../tools/firebase";
-import { GoSignOut } from "react-icons/go";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { userLogout } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import {
+  MdSpaceDashboard,
+  MdAdminPanelSettings,
+  MdLogout,
+} from "react-icons/md";
 import { APP_COLOR_BLUE, APP_COLOR_LIGHT_BLACK } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
 
@@ -62,7 +67,13 @@ function UserProfileSection({ user, userLogout }) {
         title={user.displayName}
       />
       <article>
-        <p style={{ fontSize: "12px", color: "gray", marginBottom: "-5px" }}>
+        <p
+          style={{
+            fontSize: "12px",
+            color: isMobile ? "white" : "gray",
+            marginBottom: "-5px",
+          }}
+        >
           Basic Plan
         </p>
         <h5 style={{ color: isMobile ? "white" : APP_COLOR_BLUE }}>
@@ -94,15 +105,32 @@ function UserProfileSection({ user, userLogout }) {
         <div>
           <div className="userProfileMenu" ref={showMenuRef}>
             <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
+              <li className="userMenuOptions">
+                <MdSpaceDashboard
+                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+                />
+                Dashboard
+              </li>
+              <li className="userMenuOptions">
+                <RiLockPasswordFill
+                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+                />
+                Security
+              </li>
+              <li className="userMenuOptions">
+                <MdAdminPanelSettings
+                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+                />
+                Admin Portal
+              </li>
               <li
-                style={{
-                  padding: "10px",
-                  boxShadow: `-4px 0 8px -6px ${APP_COLOR_LIGHT_BLACK}`,
-                  cursor: "pointer",
-                }}
+                className="userMenuOptions"
+                style={{ cursor: "pointer", color: "black" }}
                 onClick={handleSignOut}
               >
-                <GoSignOut style={{ marginRight: "10px" }} />
+                <MdLogout
+                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+                />
                 Sign Out
               </li>
             </ul>
