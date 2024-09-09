@@ -102,39 +102,37 @@ function UserProfileSection({ user, userLogout }) {
         />
       )}
       {showMenu && (
-        <div>
-          <div className="userProfileMenu" ref={showMenuRef}>
-            <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
-              <li className="userMenuOptions">
-                <MdSpaceDashboard
-                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-                />
-                Dashboard
-              </li>
-              <li className="userMenuOptions">
-                <RiLockPasswordFill
-                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-                />
-                Security
-              </li>
-              <li className="userMenuOptions">
-                <MdAdminPanelSettings
-                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-                />
-                Admin Portal
-              </li>
-              <li
-                className="userMenuOptions"
-                style={{ cursor: "pointer", color: "black" }}
-                onClick={handleSignOut}
-              >
-                <MdLogout
-                  style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-                />
-                Sign Out
-              </li>
-            </ul>
-          </div>
+        <div className="userProfileMenu" ref={showMenuRef}>
+          <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
+            <li className="userMenuOptions">
+              <MdSpaceDashboard
+                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+              />
+              Dashboard
+            </li>
+            <li className="userMenuOptions">
+              <RiLockPasswordFill
+                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+              />
+              Security
+            </li>
+            <li className="userMenuOptions">
+              <MdAdminPanelSettings
+                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+              />
+              Admin Portal
+            </li>
+            <li
+              className="userMenuOptions"
+              style={{ cursor: "pointer", color: "black" }}
+              onClick={handleSignOut}
+            >
+              <MdLogout
+                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
+              />
+              Sign Out
+            </li>
+          </ul>
         </div>
       )}
     </section>
