@@ -23,7 +23,7 @@ const newCardholder = {
   lastName: "",
   img: null,
 };
-function CardholderAddEditModal({ cardholder, disableBtn }) {
+function CardholderAddEditModal({ cardholder, disableBtn, showAsRectangle }) {
   const [cardHolderForModal, setCardHolderForModal] = useState(
     cardholder
       ? {
@@ -152,7 +152,7 @@ function CardholderAddEditModal({ cardholder, disableBtn }) {
         <Button
           variant="success"
           onClick={toggleShow}
-          className="rounded-circle"
+          className={!showAsRectangle ? "rounded-circle" : ""}
           disabled={disableBtn}
         >
           <MdModeEditOutline />

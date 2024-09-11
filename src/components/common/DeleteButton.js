@@ -3,12 +3,12 @@ import { Button } from "react-bootstrap";
 import { BsTrash3 } from "react-icons/bs";
 import PropTypes from "prop-types";
 
-export function DeleteButton({ onClick, disableBtn }) {
+export function DeleteButton({ onClick, disableBtn, showAsRectangle }) {
   return (
     <Button
       variant="danger"
       onClick={onClick}
-      className="rounded-circle"
+      className={!showAsRectangle ? "rounded-circle" : ""}
       disabled={disableBtn}
     >
       <BsTrash3 />

@@ -24,12 +24,13 @@ export default function CardholderCards({
 
     return (
       <div className="cardholderCard" style={{ width: cardWidth }}>
-        <div>
+        <div id="cardholderCardImgSection">
           <CardholderPhoto img={holder.img} heightAndWidth="6rem" imgOnCard />
-          <div className=" right">
+          <div id="editDeleteOnCardholderCards">
             <CardholderAddEditModal
               cardholder={holder}
               disableBtn={holder.isPrimary}
+              showAsRectangle
             />
             <ConfirmDeleteModal
               data={holder}
@@ -37,11 +38,14 @@ export default function CardholderCards({
               disableBtn={
                 holder.hasCards || holder.hasLoyalty || holder.isPrimary
               }
+              showAsRectangle
             />
           </div>
         </div>
         <div style={{ marginLeft: "10px", flex: 1 }}>
-          <p style={{ color: APP_COLOR_BLUE }}>{holder.name}</p>
+          <p style={{ color: APP_COLOR_BLUE }}>
+            {holder.name} {holder.isPrimary && "(Primary)"}
+          </p>
           <section className="cardholderCardDataSection">
             <CardsDataMiniTable cards={cardsForThisHolder} isLoadedInCard />
             <LoyaltyDataMiniTable

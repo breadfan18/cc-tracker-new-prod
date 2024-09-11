@@ -18,6 +18,7 @@ export default function ConfirmDeleteModal({
   setModalOpen,
   redirect,
   disableBtn = false,
+  showAsRectangle,
 }) {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
@@ -89,7 +90,11 @@ export default function ConfirmDeleteModal({
 
   return (
     <>
-      <DeleteButton onClick={handleDeleteButtonClick} disableBtn={disableBtn} />
+      <DeleteButton
+        onClick={handleDeleteButtonClick}
+        disableBtn={disableBtn}
+        showAsRectangle={showAsRectangle}
+      />
       <Modal show={show} onHide={toggleModal} centered>
         <Modal.Header className="modalHeader" closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>

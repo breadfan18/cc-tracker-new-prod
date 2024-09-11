@@ -533,6 +533,12 @@ input[type="search"]::-webkit-search-cancel-button {
   border-radius: 10px;
 }
 
+#cardholderCardImgSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cardholderCardDataSection {
   font-size: 10px;
 }
@@ -541,10 +547,19 @@ input[type="search"]::-webkit-search-cancel-button {
   margin-bottom: 8px;
 }
 
-.editDeleteOnCardholderCards {
+#editDeleteOnCardholderCards {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-top: 10px;
+}
+
+#editDeleteOnCardholderCards button {
+  width: 6rem;
+}
+
+#editDeleteOnCardholderCards button:first-child {
+  margin-bottom: 5px;
 }
 
 .cardholderCardMiniTableContainer {
