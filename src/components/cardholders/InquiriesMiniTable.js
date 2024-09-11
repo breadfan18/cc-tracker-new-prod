@@ -1,13 +1,45 @@
 import React from "react";
-import { CREDIT_BUREAUS } from "../../constants";
+import { APP_COLOR_LIGHT_GRAY, CREDIT_BUREAUS } from "../../constants";
 import { titleCase } from "../../helpers";
 
-export default function InquiriesMiniTable({ inquiries, layout }) {
+export default function InquiriesMiniTable({
+  inquiries,
+  layout,
+  isLoadedInCard,
+}) {
   const totalInquiries = inquiries
     ? Object.keys(inquiries).reduce((total, i) => (total += inquiries[i]), 0)
     : 0;
   const miniDataSectionMarginRight = layout === "list" && "1.5rem";
-  return (
+
+  const inquiriesByBureau = CREDIT_BUREAUS.map((bureau) => {
+    return {
+      bureauName: bureau.name,
+      inquiries: inquiries ? inquiries[bureau.name] : 0,
+    };
+  });
+
+  return isLoadedInCard ? (
+    <article>
+      <p>Inquiries</p>
+      <table style={{ backgroundColor: APP_COLOR_LIGHT_GRAY, width: "100%" }}>
+        <thead style={{ borderBottom: "1px solid black" }}>
+          <tr>
+            {inquiriesByBureau.map((bureau) => (
+              <th>{titleCase(bureau.bureauName)}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {inquiriesByBureau.map((bureau) => (
+              <th>{bureau.inquiries}</th>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  ) : (
     <section
       className="cardholderDataSection"
       style={{ marginRight: miniDataSectionMarginRight }}
