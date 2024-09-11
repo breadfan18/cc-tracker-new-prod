@@ -61,6 +61,7 @@ const CardHoldersPage = () => {
           borderRadius: "10px",
           color: "gray",
           marginBottom: "15px",
+          fontSize: "14px",
         }}
       >
         NOTE - Card Holders with existing cards or loyalty accounts cannot be

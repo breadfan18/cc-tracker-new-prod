@@ -1,5 +1,5 @@
 import React from "react";
-import { APP_COLOR_LIGHT_GRAY, CREDIT_BUREAUS } from "../../constants";
+import { CREDIT_BUREAUS } from "../../constants";
 import { titleCase } from "../../helpers";
 
 export default function InquiriesMiniTable({
@@ -22,22 +22,24 @@ export default function InquiriesMiniTable({
   return isLoadedInCard ? (
     <article>
       <p>Inquiries</p>
-      <table style={{ backgroundColor: APP_COLOR_LIGHT_GRAY, width: "100%" }}>
-        <thead style={{ borderBottom: "1px solid black" }}>
-          <tr>
-            {inquiriesByBureau.map((bureau) => (
-              <th>{titleCase(bureau.bureauName)}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {inquiriesByBureau.map((bureau) => (
-              <th>{bureau.inquiries}</th>
-            ))}
-          </tr>
-        </tbody>
-      </table>
+      <div className="cardholderCardMiniTableContainer">
+        <table className="cardholderCardMiniTable">
+          <thead style={{ borderBottom: "1px solid black" }}>
+            <tr>
+              {inquiriesByBureau.map((bureau) => (
+                <th>{titleCase(bureau.bureauName)}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {inquiriesByBureau.map((bureau) => (
+                <th>{bureau.inquiries}</th>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </article>
   ) : (
     <section

@@ -384,29 +384,6 @@ div.alert-danger {
   align-items: center;
 }
 
-#cardholderCardBody {
-  display: flex;
-  flex-direction: column;
-  padding: 5px 20px 15px 20px;
-  margin-top: 40px;
-}
-
-.cardholderCardTitle {
-  margin: 0;
-  text-decoration: bold;
-  display: flex;
-  justify-content: center;
-  height: 4rem;
-  background-color: var(--light-blue);
-}
-
-#cardholderCardName {
-  text-align: center;
-  margin: 10px 0 20px 0px;
-  color: var(--color-blue);
-  font-size: 18px;
-}
-
 #cardBody:hover {
   background-color: var(--black-opacity);
   cursor: pointer;
@@ -419,7 +396,7 @@ div.alert-danger {
 #cardCardContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 28px;
+  gap: 15px;
   padding: 0 10px 0 0;
 }
 
@@ -548,14 +525,48 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .cardholderCard {
   box-shadow: 0 0 15px gray;
-  border: 10px solid var(--light-blue);
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.cardholderCardDataSection {
+  font-size: 10px;
+}
+
+.cardholderCardDataSection article {
+  margin-bottom: 8px;
+}
+
+.editDeleteOnCardholderCards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.cardholderCardMiniTableContainer {
+  padding: 0 5px;
+  background-color: var(--black-opacity);
+  border-radius: 5px;
+}
+
+.cardholderCardMiniTable {
+  width: 100%;
+}
+
+.cardholderCardMiniTable th,
+.cardholderCardMiniTable td {
+  width: 33.33%;
+  text-align: left;
 }
 
 .cardholderDataSection {
   display: flex;
   flex-direction: column;
   background-color: rgb(243, 240, 240);
-  padding: 5px 8px;
   border-radius: 10px;
 }
 

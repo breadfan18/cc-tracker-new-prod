@@ -1,6 +1,6 @@
 import React from "react";
 import { groupBy } from "lodash";
-import { APP_COLOR_LIGHT_GRAY, CARD_STATUS } from "../../constants";
+import { CARD_STATUS } from "../../constants";
 import { titleCase } from "../../helpers";
 
 export default function CardsDataMiniTable({ cards, layout, isLoadedInCard }) {
@@ -9,22 +9,24 @@ export default function CardsDataMiniTable({ cards, layout, isLoadedInCard }) {
   return isLoadedInCard ? (
     <article>
       <p>Cards</p>
-      <table style={{ backgroundColor: APP_COLOR_LIGHT_GRAY, width: "100%" }}>
-        <thead style={{ borderBottom: "1px solid black" }}>
-          <tr>
-            {CARD_STATUS.map((status) => (
-              <th>{titleCase(status)}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {CARD_STATUS.map((status) => (
-              <td>{cardsByStatus[status]?.length || 0}</td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
+      <div className="cardholderCardMiniTableContainer">
+        <table className="cardholderCardMiniTable">
+          <thead style={{ borderBottom: "1px solid black" }}>
+            <tr style={{ padding: "5px" }}>
+              {CARD_STATUS.map((status) => (
+                <th>{titleCase(status)}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {CARD_STATUS.map((status) => (
+                <td>{cardsByStatus[status]?.length || 0}</td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </article>
   ) : (
     <section

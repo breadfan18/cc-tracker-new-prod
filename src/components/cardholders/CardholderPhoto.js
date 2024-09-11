@@ -6,16 +6,14 @@ export default function CardholderPhoto({ img, heightAndWidth, imgOnCard }) {
     height: heightAndWidth,
     width: heightAndWidth,
     borderRadius: "50%",
-    border: "2px solid gray",
+    border: "1px solid gray",
     objectFit: "cover",
   };
 
   const photoOnCardStyles = {
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: "100px",
-    marginBottom: "50px",
+    marginTop: "5px",
     padding: "2px",
+    borderRadius: "10%",
   };
 
   const finalStyles = imgOnCard

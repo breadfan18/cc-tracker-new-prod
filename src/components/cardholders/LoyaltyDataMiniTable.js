@@ -1,7 +1,7 @@
 import React from "react";
 import { groupBy } from "lodash";
 import { titleCase } from "../../helpers";
-import { ACCOUNT_TYPE, APP_COLOR_LIGHT_GRAY } from "../../constants";
+import { ACCOUNT_TYPE } from "../../constants";
 
 export default function LoyaltyDataMiniTable({
   loyaltyData,
@@ -13,22 +13,24 @@ export default function LoyaltyDataMiniTable({
   return isLoadedInCard ? (
     <article>
       <p>Loyalty</p>
-      <table style={{ backgroundColor: APP_COLOR_LIGHT_GRAY, width: "100%" }}>
-        <thead style={{ borderBottom: "1px solid black" }}>
-          <tr>
-            {ACCOUNT_TYPE.map((loyaltyType) => (
-              <th>{titleCase(loyaltyType)}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {ACCOUNT_TYPE.map((loyaltyType) => (
-              <td>{loyaltyByType[loyaltyType]?.length || 0}</td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
+      <div className="cardholderCardMiniTableContainer">
+        <table className="cardholderCardMiniTable">
+          <thead style={{ borderBottom: "1px solid black" }}>
+            <tr>
+              {ACCOUNT_TYPE.map((loyaltyType) => (
+                <th>{titleCase(loyaltyType)}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {ACCOUNT_TYPE.map((loyaltyType) => (
+                <td>{loyaltyByType[loyaltyType]?.length || 0}</td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </article>
   ) : (
     <section
