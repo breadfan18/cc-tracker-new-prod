@@ -1,6 +1,6 @@
 import React from "react";
 import { groupBy } from "lodash";
-import { CARD_STATUS } from "../../constants";
+import { APP_COLOR_LIGHT_GRAY, CARD_STATUS } from "../../constants";
 import { titleCase } from "../../helpers";
 
 export default function CardsDataMiniTable({ cards, layout, isLoadedInCard }) {
@@ -11,7 +11,7 @@ export default function CardsDataMiniTable({ cards, layout, isLoadedInCard }) {
       <p>Cards</p>
       <div className="cardholderCardMiniTableContainer">
         <table className="cardholderCardMiniTable">
-          <thead style={{ borderBottom: "0.5px solid gray" }}>
+          <thead style={{ borderBottom: "1px solid" + APP_COLOR_LIGHT_GRAY }}>
             <tr style={{ padding: "5px" }}>
               {CARD_STATUS.map((status) => (
                 <th>{titleCase(status)}</th>

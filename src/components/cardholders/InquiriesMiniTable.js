@@ -1,5 +1,9 @@
 import React from "react";
-import { CREDIT_BUREAUS } from "../../constants";
+import {
+  APP_COLOR_BLACK_OPACITY,
+  APP_COLOR_LIGHT_GRAY,
+  CREDIT_BUREAUS,
+} from "../../constants";
 import { titleCase } from "../../helpers";
 
 export default function InquiriesMiniTable({
@@ -24,7 +28,7 @@ export default function InquiriesMiniTable({
       <p>Inquiries</p>
       <div className="cardholderCardMiniTableContainer">
         <table className="cardholderCardMiniTable">
-          <thead style={{ borderBottom: "0.5px solid gray" }}>
+          <thead style={{ borderBottom: "1px solid" + APP_COLOR_LIGHT_GRAY }}>
             <tr>
               {inquiriesByBureau.map((bureau) => (
                 <th>{titleCase(bureau.bureauName)}</th>

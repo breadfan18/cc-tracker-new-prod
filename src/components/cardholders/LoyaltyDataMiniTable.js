@@ -1,7 +1,7 @@
 import React from "react";
 import { groupBy } from "lodash";
 import { titleCase } from "../../helpers";
-import { ACCOUNT_TYPE } from "../../constants";
+import { ACCOUNT_TYPE, APP_COLOR_LIGHT_GRAY } from "../../constants";
 
 export default function LoyaltyDataMiniTable({
   loyaltyData,
@@ -15,7 +15,7 @@ export default function LoyaltyDataMiniTable({
       <p>Loyalty</p>
       <div className="cardholderCardMiniTableContainer">
         <table className="cardholderCardMiniTable">
-          <thead style={{ borderBottom: "0.5px solid gray" }}>
+          <thead style={{ borderBottom: "1px solid" + APP_COLOR_LIGHT_GRAY }}>
             <tr>
               {ACCOUNT_TYPE.map((loyaltyType) => (
                 <th>{titleCase(loyaltyType)}</th>
