@@ -15,7 +15,7 @@ export default function LoyaltyDataMiniTable({
       <p>Loyalty</p>
       <div className="cardholderCardMiniTableContainer">
         <table className="cardholderCardMiniTable">
-          <thead style={{ borderBottom: "1px solid black" }}>
+          <thead style={{ borderBottom: "0.5px solid gray" }}>
             <tr>
               {ACCOUNT_TYPE.map((loyaltyType) => (
                 <th>{titleCase(loyaltyType)}</th>

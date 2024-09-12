@@ -24,7 +24,7 @@ export default function InquiriesMiniTable({
       <p>Inquiries</p>
       <div className="cardholderCardMiniTableContainer">
         <table className="cardholderCardMiniTable">
-          <thead style={{ borderBottom: "1px solid black" }}>
+          <thead style={{ borderBottom: "0.5px solid gray" }}>
             <tr>
               {inquiriesByBureau.map((bureau) => (
                 <th>{titleCase(bureau.bureauName)}</th>

@@ -564,12 +564,13 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .cardholderCardMiniTableContainer {
   padding: 0 5px;
-  background-color: var(--black-opacity);
+  background-color: rgb(243, 240, 240);
   border-radius: 5px;
 }
 
 .cardholderCardMiniTable {
   width: 100%;
+  color: gray;
 }
 
 .cardholderCardMiniTable th,
