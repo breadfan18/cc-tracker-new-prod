@@ -8,13 +8,16 @@
   --bonus-info-container-bkgrd: "";
   --black-opacity: rgba(0, 0, 0, 0.09);
   --edit-color-green: #198754;
-  --url-white-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
-  --url-black-bkgrd: url("https://i.imgur.com/nK3V6T8.jpg");
+  --url-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --bonus-ribbon-effect: "block";
 }
 
+[data-theme="dark"] {
+  --url-bkgrd: url("https://i.imgur.com/nK3V6T8.jpg");
+}
+
 body {
-  background-image: var(--url-white-bkgrd);
+  background-image: var(--url-bkgrd);
   font-family: "Exo 2", sans-serif;
 }
 
