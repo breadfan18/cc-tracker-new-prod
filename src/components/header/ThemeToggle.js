@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./ThemeToggle.css"; // CSS file for styles
+import { useDispatch } from "react-redux";
+import { changeReduxTheme } from "../../redux/actions/themeActions";
 
 const ThemeToggle = () => {
   const savedTheme = localStorage.getItem("theme") || "light";
   const [theme, setTheme] = useState(savedTheme);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
+    dispatch(changeReduxTheme(theme));
   }, [theme]);
 
   const toggleTheme = () => {

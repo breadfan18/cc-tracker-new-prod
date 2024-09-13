@@ -4,6 +4,7 @@ const initialState = {
   apiCallsInProgress: 0,
   cardholders: [],
   referrals: [],
+  theme: "light",
 };
 
 export default initialState;
