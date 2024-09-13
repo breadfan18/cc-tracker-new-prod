@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import Burger from "./Burger";
+import Burger from "../common/Burger";
 import { APP_COLOR_BLUE, HEADER_CARD_LOGO } from "../../constants";
 import UserProfileSection from "./UserProfileSection";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = ({ user, isMobile }) => {
   const [open, setOpen] = useState(false);
@@ -88,6 +89,7 @@ const Header = ({ user, isMobile }) => {
       <section className="headerSectionLeft">
         <img src={HEADER_CARD_LOGO} alt="" />
       </section>
+      <ThemeToggle />
       <section className="headerSectionRight">
         <nav className="navFull">
           <NavLink to="/" activeStyle={activeStyle} exact>

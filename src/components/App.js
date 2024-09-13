@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import CardHoldersPage from "./cardholders/CardHoldersPage";
-import Header from "./common/Header";
+import Header from "./header/Header";
 import PageNotFound from "./PageNotFound";
 import CardsPage from "./cards/CardsPage";
 import { ToastContainer } from "react-toastify";
