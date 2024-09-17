@@ -17,7 +17,7 @@
 
 [data-theme="dark"] {
   --url-bkgrd: url("https://i.imgur.com/D93tmxE.jpeg");
-  --header-background: rgba(0, 0, 0);
+  --header-background: rgba(0, 0, 0, 0.5);
   --general-font-color: white;
   --header-shadow: rgba(255, 255, 255, 0.5);
 }
