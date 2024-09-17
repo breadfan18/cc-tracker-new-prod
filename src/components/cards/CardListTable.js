@@ -28,6 +28,7 @@ import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { getRemindersData } from "../../hooks/reminderData";
 import CardFavIcon from "./CardFavIcon";
+import { useSelector } from "react-redux";
 
 export default function CardListTable({
   cards,
@@ -39,6 +40,7 @@ export default function CardListTable({
   const { data, requestSort } = useSortableData(cards);
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
+  const theme = useSelector((state) => state.theme);
 
   const routeChange = (card, e) => {
     let path = `/card/${card.id}`;
@@ -62,7 +64,7 @@ export default function CardListTable({
   return cards.length === 0 ? (
     <EmptyList dataType={"card"} />
   ) : (
-    <Table>
+    <Table variant={theme === "dark" ? "dark" : null}>
       <thead>
         <tr>
           {!showCompactTable && <th></th>}
