@@ -4,6 +4,9 @@
   --color-blue: #6b58e5;
   --light-gray: #d9d7d7;
   --light-blue: #c9bffc;
+  --general-font-color: black;
+  --header-shadow: rgba(0, 0, 0, 0.5);
+  --header-background: rgba(255, 255, 255, 0);
   --fav-red: rgb(184, 51, 44);
   --bonus-info-container-bkgrd: "";
   --black-opacity: rgba(0, 0, 0, 0.09);
@@ -13,12 +16,16 @@
 }
 
 [data-theme="dark"] {
-  --url-bkgrd: url("https://i.imgur.com/nK3V6T8.jpg");
+  --url-bkgrd: url("https://i.imgur.com/D93tmxE.jpeg");
+  --header-background: rgba(0, 0, 0);
+  --general-font-color: white;
+  --header-shadow: rgba(255, 255, 255, 0.5);
 }
 
 body {
   background-image: var(--url-bkgrd);
   font-family: "Exo 2", sans-serif;
+  background-size: cover;
 }
 
 .fiveTwentyFourContainer,
@@ -76,13 +83,14 @@ body {
 }
 
 .navContainer {
+  background-color: var(--header-background);
   padding: 0;
   margin-bottom: 10px;
   min-height: 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px -4px var(--header-shadow);
 }
 
 .smallNavContainer {
@@ -132,7 +140,7 @@ body {
 
 nav a {
   text-decoration: none;
-  color: black;
+  color: var(--general-font-color);
   margin-left: 1rem;
   margin-right: 1rem;
   padding: 5px 10px;
