@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;1,600&display=swap");
 
 :root {
+  --black-or-white: white;
   --color-blue: #6b58e5;
   --light-gray: #d9d7d7;
   --light-blue: #c9bffc;
@@ -19,6 +20,7 @@
 }
 
 [data-theme="dark"] {
+  --black-or-white: black;
   --url-bkgrd: url("https://i.imgur.com/0EMIxcF.jpeg");
   --header-background: rgba(0, 0, 0, 0.5);
   --general-font-color: white;
@@ -26,6 +28,7 @@
   --sectionHeaderBkgrd: rgba(255, 255, 255, 0.12);
   --logos-bkgrd: rgba(255, 255, 255, 0.8);
   --heart-color-unfavorite: rgba(255, 255, 255, 0.3);
+  --modal-dark-bkgrd: #212529;
 }
 
 body {
@@ -214,6 +217,9 @@ nav a {
 .userMenuOptions {
   padding: 10px;
   box-shadow: -4px 0 8px -6px rgb(59, 54, 54);
+}
+
+.disabledMenuOption {
   color: gray;
 }
 
@@ -463,6 +469,10 @@ form {
   background-color: #c9bffc;
 }
 
+.modal-body {
+  background-color: var(--modal-dark-bkgrd);
+}
+
 .list-group-item {
   padding-left: 0;
   border: none;
@@ -668,7 +678,7 @@ input[type="range"] {
 }
 
 .inputLabels {
-  background-color: var(--black-opacity);
+  background-color: var(--logos-bkgrd);
   padding: 5px 5px 5px 10px;
   width: 100%;
   border-radius: 10px 10px 0 0;
