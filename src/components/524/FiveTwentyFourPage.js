@@ -9,7 +9,7 @@ import {
   wasCardOpenedWithinLast24Months,
 } from "../../helpers";
 import FiveTwentyFourAccordion from "./FiveTwentyFourAccordion";
-import SelectInput from "../common/SelectInput";
+import SelectInput from "../common/input-fields/SelectInput";
 import CardList from "../cards/CardListTable";
 import CardListCards from "../cards/CardListCards";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";

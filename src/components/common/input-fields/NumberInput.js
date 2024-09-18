@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   APP_COLOR_BLACK_OPACITY,
-  APP_COLOR_BLUE,
   CANCELLED_COLOR_RED,
-} from "../../constants";
+} from "../../../constants";
 import { useSelector } from "react-redux";
 
 const NumberInput = ({
@@ -16,15 +15,10 @@ const NumberInput = ({
   error,
   isCurrency,
 }) => {
-  let wrapperClass = "form-group";
-  if (error && error.length > 0) {
-    wrapperClass += " has-error";
-  }
-
   const theme = useSelector((state) => state.theme);
 
   return (
-    <div className={wrapperClass}>
+    <div className="input-container">
       <label
         htmlFor={name}
         className="inputLabels"
@@ -33,17 +27,7 @@ const NumberInput = ({
         }}
       >
         {label}
-        {error && (
-          <p
-            style={{
-              margin: "0 10px 0 0",
-              color: APP_COLOR_BLUE,
-              fontSize: "0.8rem",
-            }}
-          >
-            Required
-          </p>
-        )}
+        {error && <p className="requiredField">Required</p>}
       </label>
       <div
         className="field transparentPlaceholderField"
@@ -51,6 +35,7 @@ const NumberInput = ({
       >
         {isCurrency && (
           <p
+            className="requiredField"
             style={{
               padding: "0 10px",
               backgroundColor:

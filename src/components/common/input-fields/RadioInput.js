@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form } from "react-bootstrap";
-import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
+import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../../constants";
 
 const RadioInput = ({
   name,
@@ -17,7 +17,7 @@ const RadioInput = ({
   }
 
   return (
-    <div className={wrapperClass}>
+    <div className="input-container">
       <label
         htmlFor={name}
         className="labels inputLabels"
@@ -26,17 +26,7 @@ const RadioInput = ({
         }}
       >
         {label}
-        {requiredField && (
-          <p
-            style={{
-              margin: "0 10px 0 0",
-              fontSize: "0.8rem",
-              color: APP_COLOR_BLUE,
-            }}
-          >
-            Required
-          </p>
-        )}
+        {requiredField && <p className="requiredField">Required</p>}
       </label>
       <div className="field radioField">
         <Form.Check

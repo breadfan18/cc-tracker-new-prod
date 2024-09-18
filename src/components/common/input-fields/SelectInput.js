@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
+import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../../constants";
 
 const SelectInput = ({
   name,
@@ -16,7 +16,7 @@ const SelectInput = ({
   requiredField,
 }) => {
   return (
-    <div className="form-group">
+    <div className="input-container">
       <label
         htmlFor={name}
         className="labels inputLabels"
@@ -25,17 +25,7 @@ const SelectInput = ({
         }}
       >
         {label}
-        {requiredField && (
-          <p
-            style={{
-              margin: "0 10px 0 0",
-              fontSize: "0.8rem",
-              color: APP_COLOR_BLUE,
-            }}
-          >
-            Required
-          </p>
-        )}
+        {requiredField && <p className="requiredField">Required</p>}
       </label>
       <Form.Select
         aria-label={defaultOption}

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
+import TextInput from "../common/input-fields/TextInput";
 import PhotoEditor from "../cardholders/PhotoEditor";
 
 const CardholderForm = ({

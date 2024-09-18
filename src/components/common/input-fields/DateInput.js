@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
+import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../../constants";
+import { useRequiredLabelPosition } from "../../../hooks/useRequiredLabelPosition";
 
 const DateInput = ({
   name,
@@ -12,13 +13,10 @@ const DateInput = ({
   disabled,
   requiredField,
 }) => {
-  let wrapperClass = "form-group";
-  if (error && error.length > 0) {
-    wrapperClass += " has-error";
-  }
+  const absoluteLeftValue = useRequiredLabelPosition(false);
 
   return (
-    <div className={wrapperClass}>
+    <div className="input-container">
       <label
         htmlFor={name}
         className="labels inputLabels"
@@ -28,13 +26,7 @@ const DateInput = ({
       >
         {label}
         {requiredField && (
-          <p
-            style={{
-              margin: "0 10px 0 0",
-              fontSize: "0.8rem",
-              color: APP_COLOR_BLUE,
-            }}
-          >
+          <p className="requiredField" style={{ left: absoluteLeftValue }}>
             Required
           </p>
         )}

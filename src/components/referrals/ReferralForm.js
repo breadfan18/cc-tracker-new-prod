@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
+import TextInput from "../common/input-fields/TextInput";
 import { DELETE_COLOR_RED, ISSUERS, REFERRAL_DATA_KEYS } from "../../constants";
-import SelectInput from "../common/SelectInput";
+import SelectInput from "../common/input-fields/SelectInput";
 import { useSelector } from "react-redux";
-import DateInput from "../common/DateInput";
+import DateInput from "../common/input-fields/DateInput";
 import Form from "react-bootstrap/Form";
 import { isEmpty } from "lodash";
 

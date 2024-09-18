@@ -4,7 +4,7 @@ import {
   APP_COLOR_BLACK_OPACITY,
   APP_COLOR_BLUE,
   CANCELLED_COLOR_RED,
-} from "../../constants";
+} from "../../../constants";
 
 const TextInput = ({
   name,
@@ -19,11 +19,6 @@ const TextInput = ({
   requiredField,
   length,
 }) => {
-  let wrapperClass = "form-group";
-  if (error && error.length > 0) {
-    wrapperClass += " has-error";
-  }
-
   const fieldBorderRadius = isCurrency
     ? "0 0 10px 0"
     : isRewardsBalance
@@ -31,7 +26,7 @@ const TextInput = ({
     : "0 0 10px 10px";
 
   return (
-    <div className={wrapperClass}>
+    <div className="input-container">
       <label
         htmlFor={name}
         className="labels inputLabels"
@@ -40,17 +35,7 @@ const TextInput = ({
         }}
       >
         {label}
-        {requiredField && (
-          <p
-            style={{
-              margin: "0 10px 0 0",
-              fontSize: "0.8rem",
-              color: APP_COLOR_BLUE,
-            }}
-          >
-            Required
-          </p>
-        )}
+        {requiredField && <p className="requiredField">Required</p>}
       </label>
       <div className="field" style={{ display: "flex" }}>
         {isCurrency && (

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
-import SelectInput from "../common/SelectInput";
+import TextInput from "../common/input-fields/TextInput";
+import SelectInput from "../common/input-fields/SelectInput";
 import { ACCOUNT_TYPE, LOYALTY_DATA_KEYS, PROGRAMS } from "../../constants";
 import { titleCase } from "../../helpers";
-import DateInput from "../common/DateInput";
+import DateInput from "../common/input-fields/DateInput";
 
 const LoyaltyForm = ({
   loyaltyAcc,
