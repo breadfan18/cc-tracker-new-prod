@@ -4,8 +4,8 @@ import {
   APP_COLOR_BLACK_OPACITY,
   APP_COLOR_BLUE,
   CANCELLED_COLOR_RED,
-  DELETE_COLOR_RED,
 } from "../../constants";
+import { useSelector } from "react-redux";
 
 const NumberInput = ({
   name,
@@ -20,6 +20,8 @@ const NumberInput = ({
   if (error && error.length > 0) {
     wrapperClass += " has-error";
   }
+
+  const theme = useSelector((state) => state.theme);
 
   return (
     <div className={wrapperClass}>
@@ -51,7 +53,8 @@ const NumberInput = ({
           <p
             style={{
               padding: "0 10px",
-              backgroundColor: APP_COLOR_BLACK_OPACITY,
+              backgroundColor:
+                theme === "light" ? APP_COLOR_BLACK_OPACITY : "white",
               marginBottom: 0,
               borderRadius: "0 0 0 10px",
               display: "flex",
