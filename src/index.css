@@ -10,22 +10,28 @@
   --fav-red: rgb(184, 51, 44);
   --bonus-info-container-bkgrd: "";
   --black-opacity: rgba(0, 0, 0, 0.09);
+  --sectionHeaderBkgrd: rgba(0, 0, 0, 0.09);
+  --logos-bkgrd: rgba(0, 0, 0, 0.09);
+  --heart-color-unfavorite: rgba(0, 0, 0, 0.09);
   --edit-color-green: #198754;
   --url-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --bonus-ribbon-effect: "block";
 }
 
 [data-theme="dark"] {
-  --url-bkgrd: url("https://i.imgur.com/D93tmxE.jpeg");
+  --url-bkgrd: url("https://i.imgur.com/0EMIxcF.jpeg");
   --header-background: rgba(0, 0, 0, 0.5);
   --general-font-color: white;
   --header-shadow: rgba(255, 255, 255, 0.5);
+  --sectionHeaderBkgrd: rgba(255, 255, 255, 0.12);
+  --logos-bkgrd: rgba(255, 255, 255, 0.8);
+  --heart-color-unfavorite: rgba(255, 255, 255, 0.3);
 }
 
 body {
   background-image: var(--url-bkgrd);
+  /* background-color: #212529; */
   font-family: "Exo 2", sans-serif;
-  background-size: cover;
 }
 
 .fiveTwentyFourContainer,
@@ -215,7 +221,7 @@ nav a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--black-opacity);
+  background-color: var(--sectionHeaderBkgrd);
   padding: 10px;
   border-radius: 10px;
   color: var(--color-blue);
@@ -335,7 +341,7 @@ div.alert-danger {
 }
 
 .cardsContainer .nav-tabs .nav-item:last-child .nav-link {
-  background-color: rgba(184, 51, 44, 0.3);
+  background-color: #dfc2c4;
   color: var(--fav-red);
   border-bottom: 2px solid var(--fav-red);
 }
@@ -375,6 +381,7 @@ div.alert-danger {
   font-size: 2.5rem;
   margin-right: 5px;
   cursor: pointer;
+  color: var(--heart-color-unfavorite);
 }
 
 #cardBody,
@@ -427,7 +434,7 @@ div.alert-danger {
   border: 1px solid var(--light-gray);
   padding: 2px;
   border-radius: 10px;
-  background-color: var(--black-opacity);
+  background-color: var(--logos-bkgrd);
 }
 
 .loyaltyLogos {
@@ -437,7 +444,7 @@ div.alert-danger {
   border: 1px solid var(--light-gray);
   padding: 3px;
   border-radius: 10px;
-  background-color: var(--black-opacity);
+  background-color: var(--logos-bkgrd);
 }
 
 form {
