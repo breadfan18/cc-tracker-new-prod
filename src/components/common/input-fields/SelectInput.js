@@ -25,7 +25,9 @@ const SelectInput = ({
         }}
       >
         {label}
-        {requiredField && <p className="requiredField">Required</p>}
+        {requiredField && (
+          <p className="requiredField cardFormRequiredField">Required</p>
+        )}
       </label>
       <Form.Select
         aria-label={defaultOption}

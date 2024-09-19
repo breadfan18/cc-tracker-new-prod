@@ -27,7 +27,9 @@ const NumberInput = ({
         }}
       >
         {label}
-        {error && <p className="requiredField">Required</p>}
+        {error && (
+          <p className="requiredField cardFormRequiredField">Required</p>
+        )}
       </label>
       <div
         className="field transparentPlaceholderField"

@@ -35,7 +35,9 @@ const TextInput = ({
         }}
       >
         {label}
-        {requiredField && <p className="requiredField">Required</p>}
+        {requiredField && (
+          <p className="requiredField cardFormRequiredField">Required</p>
+        )}
       </label>
       <div className="field" style={{ display: "flex" }}>
         {isCurrency && (

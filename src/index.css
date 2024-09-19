@@ -233,16 +233,6 @@ nav a {
   color: var(--color-blue);
   margin: 1rem 0;
 }
-
-.labels {
-  background-color: var(--black-opacity);
-  padding: 5px 5px 5px 10px;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  color: black;
-  font-weight: bold;
-}
-
 .cardsDropDownContainer {
   margin-bottom: 10px;
 }
@@ -304,13 +294,42 @@ nav a {
   top: 186px;
 }
 
-.field input,
-.form-group select {
-  border-radius: 0 0 10px 10px;
+.input-container {
+  position: relative;
+  margin: 10px 0;
 }
 
-.form-group {
-  padding: 10px 0;
+.input-container input,
+.input-container select {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.inputLabels {
+  position: absolute;
+  top: -13px;
+  left: 9px;
+  background-color: white;
+  padding: 0 5px;
+  color: var(--color-blue);
+}
+
+.requiredField {
+  margin: 0px 10px 0px 0px;
+  color: rgb(69, 15, 1);
+  font-size: 0.8rem;
+  position: absolute;
+  top: 4px;
+  background-color: white;
+  padding: 0 5px;
+}
+
+.cardFormRequiredField {
+  left: 286px;
 }
 
 .radioField {
@@ -675,18 +694,6 @@ input[type="range"] {
   flex-direction: column;
   border: 2px solid gray;
   border-radius: 0 0 10px 10px;
-}
-
-.inputLabels {
-  background-color: var(--logos-bkgrd);
-  padding: 5px 5px 5px 10px;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  color: black;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 p {

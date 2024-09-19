@@ -26,7 +26,11 @@ const RadioInput = ({
         }}
       >
         {label}
-        {requiredField && <p className="requiredField">Required</p>}
+        {requiredField && (
+          <p className="requiredField" style={{ left: "680px" }}>
+            Required
+          </p>
+        )}
       </label>
       <div className="field radioField">
         <Form.Check

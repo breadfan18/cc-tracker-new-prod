@@ -13,8 +13,6 @@ const DateInput = ({
   disabled,
   requiredField,
 }) => {
-  const absoluteLeftValue = useRequiredLabelPosition(false);
-
   return (
     <div className="input-container">
       <label
@@ -26,9 +24,7 @@ const DateInput = ({
       >
         {label}
         {requiredField && (
-          <p className="requiredField" style={{ left: absoluteLeftValue }}>
-            Required
-          </p>
+          <p className="requiredField cardFormRequiredField">Required</p>
         )}
       </label>
       <div className="field">
