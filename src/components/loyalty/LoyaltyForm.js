@@ -27,7 +27,7 @@ const LoyaltyForm = ({
           text: program.name,
         }));
   return (
-    <form onSubmit={onSave}>
+    <form onSubmit={onSave} className="singleColumnForm">
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}

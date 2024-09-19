@@ -27,7 +27,7 @@ const CardFormResponsive = ({
 }) => {
   return (
     <>
-      <Form onSubmit={onSave} className="responsiveForm">
+      <Form onSubmit={onSave} className="singleColumnForm">
         {!isEmpty(errors) && (
           <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
             Please fill out required fields

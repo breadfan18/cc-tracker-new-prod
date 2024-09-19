@@ -40,7 +40,7 @@ const ReferralForm = ({
       }));
 
   return (
-    <form onSubmit={onSave} style={{ margin: 0 }}>
+    <form onSubmit={onSave} style={{ margin: 0 }} className="singleColumnForm">
       {!isEmpty(errors) && (
         <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
           Please fill out required fields
@@ -49,11 +49,11 @@ const ReferralForm = ({
       <Form.Check
         name={REFERRAL_DATA_KEYS.referralBonusEarned}
         type="switch"
-        label="Earned"
+        label="Referral Earned"
         value={referral.referralBonusEarned || null}
         checked={referral.referralBonusEarned}
         onChange={onChange}
-        style={{ float: "right" }}
+        className="bonusEarnedCheck"
       />
       <TextInput
         name={REFERRAL_DATA_KEYS.referralFor}
