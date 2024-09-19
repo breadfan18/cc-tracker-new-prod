@@ -299,6 +299,11 @@ nav a {
   margin: 15px 0;
 }
 
+.radioFieldContainer {
+  position: relative;
+  margin: 15px 0;
+}
+
 .formFieldContainer input,
 .formFieldContainer select {
   width: 100%;
@@ -352,7 +357,7 @@ nav a {
 
 .radioField {
   background-color: white;
-  padding-left: 10px;
+  padding: 10px 20px;
   border-radius: 10px;
   border: 1px solid rgb(222, 226, 230);
 }

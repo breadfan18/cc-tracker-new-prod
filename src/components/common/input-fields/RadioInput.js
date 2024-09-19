@@ -12,7 +12,7 @@ const RadioInput = ({
   requiredField,
 }) => {
   return (
-    <div className="formFieldContainer">
+    <div className="radioFieldContainer">
       <label
         htmlFor={name}
         className="labels inputLabels"
