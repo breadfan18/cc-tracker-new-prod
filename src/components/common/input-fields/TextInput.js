@@ -19,14 +19,8 @@ const TextInput = ({
   requiredField,
   length,
 }) => {
-  const fieldBorderRadius = isCurrency
-    ? "0 0 10px 0"
-    : isRewardsBalance
-    ? "0 0 0 10px"
-    : "0 0 10px 10px";
-
   return (
-    <div className="input-container">
+    <div className="formFieldContainer">
       <label
         htmlFor={name}
         className="labels inputLabels"
@@ -35,25 +29,10 @@ const TextInput = ({
         }}
       >
         {label}
-        {requiredField && (
-          <p className="requiredField cardFormRequiredField">Required</p>
-        )}
       </label>
-      <div className="field" style={{ display: "flex" }}>
-        {isCurrency && (
-          <p
-            style={{
-              padding: "0 10px",
-              backgroundColor: APP_COLOR_BLACK_OPACITY,
-              marginBottom: 0,
-              borderRadius: "0 0 0 10px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            $
-          </p>
-        )}
+      {requiredField && <p className="requiredField">Required</p>}
+      <div className="inputContainer" style={{ display: "flex" }}>
+        {isCurrency && <p className="currencySymbol">$</p>}
         <input
           type="text"
           name={name}
@@ -62,7 +41,6 @@ const TextInput = ({
           value={value}
           onChange={onChange}
           style={{
-            borderRadius: fieldBorderRadius,
             paddingLeft: isCurrency ? "5px" : "12px",
           }}
           maxLength={length}

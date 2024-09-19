@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../../constants";
-import { useRequiredLabelPosition } from "../../../hooks/useRequiredLabelPosition";
+import { CANCELLED_COLOR_RED } from "../../../constants";
 
 const DateInput = ({
   name,
@@ -14,7 +13,7 @@ const DateInput = ({
   requiredField,
 }) => {
   return (
-    <div className="input-container">
+    <div className="formFieldContainer">
       <label
         htmlFor={name}
         className="labels inputLabels"
@@ -23,11 +22,9 @@ const DateInput = ({
         }}
       >
         {label}
-        {requiredField && (
-          <p className="requiredField cardFormRequiredField">Required</p>
-        )}
       </label>
-      <div className="field">
+      {requiredField && <p className="requiredField">Required</p>}
+      <div className="field inputContainer">
         <Form.Control
           type="date"
           name={name}

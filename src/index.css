@@ -294,19 +294,24 @@ nav a {
   top: 186px;
 }
 
-.input-container {
+.formFieldContainer {
   position: relative;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
-.input-container input,
-.input-container select {
+.formFieldContainer input,
+.formFieldContainer select {
   width: 100%;
   padding: 15px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s;
+}
+
+.inputContainer {
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .inputLabels {
@@ -319,24 +324,35 @@ nav a {
 }
 
 .requiredField {
+  position: absolute;
+  top: -9px;
+  right: 5px;
   margin: 0px 10px 0px 0px;
   color: rgb(69, 15, 1);
   font-size: 0.8rem;
-  position: absolute;
-  top: 4px;
   background-color: white;
   padding: 0 5px;
-}
-
-.cardFormRequiredField {
-  left: 286px;
 }
 
 .radioField {
   background-color: white;
   padding-left: 10px;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
   border: 1px solid rgb(222, 226, 230);
+}
+
+.form-control:disabled {
+  background-color: none;
+  color: rgb(155, 155, 155);
+}
+
+.currencySymbol {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  margin: 3px 0;
+  border-right: 1px solid var(--black-opacity);
+  color: var(--color-blue);
 }
 
 div.alert-danger {

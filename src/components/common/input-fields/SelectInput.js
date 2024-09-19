@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../../constants";
+import { CANCELLED_COLOR_RED } from "../../../constants";
 
 const SelectInput = ({
   name,
@@ -16,7 +16,7 @@ const SelectInput = ({
   requiredField,
 }) => {
   return (
-    <div className="input-container">
+    <div className="formFieldContainer">
       <label
         htmlFor={name}
         className="labels inputLabels"
@@ -25,29 +25,29 @@ const SelectInput = ({
         }}
       >
         {label}
-        {requiredField && (
-          <p className="requiredField cardFormRequiredField">Required</p>
-        )}
       </label>
-      <Form.Select
-        aria-label={defaultOption}
-        name={name}
-        value={value}
-        onChange={onChange}
-        className="form-control"
-        style={{ backgroundColor: `${bkgrdColor}` }}
-      >
-        <option value="" disabled={disableDefaultOption}>
-          {defaultOption}
-        </option>
-        {options.map((option) => {
-          return (
-            <option key={option.value} value={option.value}>
-              {option.text}
-            </option>
-          );
-        })}
-      </Form.Select>
+      {requiredField && <p className="requiredField">Required</p>}
+      <div className="inputContainer">
+        <Form.Select
+          aria-label={defaultOption}
+          name={name}
+          value={value}
+          onChange={onChange}
+          className="form-control"
+          style={{ backgroundColor: `${bkgrdColor}` }}
+        >
+          <option value="" disabled={disableDefaultOption}>
+            {defaultOption}
+          </option>
+          {options.map((option) => {
+            return (
+              <option key={option.value} value={option.value}>
+                {option.text}
+              </option>
+            );
+          })}
+        </Form.Select>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  APP_COLOR_BLACK_OPACITY,
-  CANCELLED_COLOR_RED,
-} from "../../../constants";
-import { useSelector } from "react-redux";
+import { CANCELLED_COLOR_RED } from "../../../constants";
 
 const NumberInput = ({
   name,
@@ -14,11 +10,10 @@ const NumberInput = ({
   value,
   error,
   isCurrency,
+  isRequired,
 }) => {
-  const theme = useSelector((state) => state.theme);
-
   return (
-    <div className="input-container">
+    <div className="formFieldContainer">
       <label
         htmlFor={name}
         className="inputLabels"
@@ -27,30 +22,10 @@ const NumberInput = ({
         }}
       >
         {label}
-        {error && (
-          <p className="requiredField cardFormRequiredField">Required</p>
-        )}
       </label>
-      <div
-        className="field transparentPlaceholderField"
-        style={{ display: "flex" }}
-      >
-        {isCurrency && (
-          <p
-            className="requiredField"
-            style={{
-              padding: "0 10px",
-              backgroundColor:
-                theme === "light" ? APP_COLOR_BLACK_OPACITY : "white",
-              marginBottom: 0,
-              borderRadius: "0 0 0 10px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            $
-          </p>
-        )}
+      {isRequired && <p className="requiredField">Required</p>}
+      <div className="field inputContainer" style={{ display: "flex" }}>
+        {isCurrency && <p className="currencySymbol">$</p>}
         <input
           type="number"
           min="0"
@@ -61,9 +36,6 @@ const NumberInput = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          style={{
-            borderRadius: isCurrency && "0 0 10px 0",
-          }}
         />
       </div>
     </div>

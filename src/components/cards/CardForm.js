@@ -42,7 +42,6 @@ const CardForm = ({
           value={CARD_DATA_KEYS.bonusEarned}
           checked={card.bonusEarned}
           onChange={onChange}
-          style={{ float: "right" }}
         />
         <SelectInput
           name={CARD_DATA_KEYS.status}

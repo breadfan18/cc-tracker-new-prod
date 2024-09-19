@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
   return (
-    <div className="input-container">
+    <div className="formFieldContainer">
       <label htmlFor={name}>{label}</label>
-      <div className="field">
+      <div className="inputContainer">
         <input
           type="password"
           name={name}
