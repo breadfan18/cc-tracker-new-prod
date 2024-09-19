@@ -299,6 +299,10 @@ nav a {
   margin: 15px 0;
 }
 
+.responsiveForm .formFieldContainer {
+  margin: 24px 0;
+}
+
 .radioFieldContainer {
   position: relative;
   margin: 15px 0;

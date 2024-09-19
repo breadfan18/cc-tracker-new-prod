@@ -27,7 +27,7 @@ const CardFormResponsive = ({
 }) => {
   return (
     <>
-      <Form onSubmit={onSave}>
+      <Form onSubmit={onSave} className="responsiveForm">
         {!isEmpty(errors) && (
           <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
             Please fill out required fields
@@ -40,7 +40,7 @@ const CardFormResponsive = ({
           value={CARD_DATA_KEYS.bonusEarned}
           checked={card.bonusEarned}
           onChange={onChange}
-          style={{ float: "right" }}
+          className="bonusEarnedCheck"
         />
         <SelectInput
           name={CARD_DATA_KEYS.status}
