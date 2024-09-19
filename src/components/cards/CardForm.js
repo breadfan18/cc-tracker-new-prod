@@ -42,6 +42,7 @@ const CardForm = ({
           value={CARD_DATA_KEYS.bonusEarned}
           checked={card.bonusEarned}
           onChange={onChange}
+          className="bonusEarnedCheck"
         />
         <SelectInput
           name={CARD_DATA_KEYS.status}

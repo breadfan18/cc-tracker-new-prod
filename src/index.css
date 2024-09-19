@@ -334,6 +334,21 @@ nav a {
   padding: 0 5px;
 }
 
+.bonusEarnedCheck {
+  border-radius: 5px;
+  padding: 12px;
+  background-color: var(--color-blue);
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.bonusEarnedCheck input {
+  margin-right: 10px;
+}
+
 .radioField {
   background-color: white;
   padding-left: 10px;
