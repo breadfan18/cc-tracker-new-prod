@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {
   APP_COLOR_BLACK_OPACITY,
   APP_COLOR_BLUE,
+  APP_COLOR_LIGHT_GRAY,
   CANCELLED_COLOR_RED,
 } from "../../../constants";
 
@@ -49,12 +50,12 @@ const TextInput = ({
           <p
             style={{
               padding: "0 10px",
-              backgroundColor: APP_COLOR_BLACK_OPACITY,
-              marginBottom: 0,
-              borderRadius: "0 0 10px 0",
+              color: APP_COLOR_BLUE,
+              margin: "7px 0",
+              borderLeft: "1px solid " + APP_COLOR_LIGHT_GRAY,
               display: "flex",
               alignItems: "center",
-              minWidth: "5.5rem",
+              minWidth: "4.5em",
             }}
           >
             {rewardsBalanceText || ""}
