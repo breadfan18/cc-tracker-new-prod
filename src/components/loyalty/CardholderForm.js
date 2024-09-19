@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/input-fields/TextInput";
-import PhotoEditor from "../cardholders/PhotoEditor";
+// import PhotoEditor from "../cardholders/PhotoEditor";
 
 const CardholderForm = ({
   cardholder,
@@ -18,11 +18,6 @@ const CardholderForm = ({
 
   return (
     <form onSubmit={onSave} style={{ margin: 0 }} className="singleColumnForm">
-      {errors.onSave && (
-        <div className="alert alert-danger" role="alert">
-          {errors.onSave}
-        </div>
-      )}
       <TextInput
         name="firstName"
         label="First Name"

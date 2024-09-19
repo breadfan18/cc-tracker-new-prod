@@ -5,6 +5,7 @@ import {
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_GRAY,
   CANCELLED_COLOR_RED,
+  DELETE_COLOR_RED,
 } from "../../../constants";
 
 const TextInput = ({
@@ -22,17 +23,17 @@ const TextInput = ({
 }) => {
   return (
     <div className="formFieldContainer">
-      <label
-        htmlFor={name}
-        className="labels inputLabels"
-        style={{
-          backgroundColor: error ? CANCELLED_COLOR_RED : "",
-        }}
-      >
+      <label htmlFor={name} className="labels inputLabels">
         {label}
       </label>
       {requiredField && <p className="requiredField">Required</p>}
-      <div className="inputContainer" style={{ display: "flex" }}>
+      <div
+        className="inputContainer"
+        style={{
+          display: "flex",
+          border: error && "2px solid " + DELETE_COLOR_RED,
+        }}
+      >
         {isCurrency && <p className="currencySymbol">$</p>}
         <input
           type="text"

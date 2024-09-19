@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { CANCELLED_COLOR_RED } from "../../../constants";
+import { DELETE_COLOR_RED } from "../../../constants";
 
 const RadioInput = ({
   name,
@@ -13,17 +13,14 @@ const RadioInput = ({
 }) => {
   return (
     <div className="radioFieldContainer">
-      <label
-        htmlFor={name}
-        className="labels inputLabels"
-        style={{
-          backgroundColor: error ? CANCELLED_COLOR_RED : "",
-        }}
-      >
+      <label htmlFor={name} className="labels inputLabels">
         {label}
       </label>
       {requiredField && <p className="requiredField">Required</p>}
-      <div className="inputContainer radioField">
+      <div
+        className="inputContainer radioField"
+        style={{ border: error && "2px solid " + DELETE_COLOR_RED }}
+      >
         <Form.Check
           name="inquiries"
           type="switch"

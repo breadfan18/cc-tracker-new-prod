@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { CANCELLED_COLOR_RED } from "../../../constants";
+import { CANCELLED_COLOR_RED, DELETE_COLOR_RED } from "../../../constants";
 
 const DateInput = ({
   name,
@@ -14,17 +14,14 @@ const DateInput = ({
 }) => {
   return (
     <div className="formFieldContainer">
-      <label
-        htmlFor={name}
-        className="labels inputLabels"
-        style={{
-          backgroundColor: error ? CANCELLED_COLOR_RED : "",
-        }}
-      >
+      <label htmlFor={name} className="labels inputLabels">
         {label}
       </label>
       {requiredField && <p className="requiredField">Required</p>}
-      <div className="field inputContainer">
+      <div
+        className="field inputContainer"
+        style={{ border: error && "2px solid " + DELETE_COLOR_RED }}
+      >
         <Form.Control
           type="date"
           name={name}

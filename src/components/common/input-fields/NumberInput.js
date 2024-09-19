@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CANCELLED_COLOR_RED } from "../../../constants";
+import { CANCELLED_COLOR_RED, DELETE_COLOR_RED } from "../../../constants";
 
 const NumberInput = ({
   name,
@@ -14,17 +14,17 @@ const NumberInput = ({
 }) => {
   return (
     <div className="formFieldContainer">
-      <label
-        htmlFor={name}
-        className="inputLabels"
-        style={{
-          backgroundColor: error ? CANCELLED_COLOR_RED : "",
-        }}
-      >
+      <label htmlFor={name} className="inputLabels">
         {label}
       </label>
       {isRequired && <p className="requiredField">Required</p>}
-      <div className="field inputContainer" style={{ display: "flex" }}>
+      <div
+        className="field inputContainer"
+        style={{
+          display: "flex",
+          border: error && "2px solid " + DELETE_COLOR_RED,
+        }}
+      >
         {isCurrency && <p className="currencySymbol">$</p>}
         <input
           type="number"
