@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;1,600&display=swap");
 
 :root {
-  --black-or-white: white;
+  --black-or-white-bkgrd: white;
+  --black-or-white-text-color: black;
   --color-blue: #6b58e5;
   --light-gray: #d9d7d7;
   --light-blue: #c9bffc;
@@ -17,10 +18,13 @@
   --edit-color-green: #198754;
   --url-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --bonus-ribbon-effect: "block";
+  --modal-color: white;
+  --required-field-color: rgb(69, 15, 1);
 }
 
 [data-theme="dark"] {
-  --black-or-white: black;
+  --black-or-white-bkgrd: black;
+  --black-or-white-text-color: white;
   --url-bkgrd: url("https://i.imgur.com/0EMIxcF.jpeg");
   --header-background: rgba(0, 0, 0, 0.5);
   --general-font-color: white;
@@ -28,7 +32,8 @@
   --sectionHeaderBkgrd: rgba(255, 255, 255, 0.12);
   --logos-bkgrd: rgba(255, 255, 255, 0.8);
   --heart-color-unfavorite: rgba(255, 255, 255, 0.3);
-  --modal-dark-bkgrd: #212529;
+  --modal-color: #212529;
+  --required-field-color: #ccc;
 }
 
 body {
@@ -323,11 +328,22 @@ nav a {
   border-radius: 4px;
 }
 
+.inputContainer input,
+.inputContainer select {
+  background-color: var(--modal-color);
+  color: var(--black-or-white-text-color);
+}
+
+.custom-modal .modal-backdrop {
+  background-color: white;
+  opacity: 0.9;
+}
+
 .inputLabels {
   position: absolute;
   top: -13px;
   left: 9px;
-  background-color: white;
+  background-color: var(--modal-color);
   padding: 0 5px;
   color: var(--color-blue);
 }
@@ -337,9 +353,9 @@ nav a {
   top: -9px;
   right: 5px;
   margin: 0px 10px 0px 0px;
-  color: rgb(69, 15, 1);
+  color: var(--required-field-color);
   font-size: 0.8rem;
-  background-color: white;
+  background-color: var(--modal-color);
   padding: 0 5px;
 }
 
@@ -360,14 +376,14 @@ nav a {
 }
 
 .radioField {
-  background-color: white;
+  background-color: var(--modal-color);
   padding: 10px 20px;
   border-radius: 10px;
-  border: 1px solid rgb(222, 226, 230);
+  color: var(--black-or-white-text-color);
 }
 
 .form-control:disabled {
-  background-color: white;
+  background-color: var(--modal-color);
   color: rgb(155, 155, 155);
 }
 
@@ -530,7 +546,7 @@ form {
 }
 
 .modal-body {
-  background-color: var(--modal-dark-bkgrd);
+  background-color: var(--modal-color);
 }
 
 .list-group-item {

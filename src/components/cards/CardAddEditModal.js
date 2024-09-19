@@ -160,7 +160,8 @@ function CardAddEditModal({
         onHide={toggleModal}
         centered
         size="lg"
-        backdrop="static"
+        // backdrop="static"
+        className="custom-modal"
       >
         <Modal.Header className="modalHeader" closeButton>
           <Modal.Title>{cardForModal.id ? "Edit" : "Add"} Card</Modal.Title>
