@@ -18,7 +18,6 @@ import { formDisabledCheck, titleCase } from "../../helpers";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
-import ThemeToggle from "../header/ThemeToggle";
 
 const CardForm = ({
   card,
@@ -31,7 +30,6 @@ const CardForm = ({
   return (
     <>
       <Form onSubmit={onSave}>
-        <ThemeToggle />
         {!isEmpty(errors) && (
           <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
             Please fill out required fields

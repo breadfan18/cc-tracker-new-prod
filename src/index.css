@@ -20,12 +20,14 @@
   --bonus-ribbon-effect: "block";
   --modal-color: white;
   --required-field-color: rgb(69, 15, 1);
+  --form-field-borders: 1px solid #ccc;
 }
 
 [data-theme="dark"] {
   --black-or-white-bkgrd: black;
   --black-or-white-text-color: white;
-  --url-bkgrd: url("https://i.imgur.com/0EMIxcF.jpeg");
+  --url-bkgrd: url("https://i.imgur.com/9oYAEde.jpeg");
+  /* --url-bkgrd: url("https://i.imgur.com/0EMIxcF.jpeg"); */
   --header-background: rgba(0, 0, 0, 0.5);
   --general-font-color: white;
   --header-shadow: rgba(255, 255, 255, 0.5);
@@ -34,6 +36,7 @@
   --heart-color-unfavorite: rgba(255, 255, 255, 0.3);
   --modal-color: #212529;
   --required-field-color: #ccc;
+  --form-field-borders: 1px solid #4b4a4a;
 }
 
 body {
@@ -324,7 +327,7 @@ nav a {
 }
 
 .inputContainer {
-  border: 1px solid #ccc;
+  border: var(--form-field-borders);
   border-radius: 4px;
 }
 
@@ -332,6 +335,21 @@ nav a {
 .inputContainer select {
   background-color: var(--modal-color);
   color: var(--black-or-white-text-color);
+}
+
+.inputContainer input:focus,
+.inputContainer select:focus {
+  background-color: var(--modal-color);
+  color: var(--black-or-white-text-color);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.radioField input {
+  background-color: white;
 }
 
 .custom-modal .modal-backdrop {
@@ -362,7 +380,7 @@ nav a {
 .bonusEarnedCheck {
   border-radius: 5px;
   padding: 12px;
-  background-color: var(--black-opacity);
+  background-color: #e8e8e8;
   display: flex;
   justify-content: flex-end;
   color: var(--color-blue);
