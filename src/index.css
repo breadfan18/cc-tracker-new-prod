@@ -51,6 +51,10 @@ body {
   font-family: "Exo 2", sans-serif;
 }
 
+.homePageText {
+  color: var(--black-or-white-text-color);
+  margin-bottom: 15px;
+}
 .fiveTwentyFourContainer,
 .loyaltyContainer,
 .cardDetailsContainer,
@@ -470,6 +474,10 @@ div.alert-danger {
   margin-right: 5px;
 }
 
+.accordion {
+  border: none;
+}
+
 .accordion-body {
   background-color: var(--modal-color);
   color: var(--black-or-white-text-color);
@@ -481,6 +489,10 @@ div.alert-danger {
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   margin: 8px 0;
+}
+
+.accordion-item {
+  border: none;
 }
 
 .rounded-circle {
@@ -631,8 +643,11 @@ form {
 
 #five24AccordionHeader .accordion-button {
   font-size: 0.9rem;
-  background-color: var(--black-opacity);
-  box-shadow: none;
+}
+
+.accordion-item:last-of-type .accordion-button {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .five24Card {
