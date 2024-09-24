@@ -307,6 +307,12 @@ export const PROGRAMS = [
     name: "Capital One Rewards",
     img: "https://i.imgur.com/u3Rr8rT.png",
   },
+  {
+    id: 30,
+    type: "misc",
+    name: "Amtrak",
+    img: "https://imgur.com/HJoyVAz.png",
+  },
 ];
 
 export const USERS = [
