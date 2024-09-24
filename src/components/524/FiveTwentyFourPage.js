@@ -9,7 +9,6 @@ import {
   wasCardOpenedWithinLast24Months,
 } from "../../helpers";
 import FiveTwentyFourAccordion from "./FiveTwentyFourAccordion";
-import SelectInput from "../common/input-fields/SelectInput";
 import CardList from "../cards/CardListTable";
 import CardListCards from "../cards/CardListCards";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
@@ -42,8 +41,6 @@ const FiveTwentyFourPage = () => {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
   }, [status, user]);
-
-  const handleChange = (e) => setSelectedCardholder(e.target.value);
 
   const cardholdersToDisplay =
     selectedCardHolder === undefined || selectedCardHolder === ""
@@ -107,27 +104,8 @@ const FiveTwentyFourPage = () => {
   return (
     <div className="fiveTwentyFourContainer">
       <h2 className="sectionHeaders">5/24 Status</h2>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <SelectInput
-            name="id"
-            label="Select Card Holder to View"
-            value={selectedCardHolder}
-            defaultOption="All Card Holders"
-            options={cardholders.map((user) => ({
-              value: user.id,
-              text: user.name,
-            }))}
-            onChange={handleChange}
-            disableDefaultOption={false}
-            // error={errors.author}
-          />
-          <hr />
-          {cardholders524Status}
-        </>
-      )}
+      <br />
+      {loading ? <Spinner /> : <>{cardholders524Status}</>}
     </div>
   );
 };

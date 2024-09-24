@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;1,600&display=swap");
 
 :root {
+  --url-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --black-or-white-bkgrd: white;
   --black-or-white-text-color: black;
   --color-blue: #6b58e5;
@@ -16,18 +17,20 @@
   --logos-bkgrd: rgba(0, 0, 0, 0.09);
   --heart-color-unfavorite: rgba(0, 0, 0, 0.09);
   --edit-color-green: #198754;
-  --url-bkgrd: url("https://i.imgur.com/zF8fZ5k.jpg");
   --bonus-ribbon-effect: "block";
   --modal-color: white;
   --required-field-color: rgb(69, 15, 1);
   --form-field-borders: 1px solid #ccc;
+  --box-shadow: 0 0 10px gray;
+  --mini-table-bkgrd: rgba(81, 79, 79, 0.09);
+  --progress-bar-bkgrd: rgba(0, 0, 0, 0.09);
 }
 
 [data-theme="dark"] {
-  --black-or-white-bkgrd: black;
-  --black-or-white-text-color: white;
   --url-bkgrd: url("https://i.imgur.com/9oYAEde.jpeg");
   /* --url-bkgrd: url("https://i.imgur.com/0EMIxcF.jpeg"); */
+  --black-or-white-bkgrd: black;
+  --black-or-white-text-color: white;
   --header-background: rgba(0, 0, 0, 0.5);
   --general-font-color: white;
   --header-shadow: rgba(255, 255, 255, 0.5);
@@ -37,6 +40,9 @@
   --modal-color: #212529;
   --required-field-color: #ccc;
   --form-field-borders: 1px solid #4b4a4a;
+  --box-shadow: 0 0 10px rgb(168, 166, 166);
+  --mini-table-bkgrd: rgba(0, 0, 0);
+  --progress-bar-bkgrd: rgba(255, 255, 255, 0.2);
 }
 
 body {
@@ -464,8 +470,17 @@ div.alert-danger {
   margin-right: 5px;
 }
 
-.accordion {
+.accordion-body {
+  background-color: var(--modal-color);
+  color: var(--black-or-white-text-color);
+  border-radius: 0 0 5px 5px;
+}
+
+.customAccordions {
   text-align: left;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  margin: 8px 0;
 }
 
 .rounded-circle {
@@ -617,6 +632,20 @@ form {
 #five24AccordionHeader .accordion-button {
   font-size: 0.9rem;
   background-color: var(--black-opacity);
+  box-shadow: none;
+}
+
+.five24Card {
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  background-color: var(--modal-color);
+  color: var(--black-or-white-text-color);
+  margin-top: 15px;
+}
+
+.progress,
+.progress-stacked {
+  background-color: var(--progress-bar-bkgrd);
 }
 
 .cardTabsFilterInput {
@@ -704,7 +733,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .cardholderDataSection {
   display: flex;
   flex-direction: column;
-  background-color: rgb(243, 240, 240);
+  background-color: var(--mini-table-bkgrd);
   border-radius: 10px;
   padding: 7px;
   min-width: clamp(10rem, 15vw, 15rem);
