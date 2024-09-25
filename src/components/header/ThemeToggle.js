@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./ThemeToggle.css"; // CSS file for styles
+import "./ThemeToggle.css";
 import { useDispatch } from "react-redux";
 import { changeReduxTheme } from "../../redux/actions/themeActions";
+import { MdWbSunny } from "react-icons/md";
+import { FaMoon } from "react-icons/fa";
 
 const ThemeToggle = () => {
   const savedTheme = localStorage.getItem("theme") || "light";
@@ -28,8 +30,12 @@ const ThemeToggle = () => {
         onChange={toggleTheme}
       />
       <label htmlFor="themeSwitch" className="slider">
-        <span className="sun-icon">☀️</span>
-        <span className="moon-icon">🌙</span>
+        <span className="sun-icon">
+          <MdWbSunny style={{ color: "white" }} />
+        </span>
+        <span className="moon-icon">
+          <FaMoon style={{ color: "white" }} />
+        </span>
         <div className="slider-thumb"></div>
       </label>
     </div>
