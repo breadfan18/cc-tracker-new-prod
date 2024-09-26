@@ -492,7 +492,7 @@ div.alert-danger {
 }
 
 .accordion-body {
-  background-color: var(--modal-color);
+  background-color: var(--black-or-white-bkgrd);
   color: var(--black-or-white-text-color);
   border-radius: 0 0 5px 5px;
 }
@@ -537,13 +537,24 @@ div.alert-danger {
 }
 
 .loyaltyCardTitle {
-  padding: 5px 5px 5px 10px;
+  padding: 8px 8px 8px 10px;
   font-size: 1.1rem;
-  border-radius: 10px;
   margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--color-blue);
+}
+
+.copyIcon {
+  margin: 0 5px;
+  background: var(--black-opacity);
+  padding: 5px;
+  height: 1.7rem;
+  width: 1.7rem;
+  border-radius: 5px;
+  color: gray;
+  cursor: pointer;
 }
 
 #cardBody:hover {
@@ -559,6 +570,10 @@ div.alert-danger {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+.cardsContainer #cardCardContainer,
+.referralsPageContainer #cardCardContainer {
   padding: 0 10px 0 0;
 }
 
