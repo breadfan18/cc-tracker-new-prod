@@ -493,7 +493,6 @@ div.alert-danger {
 }
 
 .accordion-body {
-  background-color: var(--black-or-white-bkgrd);
   color: var(--black-or-white-text-color);
   border-radius: 0 0 5px 5px;
 }

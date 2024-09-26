@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Accordion } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { APP_COLOR_BLUE } from "../../constants";
-
+import useWindhowWidth from "../../hooks/windowWidth";
 export default function FiveTwentyFourAccordion({
   showCards,
   five24Cards,
   user,
   fiveTwentyFourStatusElement,
 }) {
+  const { isDesktop } = useWindhowWidth();
   const [cardsShowing, setCardsShowing] = useState(false);
 
   return (
@@ -27,7 +28,11 @@ export default function FiveTwentyFourAccordion({
             >
               {cardsShowing ? "Hide Cards" : "Show Cards"}
             </Accordion.Header>
-            <Accordion.Body>{five24Cards}</Accordion.Body>
+            <Accordion.Body
+              style={{ backgroundColor: isDesktop ? "#212529" : "black" }}
+            >
+              {five24Cards}
+            </Accordion.Body>
           </Accordion.Item>
         </Accordion>
       )}
