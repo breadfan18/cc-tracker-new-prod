@@ -18,6 +18,7 @@ import { Spinner } from "./common/Spinner";
 import { useSigninCheck } from "reactfire";
 import ReferralsPage from "./referrals/ReferralsPage";
 import useWindhowWidth from "../hooks/windowWidth";
+import ThemeToggle from "./header/ThemeToggle";
 export const WindowWidthContext = createContext();
 
 function App() {
@@ -33,6 +34,11 @@ function App() {
   return signedIn === true ? (
     <>
       <WindowWidthContext.Provider value={windowWidth}>
+        {/* Rendering ThemeToggle with display set to false here so that 
+        it is available in the context for the App component.. otherwise, 
+        dark mode would reset to light on refresh
+        */}
+        <ThemeToggle displayToggle={false} />
         <Header user={user} isMobile={isMobile} />
         <main className="container-fluid">
           <Switch>

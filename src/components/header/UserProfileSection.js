@@ -12,6 +12,7 @@ import {
 } from "react-icons/md";
 import { APP_COLOR_BLUE, APP_COLOR_LIGHT_BLACK } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
+import ThemeToggle from "./ThemeToggle";
 
 function UserProfileSection({ user, userLogout }) {
   const history = useHistory();
@@ -108,6 +109,9 @@ function UserProfileSection({ user, userLogout }) {
           ref={showMenuRef}
           style={{ backgroundColor: theme === "dark" && "black" }}
         >
+          <div className="themeTogglePlacement">
+            <ThemeToggle displayToggle={true} />
+          </div>
           <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
             <li className="userMenuOptions disabledMenuOption">
               <MdSpaceDashboard

@@ -5,7 +5,7 @@ import { changeReduxTheme } from "../../redux/actions/themeActions";
 import { MdWbSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ displayToggle }) => {
   const savedTheme = localStorage.getItem("theme") || "light";
   const [theme, setTheme] = useState(savedTheme);
   const dispatch = useDispatch();
@@ -21,24 +21,26 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div className="theme-toggle">
-      <input
-        type="checkbox"
-        id="themeSwitch"
-        className="theme-switch"
-        checked={theme === "dark"}
-        onChange={toggleTheme}
-      />
-      <label htmlFor="themeSwitch" className="slider">
-        <span className="sun-icon">
-          <MdWbSunny style={{ color: "white" }} />
-        </span>
-        <span className="moon-icon">
-          <FaMoon style={{ color: "white" }} />
-        </span>
-        <div className="slider-thumb"></div>
-      </label>
-    </div>
+    displayToggle && (
+      <div className="theme-toggle">
+        <input
+          type="checkbox"
+          id="themeSwitch"
+          className="theme-switch"
+          checked={theme === "dark"}
+          onChange={toggleTheme}
+        />
+        <label htmlFor="themeSwitch" className="slider">
+          <span className="sun-icon">
+            <MdWbSunny style={{ color: "white" }} />
+          </span>
+          <span className="moon-icon">
+            <FaMoon style={{ color: "white" }} />
+          </span>
+          <div className="slider-thumb"></div>
+        </label>
+      </div>
+    )
   );
 };
 

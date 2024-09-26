@@ -26,7 +26,7 @@
 .sun-icon,
 .moon-icon {
   font-size: 16px;
-  padding: 0 8px;
+  padding: 0 7px;
 }
 
 .slider-thumb {
@@ -35,9 +35,10 @@
   height: 21px;
   background-color: white;
   border-radius: 50%;
-  top: 3px;
-  left: 5px;
+  top: 4px;
+  left: 4px;
   transition: transform 0.4s;
+  cursor: pointer;
 }
 
 .theme-switch:checked + .slider {
@@ -45,7 +46,7 @@
 }
 
 .theme-switch:checked + .slider .slider-thumb {
-  transform: translateX(31px);
+  transform: translateX(32px);
 }
 
 .slider .sun-icon {
@@ -55,12 +56,4 @@
 .slider .moon-icon {
   transition: opacity 0.4s;
   transform: scaleX(-1);
-}
-
-.theme-switch:checked + .slider .sun-icon {
-  opacity: 0.5;
-}
-
-.theme-switch:checked + .slider .moon-icon {
-  opacity: 1;
 }

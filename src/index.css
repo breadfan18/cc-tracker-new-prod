@@ -24,6 +24,7 @@
   --box-shadow: 0 0 10px gray;
   --mini-table-bkgrd: rgba(81, 79, 79, 0.09);
   --progress-bar-bkgrd: rgba(0, 0, 0, 0.09);
+  --hover-color: #c9bffc;
 }
 
 [data-theme="dark"] {
@@ -40,9 +41,10 @@
   --modal-color: #212529;
   --required-field-color: #ccc;
   --form-field-borders: 1px solid #4b4a4a;
-  --box-shadow: 0 0 10px rgb(168, 166, 166);
+  --box-shadow: 0 0 3px rgb(168, 166, 166);
   --mini-table-bkgrd: rgba(0, 0, 0);
   --progress-bar-bkgrd: rgba(255, 255, 255, 0.2);
+  --hover-color: #212529;
 }
 
 body {
@@ -229,7 +231,12 @@ nav a {
 }
 
 .userProfileMenu li:hover {
-  background-color: var(--light-gray);
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+.userProfileMenu li:first-child:hover {
+  background-color: none;
 }
 
 .userMenuOptions {
@@ -239,6 +246,12 @@ nav a {
 
 .disabledMenuOption {
   color: gray;
+}
+
+.themeTogglePlacement {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
 }
 
 .sectionHeaders {
@@ -645,7 +658,7 @@ form {
   font-size: 0.9rem;
 }
 
-.accordion-item:last-of-type .accordion-button {
+.five24Card .accordion-item:last-of-type .accordion-button {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
