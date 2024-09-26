@@ -8,10 +8,19 @@ import { FaCheck, FaRunning } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
+import { useSelector } from "react-redux";
 
 export default function CardReferrals({ cardReferrals, windowWidth }) {
+  const theme = useSelector((state) => state.theme);
+
   return (
-    <Card className="text-center" style={{ boxShadow: `2px 0 10px gray` }}>
+    <Card
+      className={`text-center ${theme === "dark" && "bg-dark"}`}
+      style={{
+        boxShadow:
+          theme === "dark" ? "0 0 3px rgb(168, 166, 166)" : "2px 0 10px gray",
+      }}
+    >
       <Card.Header className="cardHeaders referralCardHeader">
         <p>Card Referrals</p>
         <Link to={`/referrals`}>
@@ -20,7 +29,11 @@ export default function CardReferrals({ cardReferrals, windowWidth }) {
       </Card.Header>
       <Card.Body style={{ textAlign: "left", padding: "5px 8px" }}>
         {windowWidth >= 550 ? (
-          <Table size="sm" style={{ marginBottom: 0 }}>
+          <Table
+            size="sm"
+            style={{ marginBottom: 0 }}
+            variant={theme === "dark" && "dark"}
+          >
             <thead>
               <tr>
                 <th></th>

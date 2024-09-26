@@ -9,11 +9,16 @@ import {
 } from "../../redux/actions/cardsActions";
 import { Spinner } from "../common/Spinner";
 import { formatDate } from "../../helpers";
-import { DELETE_COLOR_RED, NEW_NOTE } from "../../constants";
+import {
+  APP_COLOR_LIGHT_BLUE,
+  DELETE_COLOR_RED,
+  NEW_NOTE,
+} from "../../constants";
 import { AiFillDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
 import EmptyList from "../common/EmptyList";
 import { useUser } from "reactfire";
+import { useSelector } from "react-redux";
 
 function CardNotes({
   cardId,
@@ -22,6 +27,7 @@ function CardNotes({
   deleteCardNoteFromFirebase,
   loading,
 }) {
+  const theme = useSelector((state) => state.theme);
   const [note, setNote] = useState(NEW_NOTE);
   const { data: user } = useUser();
 
@@ -56,13 +62,16 @@ function CardNotes({
   return loading ? (
     <Spinner />
   ) : (
-    <Card className="text-center" style={{ boxShadow: `2px 0 10px gray` }}>
+    <Card
+      className={`text-center ${theme === "dark" && "bg-dark"}`}
+      style={{ boxShadow: `0 0 3px gray` }}
+    >
       <Card.Header className="cardHeaders">Card Notes</Card.Header>
       <Card.Body style={{ textAlign: "left" }}>
         {cardNotes.length === 0 ? (
           <EmptyList dataType={"note"} />
         ) : (
-          <Table size="sm">
+          <Table size="sm" variant={theme === "dark" && "dark"}>
             <thead>
               <tr>
                 <th>Date</th>
@@ -93,7 +102,11 @@ function CardNotes({
       </Card.Body>
       <Card.Footer
         className="text-muted notesFooter"
-        style={{ padding: "10px" }}
+        style={{
+          padding: "10px",
+          borderTop: theme === "dark" && "1px solid #4e5359",
+          backgroundColor: theme === "light" && APP_COLOR_LIGHT_BLUE,
+        }}
       >
         <Form.Control
           as="textarea"
@@ -101,6 +114,10 @@ function CardNotes({
           onChange={handleChange}
           value={note.note}
           onKeyDown={handleSaveOnEnter}
+          style={{
+            backgroundColor: theme === "dark" ? "black" : "#fff",
+            color: theme === "dark" ? "white" : "black",
+          }}
         />
         <Button className="addButton" onClick={(e) => handleSave(e)}>
           Add

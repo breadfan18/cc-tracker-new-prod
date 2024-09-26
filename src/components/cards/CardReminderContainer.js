@@ -12,7 +12,9 @@ import {
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { getRemindersData } from "../../hooks/reminderData";
+import { useSelector } from "react-redux";
 export function CardReminderContainer({ card }) {
+  const theme = useSelector((state) => state.theme);
   const {
     isAnnualFeeClose,
     isSpendByDateClose,
@@ -23,7 +25,13 @@ export function CardReminderContainer({ card }) {
   } = getRemindersData(card);
 
   return (
-    <Card className="text-center" style={{ boxShadow: `2px 0 10px gray` }}>
+    <Card
+      className={`text-center ${theme === "dark" && "bg-dark"}`}
+      style={{
+        boxShadow: theme === "dark" ? `rgb(168, 166, 166)` : `2px 0 10px gray`,
+        color: theme === "dark" ? "white" : `black`,
+      }}
+    >
       <Card.Header className="cardHeaders">Card Reminders</Card.Header>
       <Card.Body style={{ textAlign: "left" }}>
         {isAnnualFeeClose && (
@@ -64,10 +72,6 @@ export function CardReminderContainer({ card }) {
           !annualFeeDatePassed &&
           !spendDaysRemaining < 0 && <div>No Reminders</div>}
       </Card.Body>
-      <Card.Footer
-        className="text-muted notesFooter"
-        style={{ padding: "10px" }}
-      ></Card.Footer>
     </Card>
   );
 }

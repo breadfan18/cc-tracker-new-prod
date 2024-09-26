@@ -102,6 +102,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: var(--black-opacity);
+  color: var(--color-blue);
 }
 
 .cardDetailsStatus {
@@ -638,8 +639,7 @@ form {
 .notesFooter {
   display: flex;
   justify-content: center;
-  /* padding: 10px 15px; */
-  background-color: var(--light-blue);
+  /* background-color: var(--light-blue); */
 }
 
 .notesFooter button {

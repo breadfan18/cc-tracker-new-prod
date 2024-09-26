@@ -13,6 +13,9 @@ export const getRemindersData = (card) => {
     CARD_DATA_KEYS.nextFeeDate,
     90
   );
+
+  console.log(isAnnualFeeClose);
+
   const isSpendByDateClose = isDateApproaching(
     card,
     CARD_DATA_KEYS.spendBy,
@@ -36,6 +39,7 @@ export const getRemindersData = (card) => {
   return {
     nextFeeText,
     nextFeeColor,
+    isAnnualFeeClose,
     isSpendByDateClose,
     spendDaysRemaining,
     spendDaysRemainingText,
