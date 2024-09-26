@@ -532,6 +532,10 @@ div.alert-danger {
   padding: 10px;
 }
 
+.cardBodyText {
+  color: var(--black-or-white-text-color);
+}
+
 .loyaltyCardTitle {
   padding: 5px 5px 5px 10px;
   font-size: 1.1rem;
@@ -838,6 +842,7 @@ p {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0;
+  color: var(--color-blue);
 }
 
 .cardCardSubtitle {
@@ -877,6 +882,7 @@ p {
 
 .cardCard {
   width: 20rem;
+  box-shadow: var(--box-shadow);
 }
 
 @media (max-width: 650px) {

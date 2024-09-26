@@ -20,6 +20,7 @@ import { getRemindersData } from "../../hooks/reminderData";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import CardFavIcon from "./CardFavIcon";
+import { useSelector } from "react-redux";
 export default function CardListCards({
   cards,
   showEditDelete,
@@ -27,6 +28,7 @@ export default function CardListCards({
   showBonusInfo,
 }) {
   const history = useHistory();
+  const theme = useSelector((state) => state.theme);
 
   const routeChange = (card) => {
     let path = `/card/${card.id}`;
@@ -38,7 +40,10 @@ export default function CardListCards({
     const { isSpendByDateClose, spendDaysRemaining, showAnnualFeeDueIcon } =
       getRemindersData(card);
     return (
-      <Card key={card.id} className="cardCard">
+      <Card
+        key={card.id}
+        className={`cardCard ${theme === "dark" && "bg-dark"}`}
+      >
         <Card.Body style={{ padding: "0" }}>
           <div
             style={{
@@ -47,14 +52,16 @@ export default function CardListCards({
           >
             <Card.Title
               className="cardCardTitle"
-              style={{ backgroundColor: cardTitleColor }}
+              style={{
+                backgroundColor: cardTitleColor,
+                borderBottom: theme === "dark" && "1px solid #4e5359",
+              }}
             >
               <div style={{ padding: "10px" }}>
                 <p>{showUserName ? card.cardholder : card.issuer.name}</p>
                 <p
                   style={{
                     fontSize: "1rem",
-                    color: "rgba(33, 37, 41, 0.75)",
                   }}
                 >
                   {!showUserName
@@ -76,7 +83,7 @@ export default function CardListCards({
           <section id="cardBody" onClick={() => routeChange(card)}>
             <div>
               {Object.keys(CARD_DATA_IN_CARD_VIEW).map((key) => (
-                <CardText card={card} dataType={key} />
+                <CardText card={card} dataType={key} theme={theme} />
               ))}
             </div>
             <div>
@@ -84,7 +91,10 @@ export default function CardListCards({
             </div>
           </section>
         </Card.Body>
-        <Card.Footer className="cardsCardFooter">
+        <Card.Footer
+          className="cardsCardFooter"
+          style={{ borderTop: theme === "dark" && "1px solid #4e5359" }}
+        >
           <div>
             {showAnnualFeeDueIcon && (
               <TbAlertOctagonFilled
