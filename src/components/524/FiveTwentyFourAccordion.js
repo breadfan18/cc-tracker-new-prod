@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Accordion } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { APP_COLOR_BLUE } from "../../constants";
 
 export default function FiveTwentyFourAccordion({
   showCards,
@@ -9,29 +10,28 @@ export default function FiveTwentyFourAccordion({
   fiveTwentyFourStatusElement,
 }) {
   const [cardsShowing, setCardsShowing] = useState(false);
+
   return (
-    <Accordion
-      defaultActiveKey={["0"]}
-      style={{
-        borderRadius: "10px",
-        boxShadow: user ? "0 0 10px gray" : "none",
-      }}
-      alwaysOpen
-    >
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>{user}</Accordion.Header>
-        <Accordion.Body>{fiveTwentyFourStatusElement}</Accordion.Body>
-      </Accordion.Item>
-      {showCards && <Accordion.Item eventKey="1">
-        <Accordion.Header
-          id="five24AccordionHeader"
-          onClick={() => setCardsShowing(!cardsShowing)}
-        >
-          {cardsShowing ? "Hide Cards" : "Show Cards"}
-        </Accordion.Header>
-        <Accordion.Body>{five24Cards}</Accordion.Body>
-      </Accordion.Item>}
-    </Accordion>
+    <div className="five24Card">
+      <div style={{ padding: "15px 25px" }}>
+        <h4 style={{ color: APP_COLOR_BLUE }}>{user}</h4>
+        <hr />
+        <div>{fiveTwentyFourStatusElement}</div>
+      </div>
+      {showCards && (
+        <Accordion defaultActiveKey={["0"]} alwaysOpen>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header
+              id="five24AccordionHeader"
+              onClick={() => setCardsShowing(!cardsShowing)}
+            >
+              {cardsShowing ? "Hide Cards" : "Show Cards"}
+            </Accordion.Header>
+            <Accordion.Body>{five24Cards}</Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      )}
+    </div>
   );
 }
 

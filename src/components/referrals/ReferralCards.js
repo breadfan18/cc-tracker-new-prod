@@ -13,16 +13,21 @@ import { getReferralData } from "../../hooks/referralsData";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 import { FaLink } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 export default function ReferralCards({ referrals, cardsByHolder }) {
+  const theme = useSelector((state) => state.theme);
   const referralsData = referrals.map((referral) => {
     const { id, referralLink, referringCardholder, referringCard } =
       getReferralData(referral, cardsByHolder);
     return (
-      <Card key={id} className="cardCard">
+      <Card key={id} className={`cardCard ${theme === "dark" && "bg-dark"}`}>
         <Card.Body style={{ padding: "0" }}>
           <div style={{ backgroundColor: APP_COLOR_BLACK_OPACITY }}>
-            <Card.Title className="cardCardTitle">
+            <Card.Title
+              className="cardCardTitle"
+              style={{ borderBottom: theme === "dark" && "1px solid #4e5359" }}
+            >
               <div style={{ padding: "10px" }}>
                 <p>{referringCardholder}</p>
                 <p
@@ -56,7 +61,9 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
             </div>
           </section>
         </Card.Body>
-        <Card.Footer>
+        <Card.Footer
+          style={{ borderTop: theme === "dark" && "1px solid #4e5359" }}
+        >
           <div className="editDeleteCard editDeleteOnCards">
             <a
               href={referralLink}

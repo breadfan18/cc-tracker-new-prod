@@ -9,6 +9,7 @@ import CardsDataMiniTable from "./CardsDataMiniTable";
 import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
 import CardholderPhoto from "./CardholderPhoto";
 import InquiriesMiniTable from "./InquiriesMiniTable";
+import { useSelector } from "react-redux";
 
 const CardholdersList = ({
   cardsByHolder,
@@ -16,10 +17,12 @@ const CardholdersList = ({
   cardholders,
   inquiriesByHolder,
 }) => {
+  const theme = useSelector((state) => state.theme);
+
   return cardholders.length === 0 ? (
     <EmptyList dataType={"card holders"} />
   ) : (
-    <Table size="sm">
+    <Table size="sm" variant={theme === "dark" ? "dark" : null}>
       <thead>
         <tr>
           <th className="tableHeader"></th>

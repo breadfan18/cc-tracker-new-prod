@@ -46,12 +46,10 @@ function CardText({ card, dataType }) {
 
   const cardDataType = setCardDataType(card, dataType);
   return (
-    <p className="mb-0 text-muted">
-      <small>
-        <b style={{ color: "black" }}>{cardDataType.fieldName}</b>
-        {": "}
-        {cardDataType.value}
-      </small>
+    <p className="mb-0 cardBodyText">
+      <b>{cardDataType.fieldName}</b>
+      {": "}
+      <small className="cardTextValue">{cardDataType.value}</small>
     </p>
   );
 }

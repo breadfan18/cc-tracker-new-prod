@@ -1,0 +1,59 @@
+/* ThemeToggle.css */
+
+.theme-toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+.theme-switch {
+  display: none;
+}
+
+.slider {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  border-radius: 34px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+
+.sun-icon,
+.moon-icon {
+  font-size: 16px;
+  padding: 0 7px;
+}
+
+.slider-thumb {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  background-color: white;
+  border-radius: 50%;
+  top: 4px;
+  left: 4px;
+  transition: transform 0.4s;
+  cursor: pointer;
+}
+
+.theme-switch:checked + .slider {
+  background-color: #6b58e5;
+}
+
+.theme-switch:checked + .slider .slider-thumb {
+  transform: translateX(32px);
+}
+
+.slider .sun-icon {
+  transition: opacity 0.4s;
+}
+
+.slider .moon-icon {
+  transition: opacity 0.4s;
+  transform: scaleX(-1);
+}

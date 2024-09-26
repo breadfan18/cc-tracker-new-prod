@@ -41,10 +41,13 @@ function LoyaltyCardText({ account, dataType, showCopyIcon, dataToCopy }) {
 
   const loyaltyAccountType = setLoyaltyAccountType(account, dataType);
   return (
-    <p className="mb-0 text-muted">
-      <small style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
-        <b style={{ color: "black" }}>{loyaltyAccountType.fieldName}</b>
-        {": "}
+    <p className="mb-0 cardBodyText">
+      <b>{loyaltyAccountType.fieldName}</b>
+      {": "}
+      <small
+        className="cardTextValue"
+        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+      >
         {loyaltyAccountType.value}{" "}
         {showCopyIcon && <CopyIcon dataToCopy={dataToCopy} />}
       </small>

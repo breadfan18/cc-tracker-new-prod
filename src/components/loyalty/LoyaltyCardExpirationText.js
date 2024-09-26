@@ -2,12 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { DELETE_COLOR_RED } from "../../constants";
 
-function LoyaltyCardExpirationText({ expirationDate, daysForExpiration }) {
+function LoyaltyCardExpirationText({
+  expirationDate,
+  daysForExpiration,
+  theme,
+}) {
   return (
-    <div className="mb-0 text-muted">
-      <small style={{ display: "flex", alignItems: "center" }}>
-        <b style={{ color: "black" }}>Expiration</b>
-        {": "}
+    <p
+      className="mb-0 cardBodyText"
+      style={{ display: "flex", alignItems: "center" }}
+    >
+      <b>Expiration</b>
+      {": "}
+      <small
+        className="cardTextValue"
+        style={{ display: "flex", alignItems: "center", marginLeft: "5px" }}
+      >
         {expirationDate}{" "}
         {daysForExpiration && (
           <p
@@ -19,7 +29,7 @@ function LoyaltyCardExpirationText({ expirationDate, daysForExpiration }) {
           >{`(Rewards expire in ${daysForExpiration} days)`}</p>
         )}
       </small>
-    </div>
+    </p>
   );
 }
 

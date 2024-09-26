@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form } from "react-bootstrap";
-import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
+import Form from "react-bootstrap/Form";
+import { DELETE_COLOR_RED } from "../../../constants";
 
 const RadioInput = ({
   name,
@@ -11,48 +11,27 @@ const RadioInput = ({
   onChange,
   requiredField,
 }) => {
-  let wrapperClass = "form-group";
-  if (error && error.length > 0) {
-    wrapperClass += " has-error";
-  }
-
   return (
-    <div className={wrapperClass}>
-      <label
-        htmlFor={name}
-        className="labels inputLabels"
-        style={{
-          backgroundColor: error ? CANCELLED_COLOR_RED : "",
-        }}
-      >
+    <div className="radioFieldContainer">
+      <label htmlFor={name} className="labels inputLabels">
         {label}
-        {requiredField && (
-          <p
-            style={{
-              margin: "0 10px 0 0",
-              fontSize: "0.8rem",
-              color: APP_COLOR_BLUE,
-            }}
-          >
-            Required
-          </p>
-        )}
       </label>
-      <div className="field radioField">
+      {requiredField && <p className="requiredField">Required</p>}
+      <div
+        className="inputContainer radioField"
+        style={{ border: error && "2px solid " + DELETE_COLOR_RED }}
+      >
         <Form.Check
-          type="switch"
           name="inquiries"
-          id="custom-switch"
+          type="switch"
           label="Experian"
           value="experian"
           checked={inquiriesStatus.experian}
           onChange={onChange}
-          className="testing"
         />
         <Form.Check
           type="switch"
           name="inquiries"
-          id="custom-switch"
           label="Equifax"
           value="equifax"
           checked={inquiriesStatus.equifax}
@@ -61,7 +40,6 @@ const RadioInput = ({
         <Form.Check
           type="switch"
           name="inquiries"
-          id="custom-switch"
           label="Transunion"
           value="transunion"
           checked={inquiriesStatus.transunion}

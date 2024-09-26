@@ -12,12 +12,15 @@ import { FiExternalLink } from "react-icons/fi";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferrerField from "./ReferralForField";
 import { getReferralData } from "../../hooks/referralsData";
+import { useSelector } from "react-redux";
 
 const ReferralsList = ({ referrals, cardsByHolder }) => {
+  const theme = useSelector((state) => state.theme);
+
   return referrals.length === 0 ? (
     <EmptyList dataType={"referrals"} />
   ) : (
-    <Table size="sm">
+    <Table size="sm" variant={theme === "dark" ? "dark" : null}>
       <thead>
         <tr>
           <th className="tableHeader">Referrer</th>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../tools/firebase";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { userLogout } from "../../redux/actions/authActions";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import {
@@ -12,12 +12,14 @@ import {
 } from "react-icons/md";
 import { APP_COLOR_BLUE, APP_COLOR_LIGHT_BLACK } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
+import ThemeToggle from "./ThemeToggle";
 
 function UserProfileSection({ user, userLogout }) {
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const showMenuRef = useRef(null);
   const { isMobile } = useWindhowWidth();
+  const theme = useSelector((selector) => selector.theme);
 
   const handleEscapeKey = (event) => {
     if (event.key === "Escape") {
@@ -86,7 +88,7 @@ function UserProfileSection({ user, userLogout }) {
             marginLeft: "10px",
             fontSize: "1.3rem",
             cursor: "pointer",
-            color: isMobile ? "white" : "black",
+            color: isMobile || theme === "dark" ? "white" : "black",
           }}
           onClick={toggleShowMenu}
         />
@@ -96,27 +98,34 @@ function UserProfileSection({ user, userLogout }) {
             marginLeft: "10px",
             fontSize: "1.3rem",
             cursor: "pointer",
-            color: isMobile ? "white" : "black",
+            color: isMobile || theme === "dark" ? "white" : "black",
           }}
           onClick={toggleShowMenu}
         />
       )}
       {showMenu && (
-        <div className="userProfileMenu" ref={showMenuRef}>
+        <div
+          className="userProfileMenu"
+          ref={showMenuRef}
+          style={{ backgroundColor: theme === "dark" && "black" }}
+        >
+          <div className="themeTogglePlacement">
+            <ThemeToggle displayToggle={true} />
+          </div>
           <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
-            <li className="userMenuOptions">
+            <li className="userMenuOptions disabledMenuOption">
               <MdSpaceDashboard
                 style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
               />
               Dashboard
             </li>
-            <li className="userMenuOptions">
+            <li className="userMenuOptions disabledMenuOption">
               <RiLockPasswordFill
                 style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
               />
               Security
             </li>
-            <li className="userMenuOptions">
+            <li className="userMenuOptions disabledMenuOption">
               <MdAdminPanelSettings
                 style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
               />
@@ -124,7 +133,10 @@ function UserProfileSection({ user, userLogout }) {
             </li>
             <li
               className="userMenuOptions"
-              style={{ cursor: "pointer", color: "black" }}
+              style={{
+                color: theme === "light" ? "black" : "white",
+                cursor: "pointer",
+              }}
               onClick={handleSignOut}
             >
               <MdLogout

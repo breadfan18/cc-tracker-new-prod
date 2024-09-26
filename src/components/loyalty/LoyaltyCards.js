@@ -9,21 +9,29 @@ import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
 import LoyaltyCardExpirationText from "./LoyaltyCardExpirationText";
 import { formatDate } from "../../helpers";
 import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
+import { useSelector } from "react-redux";
 
 export default function LoyaltyCards({ loyaltyData }) {
+  const theme = useSelector((state) => state.theme);
   const allCards = loyaltyData.map((acc) => {
     const { daysForRewardExpiration, rewardsExpirationIcon } =
       getRewardsExpirationStuff(acc);
 
     return (
-      <Card key={acc.id} className="cardCard">
+      <Card
+        key={acc.id}
+        className={`cardCard ${theme === "dark" && "bg-dark"}`}
+      >
         <Card.Body style={{ padding: "0" }}>
           <div
             style={{
               backgroundColor: "rgba(0,0,0,0.06)",
             }}
           >
-            <Card.Subtitle className="mb-0 loyaltyCardTitle">
+            <Card.Subtitle
+              className="mb-0 loyaltyCardTitle"
+              style={{ borderBottom: theme === "dark" && "1px solid #4e5359" }}
+            >
               <a
                 href={acc.program.url}
                 style={{ textDecoration: "none" }}
@@ -71,7 +79,9 @@ export default function LoyaltyCards({ loyaltyData }) {
             {daysForRewardExpiration && <div>{rewardsExpirationIcon}</div>}
           </section>
         </Card.Body>
-        <Card.Footer>
+        <Card.Footer
+          style={{ borderTop: theme === "dark" && "1px solid #4e5359" }}
+        >
           <div className="editDeleteCard editDeleteOnCards">
             <LoyaltyAddEditModal loyaltyAcc={acc} />
             <ConfirmDeleteModal

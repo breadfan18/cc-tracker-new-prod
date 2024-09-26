@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
-import SelectInput from "../common/SelectInput";
-import { ACCOUNT_TYPE, LOYALTY_DATA_KEYS, PROGRAMS } from "../../constants";
+import { isEmpty } from "lodash";
+import TextInput from "../common/input-fields/TextInput";
+import SelectInput from "../common/input-fields/SelectInput";
+import {
+  ACCOUNT_TYPE,
+  DELETE_COLOR_RED,
+  LOYALTY_DATA_KEYS,
+  PROGRAMS,
+} from "../../constants";
 import { titleCase } from "../../helpers";
-import DateInput from "../common/DateInput";
+import DateInput from "../common/input-fields/DateInput";
 
 const LoyaltyForm = ({
   loyaltyAcc,
@@ -27,10 +33,10 @@ const LoyaltyForm = ({
           text: program.name,
         }));
   return (
-    <form onSubmit={onSave}>
-      {errors.onSave && (
-        <div className="alert alert-danger" role="alert">
-          {errors.onSave}
+    <form onSubmit={onSave} className="singleColumnForm">
+      {!isEmpty(errors) && (
+        <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
+          Please fill out required fields
         </div>
       )}
       <SelectInput

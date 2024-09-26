@@ -12,16 +12,7 @@ export default function CopyIcon({ dataToCopy }) {
   };
   return (
     <IoCopyOutline
-      style={{
-        marginRight: "5px",
-        background: APP_COLOR_BLACK_OPACITY,
-        padding: "5px",
-        height: "1.7rem",
-        width: "1.7rem",
-        borderRadius: "5px",
-        color: "gray",
-        cursor: "pointer",
-      }}
+      className="copyIcon"
       onClick={() => copyFileNameToClipboard(dataToCopy)}
     />
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import Burger from "./Burger";
+import Burger from "../common/Burger";
 import { APP_COLOR_BLUE, HEADER_CARD_LOGO } from "../../constants";
 import UserProfileSection from "./UserProfileSection";
 

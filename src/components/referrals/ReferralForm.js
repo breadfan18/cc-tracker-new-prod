@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
+import TextInput from "../common/input-fields/TextInput";
 import { DELETE_COLOR_RED, ISSUERS, REFERRAL_DATA_KEYS } from "../../constants";
-import SelectInput from "../common/SelectInput";
+import SelectInput from "../common/input-fields/SelectInput";
 import { useSelector } from "react-redux";
-import DateInput from "../common/DateInput";
+import DateInput from "../common/input-fields/DateInput";
 import Form from "react-bootstrap/Form";
 import { isEmpty } from "lodash";
 
@@ -40,7 +40,7 @@ const ReferralForm = ({
       }));
 
   return (
-    <form onSubmit={onSave} style={{ margin: 0 }}>
+    <form onSubmit={onSave} style={{ margin: 0 }} className="singleColumnForm">
       {!isEmpty(errors) && (
         <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
           Please fill out required fields
@@ -49,11 +49,11 @@ const ReferralForm = ({
       <Form.Check
         name={REFERRAL_DATA_KEYS.referralBonusEarned}
         type="switch"
-        label="Earned"
+        label="Referral Earned"
         value={referral.referralBonusEarned || null}
         checked={referral.referralBonusEarned}
         onChange={onChange}
-        style={{ float: "right" }}
+        className="bonusEarnedCheck"
       />
       <TextInput
         name={REFERRAL_DATA_KEYS.referralFor}

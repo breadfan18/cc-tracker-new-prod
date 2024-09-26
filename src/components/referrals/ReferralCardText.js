@@ -35,12 +35,10 @@ function ReferralCardText({ referral, dataType, cardsByHolder }) {
   const { fieldName, value } = setCardDataType(referral, dataType);
 
   return (
-    <p className="mb-0 text-muted">
-      <small>
-        <b style={{ color: "black" }}>{fieldName}</b>
-        {": "}
-        {value}
-      </small>
+    <p className="mb-0 cardBodyText">
+      <b>{fieldName}</b>
+      {": "}
+      <small className="cardTextValue">{value}</small>
     </p>
   );
 }

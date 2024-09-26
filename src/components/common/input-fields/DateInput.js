@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
-import { APP_COLOR_BLUE, CANCELLED_COLOR_RED } from "../../constants";
+import { DELETE_COLOR_RED } from "../../../constants";
 
 const DateInput = ({
   name,
@@ -12,34 +12,16 @@ const DateInput = ({
   disabled,
   requiredField,
 }) => {
-  let wrapperClass = "form-group";
-  if (error && error.length > 0) {
-    wrapperClass += " has-error";
-  }
-
   return (
-    <div className={wrapperClass}>
-      <label
-        htmlFor={name}
-        className="labels inputLabels"
-        style={{
-          backgroundColor: error ? CANCELLED_COLOR_RED : "",
-        }}
-      >
+    <div className="formFieldContainer">
+      <label htmlFor={name} className="labels inputLabels">
         {label}
-        {requiredField && (
-          <p
-            style={{
-              margin: "0 10px 0 0",
-              fontSize: "0.8rem",
-              color: APP_COLOR_BLUE,
-            }}
-          >
-            Required
-          </p>
-        )}
       </label>
-      <div className="field">
+      {requiredField && <p className="requiredField">Required</p>}
+      <div
+        className="field inputContainer"
+        style={{ border: error && "2px solid " + DELETE_COLOR_RED }}
+      >
         <Form.Control
           type="date"
           name={name}

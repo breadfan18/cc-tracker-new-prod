@@ -223,12 +223,12 @@ export function setNextFeeDataForTable(card) {
   } else if (card.status === "closed") {
     return {
       nextFeeText: "Account Closed",
-      nextFeeColor: "black",
+      nextFeeColor: null,
     };
   } else if (card.status === "downgraded") {
     return {
       nextFeeText: "Account Downgraded",
-      nextFeeColor: "black",
+      nextFeeColor: null,
     };
   } else {
     return {
@@ -251,7 +251,7 @@ export function getSpendByRemainingDays(bonusEarned, spendByDate) {
   const daysDifference = differenceInMillis / (1000 * 3600 * 24);
   const spendDaysRemaining = Math.floor(daysDifference);
   const spendByTextColor =
-    spendDaysRemaining > 30 || !spendByDate ? "black" : "orange";
+    spendDaysRemaining > 30 || !spendByDate ? null : "orange";
   return {
     spendDaysRemaining,
     spendDaysRemainingText:

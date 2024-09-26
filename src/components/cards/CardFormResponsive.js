@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
-import SelectInput from "../common/SelectInput";
+import TextInput from "../common/input-fields/TextInput";
+import SelectInput from "../common/input-fields/SelectInput";
 import {
   CARD_STATUS,
   CARD_DATA_KEYS,
@@ -9,13 +9,13 @@ import {
   ISSUERS,
   DELETE_COLOR_RED,
 } from "../../constants";
-import DateInput from "../common/DateInput";
-import RadioInput from "../common/RadioInput";
+import DateInput from "../common/input-fields/DateInput";
+import RadioInput from "../common/input-fields/RadioInput";
 import Form from "react-bootstrap/Form";
 import { formDisabledCheck, titleCase } from "../../helpers";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
-import NumberInput from "../common/NumberInput";
+import NumberInput from "../common/input-fields/NumberInput";
 
 const CardFormResponsive = ({
   card,
@@ -27,7 +27,7 @@ const CardFormResponsive = ({
 }) => {
   return (
     <>
-      <Form onSubmit={onSave}>
+      <Form onSubmit={onSave} className="singleColumnForm">
         {!isEmpty(errors) && (
           <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
             Please fill out required fields
@@ -40,7 +40,7 @@ const CardFormResponsive = ({
           value={CARD_DATA_KEYS.bonusEarned}
           checked={card.bonusEarned}
           onChange={onChange}
-          style={{ float: "right" }}
+          className="bonusEarnedCheck"
         />
         <SelectInput
           name={CARD_DATA_KEYS.status}

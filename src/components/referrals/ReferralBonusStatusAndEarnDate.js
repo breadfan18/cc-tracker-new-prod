@@ -7,6 +7,7 @@ import {
   EDIT_COLOR_GREEN_OPACITY,
 } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
+import { useSelector } from "react-redux";
 
 export default function ReferralsBonusStatusAndEarnDate({
   referral,
@@ -15,9 +16,10 @@ export default function ReferralsBonusStatusAndEarnDate({
   inverseColor,
   iconSize,
 }) {
-  const { windowWidth, isMobileXS } = useWindhowWidth();
+  const { isDesktop, windowWidth, isMobileXS } = useWindhowWidth();
   const hasEarnDate =
     referral.referralEarnDate?.includes("-") && referral.referralBonusEarned;
+  const theme = useSelector((state) => state.theme);
 
   const backgroundColor = !isCard
     ? "none"
@@ -57,7 +59,10 @@ export default function ReferralsBonusStatusAndEarnDate({
         <p
           style={{
             fontSize: isCardTitle ? "1rem" : null,
-            color: inverseColor ? "white" : "black",
+            color:
+              (isDesktop && theme === "dark") || inverseColor
+                ? "white"
+                : "black",
           }}
         >
           {referral.referralBonus}{" "}

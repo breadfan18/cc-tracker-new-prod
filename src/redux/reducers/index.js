@@ -4,6 +4,7 @@ import loyaltyData from "./loyaltyReducer";
 import cardholders from "./cardholdersReducer";
 import referrals from "./referralsReducer";
 import apiCallsInProgress from "./apiStatusReducer";
+import theme from "./themeReducer";
 import { USER_LOGOUT_SUCCESS } from "../actions/actionTypes";
 
 const appReducer = combineReducers({
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
   apiCallsInProgress,
   cardholders,
   referrals,
+  theme,
 });
 
 const rootReducer = (state, action) => {

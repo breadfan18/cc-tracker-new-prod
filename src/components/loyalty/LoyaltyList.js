@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import { FaSort } from "react-icons/fa";
@@ -18,11 +18,12 @@ import CopyIcon from "../common/CopyIcon";
 
 const LoyaltyList = ({ loyaltyData, showEditDelete, isDesktop }) => {
   const { data, requestSort } = useSortableData(loyaltyData);
+  const theme = useSelector((state) => state.theme);
 
   return loyaltyData.length === 0 ? (
     <EmptyList dataType={"loyalty account"} />
   ) : (
-    <Table>
+    <Table variant={theme === "dark" ? "dark" : null}>
       <thead>
         <tr>
           <th></th>
