@@ -83,7 +83,7 @@ export default function CardListCards({
           <section id="cardBody" onClick={() => routeChange(card)}>
             <div>
               {Object.keys(CARD_DATA_IN_CARD_VIEW).map((key) => (
-                <CardText card={card} dataType={key} theme={theme} />
+                <CardText card={card} dataType={key} />
               ))}
             </div>
             <div>

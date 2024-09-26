@@ -4,13 +4,7 @@ import { LOYALTY_DATA_KEYS } from "../../constants";
 import { formatDate } from "../../helpers";
 import CopyIcon from "../common/CopyIcon";
 
-function LoyaltyCardText({
-  account,
-  dataType,
-  showCopyIcon,
-  dataToCopy,
-  theme,
-}) {
+function LoyaltyCardText({ account, dataType, showCopyIcon, dataToCopy }) {
   const setLoyaltyAccountType = (account, dataType) => {
     switch (dataType) {
       case LOYALTY_DATA_KEYS.memberId:
@@ -47,10 +41,13 @@ function LoyaltyCardText({
 
   const loyaltyAccountType = setLoyaltyAccountType(account, dataType);
   return (
-    <p className={`mb-0 cardBodyText ${theme === "light" && "text-muted"}`}>
-      <small style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
-        <b>{loyaltyAccountType.fieldName}</b>
-        {": "}
+    <p className="mb-0 cardBodyText">
+      <b>{loyaltyAccountType.fieldName}</b>
+      {": "}
+      <small
+        className="cardTextValue"
+        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+      >
         {loyaltyAccountType.value}{" "}
         {showCopyIcon && <CopyIcon dataToCopy={dataToCopy} />}
       </small>

@@ -8,10 +8,16 @@ function LoyaltyCardExpirationText({
   theme,
 }) {
   return (
-    <div className={`mb-0 cardBodyText ${theme === "light" && "text-muted"}`}>
-      <small style={{ display: "flex", alignItems: "center" }}>
-        <b>Expiration</b>
-        {": "}
+    <p
+      className="mb-0 cardBodyText"
+      style={{ display: "flex", alignItems: "center" }}
+    >
+      <b>Expiration</b>
+      {": "}
+      <small
+        className="cardTextValue"
+        style={{ display: "flex", alignItems: "center", marginLeft: "5px" }}
+      >
         {expirationDate}{" "}
         {daysForExpiration && (
           <p
@@ -23,7 +29,7 @@ function LoyaltyCardExpirationText({
           >{`(Rewards expire in ${daysForExpiration} days)`}</p>
         )}
       </small>
-    </div>
+    </p>
   );
 }
 

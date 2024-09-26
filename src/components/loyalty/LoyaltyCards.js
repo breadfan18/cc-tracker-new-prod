@@ -56,29 +56,24 @@ export default function LoyaltyCards({ loyaltyData }) {
                 dataType={LOYALTY_DATA_KEYS.memberId}
                 showCopyIcon
                 dataToCopy={acc.memberId}
-                theme={theme}
               />
               <LoyaltyCardText
                 account={acc}
                 dataType={LOYALTY_DATA_KEYS.rewardsBalance}
-                theme={theme}
               />
               <LoyaltyCardExpirationText
                 expirationDate={formatDate(acc.rewardsExpiration)}
                 daysForExpiration={daysForRewardExpiration}
-                theme={theme}
               />
               <LoyaltyCardText
                 account={acc}
                 dataType={LOYALTY_DATA_KEYS.loginId}
                 showCopyIcon
                 dataToCopy={acc.loginId}
-                theme={theme}
               />
               <LoyaltyCardText
                 account={acc}
                 dataType={LOYALTY_DATA_KEYS.password}
-                theme={theme}
               />
             </div>
             {daysForRewardExpiration && <div>{rewardsExpirationIcon}</div>}

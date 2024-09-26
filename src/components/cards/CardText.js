@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { formatCurrency, formatDate } from "../../helpers";
 import { CARD_DATA_KEYS } from "../../constants";
 
-function CardText({ card, dataType, theme }) {
+function CardText({ card, dataType }) {
   const setCardDataType = (card, dataType) => {
     switch (dataType) {
       case CARD_DATA_KEYS.appDate:
@@ -46,12 +46,10 @@ function CardText({ card, dataType, theme }) {
 
   const cardDataType = setCardDataType(card, dataType);
   return (
-    <p className={`mb-0 cardBodyText ${theme === "light" && "text-muted"}`}>
-      <small>
-        <b>{cardDataType.fieldName}</b>
-        {": "}
-        {cardDataType.value}
-      </small>
+    <p className="mb-0 cardBodyText">
+      <b>{cardDataType.fieldName}</b>
+      {": "}
+      <small className="cardTextValue">{cardDataType.value}</small>
     </p>
   );
 }
