@@ -8,13 +8,9 @@ import {
 
 export const getRemindersData = (card) => {
   const { nextFeeText, nextFeeColor } = setNextFeeDataForTable(card);
-  const isAnnualFeeClose = isDateApproaching(
-    card,
-    CARD_DATA_KEYS.nextFeeDate,
-    90
-  );
-
-  console.log(isAnnualFeeClose);
+  const isAnnualFeeClose =
+    isDateApproaching(card, CARD_DATA_KEYS.nextFeeDate, 90) &&
+    card.status === "open";
 
   const isSpendByDateClose = isDateApproaching(
     card,
@@ -33,8 +29,7 @@ export const getRemindersData = (card) => {
   const annualFeeDatePassed =
     dateHasPassed(card.nextFeeDate) && card.status === "open";
 
-  const showAnnualFeeDueIcon =
-    (isAnnualFeeClose || annualFeeDatePassed) && card.status === "open";
+  const showAnnualFeeDueIcon = isAnnualFeeClose || annualFeeDatePassed;
 
   return {
     nextFeeText,
