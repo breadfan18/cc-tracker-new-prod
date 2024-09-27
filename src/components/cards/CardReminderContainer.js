@@ -24,11 +24,14 @@ export function CardReminderContainer({ card }) {
     spendDaysRemaining,
   } = getRemindersData(card);
 
+  console.log(annualFeeDatePassed);
+
   return (
     <Card
       className={`text-center ${theme === "dark" && "bg-dark"}`}
       style={{
-        boxShadow: theme === "dark" ? `rgb(168, 166, 166)` : `2px 0 10px gray`,
+        boxShadow:
+          theme === "dark" ? `0 0 3px rgb(168, 166, 166)` : `2px 0 10px gray`,
         color: theme === "dark" ? "white" : `black`,
       }}
     >
@@ -47,7 +50,7 @@ export function CardReminderContainer({ card }) {
             text={REMINDERS_TEXT_AF_DATE_PASSED}
             Icon={TbAlertOctagonFilled}
             iconColor={DELETE_COLOR_RED}
-            lastReminder={isLastReminder}
+            lastReminder={false}
           />
         )}
         {bonusNotEarned && (
@@ -70,7 +73,9 @@ export function CardReminderContainer({ card }) {
           !isSpendByDateClose &&
           !bonusNotEarned &&
           !annualFeeDatePassed &&
-          !spendDaysRemaining < 0 && <div>No Reminders</div>}
+          (spendDaysRemaining === null || !spendDaysRemaining < 0) && (
+            <div>No Reminders</div>
+          )}
       </Card.Body>
     </Card>
   );

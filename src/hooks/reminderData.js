@@ -23,6 +23,7 @@ export const getRemindersData = (card) => {
 
   const bonusNotEarned =
     isSpendByDateClose && (card.bonusEarned === undefined || !card.bonusEarned);
+
   const isLastReminder =
     isAnnualFeeClose && isSpendByDateClose && bonusNotEarned ? false : true;
 
@@ -42,5 +43,6 @@ export const getRemindersData = (card) => {
     bonusNotEarned,
     isLastReminder,
     showAnnualFeeDueIcon,
+    annualFeeDatePassed,
   };
 };
