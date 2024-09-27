@@ -64,7 +64,10 @@ function CardNotes({
   ) : (
     <Card
       className={`text-center ${theme === "dark" && "bg-dark"}`}
-      style={{ boxShadow: `0 0 3px gray` }}
+      style={{
+        boxShadow:
+          theme === "dark" ? `0 0 3px rgb(168, 166, 166)` : `2px 0 10px gray`,
+      }}
     >
       <Card.Header className="cardHeaders">Card Notes</Card.Header>
       <Card.Body style={{ textAlign: "left" }}>
