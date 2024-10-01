@@ -25,6 +25,7 @@
   --mini-table-bkgrd: rgba(81, 79, 79, 0.09);
   --progress-bar-bkgrd: rgba(0, 0, 0, 0.09);
   --hover-color: #c9bffc;
+  --empty-list-bkgrd: rgba(0, 0, 0, 0.09);
 }
 
 [data-theme="dark"] {
@@ -45,6 +46,7 @@
   --mini-table-bkgrd: rgba(0, 0, 0);
   --progress-bar-bkgrd: rgba(255, 255, 255, 0.2);
   --hover-color: #212529;
+  --empty-list-bkgrd: rgba(255, 255, 255, 0.13);
 }
 
 body {
@@ -453,28 +455,36 @@ div.alert-danger {
   transform: scale(1.5);
 }
 
+.nav-tabs .nav-item {
+  margin: 0 2px;
+}
+
 .nav-tabs .nav-item .nav-link {
   color: var(--color-blue);
   background-color: var(--light-gray);
-  border-bottom: 2px solid var(--color-blue);
 }
 
 .nav-tabs .nav-item .nav-link.active {
   color: #fff;
   background-color: var(--color-blue);
   font-weight: bold;
+  border-color: var(--color-blue);
 }
 
 .cardsContainer .nav-tabs .nav-item:last-child .nav-link {
   background-color: #dfc2c4;
   color: var(--fav-red);
-  border-bottom: 2px solid var(--fav-red);
+}
+
+.nav-tabs .nav-item .nav-link:first-child {
+  margin-left: 0;
 }
 
 .cardsContainer .nav-tabs .nav-item:last-child .nav-link.active {
   background-color: var(--fav-red);
   color: white;
   font-weight: bold;
+  border-color: var(--fav-red);
 }
 
 .tableHeader > svg {
@@ -1001,4 +1011,9 @@ p {
 .jumbotron a {
   background-color: var(--color-blue);
   border: none;
+}
+
+.emptyList {
+  background-color: var(--empty-list-bkgrd);
+  color: var(--black-or-white-text-color);
 }
