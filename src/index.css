@@ -213,6 +213,7 @@ nav a {
 }
 
 #userSection {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -225,9 +226,9 @@ nav a {
 
 .userProfileMenu {
   position: absolute;
-  top: 4.5rem;
-  right: 13px;
-  width: 13rem;
+  top: 4.4rem;
+  right: 0px;
+  width: 100%;
   z-index: 1000;
   background-color: white;
   box-shadow: black 0px 4px 8px -6px;
