@@ -29,8 +29,8 @@
 }
 
 [data-theme="dark"] {
-  --url-bkgrd: url("https://i.imgur.com/9oYAEde.jpeg");
-  /* --url-bkgrd: url("https://i.imgur.com/0EMIxcF.jpeg"); */
+  --url-bkgrd: url("https://imgur.com/Nldmpid.jpg");
+  /* --url-bkgrd: url("https://i.imgur.com/0EMIdxcF.jpeg"); */
   --black-or-white-bkgrd: black;
   --black-or-white-text-color: white;
   --header-background: rgba(0, 0, 0, 0.5);
