@@ -10,6 +10,8 @@
     "csv-stringify": "^6.4.0",
     "dotenv": "^16.4.5",
     "firebase": "^9.23.0",
+    "firebase-admin": "^12.6.0",
+    "firebase-tools": "^13.22.0",
     "fs-extra": "^11.1.1",
     "immer": "9.0.5",
     "lodash": "^4.17.21",
@@ -37,8 +39,9 @@
     "eject": "react-scripts eject",
     "basedata": "tsc && node dist/tools/excelDataMigrator.js",
     "test-card": "tsc && node dist/ts/createTestCard.js",
-    "runCloudFn": "node functions/index.js",
-    "testSend": "node functions/send.js"
+    "runCloudFn": "node functions/src/index.js",
+    "testSend": "node functions/src/send.js",
+    "localSend": "node functions/src/localEmails.js"
   },
   "eslintConfig": {
     "extends": [

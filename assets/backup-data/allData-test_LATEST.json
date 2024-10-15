@@ -1,0 +1,231 @@
+{
+  "users": {
+    "IDvrpQUEjSQBI9FJG9VhaU0wDoq2": {
+      "cardHolders": {
+        "dex-pogba": {
+          "id": "dex-pogba",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2F1910596_511047669708_4590_n_511047669708.jpg?alt=media&token=51692d39-2146-48b1-af05-b71fc629c116",
+          "name": "Dex Pogba",
+          "email": "breadfan18@gmail.com",
+          "isPrimary": true
+        },
+        "anshu-thapa": {
+          "id": "anshu-thapa",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FIMG_6027.jpeg?alt=media&token=6584cc91-33aa-427e-84a3-06738e891845",
+          "name": "Anshu Thapa"
+        },
+        "sammy-test": {
+          "id": "sammy-test",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FYD0_7782_Original.jpeg?alt=media&token=d7d97287-24fe-487a-9ce7-e348dfc409e6",
+          "name": "Sammy Test"
+        },
+        "loo-loo": {
+          "id": "loo-loo",
+          "img": "https://firebasestorage.googleapis.com/v0/b/cc-tracker-new.appspot.com/o/images%2FIMG_7972.jpeg?alt=media&token=e769cc2e-81bd-41d9-afef-f9d65333c79c",
+          "name": "Loo Loo"
+        }
+      },
+      "cards": {
+        "amex-hilton-honors-3-59ebba53fcd": {
+          "annualFee": "65",
+          "appDate": "2023-03-02",
+          "bonusEarnDate": "2023-05-17",
+          "bonusEarned": true,
+          "card": "Hilton Honors",
+          "cardNotes": {
+            "1eb7701cf3f": {
+              "date": "2023-07-12",
+              "id": "1eb7701cf3f",
+              "note": "Amex Special Offer expires March 2032"
+            },
+            "eb7701cf3fb": {
+              "date": "2023-07-12",
+              "id": "eb7701cf3fb",
+              "note": "Upgrade to Surpass next year "
+            }
+          },
+          "cardType": "Personal",
+          "cardholder": "Loo Loo",
+          "creditLine": "5000",
+          "id": "amex-hilton-honors-3-59ebba53fcd",
+          "inquiries": {
+            "equifax": false,
+            "experian": false,
+            "transunion": true
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/1XOuPt8.png",
+            "name": "Amex"
+          },
+          "nextFeeDate": "2023-11-29",
+          "signupBonus": "25,000 Points",
+          "spendBy": "2023-06-02",
+          "spendReq": "3000",
+          "status": "open",
+          "userId": "loo-loo"
+        },
+        "barclays-aviator-red-4-cd2274f9abe": {
+          "annualFee": "65",
+          "appDate": "2022-06-21",
+          "bonusEarnDate": "2022-08-31",
+          "bonusEarned": true,
+          "card": "Aviator Red",
+          "cardNotes": {
+            "03a1eb7701c": {
+              "date": "2023-07-12",
+              "id": "03a1eb7701c",
+              "note": "Need to downgrade in 2024"
+            }
+          },
+          "cardType": "Personal",
+          "cardholder": "Sammy Test",
+          "creditLine": "9000",
+          "id": "barclays-aviator-red-4-cd2274f9abe",
+          "inquiries": {
+            "equifax": false,
+            "experian": false,
+            "transunion": true
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/bsjoGQv.png",
+            "name": "Barclays"
+          },
+          "nextFeeDate": "2023-07-13",
+          "signupBonus": "50,000 Points",
+          "spendBy": "2022-09-22",
+          "spendReq": "3000",
+          "status": "open",
+          "userId": "sammy-test"
+        },
+        "capone-venture-x-1-64e49a6fe8d": {
+          "annualFee": "95",
+          "appDate": "2023-07-11",
+          "card": "Venture X",
+          "cardNotes": {
+            "269f0483d1e": {
+              "date": "2023-07-12",
+              "id": "269f0483d1e",
+              "note": "Eligible to get another bonus on Sept 2025"
+            },
+            "69f0483d1ea": {
+              "date": "2023-07-12",
+              "id": "69f0483d1ea",
+              "note": "Special bonus offer 10,000 points - by July 2024"
+            }
+          },
+          "cardType": "Personal",
+          "cardholder": "Anshu Thapa",
+          "creditLine": "9000",
+          "id": "capone-venture-x-1-64e49a6fe8d",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": true
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/u3Rr8rT.png",
+            "name": "CapOne"
+          },
+          "nextFeeDate": "2024-07-11",
+          "signupBonus": "100,000 Miles",
+          "spendBy": "2023-10-19",
+          "spendReq": "6000",
+          "status": "open",
+          "userId": "anshu-thapa"
+        },
+        "chase-freedom-ultd-1-8aef65c6f5d": {
+          "annualFee": "35",
+          "appDate": "2015-01-14",
+          "bonusEarnDate": "2015-03-29",
+          "bonusEarned": true,
+          "card": "Freedom Ultd",
+          "cardNotes": {
+            "aef65c6f5d0": {
+              "date": "2023-07-12",
+              "id": "aef65c6f5d0",
+              "note": "Closed this card on 02-23-2021"
+            },
+            "ef65c6f5d05": {
+              "date": "2023-07-12",
+              "id": "ef65c6f5d05",
+              "note": "Make referral to Anshu"
+            }
+          },
+          "cardType": "Personal",
+          "cardholder": "Loo Loo",
+          "creditLine": "3500",
+          "id": "chase-freedom-ultd-1-8aef65c6f5d",
+          "inquiries": {
+            "equifax": true,
+            "experian": true,
+            "transunion": false
+          },
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "nextFeeDate": "2016-01-15",
+          "signupBonus": "10,000 UR",
+          "spendBy": "2015-04-15",
+          "spendReq": "1500",
+          "status": "closed",
+          "userId": "loo-loo"
+        }
+      },
+      "loyaltyData": {
+        "american-aadvantage-dex-pogba-c158e8be251": {
+          "accountHolder": "Dex Pogba",
+          "id": "american-aadvantage-dex-pogba-c158e8be251",
+          "loginId": "doodoo",
+          "loyaltyType": "airlines",
+          "memberId": "92kd70s",
+          "password": "p********31",
+          "program": {
+            "id": 1,
+            "img": "https://i.imgur.com/0UD33Y8.png",
+            "name": "American AAdvantage",
+            "type": "airlines",
+            "url": "https://www.aa.com/loyalty/login?uri=%2floyalty%2flogin&previousPage=&bookingPathStateId=&marketId="
+          },
+          "rewardsBalance": "1154",
+          "rewardsExpiration": "2024-11-30",
+          "userId": "dex-pogba"
+        },
+        "united-mileageplus-sammy-test-158e8be2519": {
+          "accountHolder": "Sammy Test",
+          "id": "united-mileageplus-sammy-test-158e8be2519",
+          "loginId": "12345",
+          "loyaltyType": "airlines",
+          "memberId": "foo lala",
+          "password": "f********ar",
+          "program": {
+            "id": 2,
+            "img": "https://i.imgur.com/IAWs57y.png",
+            "name": "United MileagePlus",
+            "type": "airlines",
+            "url": "https://www.united.com/ual/en/us/sso?return_to=wsta"
+          },
+          "userId": "sammy-test"
+        }
+      },
+      "referrals": {
+        "referral-2d936ac49af": {
+          "id": "referral-2d936ac49af",
+          "issuer": {
+            "img": "https://i.imgur.com/AsfYKFY.png",
+            "name": "Chase"
+          },
+          "referralBonus": "75K UR",
+          "referralBonusEarned": true,
+          "referralDate": "2024-10-14",
+          "referralEarnDate": "2024-10-03",
+          "referralFor": "Harry Enton",
+          "referralLink": "https://TEST.com",
+          "referredCard": "Foo Card",
+          "referrerId": "anshu-thapa",
+          "referringCardId": "capone-venture-x-1-64e49a6fe8d"
+        }
+      }
+    }
+  }
+}

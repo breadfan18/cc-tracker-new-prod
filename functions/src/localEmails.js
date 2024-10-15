@@ -1,7 +1,8 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
-const serviceAccount = require("../firebase-service-account.json");
+const serviceAccount = require("../../firebase-service-account.json");
+const { getDatabase, onValue } = require("firebase/database");
 require("dotenv").config();
 const _ = require("lodash");
 
@@ -23,7 +24,7 @@ function daysUntilNextFee(annualFeeDate) {
   return Math.round((nextFeeDate - todaysDate) / (1000 * 60 * 60 * 24));
 }
 
-// Initialize Firebase Admin SDK
+// Initialize Firebase Admin SDK if sending locally or in a non-GCP environment
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://cc-tracker-test-default-rtdb.firebaseio.com/",
@@ -36,27 +37,36 @@ const ref = admin.database().ref("/users");
 
 // Retrieve data once
 ref.once("value").then(async (snapshot) => {
-  snapshot.forEach(async (childSnapshot) => {
-    const cards = childSnapshot.val().cards;
-    const primaryUser = _.values(childSnapshot.val().cardHolders).find(
+  const allAccountsData = snapshot.val();
+
+  for (const onlineAccountKey in allAccountsData) {
+    const userData = allAccountsData[onlineAccountKey];
+
+    const cards = userData.cards;
+
+    const primaryUser = _.values(userData.cardHolders).find(
       (holder) => holder.isPrimary
-    ).name;
+    );
 
     for (const card of _.values(cards)) {
+      const cardRef = admin
+        .database()
+        .ref(`/users/${onlineAccountKey}/cards/${card.id}`);
       const numberOfDays = daysUntilNextFee(card.nextFeeDate);
-      const isAnnualFeeClose = numberOfDays <= 90 && card.status === "open";
+      const isAnnualFeeClose =
+        numberOfDays <= 90 && numberOfDays > 0 && card.status === "open";
       // const foo = isDateApproaching(card, card.nextFeeDate, 90);
 
-      if (isAnnualFeeClose) {
+      if (card.userId === "loo-loo" && card.card === "Hilton Honors") {
         const msg = {
-          to: "breadfan18@gmail.com",
+          to: primaryUser.email,
           from: "cctrackerapp@gmail.com",
           templateId: "d-06023a5c215a48d6b802ecae1b335777",
           personalizations: [
             {
               to: ["breadfan18@gmail.com"],
               dynamic_template_data: {
-                primaryUser,
+                primaryUser: primaryUser.name,
                 ...card,
                 numberOfDays,
               },
@@ -65,7 +75,16 @@ ref.once("value").then(async (snapshot) => {
         };
 
         try {
-          await sgMail.send(msg);
+          await sgMail.send(msg).then(() => {
+            const data = {
+              ...card,
+              emailSentDates: {
+                annuaFeeDue: new Date().toISOString().split("T")[0],
+              },
+            };
+            cardRef.set(data);
+            console.log("Data written successfully");
+          });
           console.log("Email sent successfully");
         } catch (error) {
           console.error("Error sending email:", error);
@@ -74,5 +93,5 @@ ref.once("value").then(async (snapshot) => {
     }
 
     console.log("All emails for this user sent (or skipped)");
-  });
+  }
 });
