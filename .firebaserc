@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "cc-tracker-test"
+    "default": "cc-tracker-new",
+    "test": "cc-tracker-test"
   }
 }

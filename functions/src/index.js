@@ -1,7 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
-// const serviceAccount = require("../../firebase-service-account.json");
 require("dotenv").config();
 const _ = require("lodash");
 
@@ -23,12 +22,6 @@ function daysUntilNextFee(annualFeeDate) {
   return Math.round((nextFeeDate - todaysDate) / (1000 * 60 * 60 * 24));
 }
 
-// Initialize Firebase Admin SDK if sending locally or in a non-GCP environment
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: "https://cc-tracker-test-default-rtdb.firebaseio.com/",
-// });
-
 admin.initializeApp();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -40,45 +33,63 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
   .schedule("40 14 * * *")
   .onRun(async (context) => {
     return ref.once("value").then(async (snapshot) => {
-      snapshot.forEach(async (childSnapshot) => {
-        const cards = childSnapshot.val().cards;
-        const primaryUser = _.values(childSnapshot.val().cardHolders).find(
+      const allAccountsData = snapshot.val();
+
+      for (const onlineAccountKey in allAccountsData) {
+        const userData = allAccountsData[onlineAccountKey];
+        const cards = userData.cards;
+        const primaryUser = _.values(userData.cardHolders).find(
           (holder) => holder.isPrimary
         );
 
-        for (const card of _.values(cards)) {
-          const numberOfDays = daysUntilNextFee(card.nextFeeDate);
-          const isAnnualFeeClose =
-            numberOfDays <= 90 && numberOfDays > 0 && card.status === "open";
-          // const foo = isDateApproaching(card, card.nextFeeDate, 90);
+        if (cards) {
+          for (const card of _.values(cards)) {
+            const cardRef = admin
+              .database()
+              .ref(`/users/${onlineAccountKey}/cards/${card.id}`);
+            const numberOfDays = daysUntilNextFee(card.nextFeeDate);
+            const isAnnualFeeClose =
+              numberOfDays <= 90 && numberOfDays > 0 && card.status === "open";
+            // const foo = isDateApproaching(card, card.nextFeeDate, 90);
 
-          if (card.userId === "swaroop-uprety" && card.card === "Blue Cash") {
-            const msg = {
-              to: primaryUser.email,
-              from: "cctrackerapp@gmail.com",
-              templateId: "d-06023a5c215a48d6b802ecae1b335777",
-              personalizations: [
-                {
-                  to: ["breadfan18@gmail.com"],
-                  dynamic_template_data: {
-                    primaryUser: primaryUser.name,
-                    ...card,
-                    numberOfDays,
+            if (card.userId === "anshu-thapa" && card.card === "Blue Cash") {
+              const msg = {
+                to: primaryUser.email,
+                from: "cctrackerapp@gmail.com",
+                templateId: "d-06023a5c215a48d6b802ecae1b335777",
+                personalizations: [
+                  {
+                    to: ["breadfan18@gmail.com"],
+                    dynamic_template_data: {
+                      primaryUser: primaryUser.name,
+                      ...card,
+                      numberOfDays,
+                    },
                   },
-                },
-              ],
-            };
+                ],
+              };
 
-            try {
-              await sgMail.send(msg);
-              console.log("Email sent successfully");
-            } catch (error) {
-              console.error("Error sending email:", error);
+              try {
+                await sgMail.send(msg).then(() => {
+                  const data = {
+                    ...card,
+                    emailSentDates: {
+                      annuaFeeDue: new Date().toISOString().split("T")[0],
+                    },
+                  };
+                  cardRef.set(data);
+                  console.log("Data written successfully");
+                });
+                console.log("Email sent successfully");
+                console.res("Email sent successfully");
+              } catch (error) {
+                console.error("Error sending email:", error);
+              }
             }
           }
         }
 
         console.log("All emails for this user sent (or skipped)");
-      });
+      }
     });
   });
