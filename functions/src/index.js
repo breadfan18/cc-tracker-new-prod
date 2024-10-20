@@ -47,43 +47,49 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
             const cardRef = admin
               .database()
               .ref(`/users/${onlineAccountKey}/cards/${card.id}`);
-            const numberOfDays = daysUntilNextFee(card.nextFeeDate);
-            const isAnnualFeeClose =
-              numberOfDays <= 90 && numberOfDays > 0 && card.status === "open";
-            // const foo = isDateApproaching(card, card.nextFeeDate, 90);
+            const hasAnnualFee =
+              card.annualFee !== "" || card.annualFee !== "0";
 
-            if (card.userId === "anshu-thapa" && card.card === "Blue Cash") {
-              const msg = {
-                to: primaryUser.email,
-                from: "cctrackerapp@gmail.com",
-                templateId: "d-06023a5c215a48d6b802ecae1b335777",
-                personalizations: [
-                  {
-                    to: ["breadfan18@gmail.com"],
-                    dynamic_template_data: {
-                      primaryUser: primaryUser.name,
+            if (hasAnnualFee) {
+              const numberOfDays = daysUntilNextFee(card.nextFeeDate);
+              const isAnnualFeeClose =
+                numberOfDays <= 90 &&
+                numberOfDays > 0 &&
+                card.status === "open";
+              const emailAlreadySent = card.emailSent?.annuaFeeDue;
+              if (isAnnualFeeClose && !emailAlreadySent) {
+                const msg = {
+                  to: primaryUser.email,
+                  from: "cctrackerapp@gmail.com",
+                  templateId: "d-06023a5c215a48d6b802ecae1b335777",
+                  personalizations: [
+                    {
+                      to: ["breadfan18@gmail.com"],
+                      dynamic_template_data: {
+                        primaryUser: primaryUser.name,
+                        ...card,
+                        numberOfDays,
+                      },
+                    },
+                  ],
+                };
+
+                try {
+                  await sgMail.send(msg).then(() => {
+                    const data = {
                       ...card,
-                      numberOfDays,
-                    },
-                  },
-                ],
-              };
-
-              try {
-                await sgMail.send(msg).then(() => {
-                  const data = {
-                    ...card,
-                    emailSentDates: {
-                      annuaFeeDue: new Date().toISOString().split("T")[0],
-                    },
-                  };
-                  cardRef.set(data);
-                  console.log("Data written successfully");
-                });
-                console.log("Email sent successfully");
-                console.res("Email sent successfully");
-              } catch (error) {
-                console.error("Error sending email:", error);
+                      emailSent: {
+                        annuaFeeDue: true,
+                      },
+                    };
+                    cardRef.set(data);
+                    console.log("Data written successfully");
+                  });
+                  console.log("Email sent successfully");
+                  console.res("Email sent successfully");
+                } catch (error) {
+                  console.error("Error sending email:", error);
+                }
               }
             }
           }
