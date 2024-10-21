@@ -19,6 +19,7 @@ function HomePage({ cardholders, loadCardholdersFromFirebase }) {
         name: user.displayName,
         img: user.photoURL,
         isPrimary: true,
+        email: user.email,
       });
     }
   }, [user]);
