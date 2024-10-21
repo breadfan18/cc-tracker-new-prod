@@ -44,19 +44,18 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
 
         if (cards) {
           for (const card of _.values(cards)) {
+            const { annualFee, nextFeeDate, status, emailSent, id } = card;
             const cardRef = admin
               .database()
-              .ref(`/users/${onlineAccountKey}/cards/${card.id}`);
-            const hasAnnualFee =
-              card.annualFee !== "" || card.annualFee !== "0";
+              .ref(`/users/${onlineAccountKey}/cards/${id}`);
+            const hasAnnualFee = annualFee && annualFee !== "0";
 
             if (hasAnnualFee) {
-              const numberOfDays = daysUntilNextFee(card.nextFeeDate);
+              const numberOfDays = daysUntilNextFee(nextFeeDate);
               const isAnnualFeeClose =
-                numberOfDays <= 90 &&
-                numberOfDays > 0 &&
-                card.status === "open";
-              const emailAlreadySent = card.emailSent?.annuaFeeDue;
+                numberOfDays <= 90 && numberOfDays > 0 && status === "open";
+              const emailAlreadySent = emailSent?.annuaFeeDue;
+
               if (isAnnualFeeClose && !emailAlreadySent) {
                 const msg = {
                   to: primaryUser.email,
@@ -86,7 +85,6 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
                     console.log("Data written successfully");
                   });
                   console.log("Email sent successfully");
-                  console.res("Email sent successfully");
                 } catch (error) {
                   console.error("Error sending email:", error);
                 }

@@ -53,16 +53,17 @@ ref.once("value").then(async (snapshot) => {
 
     if (cards) {
       for (const card of _.values(cards)) {
+        const { annualFee, nextFeeDate, status, emailSent, id } = card;
         const cardRef = admin
           .database()
-          .ref(`/users/${onlineAccountKey}/cards/${card.id}`);
-        const hasAnnualFee = card.annualFee !== "" || card.annualFee !== "0";
+          .ref(`/users/${onlineAccountKey}/cards/${id}`);
+        const hasAnnualFee = annualFee && annualFee !== "0";
 
         if (hasAnnualFee) {
-          const numberOfDays = daysUntilNextFee(card.nextFeeDate);
+          const numberOfDays = daysUntilNextFee(nextFeeDate);
           const isAnnualFeeClose =
-            numberOfDays <= 90 && numberOfDays > 0 && card.status === "open";
-          const emailAlreadySent = card.emailSent?.annuaFeeDue;
+            numberOfDays <= 90 && numberOfDays > 0 && status === "open";
+          const emailAlreadySent = emailSent?.annuaFeeDue;
 
           if (isAnnualFeeClose && !emailAlreadySent) {
             const msg = {
@@ -104,3 +105,9 @@ ref.once("value").then(async (snapshot) => {
     console.log("All emails for this user sent (or skipped)");
   }
 });
+
+/* 
+Things to do
+- Update logic on sign in to add email address to primary user 
+- IF annual fee is > 0, make next fee date a required field
+*/
