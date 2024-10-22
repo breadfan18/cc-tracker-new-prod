@@ -158,6 +158,8 @@ const CardForm = ({
               onChange={onChange}
               value={formDisabledCheck(card.annualFee) ? "" : card.nextFeeDate}
               disabled={formDisabledCheck(card.annualFee)}
+              requiredField={Number(card.annualFee) > 0}
+              error={errors.nextFeeDate}
             />
           </Col>
         </Row>

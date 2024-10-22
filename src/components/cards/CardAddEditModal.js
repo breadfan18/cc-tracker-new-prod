@@ -35,6 +35,10 @@ function CardAddEditModal({
       delete errors[name];
     }
 
+    if (name === "annualFee" && value === "0") {
+      delete errors["nextFeeDate"];
+    }
+
     if (name === "inquiries") {
       // eslint-disable-next-line no-unused-expressions
       value === "experian"
@@ -95,6 +99,8 @@ function CardAddEditModal({
       creditLine,
       bonusEarned,
       bonusEarnDate,
+      nextFeeDate,
+      annualFee,
     } = cardForModal;
     const errors = {};
 
@@ -106,6 +112,7 @@ function CardAddEditModal({
     if (!cardType) errors.cardType = "Required";
     if (!creditLine) errors.creditLine = "Required";
     if (bonusEarned && !bonusEarnDate) errors.bonusEarnDate = "Required";
+    if (Number(annualFee) > 0 && !nextFeeDate) errors.nextFeeDate = "Required";
     if (Object.values(inquiries).every((i) => i === null || i === false)) {
       errors.inquiries = "Required";
     }
