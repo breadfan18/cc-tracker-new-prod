@@ -5,17 +5,6 @@ const prodServiceAccount = require("../../firebase-service-account-prod.json");
 require("dotenv").config();
 const _ = require("lodash");
 
-function isDateApproaching(data, dataType, numberOfDays) {
-  if (!data[dataType]) return;
-  const formattedDate = new Date(data[dataType]);
-  const parsedDate = Date.parse(data[dataType]);
-  const today = Date.now();
-  const daysBeforeDate = Date.parse(
-    new Date(formattedDate.setDate(formattedDate.getDate() - numberOfDays))
-  );
-  return today >= daysBeforeDate && today <= parsedDate;
-}
-
 function daysUntilNextFee(annualFeeDate) {
   if (!annualFeeDate) return;
   const nextFeeDate = new Date(annualFeeDate);
@@ -51,21 +40,27 @@ ref.once("value").then(async (snapshot) => {
       (holder) => holder.isPrimary
     );
 
+    let emailCount = 0;
+
     if (cards) {
       for (const card of _.values(cards)) {
-        const { annualFee, nextFeeDate, status, emailSent, id } = card;
-        const cardRef = admin
-          .database()
-          .ref(`/users/${onlineAccountKey}/cards/${id}`);
+        const { annualFee, nextFeeDate } = card;
+        // const cardRef = admin
+        //   .database()
+        //   .ref(`/users/${onlineAccountKey}/cards/${id}`);
         const hasAnnualFee = annualFee && annualFee !== "0";
 
         if (hasAnnualFee) {
           const numberOfDays = daysUntilNextFee(nextFeeDate);
-          const isAnnualFeeClose =
-            numberOfDays <= 90 && numberOfDays > 0 && status === "open";
-          const emailAlreadySent = emailSent?.annuaFeeDue;
+          const annualFeeDueIn90Days = numberOfDays === 90;
+          const annualFeeDueIn30Days = numberOfDays === 30;
+          const annualFeeDueIn5Days = numberOfDays === 5;
 
-          if (isAnnualFeeClose && !emailAlreadySent) {
+          if (
+            annualFeeDueIn90Days ||
+            annualFeeDueIn30Days ||
+            annualFeeDueIn5Days
+          ) {
             const msg = {
               to: primaryUser.email,
               from: "cctrackerapp@gmail.com",
@@ -83,17 +78,9 @@ ref.once("value").then(async (snapshot) => {
             };
 
             try {
-              await sgMail.send(msg).then(() => {
-                const data = {
-                  ...card,
-                  emailSent: {
-                    annuaFeeDue: true,
-                  },
-                };
-                cardRef.set(data);
-                console.log("Data written successfully");
-              });
+              await sgMail.send(msg);
               console.log("Email sent successfully");
+              emailCount++;
             } catch (error) {
               console.error("Error sending email:", error);
             }
@@ -102,12 +89,15 @@ ref.once("value").then(async (snapshot) => {
       }
     }
 
-    console.log("All emails for this user sent (or skipped)");
+    console.log(`Sent ${emailCount} emails for ${primaryUser.name}`);
   }
 });
 
 /* 
 Things to do
-- Update logic on sign in to add email address to primary user 
-- IF annual fee is > 0, make next fee date a required field
+- Other email trigger functions
+--- Spend by date approaching
+--- Loyalty points expiration approaching 
+
+- Also update UI to show notifications based on the emailSent flag?
 */

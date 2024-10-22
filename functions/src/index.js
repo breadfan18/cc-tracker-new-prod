@@ -41,22 +41,27 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
         const primaryUser = _.values(userData.cardHolders).find(
           (holder) => holder.isPrimary
         );
+        let emailCount = 0;
 
         if (cards) {
           for (const card of _.values(cards)) {
-            const { annualFee, nextFeeDate, status, emailSent, id } = card;
-            const cardRef = admin
-              .database()
-              .ref(`/users/${onlineAccountKey}/cards/${id}`);
+            const { annualFee, nextFeeDate } = card;
+            // const cardRef = admin
+            //   .database()
+            //   .ref(`/users/${onlineAccountKey}/cards/${id}`);
             const hasAnnualFee = annualFee && annualFee !== "0";
 
             if (hasAnnualFee) {
               const numberOfDays = daysUntilNextFee(nextFeeDate);
-              const isAnnualFeeClose =
-                numberOfDays <= 90 && numberOfDays > 0 && status === "open";
-              const emailAlreadySent = emailSent?.annuaFeeDue;
+              const annualFeeDueIn90Days = numberOfDays === 90;
+              const annualFeeDueIn30Days = numberOfDays === 30;
+              const annualFeeDueIn5Days = numberOfDays === 5;
 
-              if (isAnnualFeeClose && !emailAlreadySent) {
+              if (
+                annualFeeDueIn90Days ||
+                annualFeeDueIn30Days ||
+                annualFeeDueIn5Days
+              ) {
                 const msg = {
                   to: primaryUser.email,
                   from: "cctrackerapp@gmail.com",
@@ -74,17 +79,9 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
                 };
 
                 try {
-                  await sgMail.send(msg).then(() => {
-                    const data = {
-                      ...card,
-                      emailSent: {
-                        annuaFeeDue: true,
-                      },
-                    };
-                    cardRef.set(data);
-                    console.log("Data written successfully");
-                  });
+                  await sgMail.send(msg);
                   console.log("Email sent successfully");
+                  emailCount++;
                 } catch (error) {
                   console.error("Error sending email:", error);
                 }
@@ -93,7 +90,7 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
           }
         }
 
-        console.log("All emails for this user sent (or skipped)");
+        console.log(`Sent ${emailCount} emails for ${primaryUser.name}`);
       }
     });
   });
