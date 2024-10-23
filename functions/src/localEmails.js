@@ -4,13 +4,10 @@ const serviceAccount = require("../../firebase-service-account.json");
 const prodServiceAccount = require("../../firebase-service-account-prod.json");
 require("dotenv").config();
 const _ = require("lodash");
-
-function daysUntilNextFee(annualFeeDate) {
-  if (!annualFeeDate) return;
-  const nextFeeDate = new Date(annualFeeDate);
-  const todaysDate = Date.now();
-  return Math.round((nextFeeDate - todaysDate) / (1000 * 60 * 60 * 24));
-}
+const {
+  annualFeeEmailVerifier,
+  spendByEmailVerifier,
+} = require("./function-helpers");
 
 const testDatabaseURL = "https://cc-tracker-test-default-rtdb.firebaseio.com/";
 const prodDatabaseURL = "https://cc-tracker-new-default-rtdb.firebaseio.com/";
@@ -44,34 +41,40 @@ ref.once("value").then(async (snapshot) => {
 
     if (cards) {
       for (const card of _.values(cards)) {
-        const { annualFee, nextFeeDate } = card;
+        const {
+          annualFee,
+          nextFeeDate,
+          status,
+          cardholder,
+          bonusEarned,
+          spendBy,
+        } = card;
         // const cardRef = admin
         //   .database()
         //   .ref(`/users/${onlineAccountKey}/cards/${id}`);
-        const hasAnnualFee = annualFee && annualFee !== "0";
+        const cardHasAnnualFee =
+          status === "open" && annualFee && annualFee !== "0";
 
-        if (hasAnnualFee) {
-          const numberOfDays = daysUntilNextFee(nextFeeDate);
-          const annualFeeDueIn90Days = numberOfDays === 90;
-          const annualFeeDueIn30Days = numberOfDays === 30;
-          const annualFeeDueIn5Days = numberOfDays === 5;
+        const cardHasBonusToEarn = status === "open" && !bonusEarned;
 
-          if (
-            annualFeeDueIn90Days ||
-            annualFeeDueIn30Days ||
-            annualFeeDueIn5Days
-          ) {
+        if (cardHasAnnualFee) {
+          const {
+            shouldSendAnnualFeeEmail,
+            daysTillAnnualFee,
+            annualFeeTemplateToUse,
+          } = annualFeeEmailVerifier(nextFeeDate);
+
+          if (shouldSendAnnualFeeEmail) {
             const msg = {
-              to: primaryUser.email,
               from: "cctrackerapp@gmail.com",
-              templateId: "d-06023a5c215a48d6b802ecae1b335777",
+              templateId: annualFeeTemplateToUse,
               personalizations: [
                 {
-                  to: ["breadfan18@gmail.com"],
+                  to: primaryUser.email,
                   dynamic_template_data: {
                     primaryUser: primaryUser.name,
                     ...card,
-                    numberOfDays,
+                    daysTillAnnualFee,
                   },
                 },
               ],
@@ -79,7 +82,40 @@ ref.once("value").then(async (snapshot) => {
 
             try {
               await sgMail.send(msg);
-              console.log("Email sent successfully");
+              console.log(`Email sent successfully for ${cardholder}`);
+              emailCount++;
+            } catch (error) {
+              console.error("Error sending email:", error);
+            }
+          }
+        }
+
+        if (cardHasBonusToEarn) {
+          const {
+            shouldSendSpendByEmail,
+            daysTillSpendByDate,
+            spendByTemplateToUse,
+          } = spendByEmailVerifier(spendBy);
+
+          if (shouldSendSpendByEmail) {
+            const msg = {
+              from: "cctrackerapp@gmail.com",
+              templateId: spendByTemplateToUse,
+              personalizations: [
+                {
+                  to: primaryUser.email,
+                  dynamic_template_data: {
+                    primaryUser: primaryUser.name,
+                    ...card,
+                    daysTillSpendByDate,
+                  },
+                },
+              ],
+            };
+
+            try {
+              await sgMail.send(msg);
+              console.log(`Email sent successfully for ${cardholder}`);
               emailCount++;
             } catch (error) {
               console.error("Error sending email:", error);
@@ -89,7 +125,7 @@ ref.once("value").then(async (snapshot) => {
       }
     }
 
-    console.log(`Sent ${emailCount} emails for ${primaryUser.name}`);
+    console.log(`Sent ${emailCount} card emails for ${primaryUser.name}`);
   }
 });
 

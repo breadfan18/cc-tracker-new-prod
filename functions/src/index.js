@@ -3,24 +3,10 @@ const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 const _ = require("lodash");
-
-function isDateApproaching(data, dataType, numberOfDays) {
-  if (!data[dataType]) return;
-  const formattedDate = new Date(data[dataType]);
-  const parsedDate = Date.parse(data[dataType]);
-  const today = Date.now();
-  const daysBeforeDate = Date.parse(
-    new Date(formattedDate.setDate(formattedDate.getDate() - numberOfDays))
-  );
-  return today >= daysBeforeDate && today <= parsedDate;
-}
-
-function daysUntilNextFee(annualFeeDate) {
-  if (!annualFeeDate) return;
-  const nextFeeDate = new Date(annualFeeDate);
-  const todaysDate = Date.now();
-  return Math.round((nextFeeDate - todaysDate) / (1000 * 60 * 60 * 24));
-}
+const {
+  annualFeeEmailVerifier,
+  spendByEmailVerifier,
+} = require("./function-helpers");
 
 admin.initializeApp();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -41,38 +27,45 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
         const primaryUser = _.values(userData.cardHolders).find(
           (holder) => holder.isPrimary
         );
+
         let emailCount = 0;
 
         if (cards) {
           for (const card of _.values(cards)) {
-            const { annualFee, nextFeeDate } = card;
+            const {
+              annualFee,
+              nextFeeDate,
+              status,
+              cardholder,
+              bonusEarned,
+              spendBy,
+            } = card;
             // const cardRef = admin
             //   .database()
             //   .ref(`/users/${onlineAccountKey}/cards/${id}`);
-            const hasAnnualFee = annualFee && annualFee !== "0";
+            const cardHasAnnualFee =
+              status === "open" && annualFee && annualFee !== "0";
 
-            if (hasAnnualFee) {
-              const numberOfDays = daysUntilNextFee(nextFeeDate);
-              const annualFeeDueIn90Days = numberOfDays === 90;
-              const annualFeeDueIn30Days = numberOfDays === 30;
-              const annualFeeDueIn5Days = numberOfDays === 5;
+            const cardHasBonusToEarn = status === "open" && !bonusEarned;
 
-              if (
-                annualFeeDueIn90Days ||
-                annualFeeDueIn30Days ||
-                annualFeeDueIn5Days
-              ) {
+            if (cardHasAnnualFee) {
+              const {
+                shouldSendAnnualFeeEmail,
+                daysTillAnnualFee,
+                annualFeeTemplateToUse,
+              } = annualFeeEmailVerifier(nextFeeDate);
+
+              if (shouldSendAnnualFeeEmail) {
                 const msg = {
-                  to: primaryUser.email,
                   from: "cctrackerapp@gmail.com",
-                  templateId: "d-06023a5c215a48d6b802ecae1b335777",
+                  templateId: annualFeeTemplateToUse,
                   personalizations: [
                     {
-                      to: ["breadfan18@gmail.com"],
+                      to: primaryUser.email,
                       dynamic_template_data: {
                         primaryUser: primaryUser.name,
                         ...card,
-                        numberOfDays,
+                        daysTillAnnualFee,
                       },
                     },
                   ],
@@ -80,7 +73,44 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
 
                 try {
                   await sgMail.send(msg);
-                  console.log("Email sent successfully");
+                  console.log(
+                    `Annual fee email for ${cardholder} sent successfully`
+                  );
+                  emailCount++;
+                } catch (error) {
+                  console.error("Error sending email:", error);
+                }
+              }
+            }
+
+            if (cardHasBonusToEarn) {
+              const {
+                shouldSendSpendByEmail,
+                daysTillSpendByDate,
+                spendByTemplateToUse,
+              } = spendByEmailVerifier(spendBy);
+
+              if (shouldSendSpendByEmail) {
+                const msg = {
+                  from: "cctrackerapp@gmail.com",
+                  templateId: spendByTemplateToUse,
+                  personalizations: [
+                    {
+                      to: primaryUser.email,
+                      dynamic_template_data: {
+                        primaryUser: primaryUser.name,
+                        ...card,
+                        daysTillSpendByDate,
+                      },
+                    },
+                  ],
+                };
+
+                try {
+                  await sgMail.send(msg);
+                  console.log(
+                    `Bonus alert email for ${cardholder} sent successfully`
+                  );
                   emailCount++;
                 } catch (error) {
                   console.error("Error sending email:", error);
@@ -90,7 +120,7 @@ exports.sendAnnualFeeDueEmail = functions.pubsub
           }
         }
 
-        console.log(`Sent ${emailCount} emails for ${primaryUser.name}`);
+        console.log(`CARD - Sent ${emailCount} emails for ${primaryUser.name}`);
       }
     });
   });
