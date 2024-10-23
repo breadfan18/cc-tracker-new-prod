@@ -128,11 +128,3 @@ ref.once("value").then(async (snapshot) => {
     console.log(`Sent ${emailCount} card emails for ${primaryUser.name}`);
   }
 });
-/* 
-Things to do
-- Other email trigger functions
---- Spend by date approaching
---- Loyalty points expiration approaching 
-
-- Also update UI to show notifications based on the emailSent flag?
-*/

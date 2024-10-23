@@ -4,10 +4,7 @@ const serviceAccount = require("../../firebase-service-account.json");
 const prodServiceAccount = require("../../firebase-service-account-prod.json");
 require("dotenv").config();
 const _ = require("lodash");
-const {
-  annualFeeEmailVerifier,
-  spendByEmailVerifier,
-} = require("./function-helpers");
+const { loyaltyEmailVerifier } = require("./function-helpers");
 
 const testDatabaseURL = "https://cc-tracker-test-default-rtdb.firebaseio.com/";
 const prodDatabaseURL = "https://cc-tracker-new-default-rtdb.firebaseio.com/";
@@ -32,49 +29,39 @@ ref.once("value").then(async (snapshot) => {
 
   for (const onlineAccountKey in allAccountsData) {
     const userData = allAccountsData[onlineAccountKey];
-    const cards = userData.cards;
+    const loyaltyData = userData.loyaltyData;
+
     const primaryUser = _.values(userData.cardHolders).find(
       (holder) => holder.isPrimary
     );
 
     let emailCount = 0;
 
-    if (cards) {
-      for (const card of _.values(cards)) {
-        const {
-          annualFee,
-          nextFeeDate,
-          status,
-          cardholder,
-          bonusEarned,
-          spendBy,
-        } = card;
-        // const cardRef = admin
-        //   .database()
-        //   .ref(`/users/${onlineAccountKey}/cards/${id}`);
-        const cardHasAnnualFee =
-          status === "open" && annualFee && annualFee !== "0";
+    if (loyaltyData) {
+      for (const loyaltyAccount of _.values(loyaltyData)) {
+        const { accountHolder, rewardsBalance, rewardsExpiration, program } =
+          loyaltyAccount;
+        const { name, img } = program;
+        const accountHasBalance = rewardsBalance && rewardsBalance !== "0";
 
-        const cardHasBonusToEarn = status === "open" && !bonusEarned;
+        if (accountHasBalance && rewardsExpiration !== undefined) {
+          const { shouldSendLoyaltyReminderEmail, daysTillRewardsExpiration } =
+            loyaltyEmailVerifier(rewardsExpiration);
 
-        if (cardHasAnnualFee) {
-          const {
-            shouldSendAnnualFeeEmail,
-            daysTillAnnualFee,
-            annualFeeTemplateToUse,
-          } = annualFeeEmailVerifier(nextFeeDate);
-
-          if (shouldSendAnnualFeeEmail) {
+          if (shouldSendLoyaltyReminderEmail) {
             const msg = {
               from: "cctrackerapp@gmail.com",
-              templateId: annualFeeTemplateToUse,
+              templateId: "d-befc59aaef1d4517aba14e687a27bf2b",
               personalizations: [
                 {
                   to: primaryUser.email,
                   dynamic_template_data: {
+                    accountHolder,
                     primaryUser: primaryUser.name,
-                    ...card,
-                    daysTillAnnualFee,
+                    loyaltyAccountName: name,
+                    loyaltyAccountImg: img,
+                    rewardsExpirationDate: rewardsExpiration,
+                    daysTillRewardsExpiration,
                   },
                 },
               ],
@@ -82,40 +69,9 @@ ref.once("value").then(async (snapshot) => {
 
             try {
               await sgMail.send(msg);
-              console.log(`Email sent successfully for ${cardholder}`);
-              emailCount++;
-            } catch (error) {
-              console.error("Error sending email:", error);
-            }
-          }
-        }
-
-        if (cardHasBonusToEarn) {
-          const {
-            shouldSendSpendByEmail,
-            daysTillSpendByDate,
-            spendByTemplateToUse,
-          } = spendByEmailVerifier(spendBy);
-
-          if (shouldSendSpendByEmail) {
-            const msg = {
-              from: "cctrackerapp@gmail.com",
-              templateId: spendByTemplateToUse,
-              personalizations: [
-                {
-                  to: primaryUser.email,
-                  dynamic_template_data: {
-                    primaryUser: primaryUser.name,
-                    ...card,
-                    daysTillSpendByDate,
-                  },
-                },
-              ],
-            };
-
-            try {
-              await sgMail.send(msg);
-              console.log(`Email sent successfully for ${cardholder}`);
+              console.log(
+                `Rewards expiration email for ${accountHolder} sent successfully`
+              );
               emailCount++;
             } catch (error) {
               console.error("Error sending email:", error);
@@ -128,11 +84,3 @@ ref.once("value").then(async (snapshot) => {
     console.log(`Sent ${emailCount} card emails for ${primaryUser.name}`);
   }
 });
-/* 
-Things to do
-- Other email trigger functions
---- Spend by date approaching
---- Loyalty points expiration approaching 
-
-- Also update UI to show notifications based on the emailSent flag?
-*/

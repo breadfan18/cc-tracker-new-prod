@@ -55,7 +55,22 @@ function spendByEmailVerifier(spendByDate) {
   };
 }
 
+function loyaltyEmailVerifier(loyaltyExpirationDate) {
+  const daysTillRewardsExpiration = getNumberOfDaysFromDate(
+    loyaltyExpirationDate
+  );
+
+  const rewardsExpireIn180Days = daysTillRewardsExpiration === 180;
+  const rewardsExpireIn60Days = daysTillRewardsExpiration === 60;
+
+  const shouldSendLoyaltyReminderEmail =
+    rewardsExpireIn180Days || rewardsExpireIn60Days;
+
+  return { shouldSendLoyaltyReminderEmail, daysTillRewardsExpiration };
+}
+
 module.exports = {
   annualFeeEmailVerifier,
   spendByEmailVerifier,
+  loyaltyEmailVerifier,
 };
