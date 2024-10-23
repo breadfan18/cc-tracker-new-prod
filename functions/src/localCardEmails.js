@@ -128,7 +128,6 @@ ref.once("value").then(async (snapshot) => {
     console.log(`Sent ${emailCount} card emails for ${primaryUser.name}`);
   }
 });
-
 /* 
 Things to do
 - Other email trigger functions

@@ -41,8 +41,10 @@
     "test-card": "tsc && node dist/ts/createTestCard.js",
     "runCloudFn": "node functions/src/index.js",
     "testSend": "node functions/src/send.js",
-    "localSendProd": "node functions/src/localEmails.js",
-    "localSendTest": "REACT_APP_ENV_TEST=test node functions/src/localEmails.js"
+    "card-localSendProd": "node functions/src/localCardEmails.js",
+    "card-localSendTest": "REACT_APP_ENV_TEST=test node functions/src/localCardEmails.js",
+    "loyalty-localSendProd": "node functions/src/localLoyaltyEmails.js",
+    "loyalty-localSendTest": "REACT_APP_ENV_TEST=test node functions/src/localLoyaltyEmails.js"
   },
   "eslintConfig": {
     "extends": [
