@@ -52,7 +52,7 @@ ref.once("value").then(async (snapshot) => {
           const { shouldSendLoyaltyReminderEmail, daysTillRewardsExpiration } =
             loyaltyEmailVerifier(rewardsExpiration);
 
-          if (true) {
+          if (shouldSendLoyaltyReminderEmail) {
             const msg = {
               from: "cctrackerapp@gmail.com",
               templateId: LOYALTY_REMINDER_TEMPLATE_ID,
