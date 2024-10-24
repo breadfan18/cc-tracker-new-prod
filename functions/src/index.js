@@ -7,6 +7,7 @@ const {
   annualFeeEmailVerifier,
   spendByEmailVerifier,
   loyaltyEmailVerifier,
+  convertDateToLocaleString,
 } = require("./function-helpers");
 
 admin.initializeApp();
@@ -67,6 +68,8 @@ exports.sendCardReminderEmails = functions.pubsub
                         primaryUser: primaryUser.name,
                         ...card,
                         daysTillAnnualFee,
+                        formattedFeeDate:
+                          convertDateToLocaleString(nextFeeDate),
                       },
                     },
                   ],
@@ -102,6 +105,8 @@ exports.sendCardReminderEmails = functions.pubsub
                         primaryUser: primaryUser.name,
                         ...card,
                         daysTillSpendByDate,
+                        formattedSpendByDate:
+                          convertDateToLocaleString(spendBy),
                       },
                     },
                   ],
@@ -171,7 +176,8 @@ exports.sendLoyaltyReminderEmails = functions.pubsub
                         primaryUser: primaryUser.name,
                         loyaltyAccountName: name,
                         loyaltyAccountImg: img,
-                        rewardsExpirationDate: rewardsExpiration,
+                        rewardsExpirationDate:
+                          convertDateToLocaleString(rewardsExpiration),
                         daysTillRewardsExpiration,
                       },
                     },
@@ -192,7 +198,9 @@ exports.sendLoyaltyReminderEmails = functions.pubsub
           }
         }
 
-        console.log(`Sent ${emailCount} card emails for ${primaryUser.name}`);
+        console.log(
+          `LOYALTY - Sent ${emailCount} emails for ${primaryUser.name}`
+        );
       }
     });
   });

@@ -4,7 +4,11 @@ const serviceAccount = require("../../firebase-service-account.json");
 const prodServiceAccount = require("../../firebase-service-account-prod.json");
 require("dotenv").config();
 const _ = require("lodash");
-const { loyaltyEmailVerifier } = require("./function-helpers");
+const {
+  loyaltyEmailVerifier,
+  convertDateToLocaleString,
+  LOYALTY_REMINDER_TEMPLATE_ID,
+} = require("./function-helpers");
 
 const testDatabaseURL = "https://cc-tracker-test-default-rtdb.firebaseio.com/";
 const prodDatabaseURL = "https://cc-tracker-new-default-rtdb.firebaseio.com/";
@@ -48,10 +52,10 @@ ref.once("value").then(async (snapshot) => {
           const { shouldSendLoyaltyReminderEmail, daysTillRewardsExpiration } =
             loyaltyEmailVerifier(rewardsExpiration);
 
-          if (shouldSendLoyaltyReminderEmail) {
+          if (true) {
             const msg = {
               from: "cctrackerapp@gmail.com",
-              templateId: "d-befc59aaef1d4517aba14e687a27bf2b",
+              templateId: LOYALTY_REMINDER_TEMPLATE_ID,
               personalizations: [
                 {
                   to: primaryUser.email,
@@ -60,7 +64,8 @@ ref.once("value").then(async (snapshot) => {
                     primaryUser: primaryUser.name,
                     loyaltyAccountName: name,
                     loyaltyAccountImg: img,
-                    rewardsExpirationDate: rewardsExpiration,
+                    rewardsExpirationDate:
+                      convertDateToLocaleString(rewardsExpiration),
                     daysTillRewardsExpiration,
                   },
                 },
@@ -81,6 +86,6 @@ ref.once("value").then(async (snapshot) => {
       }
     }
 
-    console.log(`Sent ${emailCount} card emails for ${primaryUser.name}`);
+    console.log(`LOYALTY - Sent ${emailCount} emails for ${primaryUser.name}`);
   }
 });

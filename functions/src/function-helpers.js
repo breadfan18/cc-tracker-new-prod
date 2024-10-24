@@ -1,8 +1,15 @@
-const AF_DUE_TEMPLATE_ID = "d-06023a5c215a48d6b802ecae1b335777";
-const AF_DATE_PASSED_TEMPLATE_ID = "d-3dc493b5cd734400a4655a523b2cdd4e";
+const AF_DUE_TEMPLATE_ID = "d-d8adc7796c93412a90c2a5d1c2b10023";
+const AF_DATE_PASSED_TEMPLATE_ID = "d-71ac83215e494f5aa6138915cb771cc8";
 
-const SPEND_BY_TEMPLATE_ID = "d-4c08e57e490a4964a1a0015e6ca1d781";
-const SPEND_BY_PASSED_TEMPLATE_ID = "d-ee42189c15dc45a7aeb5e9dd0a79eaa9";
+const SPEND_BY_TEMPLATE_ID = "d-778bf701bf204af081fc21dd7c08fad6";
+const SPEND_BY_PASSED_TEMPLATE_ID = "d-0d54f1cb6d1241319c5cb570351f2eac";
+
+const LOYALTY_REMINDER_TEMPLATE_ID = "d-585b3e176444435bba99e697c48da0c6";
+
+const convertDateToLocaleString = (date) => {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(date).toLocaleDateString("en-US", options);
+};
 
 function getNumberOfDaysFromDate(date) {
   if (!date) return;
@@ -73,4 +80,6 @@ module.exports = {
   annualFeeEmailVerifier,
   spendByEmailVerifier,
   loyaltyEmailVerifier,
+  convertDateToLocaleString,
+  LOYALTY_REMINDER_TEMPLATE_ID,
 };

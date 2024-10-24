@@ -7,6 +7,7 @@ const _ = require("lodash");
 const {
   annualFeeEmailVerifier,
   spendByEmailVerifier,
+  convertDateToLocaleString,
 } = require("./function-helpers");
 
 const testDatabaseURL = "https://cc-tracker-test-default-rtdb.firebaseio.com/";
@@ -75,6 +76,7 @@ ref.once("value").then(async (snapshot) => {
                     primaryUser: primaryUser.name,
                     ...card,
                     daysTillAnnualFee,
+                    formattedFeeDate: convertDateToLocaleString(nextFeeDate),
                   },
                 },
               ],
@@ -82,7 +84,9 @@ ref.once("value").then(async (snapshot) => {
 
             try {
               await sgMail.send(msg);
-              console.log(`Email sent successfully for ${cardholder}`);
+              console.log(
+                `Annual fee email for ${cardholder} sent successfully`
+              );
               emailCount++;
             } catch (error) {
               console.error("Error sending email:", error);
@@ -108,6 +112,7 @@ ref.once("value").then(async (snapshot) => {
                     primaryUser: primaryUser.name,
                     ...card,
                     daysTillSpendByDate,
+                    formattedSpendByDate: convertDateToLocaleString(spendBy),
                   },
                 },
               ],
@@ -115,7 +120,9 @@ ref.once("value").then(async (snapshot) => {
 
             try {
               await sgMail.send(msg);
-              console.log(`Email sent successfully for ${cardholder}`);
+              console.log(
+                `Bonus alert email for ${cardholder} sent successfully`
+              );
               emailCount++;
             } catch (error) {
               console.error("Error sending email:", error);
@@ -125,6 +132,6 @@ ref.once("value").then(async (snapshot) => {
       }
     }
 
-    console.log(`Sent ${emailCount} card emails for ${primaryUser.name}`);
+    console.log(`CARD - Sent ${emailCount} emails for ${primaryUser.name}`);
   }
 });
