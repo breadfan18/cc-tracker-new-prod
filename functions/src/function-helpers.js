@@ -76,10 +76,17 @@ function loyaltyEmailVerifier(loyaltyExpirationDate) {
   return { shouldSendLoyaltyReminderEmail, daysTillRewardsExpiration };
 }
 
+const createNotificationsRef = (admin, notificationId, onlineAccountKey) => {
+  return admin
+    .database()
+    .ref(`/users/${onlineAccountKey}/notifications/${notificationId}`);
+};
+
 module.exports = {
   annualFeeEmailVerifier,
   spendByEmailVerifier,
   loyaltyEmailVerifier,
   convertDateToLocaleString,
   LOYALTY_REMINDER_TEMPLATE_ID,
+  createNotificationsRef,
 };
