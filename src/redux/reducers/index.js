@@ -3,6 +3,7 @@ import cards from "./cardsReducer";
 import loyaltyData from "./loyaltyReducer";
 import cardholders from "./cardholdersReducer";
 import referrals from "./referralsReducer";
+import notifications from "./notificationsReducer";
 import apiCallsInProgress from "./apiStatusReducer";
 import theme from "./themeReducer";
 import { USER_LOGOUT_SUCCESS } from "../actions/actionTypes";
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   apiCallsInProgress,
   cardholders,
   referrals,
+  notifications,
   theme,
 });
 

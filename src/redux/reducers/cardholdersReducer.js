@@ -6,7 +6,7 @@ import {
   DELETE_CARDHOLDER_SUCCESS,
 } from "../actions/actionTypes";
 
-export default function loyaltyReducer(
+export default function cardholdersReducer(
   state = initialState.cardholders,
   action
 ) {

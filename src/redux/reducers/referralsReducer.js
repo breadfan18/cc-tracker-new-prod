@@ -5,7 +5,10 @@ import {
   DELETE_REFERRAL_SUCCESS,
 } from "../actions/actionTypes";
 
-export default function loyaltyReducer(state = initialState.referrals, action) {
+export default function referralsReducer(
+  state = initialState.referrals,
+  action
+) {
   switch (action.type) {
     case LOAD_REFERRAL_SUCCESS:
       return action.referrals;
