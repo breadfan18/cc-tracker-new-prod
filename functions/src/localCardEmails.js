@@ -9,6 +9,7 @@ const {
   spendByEmailVerifier,
   convertDateToLocaleString,
 } = require("./function-helpers");
+const uid = require("uid");
 
 const testDatabaseURL = "https://cc-tracker-test-default-rtdb.firebaseio.com/";
 const prodDatabaseURL = "https://cc-tracker-new-default-rtdb.firebaseio.com/";
@@ -26,6 +27,12 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Reference to your data location
 const ref = admin.database().ref("/users");
+
+const createNotificationsRef = (notificationId, onlineAccountKey) => {
+  return admin
+    .database()
+    .ref(`/users/${onlineAccountKey}/notifications/${notificationId}`);
+};
 
 // Retrieve data once
 ref.once("value").then(async (snapshot) => {
@@ -49,10 +56,9 @@ ref.once("value").then(async (snapshot) => {
           cardholder,
           bonusEarned,
           spendBy,
+          issuer,
         } = card;
-        // const cardRef = admin
-        //   .database()
-        //   .ref(`/users/${onlineAccountKey}/cards/${id}`);
+
         const cardHasAnnualFee =
           status === "open" && annualFee && annualFee !== "0";
 
@@ -86,6 +92,20 @@ ref.once("value").then(async (snapshot) => {
               await sgMail.send(msg);
               console.log(
                 `Annual fee email for ${cardholder} sent successfully`
+              );
+              const notificationId = uid.uid();
+              const notificationsRef = createNotificationsRef(
+                notificationId,
+                onlineAccountKey
+              );
+              const notificationsData = {
+                dateSent: new Date().toISOString().split("T")[0],
+                message: `Annual fee for ${cardholder}'s ${issuer.name} ${card.card} is due in ${daysTillAnnualFee} days`,
+              };
+
+              await notificationsRef.set(notificationsData);
+              console.log(
+                `Notification added to db - ${cardholder}'s ${issuer.name} ${card.card} - ${daysTillAnnualFee} day annual fee alert`
               );
               emailCount++;
             } catch (error) {
