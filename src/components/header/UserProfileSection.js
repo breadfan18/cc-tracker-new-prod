@@ -83,10 +83,8 @@ function UserProfileSection({ user, userLogout }) {
           }}
           title={user.displayName}
         />
-        <span class="notification-dot"></span>
+        {notifications.length > 0 && <span class="notification-dot" />}
       </div>
-
-      <div style={{}}></div>
       <article>
         <p
           style={{
@@ -133,13 +131,6 @@ function UserProfileSection({ user, userLogout }) {
           </div>
           <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
             <li className="userMenuOptions disabledMenuOption">
-              IoMdNotifications
-              <IoMdNotifications
-                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-              />
-              Notifications
-            </li>
-            <li className="userMenuOptions disabledMenuOption">
               <RiLockPasswordFill
                 style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
               />
@@ -151,6 +142,17 @@ function UserProfileSection({ user, userLogout }) {
               />
               Admin Portal
             </li>
+            {notifications.length > 0 && (
+              <li className="userMenuOptions">
+                <span
+                  class="userMenuNotificationsBadge"
+                  style={{ marginRight: "10px" }}
+                >
+                  {notifications.length}
+                </span>
+                Notifications
+              </li>
+            )}
             <li
               className="userMenuOptions"
               style={{
@@ -176,10 +178,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(UserProfileSection);
-
-/* <div class="notification-icon">
-        <span class="notification-badge">{notifications.length}</span>
-      </div> */
-/* {notifications.map((notification) => (
-        <div key={notification.id}>{notification.message}</div>
-      ))} */
