@@ -18,19 +18,25 @@ import Notifications from "../common/NotificationsDrawer";
 
 function UserProfileSection({ user }) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const showMenuRef = useRef(null);
-  const notificationsDrawerRef = useRef(null);
   const { isMobile } = useWindhowWidth();
   const theme = useSelector((selector) => selector.theme);
   const notifications = useSelector((state) => state.notifications);
-  const dispatch = useDispatch();
+  const showMenuRef = useRef(null);
+  const notificationsDrawerRef = useRef(null);
 
   const handleEscapeKey = (event) => {
     if (event.key === "Escape") {
       setShowMenu(false);
     }
   };
+
+  useEffect(() => {
+    if (notifications.length === 0) {
+      dispatch(loadNotificationsFromFirebase(user.uid));
+    }
+  }, [notifications]);
 
   const hideShowMenuOnDocumentClick = (event) => {
     if (
@@ -58,12 +64,6 @@ function UserProfileSection({ user }) {
     localStorage.removeItem("selectedUser");
     history.push("/signin");
   }
-
-  useEffect(() => {
-    if (notifications.length === 0) {
-      dispatch(loadNotificationsFromFirebase(user.uid));
-    }
-  }, [notifications]);
 
   return (
     <section
