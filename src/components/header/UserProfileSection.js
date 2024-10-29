@@ -2,26 +2,29 @@ import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../tools/firebase";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { userLogout } from "../../redux/actions/authActions";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { MdAdminPanelSettings, MdLogout } from "react-icons/md";
 import {
-  MdSpaceDashboard,
-  MdAdminPanelSettings,
-  MdLogout,
-} from "react-icons/md";
-import { IoMdNotifications } from "react-icons/io";
-import { APP_COLOR_BLUE, APP_COLOR_LIGHT_BLACK } from "../../constants";
+  APP_COLOR_BLUE,
+  APP_COLOR_LIGHT_BLACK,
+  CARDHOLDER_STOCK_IMG,
+} from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
 import ThemeToggle from "./ThemeToggle";
 import { loadNotificationsFromFirebase } from "../../redux/actions/notificationsActions";
+import Notifications from "../common/NotificationsDrawer";
 
-function UserProfileSection({ user, userLogout }) {
+function UserProfileSection({ user }) {
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const showMenuRef = useRef(null);
+  const notificationsDrawerRef = useRef(null);
   const { isMobile } = useWindhowWidth();
   const theme = useSelector((selector) => selector.theme);
+  const notifications = useSelector((state) => state.notifications);
+  const dispatch = useDispatch();
 
   const handleEscapeKey = (event) => {
     if (event.key === "Escape") {
@@ -30,7 +33,10 @@ function UserProfileSection({ user, userLogout }) {
   };
 
   const hideShowMenuOnDocumentClick = (event) => {
-    if (!showMenuRef.current?.contains(event.target)) {
+    if (
+      !showMenuRef.current?.contains(event.target) &&
+      !notificationsDrawerRef.current?.contains(event.target)
+    ) {
       setShowMenu(false);
     }
   };
@@ -48,15 +54,10 @@ function UserProfileSection({ user, userLogout }) {
   }, []);
 
   function handleSignOut() {
-    userLogout(auth);
+    dispatch(userLogout(auth));
     localStorage.removeItem("selectedUser");
     history.push("/signin");
   }
-
-  const notifications = useSelector((state) => state.notifications);
-  const dispatch = useDispatch();
-
-  console.log(notifications);
 
   useEffect(() => {
     if (notifications.length === 0) {
@@ -74,7 +75,7 @@ function UserProfileSection({ user, userLogout }) {
       <div class="user-img-container">
         <img
           // src={user.photoURL}
-          src="https://i.imgur.com/JFgA7EB.png"
+          src={CARDHOLDER_STOCK_IMG}
           alt=""
           style={{
             borderRadius: "50%",
@@ -143,15 +144,10 @@ function UserProfileSection({ user, userLogout }) {
               Admin Portal
             </li>
             {notifications.length > 0 && (
-              <li className="userMenuOptions">
-                <span
-                  class="userMenuNotificationsBadge"
-                  style={{ marginRight: "10px" }}
-                >
-                  {notifications.length}
-                </span>
-                Notifications
-              </li>
+              <Notifications
+                notifications={notifications}
+                notificationsRef={notificationsDrawerRef}
+              />
             )}
             <li
               className="userMenuOptions"
@@ -173,8 +169,4 @@ function UserProfileSection({ user, userLogout }) {
   );
 }
 
-const mapDispatchToProps = {
-  userLogout,
-};
-
-export default connect(null, mapDispatchToProps)(UserProfileSection);
+export default UserProfileSection;
