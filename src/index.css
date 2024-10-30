@@ -263,10 +263,17 @@ nav a {
 .userMenuOptions {
   padding: 10px;
   box-shadow: -4px 0 8px -6px rgb(59, 54, 54);
+  color: var(--black-or-white-text-color);
+  cursor: pointer;
 }
 
+.userMenuOptions svg {
+  margin-right: 10px;
+  color: var(--color-blue);
+  font-size: 1.2rem;
+}
 .disabledMenuOption {
-  color: gray;
+  color: rgb(166, 165, 165);
 }
 
 .userMenuNotificationsBadge {

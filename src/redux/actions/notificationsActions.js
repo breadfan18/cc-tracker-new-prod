@@ -27,8 +27,6 @@ export function loadNotificationsFromFirebase(firebaseUid) {
 
 export function deleteNotificationFromFirebase(notification, firebaseUid) {
   return (dispatch) => {
-    // Same reason to dispatch apiCall twice here as mentioned above in save function
-    dispatch(beginApiCall());
     dispatch(beginApiCall());
     deleteFromFirebase("notifications", notification.id, firebaseUid);
     dispatch(deleteNotificationSuccess(notification));

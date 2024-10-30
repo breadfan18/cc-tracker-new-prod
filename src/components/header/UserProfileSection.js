@@ -4,8 +4,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { userLogout } from "../../redux/actions/authActions";
 import { useSelector, useDispatch } from "react-redux";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { RiAdminFill } from "react-icons/ri";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { MdAdminPanelSettings, MdLogout } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 import {
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_BLACK,
@@ -131,35 +132,23 @@ function UserProfileSection({ user }) {
             <ThemeToggle displayToggle={true} />
           </div>
           <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
-            <li className="userMenuOptions disabledMenuOption">
-              <RiLockPasswordFill
-                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-              />
-              Security
-            </li>
-            <li className="userMenuOptions disabledMenuOption">
-              <MdAdminPanelSettings
-                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-              />
-              Admin Portal
-            </li>
             {notifications.length > 0 && (
               <Notifications
                 notifications={notifications}
                 notificationsRef={notificationsDrawerRef}
+                firebaseUid={user.uid}
               />
             )}
-            <li
-              className="userMenuOptions"
-              style={{
-                color: theme === "light" ? "black" : "white",
-                cursor: "pointer",
-              }}
-              onClick={handleSignOut}
-            >
-              <MdLogout
-                style={{ marginRight: "10px", color: APP_COLOR_BLUE }}
-              />
+            <li className="userMenuOptions disabledMenuOption">
+              <RiLockPasswordFill />
+              Security
+            </li>
+            <li className="userMenuOptions disabledMenuOption">
+              <RiAdminFill />
+              Admin Portal
+            </li>
+            <li className="userMenuOptions" onClick={handleSignOut}>
+              <MdLogout />
               Sign Out
             </li>
           </ul>
