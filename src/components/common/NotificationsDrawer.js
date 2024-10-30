@@ -29,6 +29,7 @@ function Notifications({ notifications, notificationsRef, firebaseUid }) {
         onHide={handleClose}
         placement="end"
         style={{ padding: "10px" }}
+        className="notificationsDrawer"
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title style={{ color: APP_COLOR_BLUE }}>

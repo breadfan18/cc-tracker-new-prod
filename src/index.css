@@ -235,6 +235,11 @@ nav a {
   border: 2px solid white;
 }
 
+.notificationsDrawer {
+  color: var(--black-or-white-text-color);
+  background-color: var(--modal-color);
+}
+
 #userDisplayName {
   height: 100%;
   margin: 0;
