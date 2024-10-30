@@ -23,7 +23,8 @@ function UserProfileSection({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const { isMobile } = useWindhowWidth();
   const theme = useSelector((selector) => selector.theme);
-  const notifications = useSelector((state) => state.notifications);
+  // const notifications = useSelector((state) => state.notifications);
+  const notifications = [];
   const showMenuRef = useRef(null);
   const notificationsDrawerRef = useRef(null);
 
@@ -33,11 +34,11 @@ function UserProfileSection({ user }) {
     }
   };
 
-  useEffect(() => {
-    if (notifications.length === 0) {
-      dispatch(loadNotificationsFromFirebase(user.uid));
-    }
-  }, [notifications]);
+  // useEffect(() => {
+  //   if (notifications.length === 0) {
+  //     dispatch(loadNotificationsFromFirebase(user.uid));
+  //   }
+  // }, [notifications]);
 
   const hideShowMenuOnDocumentClick = (event) => {
     if (
