@@ -75,8 +75,8 @@ function UserProfileSection({ user }) {
     >
       <div class="user-img-container">
         <img
-          // src={user.photoURL}
-          src={CARDHOLDER_STOCK_IMG}
+          src={user.photoURL}
+          // src={CARDHOLDER_STOCK_IMG}
           alt=""
           style={{
             borderRadius: "50%",
