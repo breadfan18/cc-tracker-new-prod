@@ -1,11 +1,10 @@
-const uid = require("uid");
 const _ = require("lodash");
 
 const {
   convertDateToLocaleString,
   spendByEmailVerifier,
   annualFeeEmailVerifier,
-  createNotificationsRef,
+  cardNotificationCreator,
 } = require("./function-helpers");
 
 const cardEmailsProcessor = (dbRef, sgMail, admin) => {
@@ -30,7 +29,6 @@ const cardEmailsProcessor = (dbRef, sgMail, admin) => {
             cardholder,
             bonusEarned,
             spendBy,
-            issuer,
           } = card;
 
           const cardHasAnnualFee =
@@ -67,20 +65,12 @@ const cardEmailsProcessor = (dbRef, sgMail, admin) => {
                 console.log(
                   `Annual fee email for ${cardholder} sent successfully`
                 );
-                const notificationId = uid.uid();
-                const notificationsRef = createNotificationsRef(
+                await cardNotificationCreator(
                   admin,
-                  notificationId,
-                  onlineAccountKey
-                );
-                const notificationsData = {
-                  dateSent: new Date().toISOString().split("T")[0],
-                  message: `Annual fee for ${cardholder}'s ${issuer.name} ${card.card} is due in ${daysTillAnnualFee} days`,
-                };
-
-                await notificationsRef.set(notificationsData);
-                console.log(
-                  `Notification added to db - ${cardholder}'s ${issuer.name} ${card.card} - ${daysTillAnnualFee} day annual fee alert`
+                  onlineAccountKey,
+                  card,
+                  daysTillAnnualFee,
+                  "annualFee"
                 );
                 emailCount++;
               } catch (error) {
@@ -117,6 +107,13 @@ const cardEmailsProcessor = (dbRef, sgMail, admin) => {
                 await sgMail.send(msg);
                 console.log(
                   `Bonus alert email for ${cardholder} sent successfully`
+                );
+                await cardNotificationCreator(
+                  admin,
+                  onlineAccountKey,
+                  card,
+                  daysTillSpendByDate,
+                  "spendBy"
                 );
                 emailCount++;
               } catch (error) {

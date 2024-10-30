@@ -1,3 +1,5 @@
+const uid = require("uid");
+
 const AF_DUE_TEMPLATE_ID = "d-d8adc7796c93412a90c2a5d1c2b10023";
 const AF_DATE_PASSED_TEMPLATE_ID = "d-71ac83215e494f5aa6138915cb771cc8";
 
@@ -82,11 +84,73 @@ const createNotificationsRef = (admin, notificationId, onlineAccountKey) => {
     .ref(`/users/${onlineAccountKey}/notifications/${notificationId}`);
 };
 
+const cardNotificationCreator = async (
+  admin,
+  onlineAccountKey,
+  card,
+  dateDue,
+  dateType
+) => {
+  const { issuer, cardholder } = card;
+
+  const message =
+    dateType === "annualFee"
+      ? `Annual fee for ${cardholder}'s ${issuer.name} ${card.card} is due in ${dateDue} days`
+      : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${card.card} is due in ${dateDue} days`;
+
+  const notificationLog =
+    dateType === "annualFee"
+      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${card.card} - ${dateDue} day annual fee alert`
+      : `Notification added to db - ${cardholder}'s ${issuer.name} ${card.card} - ${dateDue} day annual fee alert`;
+
+  const notificationId = uid.uid();
+  const notificationsRef = createNotificationsRef(
+    admin,
+    notificationId,
+    onlineAccountKey
+  );
+  const notificationsData = {
+    dateSent: new Date().toISOString().split("T")[0],
+    message,
+    id: notificationId,
+  };
+
+  await notificationsRef.set(notificationsData);
+  console.log(notificationLog);
+};
+
+const loyaltyNotificationCreator = async (
+  admin,
+  onlineAccountKey,
+  accountHolder,
+  loyaltyProgram,
+  expirationDate
+) => {
+  const notificationId = uid.uid();
+  const notificationsRef = createNotificationsRef(
+    admin,
+    notificationId,
+    onlineAccountKey
+  );
+  const notificationsData = {
+    dateSent: new Date().toISOString().split("T")[0],
+    message: `Reward points for ${accountHolder}'s ${loyaltyProgram} program will expire in ${expirationDate} days`,
+    id: notificationId,
+  };
+
+  await notificationsRef.set(notificationsData);
+  console.log(
+    `Notification added to db - ${accountHolder}'s ${loyaltyProgram} - ${expirationDate} day rewards expiration alert`
+  );
+};
+
 module.exports = {
   annualFeeEmailVerifier,
   spendByEmailVerifier,
   loyaltyEmailVerifier,
   convertDateToLocaleString,
-  LOYALTY_REMINDER_TEMPLATE_ID,
   createNotificationsRef,
+  cardNotificationCreator,
+  loyaltyNotificationCreator,
+  LOYALTY_REMINDER_TEMPLATE_ID,
 };

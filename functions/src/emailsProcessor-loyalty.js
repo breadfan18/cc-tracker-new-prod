@@ -1,11 +1,10 @@
-const uid = require("uid");
 const _ = require("lodash");
 
 const {
   loyaltyEmailVerifier,
   convertDateToLocaleString,
   LOYALTY_REMINDER_TEMPLATE_ID,
-  createNotificationsRef,
+  loyaltyNotificationCreator,
 } = require("./function-helpers");
 
 const loyaltyEmailsProcessor = (dbRef, sgMail, admin) => {
@@ -60,21 +59,12 @@ const loyaltyEmailsProcessor = (dbRef, sgMail, admin) => {
                 console.log(
                   `Rewards expiration email for ${accountHolder} sent successfully`
                 );
-
-                const notificationId = uid.uid();
-                const notificationsRef = createNotificationsRef(
+                await loyaltyNotificationCreator(
                   admin,
-                  notificationId,
-                  onlineAccountKey
-                );
-                const notificationsData = {
-                  dateSent: new Date().toISOString().split("T")[0],
-                  message: `Reward points for ${accountHolder}'s ${name} program will expire in ${daysTillRewardsExpiration} days`,
-                };
-
-                await notificationsRef.set(notificationsData);
-                console.log(
-                  `Notification added to db - ${accountHolder}'s ${name} - ${daysTillRewardsExpiration} day rewards expiration alert`
+                  onlineAccountKey,
+                  accountHolder,
+                  name,
+                  daysTillRewardsExpiration
                 );
                 emailCount++;
               } catch (error) {
