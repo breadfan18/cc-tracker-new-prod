@@ -132,13 +132,11 @@ function UserProfileSection({ user }) {
             <ThemeToggle displayToggle={true} />
           </div>
           <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
-            {notifications.length > 0 && (
-              <Notifications
-                notifications={notifications}
-                notificationsRef={notificationsDrawerRef}
-                firebaseUid={user.uid}
-              />
-            )}
+            <Notifications
+              notifications={notifications}
+              notificationsRef={notificationsDrawerRef}
+              firebaseUid={user.uid}
+            />
             <li className="userMenuOptions disabledMenuOption">
               <RiLockPasswordFill />
               Security
