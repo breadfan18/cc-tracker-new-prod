@@ -17,9 +17,8 @@ export default function SocialLoginButton({ Icon, btnColor, btnDisabled }) {
       style={{
         backgroundColor: btnColor,
         border: "none",
-        borderRadius: "5px",
-        marginBottom: "8px",
-        padding: "10px",
+        borderRadius: "30px",
+        margin: "5px 0",
       }}
       disabled={btnDisabled}
       onClick={handleLogin}
