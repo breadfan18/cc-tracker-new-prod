@@ -8,6 +8,9 @@ const SPEND_BY_PASSED_TEMPLATE_ID = "d-0d54f1cb6d1241319c5cb570351f2eac";
 
 const LOYALTY_REMINDER_TEMPLATE_ID = "d-585b3e176444435bba99e697c48da0c6";
 
+const AF_DATA_TYPE = "annualFee";
+const SPEND_BY_DATA_TYPE = "spendBy";
+
 const convertDateToLocaleString = (date) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(date).toLocaleDateString("en-US", options);
@@ -78,32 +81,35 @@ function loyaltyEmailVerifier(loyaltyExpirationDate) {
   return { shouldSendLoyaltyReminderEmail, daysTillRewardsExpiration };
 }
 
-const createNotificationsRef = (admin, notificationId, onlineAccountKey) => {
+const createNotificationsRef = (admin, cardId, onlineAccountKey) => {
   return admin
     .database()
-    .ref(`/users/${onlineAccountKey}/notifications/${notificationId}`);
+    .ref(`/users/${onlineAccountKey}/notifications/${cardId}`);
 };
 
 const cardNotificationCreator = async (
   admin,
   onlineAccountKey,
   card,
-  dateDue,
-  dateType
+  daysUntilDue,
+  dataType
 ) => {
-  const { issuer, cardholder } = card;
+  const { issuer, cardholder, card: cardName, id: cardId } = card;
+
+  const notificationId = `${
+    daysUntilDue <= 0 ? "PASSED" : daysUntilDue
+  }_${dataType}_${cardId}`;
 
   const message =
-    dateType === "annualFee"
-      ? `Annual fee for ${cardholder}'s ${issuer.name} ${card.card} is due in ${dateDue} days`
-      : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${card.card} is due in ${dateDue} days`;
+    dataType === "annualFee"
+      ? `Annual fee for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`
+      : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`;
 
   const notificationLog =
-    dateType === "annualFee"
-      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${card.card} - ${dateDue} day annual fee alert`
-      : `Notification added to db - ${cardholder}'s ${issuer.name} ${card.card} - ${dateDue} day annual fee alert`;
+    dataType === "annualFee"
+      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} day annual fee alert`
+      : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} day annual fee alert`;
 
-  const notificationId = uid.uid();
   const notificationsRef = createNotificationsRef(
     admin,
     notificationId,
@@ -112,7 +118,7 @@ const cardNotificationCreator = async (
   const notificationsData = {
     dateSent: new Date().toISOString().split("T")[0],
     message,
-    id: notificationId,
+    notificationId,
   };
 
   await notificationsRef.set(notificationsData);
@@ -153,4 +159,6 @@ module.exports = {
   cardNotificationCreator,
   loyaltyNotificationCreator,
   LOYALTY_REMINDER_TEMPLATE_ID,
+  AF_DATA_TYPE,
+  SPEND_BY_DATA_TYPE,
 };
