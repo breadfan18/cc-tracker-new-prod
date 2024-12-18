@@ -5,6 +5,8 @@ const {
   spendByEmailVerifier,
   annualFeeEmailVerifier,
   cardNotificationCreator,
+  AF_DATA_TYPE,
+  SPEND_BY_DATA_TYPE,
 } = require("./function-helpers");
 
 const cardEmailsProcessor = (dbRef, sgMail, admin) => {
@@ -70,7 +72,7 @@ const cardEmailsProcessor = (dbRef, sgMail, admin) => {
                   onlineAccountKey,
                   card,
                   daysTillAnnualFee,
-                  "annualFee"
+                  AF_DATA_TYPE
                 );
                 emailCount++;
               } catch (error) {
@@ -113,7 +115,7 @@ const cardEmailsProcessor = (dbRef, sgMail, admin) => {
                   onlineAccountKey,
                   card,
                   daysTillSpendByDate,
-                  "spendBy"
+                  SPEND_BY_DATA_TYPE
                 );
                 emailCount++;
               } catch (error) {
