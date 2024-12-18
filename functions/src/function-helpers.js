@@ -101,12 +101,12 @@ const cardNotificationCreator = async (
   }_${dataType}_${cardId}`;
 
   const message =
-    dataType === "annualFee"
+    dataType === AF_DATA_TYPE
       ? `Annual fee for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`
       : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`;
 
   const notificationLog =
-    dataType === "annualFee"
+    dataType === AF_DATA_TYPE
       ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} day annual fee alert`
       : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} day annual fee alert`;
 
