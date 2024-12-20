@@ -107,8 +107,8 @@ const cardNotificationCreator = async (
 
   const notificationLog =
     dataType === AF_DATA_TYPE
-      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} day annual fee alert`
-      : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} day annual fee alert`;
+      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until annual fee`
+      : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until bonus deadline`;
 
   const notificationsRef = createNotificationsRef(
     admin,
