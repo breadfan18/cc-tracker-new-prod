@@ -99,7 +99,9 @@ const cardNotificationCreator = async (
   }_${cardId}`;
 
   const message =
-    dataType === AF_DATA_TYPE
+    dataType === AF_DATA_TYPE && daysUntilDue <= 0
+      ? `Annual fee date for ${cardholder}'s ${issuer.name} ${cardName} has passed! Please review the card..`
+      : dataType === AF_DATA_TYPE && daysUntilDue > 0
       ? `Annual fee for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`
       : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`;
 
