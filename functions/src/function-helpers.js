@@ -28,7 +28,7 @@ function annualFeeEmailVerifier(annualFeeDate) {
   const annualFeeDueIn90Days = daysTillAnnualFee === 90;
   const annualFeeDueIn30Days = daysTillAnnualFee === 30;
   const annualFeeDueIn5Days = daysTillAnnualFee === 5;
-  const annualFeeDatePassed = daysTillAnnualFee < 0;
+  const annualFeeDatePassed = daysTillAnnualFee === -1;
 
   const shouldSendAnnualFeeEmail =
     annualFeeDueIn90Days ||
@@ -51,7 +51,7 @@ function spendByEmailVerifier(spendByDate) {
   const daysTillSpendByDate = getNumberOfDaysFromDate(spendByDate);
   const spendByDateIn30Days = daysTillSpendByDate === 30;
   const spendByDateIn5Days = daysTillSpendByDate === 5;
-  const spendByDatePassed = daysTillSpendByDate < 0;
+  const spendByDatePassed = daysTillSpendByDate === -1;
 
   const shouldSendSpendByEmail =
     spendByDateIn30Days || spendByDateIn5Days || spendByDatePassed;
@@ -96,9 +96,9 @@ const cardNotificationCreator = async (
 ) => {
   const { issuer, cardholder, card: cardName, id: cardId } = card;
 
-  const notificationId = `${
-    daysUntilDue <= 0 ? "PASSED" : daysUntilDue
-  }_${dataType}_${cardId}`;
+  const notificationId = `${dataType}_${
+    daysUntilDue <= 0 ? "passed" : daysUntilDue
+  }_${cardId}`;
 
   const message =
     dataType === AF_DATA_TYPE
@@ -119,6 +119,7 @@ const cardNotificationCreator = async (
     dateSent: new Date().toISOString().split("T")[0],
     message,
     notificationId,
+    notificationType: dataType,
   };
 
   await notificationsRef.set(notificationsData);
@@ -130,9 +131,10 @@ const loyaltyNotificationCreator = async (
   onlineAccountKey,
   accountHolder,
   loyaltyProgram,
-  expirationDate
+  expirationDate,
+  loyaltyId
 ) => {
-  const notificationId = uid.uid();
+  const notificationId = `loyalty_${loyaltyId}`;
   const notificationsRef = createNotificationsRef(
     admin,
     notificationId,
@@ -141,7 +143,8 @@ const loyaltyNotificationCreator = async (
   const notificationsData = {
     dateSent: new Date().toISOString().split("T")[0],
     message: `Reward points for ${accountHolder}'s ${loyaltyProgram} program will expire in ${expirationDate} days`,
-    id: notificationId,
+    notificationId,
+    notificationType: "loyalty",
   };
 
   await notificationsRef.set(notificationsData);

@@ -23,8 +23,13 @@ const loyaltyEmailsProcessor = (dbRef, sgMail, admin) => {
 
       if (loyaltyData) {
         for (const loyaltyAccount of _.values(loyaltyData)) {
-          const { accountHolder, rewardsBalance, rewardsExpiration, program } =
-            loyaltyAccount;
+          const {
+            accountHolder,
+            rewardsBalance,
+            rewardsExpiration,
+            program,
+            id: loyaltyId,
+          } = loyaltyAccount;
           const { name, img } = program;
           const accountHasBalance = rewardsBalance && rewardsBalance !== "0";
 
@@ -64,7 +69,8 @@ const loyaltyEmailsProcessor = (dbRef, sgMail, admin) => {
                   onlineAccountKey,
                   accountHolder,
                   name,
-                  daysTillRewardsExpiration
+                  daysTillRewardsExpiration,
+                  loyaltyId
                 );
                 emailCount++;
               } catch (error) {
