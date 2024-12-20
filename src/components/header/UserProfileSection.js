@@ -15,7 +15,7 @@ import {
 import useWindhowWidth from "../../hooks/windowWidth";
 import ThemeToggle from "./ThemeToggle";
 import { loadNotificationsFromFirebase } from "../../redux/actions/notificationsActions";
-import Notifications from "../common/NotificationsDrawer";
+import NotificationsDrawer from "../common/NotificationsDrawer";
 
 function UserProfileSection({ user }) {
   const history = useHistory();
@@ -134,7 +134,7 @@ function UserProfileSection({ user }) {
             <ThemeToggle displayToggle={true} />
           </div>
           <ul style={{ listStyle: "none", padding: "0", margin: 0 }}>
-            <Notifications
+            <NotificationsDrawer
               notifications={notifications}
               notificationsRef={notificationsDrawerRef}
               firebaseUid={user.uid}

@@ -1,14 +1,11 @@
 import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { TiDelete } from "react-icons/ti";
 import { FaBell } from "react-icons/fa";
 import { APP_COLOR_BLUE, DELETE_COLOR_RED } from "../../constants";
-import { useDispatch } from "react-redux";
-import { deleteNotificationFromFirebase } from "../../redux/actions/notificationsActions";
+import Notification from "./Notification";
 
-function Notifications({ notifications, notificationsRef, firebaseUid }) {
+function NotificationsDrawer({ notifications, notificationsRef, firebaseUid }) {
   const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -59,33 +56,11 @@ function Notifications({ notifications, notificationsRef, firebaseUid }) {
             ) : (
               notifications.map((notification, index) => (
                 <>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                    key={index}
-                  >
-                    <p style={{ fontSize: "15px", maxWidth: "18rem" }}>
-                      {notification.message}
-                    </p>
-                    <TiDelete
-                      style={{
-                        cursor: "pointer",
-                        fontSize: "1.5rem",
-                        color: DELETE_COLOR_RED,
-                      }}
-                      onClick={() => {
-                        dispatch(
-                          deleteNotificationFromFirebase(
-                            notification,
-                            firebaseUid
-                          )
-                        );
-                      }}
-                    />
-                  </div>
+                  <Notification
+                    notification={notification}
+                    index={index}
+                    firebaseUid={firebaseUid}
+                  />
                   <hr style={{ color: APP_COLOR_BLUE }} />
                 </>
               ))
@@ -98,4 +73,4 @@ function Notifications({ notifications, notificationsRef, firebaseUid }) {
   );
 }
 
-export default Notifications;
+export default NotificationsDrawer;
