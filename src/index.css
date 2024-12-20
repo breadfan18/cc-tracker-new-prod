@@ -272,20 +272,17 @@ nav a {
 }
 
 .notificationIcon {
-  font-size: 2.5rem;
-  color: var(--edit-color-green);
+  font-size: 2rem;
+  color: var(--fav-red);
   margin-right: 10px;
 }
 
 .notificationIcon.spendBy {
-  color: var(--fav-red);
+  color: orange;
 }
 
 .notificationIcon.loyalty {
-  color: white;
-  background-color: var(--color-blue);
-  border-radius: 50%;
-  padding: 3px;
+  color: var(--color-blue);
 }
 
 .notificationFooter {

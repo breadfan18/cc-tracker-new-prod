@@ -362,3 +362,7 @@ export const DELETE_MODAL_TYPES = {
 
 export const CARDHOLDER_STOCK_IMG = "https://i.imgur.com/JFgA7EB.png";
 export const HEADER_CARD_LOGO = "https://i.imgur.com/oow4rrn.png";
+
+export const NOTIFICATIONS_AF_DATA_TYPE = "annualFee";
+export const NOTIFICATIONS_SPEND_BY_DATA_TYPE = "spendBy";
+export const NOTIFICATIONS_LOYALTY_DATA_TYPE = "loyalty";

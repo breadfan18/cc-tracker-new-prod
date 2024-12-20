@@ -1,11 +1,16 @@
 import React from "react";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { PiAirplaneTiltFill } from "react-icons/pi";
 import { GoClockFill } from "react-icons/go";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
 import { useDispatch } from "react-redux";
 import { TiDelete } from "react-icons/ti";
-import { APP_COLOR_BLUE } from "../../../constants";
+import { TbAlertOctagonFilled } from "react-icons/tb";
+import { BsFillBellFill } from "react-icons/bs";
+import {
+  APP_COLOR_BLUE,
+  NOTIFICATIONS_AF_DATA_TYPE,
+  NOTIFICATIONS_LOYALTY_DATA_TYPE,
+} from "../../../constants";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 
 export default function Notification({
@@ -18,21 +23,23 @@ export default function Notification({
   const { message, dateSent, notificationType, notificationId } = notification;
 
   const cardId =
-    notificationType === "loyalty" ? null : notificationId.split("_")[2];
+    notificationType === NOTIFICATIONS_LOYALTY_DATA_TYPE
+      ? null
+      : notificationId.split("_")[2];
 
   const headerText =
-    notificationType === "annualFee"
-      ? "Annual Fee Alert"
-      : notificationType === "loyalty"
-      ? "Loyalty Points Expiring"
-      : "Bonus Spend Deadline";
+    notificationType === NOTIFICATIONS_AF_DATA_TYPE
+      ? "Annual Fee Approaching.."
+      : notificationType === NOTIFICATIONS_LOYALTY_DATA_TYPE
+      ? "Loyalty Points Expiring.."
+      : "Bonus Deadline Approaching..";
   return (
     <div className="notificationDiv" key={index}>
       <div className="notificationHeader">
         {notificationType === "annualFee" ? (
-          <RiMoneyDollarCircleFill className="notificationIcon" />
+          <TbAlertOctagonFilled className="notificationIcon" />
         ) : notificationType === "spendBy" ? (
-          <GoClockFill className="notificationIcon spendBy" />
+          <BsFillBellFill className="notificationIcon spendBy" />
         ) : (
           <PiAirplaneTiltFill className="notificationIcon loyalty" />
         )}
@@ -49,7 +56,7 @@ export default function Notification({
         <br />
         <section className="notificationFooter">
           <p className="notificationDate">{dateSent}</p>
-          {notificationType !== "loyalty" ? (
+          {notificationType !== NOTIFICATIONS_LOYALTY_DATA_TYPE ? (
             <Link
               className="notificationCardButton"
               to={`/card/${cardId}`}
