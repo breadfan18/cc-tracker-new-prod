@@ -28,7 +28,11 @@ export function loadNotificationsFromFirebase(firebaseUid) {
 export function deleteNotificationFromFirebase(notification, firebaseUid) {
   return (dispatch) => {
     dispatch(beginApiCall());
-    deleteFromFirebase("notifications", notification.id, firebaseUid);
+    deleteFromFirebase(
+      "notifications",
+      notification.notificationId,
+      firebaseUid
+    );
     dispatch(deleteNotificationSuccess(notification));
   };
 }

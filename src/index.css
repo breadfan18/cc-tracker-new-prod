@@ -240,6 +240,78 @@ nav a {
   background-color: var(--modal-color);
 }
 
+.notificationDiv {
+  box-shadow: var(--box-shadow);
+  border-radius: 10px;
+  position: relative;
+}
+
+.notificationHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--black-opacity);
+  padding: 10px 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.notificationBody {
+  padding: 20px;
+  font-size: 13px;
+}
+
+.notificationDelete {
+  cursor: pointer;
+  font-size: 2rem;
+  color: var(--fav-red);
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.notificationIcon {
+  font-size: 2.5rem;
+  color: var(--edit-color-green);
+  margin-right: 10px;
+}
+
+.notificationIcon.spendBy {
+  color: var(--fav-red);
+}
+
+.notificationIcon.loyalty {
+  color: white;
+  background-color: var(--color-blue);
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.notificationFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notificationDate {
+  font-size: 12px;
+  color: black;
+  background-color: var(--light-blue);
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.notificationCardButton {
+  font-size: 12px;
+  padding: 3px 10px;
+  background-color: var(--color-blue);
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+}
+
 @keyframes ring {
   0% {
     transform: rotate(0);

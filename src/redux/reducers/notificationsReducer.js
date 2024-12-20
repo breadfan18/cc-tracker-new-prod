@@ -13,7 +13,8 @@ export default function notificationsReducer(
       return action.notifications;
     case DELETE_NOTIFICATION_SUCCESS:
       return state.filter(
-        (notification) => notification.id !== action.notification.id
+        (notification) =>
+          notification.notificationId !== action.notification.notificationId
       );
     default:
       return state;

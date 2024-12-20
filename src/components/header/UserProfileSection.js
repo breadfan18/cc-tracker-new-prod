@@ -15,7 +15,7 @@ import {
 import useWindhowWidth from "../../hooks/windowWidth";
 import ThemeToggle from "./ThemeToggle";
 import { loadNotificationsFromFirebase } from "../../redux/actions/notificationsActions";
-import NotificationsDrawer from "../common/NotificationsDrawer";
+import NotificationsDrawer from "../common/Notifications/NotificationsDrawer";
 
 function UserProfileSection({ user }) {
   const history = useHistory();

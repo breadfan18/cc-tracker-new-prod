@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FaBell } from "react-icons/fa";
-import { APP_COLOR_BLUE, DELETE_COLOR_RED } from "../../constants";
+import { APP_COLOR_BLUE, DELETE_COLOR_RED } from "../../../constants";
 import Notification from "./Notification";
 
 function NotificationsDrawer({ notifications, notificationsRef, firebaseUid }) {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -60,6 +59,7 @@ function NotificationsDrawer({ notifications, notificationsRef, firebaseUid }) {
                     notification={notification}
                     index={index}
                     firebaseUid={firebaseUid}
+                    setShow={setShow}
                   />
                   <hr style={{ color: APP_COLOR_BLUE }} />
                 </>
