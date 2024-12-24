@@ -282,7 +282,7 @@ nav a {
 }
 
 .notificationIcon.loyalty {
-  color: var(--color-blue);
+  color: var(--edit-color-green);
 }
 
 .notificationFooter {
