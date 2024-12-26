@@ -1,6 +1,7 @@
 import React from "react";
 import { PiAirplaneTiltFill } from "react-icons/pi";
 import { GoClockFill } from "react-icons/go";
+import { FaArrowRight } from "react-icons/fa6";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
 import { useDispatch } from "react-redux";
 import { TiDelete } from "react-icons/ti";
@@ -62,7 +63,7 @@ export default function Notification({
               to={`/card/${cardId}`}
               onClick={() => setShow(false)}
             >
-              Go to Card
+              Go to Card <FaArrowRight style={{ marginLeft: "5px" }} />
             </Link>
           ) : (
             <Link
@@ -70,7 +71,7 @@ export default function Notification({
               to={`/loyalty-accounts/`}
               onClick={() => setShow(false)}
             >
-              Loyalty Page
+              Loyalty Page <FaArrowRight style={{ marginLeft: "5px" }} />
             </Link>
           )}
         </section>

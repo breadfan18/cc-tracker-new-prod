@@ -119,6 +119,7 @@ const cardNotificationCreator = async (
     dateSent: new Date().toISOString().split("T")[0],
     message,
     notificationId,
+    cardId,
     notificationType: dataType,
   };
 
