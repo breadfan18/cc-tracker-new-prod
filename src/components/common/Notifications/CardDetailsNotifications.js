@@ -22,21 +22,31 @@ export const CardDetailsNotification = ({
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <Icon
+          <div
+            className="card-details-notification-icon-container"
             style={{
-              color: iconColor,
-              fontSize: "1.2rem",
-              marginRight: "1rem",
+              marginRight: "0.5rem",
             }}
-          />
+          >
+            <Icon
+              style={{
+                color: iconColor,
+                fontSize: "1.2rem",
+              }}
+            />
+          </div>
           <small style={{ marginBottom: 0 }}>{notification.message}</small>
         </div>
-        <TiDelete
-          className="card-details-notification-delete"
-          onClick={() => {
-            dispatch(deleteNotificationFromFirebase(notification, firebaseUid));
-          }}
-        />
+        <div className="card-details-notification-icon-container">
+          <TiDelete
+            className="card-details-notification-delete"
+            onClick={() => {
+              dispatch(
+                deleteNotificationFromFirebase(notification, firebaseUid)
+              );
+            }}
+          />
+        </div>
       </article>
       {!lastReminder && <hr style={{ color: "gray", margin: "3px 0" }} />}
     </>
