@@ -35,7 +35,9 @@ export const CardDetailsNotification = ({
               }}
             />
           </div>
-          <small style={{ marginBottom: 0 }}>{notification.message}</small>
+          <small style={{ marginBottom: 0 }}>
+            {notification.cardDetailsMessage}
+          </small>
         </div>
         <div className="card-details-notification-icon-container">
           <TiDelete

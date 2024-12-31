@@ -85,29 +85,31 @@ const createNotificationsRef = (admin, cardId, onlineAccountKey) => {
     .ref(`/users/${onlineAccountKey}/notifications/${cardId}`);
 };
 
-const cardNotificationCreator = async (
+const cardAnnualFeeNotificationCreator = async (
   admin,
   onlineAccountKey,
   card,
-  daysUntilDue,
-  dataType
+  daysUntilDue
 ) => {
   const { issuer, cardholder, card: cardName, id: cardId } = card;
 
-  const notificationId = `${dataType}_${
+  const notificationId = `${AF_DATA_TYPE}_${
     daysUntilDue <= 0 ? "passed" : daysUntilDue
   }_${cardId}`;
 
   const message =
-    dataType === AF_DATA_TYPE && daysUntilDue <= 0
-      ? `Annual fee date for ${cardholder}'s ${issuer.name} ${cardName} has passed! Please review the card..`
-      : dataType === AF_DATA_TYPE && daysUntilDue > 0
-      ? `Annual fee for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`
-      : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`;
+    daysUntilDue <= 0
+      ? `Annual fee date for ${cardholder}'s ${issuer.name} ${cardName} has passed! Please review the card`
+      : `Annual fee for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`;
+
+  const cardDetailsMessage =
+    daysUntilDue <= 0
+      ? `Annual fee date for this card has passed! Please review`
+      : `Annual fee for this card is due in ${daysUntilDue} days`;
 
   const notificationLog =
-    dataType === AF_DATA_TYPE
-      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until annual fee`
+    daysUntilDue <= 0
+      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - Annual fee due date passed`
       : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until bonus deadline`;
 
   const notificationsRef = createNotificationsRef(
@@ -118,9 +120,55 @@ const cardNotificationCreator = async (
   const notificationsData = {
     dateSent: new Date().toISOString().split("T")[0],
     message,
+    cardDetailsMessage,
     notificationId,
     cardId,
-    notificationType: dataType,
+    notificationType: AF_DATA_TYPE,
+  };
+
+  await notificationsRef.set(notificationsData);
+  console.log(notificationLog);
+};
+
+const cardSpendByNotificationCreator = async (
+  admin,
+  onlineAccountKey,
+  card,
+  daysUntilDue
+) => {
+  const { issuer, cardholder, card: cardName, id: cardId } = card;
+
+  const notificationId = `${SPEND_BY_DATA_TYPE}_${
+    daysUntilDue <= 0 ? "passed" : daysUntilDue
+  }_${cardId}`;
+
+  const message =
+    daysUntilDue <= 0
+      ? `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} has passed! Please review the card`
+      : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} is in ${daysUntilDue} days`;
+
+  const notificationLog =
+    daysUntilDue <= 0
+      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - Bonus spend deadline passed`
+      : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until bonus deadline`;
+
+  const cardDetailsMessage =
+    daysUntilDue <= 0
+      ? `Bonus spend deadline for this card has passed! Please review the card`
+      : `Bonus spend deadline for this card is in ${daysUntilDue} days`;
+
+  const notificationsRef = createNotificationsRef(
+    admin,
+    notificationId,
+    onlineAccountKey
+  );
+  const notificationsData = {
+    dateSent: new Date().toISOString().split("T")[0],
+    message,
+    cardDetailsMessage,
+    notificationId,
+    cardId,
+    notificationType: SPEND_BY_DATA_TYPE,
   };
 
   await notificationsRef.set(notificationsData);
@@ -160,7 +208,8 @@ module.exports = {
   loyaltyEmailVerifier,
   convertDateToLocaleString,
   createNotificationsRef,
-  cardNotificationCreator,
+  cardAnnualFeeNotificationCreator,
+  cardSpendByNotificationCreator,
   loyaltyNotificationCreator,
   LOYALTY_REMINDER_TEMPLATE_ID,
   AF_DATA_TYPE,
