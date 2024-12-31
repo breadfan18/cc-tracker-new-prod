@@ -6,6 +6,9 @@ import LoyaltyTabs from "./LoyaltyTabs";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import { useUser } from "reactfire";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
+import { PageNotifications } from "../common/Notifications/PageNotifications";
+import { PiAirplaneTiltFill } from "react-icons/pi";
+import { APP_COLOR_BLUE } from "../../constants";
 
 const LoyaltyPage = () => {
   const { status, data: user } = useUser();
@@ -13,6 +16,9 @@ const LoyaltyPage = () => {
   const loyaltyData = useSelector((state) => state.loyaltyData);
   const loading = useSelector((state) => state.apiCallsInProgress > 0);
   const cardholders = useSelector((state) => state.cardholders);
+  const loyaltyNotifications = useSelector((state) =>
+    state.notifications.filter((n) => n.notificationType === "loyalty")
+  );
 
   useEffect(() => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
@@ -22,7 +28,23 @@ const LoyaltyPage = () => {
     if (cardholders.length === 0 && user) {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
-  }, [status, user, cardholders]);
+  }, [status, user, cardholders, loyaltyData.length, dispatch]);
+
+  const cardNotificationElements = loyaltyNotifications.map(
+    (notification, index) => {
+      return (
+        <PageNotifications
+          notification={notification}
+          Icon={PiAirplaneTiltFill}
+          iconColor={APP_COLOR_BLUE}
+          lastReminder={
+            index === loyaltyNotifications.length - 1 ? true : false
+          }
+          firebaseUid={user?.uid}
+        />
+      );
+    }
+  );
 
   return (
     <div className="loyaltyContainer">
@@ -30,6 +52,11 @@ const LoyaltyPage = () => {
         <h2 style={{ marginBottom: 0 }}>Loyalty Accounts</h2>
         <LoyaltyAddEditModal cardholders={cardholders} />
       </section>
+      {loyaltyNotifications.length > 0 && (
+        <section className="card-details-notifications-container">
+          {cardNotificationElements}
+        </section>
+      )}
       {loading ? (
         <Spinner />
       ) : (

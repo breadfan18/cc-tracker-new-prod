@@ -273,14 +273,14 @@ nav a {
   border-radius: 50%;
 }
 
-.card-details-notification-icon-container {
+.page-notification-icon-container {
   width: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.card-details-notification-delete {
+.page-notification-delete {
   cursor: pointer;
   font-size: 1.5rem;
   color: var(--fav-red);

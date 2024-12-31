@@ -21,7 +21,8 @@ export default function Notification({
   setShow,
 }) {
   const dispatch = useDispatch();
-  const { message, dateSent, notificationType, notificationId } = notification;
+  const { sidebarNotification, dateSent, notificationType, notificationId } =
+    notification;
 
   const cardId =
     notificationType === NOTIFICATIONS_LOYALTY_DATA_TYPE
@@ -53,7 +54,7 @@ export default function Notification({
             dispatch(deleteNotificationFromFirebase(notification, firebaseUid));
           }}
         />
-        <p>{message}</p>
+        <p>{sidebarNotification}</p>
         <br />
         <section className="notificationFooter">
           <p className="notificationDate">{dateSent}</p>

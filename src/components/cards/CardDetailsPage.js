@@ -21,7 +21,7 @@ import useWindhowWidth from "../../hooks/windowWidth";
 import CardFavIcon from "./CardFavIcon";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
-import { CardDetailsNotification } from "../common/Notifications/CardDetailsNotifications";
+import { PageNotifications } from "../common/Notifications/PageNotifications";
 
 function CardDetailsPage() {
   const { id } = useParams();
@@ -59,7 +59,7 @@ function CardDetailsPage() {
   const cardNotificationElements = cardNotfications.map(
     (notification, index) => {
       return (
-        <CardDetailsNotification
+        <PageNotifications
           notification={notification}
           Icon={
             notification.notificationType === NOTIFICATIONS_AF_DATA_TYPE
@@ -129,3 +129,7 @@ function CardDetailsPage() {
 }
 
 export default CardDetailsPage;
+
+/* 
+how to delete notifications when card is closed, or when card is deleted, or when bonus is earned etc.. 
+*/

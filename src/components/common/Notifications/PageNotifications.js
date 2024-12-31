@@ -4,7 +4,7 @@ import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
 
-export const CardDetailsNotification = ({
+export const PageNotifications = ({
   notification,
   Icon,
   iconColor,
@@ -23,7 +23,7 @@ export const CardDetailsNotification = ({
       >
         <div style={{ display: "flex", alignItems: "center" }}>
           <div
-            className="card-details-notification-icon-container"
+            className="page-notification-icon-container"
             style={{
               marginRight: "0.5rem",
             }}
@@ -36,12 +36,12 @@ export const CardDetailsNotification = ({
             />
           </div>
           <small style={{ marginBottom: 0 }}>
-            {notification.cardDetailsMessage}
+            {notification.pageNotification}
           </small>
         </div>
-        <div className="card-details-notification-icon-container">
+        <div className="page-notification-icon-container">
           <TiDelete
-            className="card-details-notification-delete"
+            className="page-notification-delete"
             onClick={() => {
               dispatch(
                 deleteNotificationFromFirebase(notification, firebaseUid)
@@ -55,7 +55,7 @@ export const CardDetailsNotification = ({
   );
 };
 
-CardDetailsNotification.propTypes = {
+PageNotifications.propTypes = {
   text: PropTypes.string.isRequired,
   Icon: PropTypes.func.isRequired,
   iconColor: PropTypes.string.isRequired,
