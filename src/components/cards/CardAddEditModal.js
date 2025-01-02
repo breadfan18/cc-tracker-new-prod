@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";
@@ -14,12 +14,7 @@ import useWindhowWidth from "../../hooks/windowWidth";
 import { deleteNotificationFromFirebase } from "../../redux/actions/notificationsActions";
 import { deleteCardNotifications } from "../../helpers";
 
-function CardAddEditModal({
-  card,
-  saveCardToFirebase,
-  setModalOpen,
-  cardholders,
-}) {
+export default function CardAddEditModal({ card, setModalOpen }) {
   const [cardForModal, setCardForModal] = useState(
     card ? { ...card } : NEW_CARD
   );
@@ -30,6 +25,7 @@ function CardAddEditModal({
   const { isDesktop } = useWindhowWidth();
   const { data: user } = useUser();
   const notifications = useSelector((state) => state.notifications);
+  const cardholders = useSelector((state) => state.cardholders);
   const dispatch = useDispatch();
 
   function handleChange(event) {
@@ -80,7 +76,7 @@ function CardAddEditModal({
     }
 
     const finalCard = { ...cardForModal, inquiries: inquiries };
-    saveCardToFirebase(finalCard, user?.uid);
+    dispatch(saveCardToFirebase(finalCard, user?.uid));
 
     if (finalCard.status === "closed")
       deleteCardNotifications(
@@ -212,18 +208,5 @@ function CardAddEditModal({
 
 CardAddEditModal.propTypes = {
   card: PropTypes.object,
-  saveCardToFirebase: PropTypes.func.isRequired,
   setModalOpen: PropTypes.func,
 };
-
-function mapStateToProps(state) {
-  return {
-    cardholders: state.cardholders,
-  };
-}
-
-const mapDispatchToProps = {
-  saveCardToFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardAddEditModal);
