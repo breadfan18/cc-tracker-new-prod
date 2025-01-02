@@ -11,11 +11,10 @@ import { MdModeEditOutline } from "react-icons/md";
 import { INQUIRIES, ISSUERS, NEW_CARD } from "../../constants";
 import { useUser } from "reactfire";
 import useWindhowWidth from "../../hooks/windowWidth";
-import { deleteNotificationFromFirebase } from "../../redux/actions/notificationsActions";
 import {
   deleteCardNotificationsOnCardClosure,
-  deleteSpendByNotification,
-} from "../../helpers";
+  deleteSpendByNotificationWhenBonusEarned,
+} from "../../redux/actions/notificationsActions";
 
 export default function CardAddEditModal({ card, setModalOpen }) {
   const [cardForModal, setCardForModal] = useState(
@@ -82,22 +81,22 @@ export default function CardAddEditModal({ card, setModalOpen }) {
     dispatch(saveCardToFirebase(finalCard, user?.uid));
 
     if (finalCard.status === "closed") {
-      deleteCardNotificationsOnCardClosure(
-        notifications,
-        finalCard.id,
-        dispatch,
-        deleteNotificationFromFirebase,
-        user?.uid
+      dispatch(
+        deleteCardNotificationsOnCardClosure(
+          notifications,
+          finalCard.id,
+          user?.uid
+        )
       );
     }
 
     if (finalCard.status !== "closed" && finalCard.bonusEarned) {
-      deleteSpendByNotification(
-        notifications,
-        finalCard.id,
-        dispatch,
-        deleteNotificationFromFirebase,
-        user?.uid
+      dispatch(
+        deleteSpendByNotificationWhenBonusEarned(
+          notifications,
+          finalCard.id,
+          user?.uid
+        )
       );
     }
 

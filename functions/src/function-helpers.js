@@ -195,6 +195,7 @@ const loyaltyNotificationCreator = async (
     pageNotification: `Reward points for ${accountHolder}'s ${loyaltyProgram} program will expire in ${expirationDate} days`,
     notificationId,
     notificationType: "loyalty",
+    loyaltyId,
   };
 
   await notificationsRef.set(notificationsData);
