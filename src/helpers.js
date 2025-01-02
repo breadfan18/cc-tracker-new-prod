@@ -264,7 +264,7 @@ export function getSpendByRemainingDays(bonusEarned, spendByDate) {
   };
 }
 
-export const deleteCardNotifications = (
+export const deleteCardNotificationsOnCardClosure = (
   notifications,
   cardId,
   dispatch,
@@ -277,6 +277,26 @@ export const deleteCardNotifications = (
 
   if (cardNotfications.length > 0) {
     cardNotfications.forEach((notification) => {
+      dispatch(deleteNotificationFunc(notification, firebaseUid));
+    });
+  }
+};
+
+export const deleteSpendByNotification = (
+  notifications,
+  cardId,
+  dispatch,
+  deleteNotificationFunc,
+  firebaseUid
+) => {
+  const cardSpendByNotfications = notifications.filter(
+    (notification) =>
+      notification.cardId === cardId &&
+      notification.notificationType === "spendBy"
+  );
+
+  if (cardSpendByNotfications.length > 0) {
+    cardSpendByNotfications.forEach((notification) => {
       dispatch(deleteNotificationFunc(notification, firebaseUid));
     });
   }

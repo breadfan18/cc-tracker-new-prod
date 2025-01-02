@@ -12,7 +12,10 @@ import { INQUIRIES, ISSUERS, NEW_CARD } from "../../constants";
 import { useUser } from "reactfire";
 import useWindhowWidth from "../../hooks/windowWidth";
 import { deleteNotificationFromFirebase } from "../../redux/actions/notificationsActions";
-import { deleteCardNotifications } from "../../helpers";
+import {
+  deleteCardNotificationsOnCardClosure,
+  deleteSpendByNotification,
+} from "../../helpers";
 
 export default function CardAddEditModal({ card, setModalOpen }) {
   const [cardForModal, setCardForModal] = useState(
@@ -78,14 +81,25 @@ export default function CardAddEditModal({ card, setModalOpen }) {
     const finalCard = { ...cardForModal, inquiries: inquiries };
     dispatch(saveCardToFirebase(finalCard, user?.uid));
 
-    if (finalCard.status === "closed")
-      deleteCardNotifications(
+    if (finalCard.status === "closed") {
+      deleteCardNotificationsOnCardClosure(
         notifications,
         finalCard.id,
         dispatch,
         deleteNotificationFromFirebase,
         user?.uid
       );
+    }
+
+    if (finalCard.status !== "closed" && finalCard.bonusEarned) {
+      deleteSpendByNotification(
+        notifications,
+        finalCard.id,
+        dispatch,
+        deleteNotificationFromFirebase,
+        user?.uid
+      );
+    }
 
     toast.success(cardForModal.id === null ? "Card Created" : "Card Updated");
     toggleModal();
