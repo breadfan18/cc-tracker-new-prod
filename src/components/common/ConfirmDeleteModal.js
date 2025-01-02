@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { deleteCardFromFirebase } from "../../redux/actions/cardsActions";
@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useUser } from "reactfire";
 import { DELETE_MODAL_TYPES } from "../../constants";
 import { deleteReferralFromFirebase } from "../../redux/actions/referralActions";
+import { deleteCardNotifications } from "../../helpers";
+import { deleteNotificationFromFirebase } from "../../redux/actions/notificationsActions";
 export default function ConfirmDeleteModal({
   data,
   dataType,
@@ -25,6 +27,7 @@ export default function ConfirmDeleteModal({
   const history = useHistory();
   const { data: user } = useUser();
   const dispatch = useDispatch();
+  const notifications = useSelector((state) => state.notifications);
 
   function setDataText() {
     switch (dataType) {
@@ -45,6 +48,13 @@ export default function ConfirmDeleteModal({
     switch (dataType) {
       case "card":
         dispatch(deleteCardFromFirebase(data, user?.uid));
+        deleteCardNotifications(
+          notifications,
+          data.id,
+          dispatch,
+          deleteNotificationFromFirebase,
+          user?.uid
+        );
         toast.success("Card deleted");
         if (redirect) history.push("/cards");
         break;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";
@@ -11,6 +11,8 @@ import { MdModeEditOutline } from "react-icons/md";
 import { INQUIRIES, ISSUERS, NEW_CARD } from "../../constants";
 import { useUser } from "reactfire";
 import useWindhowWidth from "../../hooks/windowWidth";
+import { deleteNotificationFromFirebase } from "../../redux/actions/notificationsActions";
+import { deleteCardNotifications } from "../../helpers";
 
 function CardAddEditModal({
   card,
@@ -27,6 +29,8 @@ function CardAddEditModal({
   const toggleShow = () => setShow(!show);
   const { isDesktop } = useWindhowWidth();
   const { data: user } = useUser();
+  const notifications = useSelector((state) => state.notifications);
+  const dispatch = useDispatch();
 
   function handleChange(event) {
     const { name, value, checked } = event.target;
@@ -77,6 +81,16 @@ function CardAddEditModal({
 
     const finalCard = { ...cardForModal, inquiries: inquiries };
     saveCardToFirebase(finalCard, user?.uid);
+
+    if (finalCard.status === "closed")
+      deleteCardNotifications(
+        notifications,
+        finalCard.id,
+        dispatch,
+        deleteNotificationFromFirebase,
+        user?.uid
+      );
+
     toast.success(cardForModal.id === null ? "Card Created" : "Card Updated");
     toggleModal();
   }

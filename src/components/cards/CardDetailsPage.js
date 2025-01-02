@@ -93,7 +93,7 @@ function CardDetailsPage() {
           />
         </div>
       </section>
-      {cardNotfications.length > 0 && card.status === "open" && (
+      {cardNotfications.length > 0 && (
         <section className="card-details-notifications-container">
           {cardNotificationElements}
         </section>

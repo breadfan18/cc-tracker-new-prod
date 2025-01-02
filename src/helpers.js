@@ -263,3 +263,21 @@ export function getSpendByRemainingDays(bonusEarned, spendByDate) {
     spendByTextColor,
   };
 }
+
+export const deleteCardNotifications = (
+  notifications,
+  cardId,
+  dispatch,
+  deleteNotificationFunc,
+  firebaseUid
+) => {
+  const cardNotfications = notifications.filter(
+    (notification) => notification.cardId === cardId
+  );
+
+  if (cardNotfications.length > 0) {
+    cardNotfications.forEach((notification) => {
+      dispatch(deleteNotificationFunc(notification, firebaseUid));
+    });
+  }
+};
