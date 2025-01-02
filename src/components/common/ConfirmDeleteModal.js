@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useUser } from "reactfire";
 import { DELETE_MODAL_TYPES } from "../../constants";
 import { deleteReferralFromFirebase } from "../../redux/actions/referralActions";
-import { deleteCardNotifications } from "../../helpers";
+import { deleteCardNotificationsOnCardClosure } from "../../helpers";
 import { deleteNotificationFromFirebase } from "../../redux/actions/notificationsActions";
 export default function ConfirmDeleteModal({
   data,
@@ -48,7 +48,7 @@ export default function ConfirmDeleteModal({
     switch (dataType) {
       case "card":
         dispatch(deleteCardFromFirebase(data, user?.uid));
-        deleteCardNotifications(
+        deleteCardNotificationsOnCardClosure(
           notifications,
           data.id,
           dispatch,
