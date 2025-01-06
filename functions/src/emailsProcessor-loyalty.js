@@ -39,7 +39,7 @@ const loyaltyEmailsProcessor = (dbRef, sgMail, admin) => {
               daysTillRewardsExpiration,
             } = loyaltyEmailVerifier(rewardsExpiration);
 
-            if (shouldSendLoyaltyReminderEmail) {
+            if (true) {
               const msg = {
                 from: "cctrackerapp@gmail.com",
                 templateId: LOYALTY_REMINDER_TEMPLATE_ID,
@@ -60,10 +60,10 @@ const loyaltyEmailsProcessor = (dbRef, sgMail, admin) => {
               };
 
               try {
-                await sgMail.send(msg);
-                console.log(
-                  `Rewards expiration email for ${accountHolder} sent successfully`
-                );
+                // await sgMail.send(msg);
+                // console.log(
+                //   `Rewards expiration email for ${accountHolder} sent successfully`
+                // );
                 await loyaltyNotificationCreator(
                   admin,
                   onlineAccountKey,
