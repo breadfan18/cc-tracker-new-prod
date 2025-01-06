@@ -216,6 +216,7 @@ nav a {
 
 #userSectionContainer {
   position: relative;
+  cursor: pointer;
 }
 
 #userSection {
