@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
+import { formatDate } from "../../../helpers";
 
 export const PageNotifications = ({
   notification,
@@ -35,7 +36,10 @@ export const PageNotifications = ({
               }}
             />
           </div>
-          <small style={{ marginBottom: 0 }}>
+          <small id="page-notification-date">
+            {formatDate(notification.dateSent)}
+          </small>
+          <small style={{ marginBottom: 0, marginLeft: "10px" }}>
             {notification.pageNotification}
           </small>
         </div>

@@ -129,7 +129,3 @@ function CardDetailsPage() {
 }
 
 export default CardDetailsPage;
-
-/* 
-how to delete notifications when card is closed, or when card is deleted, or when bonus is earned etc.. 
-*/

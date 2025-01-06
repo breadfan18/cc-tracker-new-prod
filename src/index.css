@@ -290,6 +290,13 @@ nav a {
   color: var(--fav-red);
 }
 
+#page-notification-date {
+  background-color: var(--black-opacity);
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
 .notificationIcon {
   font-size: 2rem;
   color: var(--fav-red);

@@ -61,8 +61,6 @@ export default function CardListTable({
     }
   }
 
-  const notifications = useSelector((state) => state.notifications);
-
   return cards.length === 0 ? (
     <EmptyList dataType={"card"} />
   ) : (
@@ -124,12 +122,6 @@ export default function CardListTable({
             spendByTextColor,
             showAnnualFeeDueIcon,
           } = getRemindersData(card);
-
-          const cardNotfications = notifications.filter(
-            (notifications) => notifications.cardId === card?.id
-          );
-
-          console.log(cardNotfications);
 
           const noBonus =
             card.signupBonus === undefined || card.signupBonus === "0";
@@ -262,9 +254,3 @@ CardListTable.propTypes = {
   showUser: PropTypes.bool.isRequired,
   showCompactTable: PropTypes.bool.isRequired,
 };
-
-/* 
-how can i make the notifications functions more robust? so that it can be used for all notifications.. especially everything that is used from the useReminderData hook? 
-- for example, can i have the notifications save the days until due? and update that on the database everyday? 
-- if a user changes the date that makes a certain notification irrelavant, it doesnt get deleted right now... how can i make this flow better
-*/

@@ -13,6 +13,7 @@ import {
   NOTIFICATIONS_LOYALTY_DATA_TYPE,
 } from "../../../constants";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import { formatDate } from "../../../helpers";
 
 export default function Notification({
   notification,
@@ -57,7 +58,7 @@ export default function Notification({
         <p>{sidebarNotification}</p>
         <br />
         <section className="notificationFooter">
-          <p className="notificationDate">{dateSent}</p>
+          <p className="notificationDate">{formatDate(dateSent)}</p>
           {notificationType !== NOTIFICATIONS_LOYALTY_DATA_TYPE ? (
             <Link
               className="notificationCardButton"
