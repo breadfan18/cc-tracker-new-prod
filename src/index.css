@@ -214,6 +214,10 @@ nav a {
   border-radius: 5px;
 }
 
+#userSectionContainer {
+  position: relative;
+}
+
 #userSection {
   position: relative;
   display: flex;

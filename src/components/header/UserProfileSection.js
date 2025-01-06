@@ -26,6 +26,7 @@ function UserProfileSection({ user }) {
   const notifications = useSelector((state) => state.notifications);
   const [notificationsLoaded, setNotificationsLoaded] = useState(false);
   const showMenuRef = useRef(null);
+  const userSectionRef = useRef(null);
   const notificationsDrawerRef = useRef(null);
 
   const handleEscapeKey = (event) => {
@@ -42,9 +43,15 @@ function UserProfileSection({ user }) {
   }, [dispatch, notifications.length, notificationsLoaded, user.uid]);
 
   const hideShowMenuOnDocumentClick = (event) => {
+    const isClickInsideMenu = showMenuRef.current?.contains(event.target);
+    const isClickOnUserSection = userSectionRef.current?.contains(event.target);
+    const isClickOnNotificationOption =
+      notificationsDrawerRef.current?.contains(event.target);
+
     if (
-      !showMenuRef.current?.contains(event.target) &&
-      !notificationsDrawerRef.current?.contains(event.target)
+      !isClickInsideMenu &&
+      !isClickOnUserSection &&
+      !isClickOnNotificationOption
     ) {
       setShowMenu(false);
     }
@@ -62,6 +69,12 @@ function UserProfileSection({ user }) {
     };
   }, []);
 
+  useEffect(() => {
+    // this useEffect listens for route changes and closes the user menu if we route to another page.
+    const unlisten = history.listen(() => setShowMenu(false));
+    return () => unlisten();
+  }, [history]);
+
   function handleSignOut() {
     dispatch(userLogout(auth));
     localStorage.removeItem("selectedUser");
@@ -69,61 +82,63 @@ function UserProfileSection({ user }) {
   }
 
   return (
-    <section
-      id="userSection"
-      style={{
-        boxShadow: !isMobile && `-4px 0 8px -6px ${APP_COLOR_LIGHT_BLACK}`,
-      }}
-    >
-      <div class="user-img-container">
-        <img
-          src={user.photoURL}
-          // src={CARDHOLDER_STOCK_IMG}
-          alt=""
-          style={{
-            borderRadius: "50%",
-            height: "2.8rem",
-            marginRight: "8px",
-          }}
-          title={user.displayName}
-        />
-        {notifications.length > 0 && <span class="notification-dot" />}
-      </div>
-      <article>
-        <p
-          style={{
-            fontSize: "12px",
-            color: isMobile ? "white" : "gray",
-            marginBottom: "-5px",
-          }}
-        >
-          Basic Plan
-        </p>
-        <h5 style={{ color: isMobile ? "white" : APP_COLOR_BLUE }}>
-          {user.displayName}
-        </h5>
-      </article>
-      {showMenu ? (
-        <FaAngleUp
-          style={{
-            marginLeft: "10px",
-            fontSize: "1.3rem",
-            cursor: "pointer",
-            color: isMobile || theme === "dark" ? "white" : "black",
-          }}
-          onClick={toggleShowMenu}
-        />
-      ) : (
-        <FaAngleDown
-          style={{
-            marginLeft: "10px",
-            fontSize: "1.3rem",
-            cursor: "pointer",
-            color: isMobile || theme === "dark" ? "white" : "black",
-          }}
-          onClick={toggleShowMenu}
-        />
-      )}
+    <div id="userSectionContainer">
+      <section
+        id="userSection"
+        ref={userSectionRef}
+        style={{
+          boxShadow: !isMobile && `-4px 0 8px -6px ${APP_COLOR_LIGHT_BLACK}`,
+        }}
+        onClick={toggleShowMenu}
+      >
+        <div class="user-img-container">
+          <img
+            src={user.photoURL}
+            // src={CARDHOLDER_STOCK_IMG}
+            alt=""
+            style={{
+              borderRadius: "50%",
+              height: "2.8rem",
+              marginRight: "8px",
+            }}
+            title={user.displayName}
+          />
+          {notifications.length > 0 && <span class="notification-dot" />}
+        </div>
+        <article>
+          <p
+            style={{
+              fontSize: "12px",
+              color: isMobile ? "white" : "gray",
+              marginBottom: "-5px",
+            }}
+          >
+            Basic Plan
+          </p>
+          <h5 style={{ color: isMobile ? "white" : APP_COLOR_BLUE }}>
+            {user.displayName}
+          </h5>
+        </article>
+        {showMenu ? (
+          <FaAngleUp
+            style={{
+              marginLeft: "10px",
+              fontSize: "1.3rem",
+              cursor: "pointer",
+              color: isMobile || theme === "dark" ? "white" : "black",
+            }}
+          />
+        ) : (
+          <FaAngleDown
+            style={{
+              marginLeft: "10px",
+              fontSize: "1.3rem",
+              cursor: "pointer",
+              color: isMobile || theme === "dark" ? "white" : "black",
+            }}
+          />
+        )}
+      </section>
       {showMenu && (
         <div
           className="userProfileMenu"
@@ -154,7 +169,7 @@ function UserProfileSection({ user }) {
           </ul>
         </div>
       )}
-    </section>
+    </div>
   );
 }
 
