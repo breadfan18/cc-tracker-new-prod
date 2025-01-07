@@ -19,23 +19,17 @@ export const PageNotifications = ({
       <article
         style={{
           display: "flex",
-          alignItems: "center",
           justifyContent: "flex-start",
+          alignItems: "center",
         }}
       >
-        <div
-          className="page-notification-icon-container"
+        <Icon
           style={{
-            marginRight: "0.5rem",
+            color: iconColor,
+            fontSize: "1.2rem",
+            marginRight: "10px",
           }}
-        >
-          <Icon
-            style={{
-              color: iconColor,
-              fontSize: "1.2rem",
-            }}
-          />
-        </div>
+        />
         <small id="page-notification-date">
           {formatDate(notification.dateSent)}
         </small>
@@ -45,18 +39,14 @@ export const PageNotifications = ({
         >
           {notification.pageNotification}
         </small>
-        <div className="page-notification-icon-container">
-          <TiDelete
-            className="page-notification-delete"
-            onClick={() => {
-              dispatch(
-                deleteNotificationFromFirebase(notification, firebaseUid)
-              );
-            }}
-          />
-        </div>
+        <TiDelete
+          className="page-notification-delete"
+          onClick={() => {
+            dispatch(deleteNotificationFromFirebase(notification, firebaseUid));
+          }}
+        />
       </article>
-      {!lastReminder && <hr style={{ color: "gray", margin: "3px 0" }} />}
+      {!lastReminder && <hr style={{ color: "gray", margin: "7px 0" }} />}
     </>
   );
 };

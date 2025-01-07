@@ -285,13 +285,6 @@ nav a {
   border-radius: 50%;
 }
 
-.page-notification-icon-container {
-  width: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .page-notification-delete {
   cursor: pointer;
   font-size: 1.5rem;
@@ -300,14 +293,16 @@ nav a {
 
 #page-notification-date {
   background-color: var(--black-opacity);
-  display: inline-block;
   padding: 1px 7px;
   border-radius: 10px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
 }
 
 #page-notification-message {
   margin-bottom: 0;
-  margin-left: 10px;
+  margin: 0 10px;
   flex: 1;
 }
 
