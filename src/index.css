@@ -171,6 +171,13 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--color-blue);
+  transition: max-height 0.3s ease-in-out;
+  overflow: scroll;
+  max-height: 0;
+}
+
+.navSmallContent.open {
+  max-height: 15rem;
 }
 
 nav a {
@@ -296,6 +303,12 @@ nav a {
   display: inline-block;
   padding: 1px 7px;
   border-radius: 10px;
+}
+
+#page-notification-message {
+  margin-bottom: 0;
+  margin-left: 10px;
+  flex: 1;
 }
 
 .notificationIcon {
@@ -586,9 +599,10 @@ nav a {
 }
 
 .bonusEarnedCheck {
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 12px;
-  background-color: #e8e8e8;
+  border: 1px solid var(--light-gray);
+  /* background-color: #e8e8e8; */
   display: flex;
   justify-content: flex-end;
   color: var(--color-blue);

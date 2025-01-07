@@ -13,36 +13,38 @@ export const PageNotifications = ({
   firebaseUid,
 }) => {
   const dispatch = useDispatch();
+
   return (
     <>
       <article
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            className="page-notification-icon-container"
+        <div
+          className="page-notification-icon-container"
+          style={{
+            marginRight: "0.5rem",
+          }}
+        >
+          <Icon
             style={{
-              marginRight: "0.5rem",
+              color: iconColor,
+              fontSize: "1.2rem",
             }}
-          >
-            <Icon
-              style={{
-                color: iconColor,
-                fontSize: "1.2rem",
-              }}
-            />
-          </div>
-          <small id="page-notification-date">
-            {formatDate(notification.dateSent)}
-          </small>
-          <small style={{ marginBottom: 0, marginLeft: "10px" }}>
-            {notification.pageNotification}
-          </small>
+          />
         </div>
+        <small id="page-notification-date">
+          {formatDate(notification.dateSent)}
+        </small>
+        <small
+          id="page-notification-message"
+          title={notification.pageNotification}
+        >
+          {notification.pageNotification}
+        </small>
         <div className="page-notification-icon-container">
           <TiDelete
             className="page-notification-delete"

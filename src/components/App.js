@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 import CardDetailsPage from "./cards/CardDetailsPage";
 import FiveTwentyFourPage from "./524/FiveTwentyFourPage";
 import LoyaltyPage from "./loyalty/LoyaltyPage";
-import ManageLoyaltyPage from "./loyalty/ManageLoyaltyPage";
 import Test from "./testing/UseEffectTest";
 import TestPage from "./testing/TestPage";
 import Login from "./login/Login";
@@ -48,8 +47,6 @@ function App() {
             <Route path="/card/:id" component={CardDetailsPage} />
             <Route path="/524" component={FiveTwentyFourPage} />
             <Route path="/loyalty-accounts" component={LoyaltyPage} />
-            <Route path="/loyalty/:id" component={ManageLoyaltyPage} />
-            <Route path="/loyalty" component={ManageLoyaltyPage} />
             <Route path="/referrals" component={ReferralsPage} />
             <Route path="/use-effect" component={Test} />
             <Route path="/test" component={TestPage} />
