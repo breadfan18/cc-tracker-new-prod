@@ -29,7 +29,7 @@ const RewardTags = ({ tags, cardId, firebaseUid }) => {
   };
 
   return (
-    <div>
+    <div className="reward-tags-main-container">
       <h4 style={{ color: APP_COLOR_BLUE }}>Benefit Tags</h4>
       <div className="reward-tags-container">
         <div className="tag-input-container">
