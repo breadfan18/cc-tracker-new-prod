@@ -119,6 +119,7 @@ body {
   padding: 8px 40px 8px 15px;
   border-radius: 20px;
   border: 1px solid #ccc;
+  background-color: var(--black-or-white-bkgrd);
 }
 
 .tag-input-add-button {

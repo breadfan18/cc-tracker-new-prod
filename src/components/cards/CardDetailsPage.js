@@ -123,7 +123,11 @@ function CardDetailsPage() {
               windowWidth={windowWidth}
             />
           )}
-          <RewardTags />
+          <RewardTags
+            tags={_.values(card.tags)}
+            cardId={id}
+            firebaseUid={user?.uid}
+          />
         </div>
       </div>
     </div>

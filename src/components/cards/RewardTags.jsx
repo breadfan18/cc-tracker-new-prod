@@ -1,30 +1,36 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { FaChevronRight } from "react-icons/fa";
-import { generateLightHexColor } from "../../helpers";
+import { generateLightHexColor, titleCase } from "../../helpers";
 import { TiDelete } from "react-icons/ti";
+import { APP_COLOR_BLUE } from "../../constants";
+import {
+  deleteCardTagFromFirebase,
+  saveCardTagToFirebase,
+} from "../../redux/actions/cardsActions";
 
-const RewardTags = () => {
-  const [tags, setTags] = useState([]);
+const RewardTags = ({ tags, cardId, firebaseUid }) => {
   const [newTag, setNewTag] = useState("");
+  const dispatch = useDispatch();
 
   const handleAddTag = () => {
-    if (newTag.trim() && !tags.some((tag) => tag.label === newTag)) {
+    if (newTag.trim()) {
       const newTagObject = {
-        label: newTag.trim(),
+        label: titleCase(newTag.trim()),
         color: generateLightHexColor(),
       };
-      setTags((prevTags) => [newTagObject, ...prevTags]);
+      dispatch(saveCardTagToFirebase(newTagObject, cardId, firebaseUid));
       setNewTag("");
     }
   };
 
   const handleRemoveTag = (tagToRemove) => {
-    setTags((prevTags) => prevTags.filter((tag) => tag.label !== tagToRemove));
+    dispatch(deleteCardTagFromFirebase(tagToRemove, cardId, firebaseUid));
   };
 
   return (
     <div>
-      <h3>Benefit Tags</h3>
+      <h4 style={{ color: APP_COLOR_BLUE }}>Benefit Tags</h4>
       <div className="reward-tags-container">
         <div className="tag-input-container">
           <input
@@ -40,7 +46,7 @@ const RewardTags = () => {
             onClick={handleAddTag}
           />
         </div>
-        {tags.map((tag, index) => (
+        {tags?.map((tag, index) => (
           <span
             className="tag-span"
             key={index}
@@ -50,7 +56,7 @@ const RewardTags = () => {
 
             <TiDelete
               className="tag-remove-button"
-              onClick={() => handleRemoveTag(tag.label)}
+              onClick={() => handleRemoveTag(tag)}
             />
           </span>
         ))}
