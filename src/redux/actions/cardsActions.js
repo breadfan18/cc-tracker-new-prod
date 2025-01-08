@@ -5,6 +5,8 @@ import {
   DELETE_CARD_SUCCESS,
   LOAD_CARDS_SUCCESS,
   UPDATE_CARDS_SUCCESS,
+  CREATE_TAG_SUCCESS,
+  DELETE_TAG_SUCCESS,
 } from "./actionTypes";
 import * as cardsApi from "../../api/cardsApi";
 import { apiCallError, beginApiCall } from "./apiStatusActions";
@@ -38,6 +40,14 @@ function createCardNotesSuccess(cardNote) {
 
 function deleteCardNotesSuccess(cardNote) {
   return { type: DELETE_CARD_NOTES_SUCCESS, cardNote };
+}
+
+function createCardTagSuccess(tag) {
+  return { type: CREATE_TAG_SUCCESS, tag };
+}
+
+function deleteCardTagSuccess(tag) {
+  return { type: DELETE_TAG_SUCCESS, tag };
 }
 
 export function loadCardsFromFirebase(firebaseUid) {
@@ -102,6 +112,27 @@ export function deleteCardNoteFromFirebase(note, cardId, firebaseUid) {
     dispatch(beginApiCall());
     deleteFromFirebase(`cards/${cardId}/cardNotes`, note.id, firebaseUid);
     dispatch(deleteCardNotesSuccess(note));
+  };
+}
+
+export function saveCardTagToFirebase(tag, cardId, firebaseUid) {
+  return (dispatch) => {
+    dispatch(beginApiCall());
+    dispatch(beginApiCall());
+    const uuid =
+      tag.id === null || tag.id === undefined ? `tag_${uid()}` : tag.id;
+    writeToFirebase(`cards/${cardId}/tags`, tag, uuid, firebaseUid);
+    dispatch(createCardTagSuccess(tag));
+  };
+}
+
+export function deleteCardTagFromFirebase(tag, cardId, firebaseUid) {
+  return (dispatch) => {
+    // Same reason to dispatch apiCall twice here as mentioned above in save function
+    dispatch(beginApiCall());
+    dispatch(beginApiCall());
+    deleteFromFirebase(`cards/${cardId}/tags`, tag.id, firebaseUid);
+    dispatch(deleteCardTagSuccess(tag));
   };
 }
 
