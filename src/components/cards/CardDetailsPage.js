@@ -22,6 +22,7 @@ import CardFavIcon from "./CardFavIcon";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { PageNotifications } from "../common/Notifications/PageNotifications";
+import RewardTags from "./RewardTags";
 
 function CardDetailsPage() {
   const { id } = useParams();
@@ -122,6 +123,7 @@ function CardDetailsPage() {
               windowWidth={windowWidth}
             />
           )}
+          <RewardTags />
         </div>
       </div>
     </div>

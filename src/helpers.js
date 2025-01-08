@@ -263,3 +263,31 @@ export function getSpendByRemainingDays(bonusEarned, spendByDate) {
     spendByTextColor,
   };
 }
+
+export function generateDarkHexColor() {
+  // Generate random RGB values in the darker range (0-100)
+  const r = Math.floor(Math.random() * 100);
+  const g = Math.floor(Math.random() * 100);
+  const b = Math.floor(Math.random() * 100);
+
+  // Convert RGB to a hex color string
+  const hex = `#${r.toString(16).padStart(2, "0")}${g
+    .toString(16)
+    .padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+
+  return hex;
+}
+
+export function generateLightHexColor() {
+  // Generate random RGB values in the lighter range (155-255)
+  const r = Math.floor(Math.random() * 55) + 200; // Red (155-255)
+  const g = Math.floor(Math.random() * 55) + 200; // Green (155-255)
+  const b = Math.floor(Math.random() * 55) + 200; // Blue (155-255)
+
+  // Convert RGB to a hex color string
+  const hex = `#${r.toString(16).padStart(2, "0")}${g
+    .toString(16)
+    .padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+
+  return hex;
+}
