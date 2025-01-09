@@ -5,13 +5,17 @@ import PropTypes from "prop-types";
 import CardListTable from "./CardListTable";
 import { useSelector } from "react-redux";
 import CardListCards from "./CardListCards";
+import { Button } from "react-bootstrap";
 import { useFilteredData } from "../../hooks/filterCards";
 import _ from "lodash";
+import Filters from "./Filters";
+import useCardsFilter from "../../hooks/filterCards2";
 
 function CardTabs({ cards, windowWidth, isDesktop }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
+  const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
@@ -43,12 +47,21 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
     }
   }, [selectedUser, cards]);
 
+  const {
+    filters,
+    filteredData,
+    setCardNameFilter,
+    setCardTypeFilter,
+    setStatusFilter,
+    resetFilters,
+  } = useCardsFilter(cards);
+
   const userTabs = cardholders.map((user) => {
     return (
       <Tab eventKey={user.id} title={user.name.split(" ")[0]} key={user.id}>
         {isDesktop ? (
           <CardListTable
-            cards={cardsFilter.cardList}
+            cards={filteredData}
             showEditDelete
             showUser={false}
             showCompactTable={false}
@@ -68,14 +81,22 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
 
   return (
     <>
-      <input
-        type="search"
-        value={cardsFilter.query}
-        onChange={handleCardsFilter}
-        placeholder="Filter by card name.."
-        className="cardTabsFilterInput"
-        style={{ width: "clamp(21vw, 25vw, 32vw)" }}
-      />
+      {showFilter && (
+        <Filters
+          filters={filters}
+          setCardNameFilter={setCardNameFilter}
+          setCardTypeFilter={setCardTypeFilter}
+          setStatusFilter={setStatusFilter}
+          resetFilters={resetFilters}
+        />
+      )}
+      <Button
+        className="filterButton"
+        onClick={() => setShowFilter(!showFilter)}
+        style={{ minWidth: "10rem" }}
+      >
+        {showFilter ? "Hide Filters" : "Show Filters"}
+      </Button>
       <Tabs
         defaultActiveKey={selectedUser}
         className="mb-3"
@@ -84,7 +105,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
         <Tab eventKey="all-cards" title="All Cards">
           {isDesktop ? (
             <CardListTable
-              cards={cardsFilter.cardList}
+              cards={filteredData}
               showEditDelete={true}
               showUser={true}
               showCompactTable={false}
