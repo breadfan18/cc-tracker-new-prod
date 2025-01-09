@@ -69,7 +69,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
           />
         ) : (
           <CardListCards
-            cards={cardsFilter.cardList}
+            cards={cardsForSelectedUser}
             showEditDelete
             showUserName={false}
             showBonusInfo
@@ -113,7 +113,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
             />
           ) : (
             <CardListCards
-              cards={cardsFilter.cardList}
+              cards={filteredData}
               showEditDelete
               showUserName={true}
               showBonusInfo
@@ -124,7 +124,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
         <Tab eventKey="favorites" title="Favorites">
           {isDesktop ? (
             <CardListTable
-              cards={cardsFilter.cardList}
+              cards={cardsForSelectedUser}
               showEditDelete={true}
               showUser={true}
               showCompactTable={false}
@@ -132,7 +132,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
             />
           ) : (
             <CardListCards
-              cards={cardsFilter.cardList}
+              cards={cardsForSelectedUser}
               showEditDelete
               showUserName={true}
               showBonusInfo

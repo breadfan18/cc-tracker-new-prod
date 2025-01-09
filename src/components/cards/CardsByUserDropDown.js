@@ -5,12 +5,22 @@ import { Form, Button } from "react-bootstrap";
 import { useFilteredData } from "../../hooks/filterCards";
 import { useSelector } from "react-redux";
 import _ from "lodash";
+import useCardsFilter from "../../hooks/filterCards2";
 function CardsByUserDropDown({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
+
+  const {
+    filters,
+    filteredData,
+    setCardNameFilter,
+    setCardTypeFilter,
+    setStatusFilter,
+    resetFilters,
+  } = useCardsFilter(cards);
 
   const showAllUsers =
     selectedUser === undefined || selectedUser === "all-cards";
