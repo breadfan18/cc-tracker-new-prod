@@ -4,11 +4,7 @@ import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import { FaSort } from "react-icons/fa";
 import { useSortableData } from "../../hooks/sortData";
-import {
-  formatDate,
-  formatCurrency,
-  setColorForCardStatus,
-} from "../../helpers";
+import { formatDate, formatCurrency } from "../../helpers";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -29,6 +25,7 @@ import { BsFillBellFill } from "react-icons/bs";
 import { getRemindersData } from "../../hooks/reminderData";
 import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
+import StampedStatus from "./StampedStatus";
 
 export default function CardListTable({
   cards,
@@ -120,13 +117,28 @@ export default function CardListTable({
             showAnnualFeeDueIcon,
           } = getRemindersData(card);
 
-          const noBonus =
-            card.signupBonus === undefined || card.signupBonus === "0";
+          const {
+            id,
+            status,
+            signupBonus,
+            appDate,
+            cardholder,
+            inquiries,
+            creditLine,
+            card: cardName,
+            cardType,
+            annualFee,
+            spendReq,
+            spendBy,
+            bonusEarned,
+            issuer,
+          } = card;
+
+          const noBonus = signupBonus === undefined || signupBonus === "0";
 
           return (
             <tr
-              key={card.id}
-              // className={setColorForCardStatus("cardTable", card.status)}
+              key={id}
               onMouseEnter={handleTrColorOnHover}
               onMouseLeave={(e) => handleTrColorReset(e, card)}
               style={{ cursor: "pointer" }}
@@ -136,7 +148,7 @@ export default function CardListTable({
                 <td style={{ paddingLeft: 0 }}>
                   <div
                     style={{
-                      backgroundColor: card.bonusEarned
+                      backgroundColor: bonusEarned
                         ? EDIT_COLOR_GREEN
                         : noBonus
                         ? APP_COLOR_LIGHT_BLACK
@@ -153,56 +165,58 @@ export default function CardListTable({
                   </div>
                 </td>
               )}
-              <td>{formatDate(card.appDate)}</td>
-              {showUser && <td>{card.cardholder}</td>}
+              <td>{formatDate(appDate)}</td>
+              {showUser && <td>{cardholder}</td>}
               <td>
-                <img className="issuerLogos" src={card.issuer.img} alt="" />
-                {`  ${card.card}`}
+                <img className="issuerLogos" src={issuer.img} alt="" />
+                {`  ${cardName}`}
               </td>
-              <td>{card.cardType}</td>
-              {windowWidth > 1505 && <td>{formatCurrency(card.creditLine)}</td>}
+              <td>{cardType}</td>
+              {windowWidth > 1505 && <td>{formatCurrency(creditLine)}</td>}
               {windowWidth > 1550 && (
                 <td>
-                  <CreditBureauIcons inquiries={card.inquiries} />
+                  <CreditBureauIcons inquiries={inquiries} />
                 </td>
               )}
               <td>
-                <div className="flexAndVerticalCenter">
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div className="flexAndVerticalCenter">
-                      {showAnnualFeeDueIcon && (
-                        <TbAlertOctagonFilled
-                          style={{
-                            color: DELETE_COLOR_RED,
-                            fontSize: "1.3rem",
-                            marginRight: "5px",
-                          }}
-                          title={REMINDERS_TEXT_AF}
-                        />
-                      )}
-                      <p>{formatCurrency(card.annualFee)}</p>
+                {status === "open" ? (
+                  <div className="flexAndVerticalCenter">
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <div className="flexAndVerticalCenter">
+                        {showAnnualFeeDueIcon && (
+                          <TbAlertOctagonFilled
+                            style={{
+                              color: DELETE_COLOR_RED,
+                              fontSize: "1.3rem",
+                              marginRight: "5px",
+                            }}
+                            title={REMINDERS_TEXT_AF}
+                          />
+                        )}
+                        <p>{formatCurrency(annualFee)}</p>
+                      </div>
+                      <small
+                        style={{
+                          color: nextFeeColor,
+                          fontSize: "12px",
+                        }}
+                      >
+                        {nextFeeText}
+                      </small>
                     </div>
-                    <small
-                      style={{
-                        color: nextFeeColor,
-                        fontSize: "12px",
-                      }}
-                    >
-                      {nextFeeText}
-                    </small>
                   </div>
-                </div>
+                ) : (
+                  <StampedStatus status={status} />
+                )}
               </td>
               {windowWidth > 1380 && !showCompactTable && (
-                <td>{formatCurrency(card.spendReq)}</td>
+                <td>{formatCurrency(spendReq)}</td>
               )}
               {windowWidth > 1380 && !showCompactTable && (
                 <td>
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div className="flexAndVerticalCenter">
-                      {((card.spendBy &&
-                        spendDaysRemaining &&
-                        isSpendByDateClose) ||
+                      {((spendBy && spendDaysRemaining && isSpendByDateClose) ||
                         spendDaysRemaining < 0) && (
                         <BsFillBellFill
                           style={{
@@ -213,7 +227,7 @@ export default function CardListTable({
                           title={REMINDERS_TEXT_BONUS}
                         />
                       )}
-                      <p>{formatDate(card.spendBy)}</p>
+                      <p>{formatDate(spendBy)}</p>
                     </div>
                     <small
                       style={{ fontSize: "12px", color: spendByTextColor }}
