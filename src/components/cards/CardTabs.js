@@ -20,12 +20,21 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
 
+  const {
+    filters,
+    filteredData,
+    setCardNameFilter,
+    setCardTypeFilter,
+    setStatusFilter,
+    resetFilters,
+  } = useCardsFilter(cards);
+
   const cardsForSelectedUser =
     selectedUser === "all-cards"
-      ? cards
+      ? filteredData
       : selectedUser === "favorites"
-      ? cards.filter((card) => card.isFav)
-      : cards.filter((card) => card.userId === selectedUser);
+      ? filteredData.filter((card) => card.isFav)
+      : filteredData.filter((card) => card.userId === selectedUser);
 
   const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
     useFilteredData(cardsForSelectedUser);
@@ -47,21 +56,12 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
     }
   }, [selectedUser, cards]);
 
-  const {
-    filters,
-    filteredData,
-    setCardNameFilter,
-    setCardTypeFilter,
-    setStatusFilter,
-    resetFilters,
-  } = useCardsFilter(cards);
-
   const userTabs = cardholders.map((user) => {
     return (
       <Tab eventKey={user.id} title={user.name.split(" ")[0]} key={user.id}>
         {isDesktop ? (
           <CardListTable
-            cards={filteredData}
+            cards={cardsForSelectedUser}
             showEditDelete
             showUser={false}
             showCompactTable={false}
