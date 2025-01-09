@@ -54,10 +54,7 @@ export default function CardListTable({
   }
   function handleTrColorReset(e, card) {
     if (e.target.parentNode.tagName === "TR") {
-      e.target.parentNode.className = setColorForCardStatus(
-        "cardTable",
-        card.status
-      );
+      e.target.parentNode.className = null;
     }
   }
 
@@ -129,7 +126,7 @@ export default function CardListTable({
           return (
             <tr
               key={card.id}
-              className={setColorForCardStatus("cardTable", card.status)}
+              // className={setColorForCardStatus("cardTable", card.status)}
               onMouseEnter={handleTrColorOnHover}
               onMouseLeave={(e) => handleTrColorReset(e, card)}
               style={{ cursor: "pointer" }}
