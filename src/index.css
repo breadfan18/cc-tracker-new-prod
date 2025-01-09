@@ -1265,8 +1265,8 @@ p {
   color: #ff0000;
   text-transform: uppercase;
   text-align: center;
-  padding: 7px;
-  border: 2px dashed #ff0000;
+  padding: 7px 12px;
   letter-spacing: 2px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
