@@ -1273,7 +1273,7 @@ p {
 
 .filtersContainer {
   display: flex;
-  background-color: var(--modal-color);
+  background-color: var(--black-or-white-bkgrd);
   padding: 5px;
   border-radius: 5px;
   align-items: center;
@@ -1293,9 +1293,8 @@ p {
   border-radius: 5px;
   display: flex;
   align-items: center;
-  padding: 20px 15px;
-  border: 1px solid var(--light-gray);
-  background-color: var(--black-or-white-bkgrd);
+  padding: 25px;
+  background-color: var(--modal-color);
   color: var(--black-or-white-text-color);
 }
 
@@ -1315,12 +1314,12 @@ p {
 }
 
 .inputFilters {
-  padding: 20px 15px;
-  border: 1px solid var(--light-gray);
+  padding: 25px;
+  border: none;
   height: 2rem;
   border-radius: 5px;
   min-width: 20rem;
-  background-color: var(--black-or-white-bkgrd);
+  background-color: var(--modal-color);
   color: var(--black-or-white-text-color);
 }
 

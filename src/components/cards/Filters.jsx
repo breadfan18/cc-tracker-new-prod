@@ -1,7 +1,11 @@
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import useWindhowWidth from "../../hooks/windowWidth";
-import { DELETE_COLOR_RED } from "../../constants";
+import {
+  APP_COLOR_BLACK_OPACITY,
+  APP_COLOR_LIGHT_GRAY,
+  DELETE_COLOR_RED,
+} from "../../constants";
 import { useSelector } from "react-redux";
 
 function Filters({
@@ -14,15 +18,16 @@ function Filters({
   const { windowWidth } = useWindhowWidth();
   const theme = useSelector((state) => state.theme);
 
-  console.log(theme);
-
   return (
     <>
       <hr style={{ color: theme === "dark" ? "white" : null }} />
 
       <div
         className="filtersContainer"
-        style={windowWidth < 772 ? { display: "grid" } : null}
+        style={{
+          display: windowWidth < 772 ? "grid" : null,
+          backgroundColor: theme === "light" && APP_COLOR_BLACK_OPACITY,
+        }}
       >
         <input
           type="text"
@@ -30,8 +35,12 @@ function Filters({
           placeholder="Filter by card name"
           onChange={(e) => setCardNameFilter(e.target.value)}
           className="inputFilters"
+          style={{ padding: windowWidth < 772 ? "20px" : null }}
         />
-        <div className="statusFilters">
+        <div
+          className="statusFilters"
+          style={{ padding: windowWidth < 772 ? "20px" : null }}
+        >
           <Form.Check
             label="All"
             type="radio"
@@ -60,7 +69,10 @@ function Filters({
             className="radioFilters"
           />
         </div>
-        <div className="statusFilters">
+        <div
+          className="statusFilters"
+          style={{ padding: windowWidth < 772 ? "20px" : null }}
+        >
           <Form.Check
             label="All"
             type="radio"
