@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import useWindhowWidth from "../../hooks/windowWidth";
 import { DELETE_COLOR_RED } from "../../constants";
+import { useSelector } from "react-redux";
 
 function Filters({
   filters,
@@ -11,10 +12,13 @@ function Filters({
   resetFilters,
 }) {
   const { windowWidth } = useWindhowWidth();
+  const theme = useSelector((state) => state.theme);
+
+  console.log(theme);
 
   return (
     <>
-      <hr />
+      <hr style={{ color: theme === "dark" ? "white" : null }} />
 
       <div
         className="filtersContainer"
@@ -107,7 +111,7 @@ function Filters({
           Reset
         </Button>
       </div>
-      <hr />
+      <hr style={{ color: theme === "dark" ? "white" : null }} />
     </>
   );
 }

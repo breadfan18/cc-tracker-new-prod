@@ -6,9 +6,11 @@ import { useFilteredData } from "../../hooks/filterCards";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 import useCardsFilter from "../../hooks/filterCards2";
+import Filters from "./Filters";
 function CardsByUserDropDown({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
+  const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
@@ -26,36 +28,25 @@ function CardsByUserDropDown({ cards }) {
     selectedUser === undefined || selectedUser === "all-cards";
 
   const cardsForSelectedUser = showAllUsers
-    ? cards
+    ? filteredData
     : selectedUser === "favorites"
-    ? cards.filter((card) => card.isFav)
-    : cards.filter((card) => card.userId === selectedUser);
-
-  const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
-    useFilteredData(cardsForSelectedUser);
-
-  useEffect(() => {
-    localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
-
-    if (cardsFilter.query !== "") {
-      const filteredCards = filterCards(cardsFilter.query);
-      setCardsFilter({
-        query: cardsFilter.query,
-        cardList: filteredCards,
-      });
-    } else {
-      setCardsFilter({
-        query: "",
-        cardList: [...cardsForSelectedUser],
-      });
-    }
-  }, [selectedUser, cards]);
+    ? filteredData.filter((card) => card.isFav)
+    : filteredData.filter((card) => card.userId === selectedUser);
 
   const handleUserChange = (event) =>
     setSelectedUser(event.target.value || "all-cards");
 
   return (
     <div className="cardsDropDownContainer">
+      {showFilter && (
+        <Filters
+          filters={filters}
+          setCardNameFilter={setCardNameFilter}
+          setCardTypeFilter={setCardTypeFilter}
+          setStatusFilter={setStatusFilter}
+          resetFilters={resetFilters}
+        />
+      )}
       <div id="cardFilterContainer">
         <Form.Select
           id="cardFilterUserSelect"
@@ -72,13 +63,13 @@ function CardsByUserDropDown({ cards }) {
           })}
           <option value="favorites">Favorites</option>
         </Form.Select>
-        <input
-          type="search"
-          value={cardsFilter.query}
-          onChange={handleCardsFilter}
-          placeholder="Filter by card name.."
-          id="cardFilterInput"
-        />
+        <Button
+          className="filterButtonSmallScreen"
+          onClick={() => setShowFilter(!showFilter)}
+          style={{ minWidth: "10rem" }}
+        >
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
       </div>
       <Button
         className="cardByDropDownFavButton"
@@ -89,7 +80,7 @@ function CardsByUserDropDown({ cards }) {
       </Button>
       <hr />
       <CardListCards
-        cards={cardsFilter.cardList}
+        cards={cardsForSelectedUser}
         showEditDelete
         showUserName={showAllUsers}
         showBonusInfo
