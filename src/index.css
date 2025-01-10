@@ -525,9 +525,7 @@ nav a {
 }
 
 #cardFilterUserSelect {
-  width: clamp(9rem, 11rem, 20rem);
   padding: 10px;
-  background-color: var(--light-blue);
   border-radius: 10px 0 0 10px;
   color: var(--color-blue);
 }
@@ -1275,7 +1273,7 @@ p {
 
 .filtersContainer {
   display: flex;
-  background-color: var(--light-blue);
+  background-color: var(--modal-color);
   padding: 5px;
   border-radius: 5px;
   align-items: center;
@@ -1295,7 +1293,10 @@ p {
   border-radius: 5px;
   display: flex;
   align-items: center;
-  padding: 0 5px;
+  padding: 20px 15px;
+  border: 1px solid var(--light-gray);
+  background-color: var(--black-or-white-bkgrd);
+  color: var(--black-or-white-text-color);
 }
 
 .filtersContainer button {
@@ -1314,11 +1315,13 @@ p {
 }
 
 .inputFilters {
-  padding-left: 10px;
-  border: none;
+  padding: 20px 15px;
+  border: 1px solid var(--light-gray);
   height: 2rem;
   border-radius: 5px;
-  /* min-width: 15rem; */
+  min-width: 20rem;
+  background-color: var(--black-or-white-bkgrd);
+  color: var(--black-or-white-text-color);
 }
 
 .filterButton {
@@ -1334,7 +1337,7 @@ p {
 .filterButtonSmallScreen {
   padding-left: 10px;
   color: white;
-  background-color: var(--epic-red);
+  background-color: var(--color-blue);
   border: none;
   flex: 1;
   border-radius: 0 10px 10px 0;
