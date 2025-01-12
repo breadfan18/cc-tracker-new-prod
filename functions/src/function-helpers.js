@@ -85,29 +85,31 @@ const createNotificationsRef = (admin, cardId, onlineAccountKey) => {
     .ref(`/users/${onlineAccountKey}/notifications/${cardId}`);
 };
 
-const cardNotificationCreator = async (
+const cardAnnualFeeNotificationCreator = async (
   admin,
   onlineAccountKey,
   card,
-  daysUntilDue,
-  dataType
+  daysUntilDue
 ) => {
   const { issuer, cardholder, card: cardName, id: cardId } = card;
 
-  const notificationId = `${dataType}_${
+  const notificationId = `${AF_DATA_TYPE}_${
     daysUntilDue <= 0 ? "passed" : daysUntilDue
   }_${cardId}`;
 
-  const message =
-    dataType === AF_DATA_TYPE && daysUntilDue <= 0
-      ? `Annual fee date for ${cardholder}'s ${issuer.name} ${cardName} has passed! Please review the card..`
-      : dataType === AF_DATA_TYPE && daysUntilDue > 0
-      ? `Annual fee for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`
-      : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} is due in ${daysUntilDue} days`;
+  const sidebarNotification =
+    daysUntilDue <= 0
+      ? `Annual fee date for ${cardholder}'s ${issuer.name} ${cardName} has passed! Please review the card`
+      : `Annual fee for ${cardholder}'s ${issuer.name} ${cardName} is due within ${daysUntilDue} days`;
+
+  const pageNotification =
+    daysUntilDue <= 0
+      ? `Annual fee date for this card has passed! Please review`
+      : `Annual fee for this card is due within ${daysUntilDue} days`;
 
   const notificationLog =
-    dataType === AF_DATA_TYPE
-      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until annual fee`
+    daysUntilDue <= 0
+      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - Annual fee due date passed`
       : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until bonus deadline`;
 
   const notificationsRef = createNotificationsRef(
@@ -117,9 +119,56 @@ const cardNotificationCreator = async (
   );
   const notificationsData = {
     dateSent: new Date().toISOString().split("T")[0],
-    message,
+    sidebarNotification,
+    pageNotification,
     notificationId,
-    notificationType: dataType,
+    cardId,
+    notificationType: AF_DATA_TYPE,
+  };
+
+  await notificationsRef.set(notificationsData);
+  console.log(notificationLog);
+};
+
+const cardSpendByNotificationCreator = async (
+  admin,
+  onlineAccountKey,
+  card,
+  daysUntilDue
+) => {
+  const { issuer, cardholder, card: cardName, id: cardId } = card;
+
+  const notificationId = `${SPEND_BY_DATA_TYPE}_${
+    daysUntilDue <= 0 ? "passed" : daysUntilDue
+  }_${cardId}`;
+
+  const sidebarNotification =
+    daysUntilDue <= 0
+      ? `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} has passed! Please review the card`
+      : `Bonus spend deadline for ${cardholder}'s ${issuer.name} ${cardName} is within ${daysUntilDue} days`;
+
+  const notificationLog =
+    daysUntilDue <= 0
+      ? `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - Bonus spend deadline passed`
+      : `Notification added to db - ${cardholder}'s ${issuer.name} ${cardName} - ${daysUntilDue} days until bonus deadline`;
+
+  const pageNotification =
+    daysUntilDue <= 0
+      ? `Bonus spend deadline for this card has passed! Please review the card`
+      : `Bonus spend deadline for this card is within ${daysUntilDue} days`;
+
+  const notificationsRef = createNotificationsRef(
+    admin,
+    notificationId,
+    onlineAccountKey
+  );
+  const notificationsData = {
+    dateSent: new Date().toISOString().split("T")[0],
+    sidebarNotification,
+    pageNotification,
+    notificationId,
+    cardId,
+    notificationType: SPEND_BY_DATA_TYPE,
   };
 
   await notificationsRef.set(notificationsData);
@@ -131,7 +180,7 @@ const loyaltyNotificationCreator = async (
   onlineAccountKey,
   accountHolder,
   loyaltyProgram,
-  expirationDate,
+  daysTillExpiration,
   loyaltyId
 ) => {
   const notificationId = `loyalty_${loyaltyId}`;
@@ -140,16 +189,21 @@ const loyaltyNotificationCreator = async (
     notificationId,
     onlineAccountKey
   );
+
+  console.log("expirationDate", daysTillExpiration);
+
   const notificationsData = {
     dateSent: new Date().toISOString().split("T")[0],
-    message: `Reward points for ${accountHolder}'s ${loyaltyProgram} program will expire in ${expirationDate} days`,
+    sidebarNotification: `Reward points for ${accountHolder}'s ${loyaltyProgram} program will expire within ${daysTillExpiration} days`,
+    pageNotification: `Reward points for ${accountHolder}'s ${loyaltyProgram} program will expire within ${daysTillExpiration} days`,
     notificationId,
     notificationType: "loyalty",
+    loyaltyId,
   };
 
   await notificationsRef.set(notificationsData);
   console.log(
-    `Notification added to db - ${accountHolder}'s ${loyaltyProgram} - ${expirationDate} day rewards expiration alert`
+    `Notification added to db - ${accountHolder}'s ${loyaltyProgram} - ${daysTillExpiration} day rewards expiration alert`
   );
 };
 
@@ -159,7 +213,8 @@ module.exports = {
   loyaltyEmailVerifier,
   convertDateToLocaleString,
   createNotificationsRef,
-  cardNotificationCreator,
+  cardAnnualFeeNotificationCreator,
+  cardSpendByNotificationCreator,
   loyaltyNotificationCreator,
   LOYALTY_REMINDER_TEMPLATE_ID,
   AF_DATA_TYPE,

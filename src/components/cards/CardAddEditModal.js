@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";
@@ -11,13 +11,12 @@ import { MdModeEditOutline } from "react-icons/md";
 import { INQUIRIES, ISSUERS, NEW_CARD } from "../../constants";
 import { useUser } from "reactfire";
 import useWindhowWidth from "../../hooks/windowWidth";
+import {
+  deleteCardNotificationsOnCardClosure,
+  deleteSpendByNotificationWhenBonusEarned,
+} from "../../redux/actions/notificationsActions";
 
-function CardAddEditModal({
-  card,
-  saveCardToFirebase,
-  setModalOpen,
-  cardholders,
-}) {
+export default function CardAddEditModal({ card, setModalOpen }) {
   const [cardForModal, setCardForModal] = useState(
     card ? { ...card } : NEW_CARD
   );
@@ -27,6 +26,9 @@ function CardAddEditModal({
   const toggleShow = () => setShow(!show);
   const { isDesktop } = useWindhowWidth();
   const { data: user } = useUser();
+  const notifications = useSelector((state) => state.notifications);
+  const cardholders = useSelector((state) => state.cardholders);
+  const dispatch = useDispatch();
 
   function handleChange(event) {
     const { name, value, checked } = event.target;
@@ -76,7 +78,28 @@ function CardAddEditModal({
     }
 
     const finalCard = { ...cardForModal, inquiries: inquiries };
-    saveCardToFirebase(finalCard, user?.uid);
+    dispatch(saveCardToFirebase(finalCard, user?.uid));
+
+    if (finalCard.status === "closed") {
+      dispatch(
+        deleteCardNotificationsOnCardClosure(
+          notifications,
+          finalCard.id,
+          user?.uid
+        )
+      );
+    }
+
+    if (finalCard.status !== "closed" && finalCard.bonusEarned) {
+      dispatch(
+        deleteSpendByNotificationWhenBonusEarned(
+          notifications,
+          finalCard.id,
+          user?.uid
+        )
+      );
+    }
+
     toast.success(cardForModal.id === null ? "Card Created" : "Card Updated");
     toggleModal();
   }
@@ -198,18 +221,5 @@ function CardAddEditModal({
 
 CardAddEditModal.propTypes = {
   card: PropTypes.object,
-  saveCardToFirebase: PropTypes.func.isRequired,
   setModalOpen: PropTypes.func,
 };
-
-function mapStateToProps(state) {
-  return {
-    cardholders: state.cardholders,
-  };
-}
-
-const mapDispatchToProps = {
-  saveCardToFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardAddEditModal);

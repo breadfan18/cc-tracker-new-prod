@@ -4,9 +4,8 @@ const {
   convertDateToLocaleString,
   spendByEmailVerifier,
   annualFeeEmailVerifier,
-  cardNotificationCreator,
-  AF_DATA_TYPE,
-  SPEND_BY_DATA_TYPE,
+  cardAnnualFeeNotificationCreator,
+  cardSpendByNotificationCreator,
 } = require("./function-helpers");
 
 const cardEmailsProcessor = (dbRef, sgMail, admin) => {
@@ -67,12 +66,11 @@ const cardEmailsProcessor = (dbRef, sgMail, admin) => {
                 console.log(
                   `Annual fee email for ${cardholder} sent successfully`
                 );
-                await cardNotificationCreator(
+                await cardAnnualFeeNotificationCreator(
                   admin,
                   onlineAccountKey,
                   card,
-                  daysTillAnnualFee,
-                  AF_DATA_TYPE
+                  daysTillAnnualFee
                 );
                 emailCount++;
               } catch (error) {
@@ -110,12 +108,11 @@ const cardEmailsProcessor = (dbRef, sgMail, admin) => {
                 console.log(
                   `Bonus alert email for ${cardholder} sent successfully`
                 );
-                await cardNotificationCreator(
+                await cardSpendByNotificationCreator(
                   admin,
                   onlineAccountKey,
                   card,
-                  daysTillSpendByDate,
-                  SPEND_BY_DATA_TYPE
+                  daysTillSpendByDate
                 );
                 emailCount++;
               } catch (error) {

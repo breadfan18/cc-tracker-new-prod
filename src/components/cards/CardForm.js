@@ -15,18 +15,12 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { formDisabledCheck, titleCase } from "../../helpers";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
 
-const CardForm = ({
-  card,
-  onSave,
-  onChange,
-  saving,
-  cardholders,
-  errors = {},
-}) => {
+const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
+  const cardholders = useSelector((state) => state.cardholders);
   return (
     <>
       <Form onSubmit={onSave}>
@@ -240,10 +234,4 @@ CardForm.propTypes = {
   saving: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  cardholders: state.cardholders,
-});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
+export default CardForm;

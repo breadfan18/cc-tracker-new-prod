@@ -85,8 +85,8 @@ function CardNotes({
             <tbody>
               {cardNotes.map((note) => (
                 <tr key={note.id}>
-                  <td style={{ minWidth: "80px" }}>{formatDate(note.date)}</td>
-                  <td>{note.note}</td>
+                  <td style={{ minWidth: "100px" }}>{formatDate(note.date)}</td>
+                  <td style={{ maxWidth: "500px" }}>{note.note}</td>
                   <td style={{ textAlign: "right" }}>
                     <AiFillDelete
                       style={{

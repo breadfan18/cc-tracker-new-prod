@@ -4,8 +4,35 @@ import Burger from "../common/Burger";
 import { APP_COLOR_BLUE, HEADER_CARD_LOGO } from "../../constants";
 import UserProfileSection from "./UserProfileSection";
 
+const navData = [
+  {
+    route: "/",
+    text: "Home",
+  },
+  {
+    route: "/cards",
+    text: "Cards",
+  },
+  {
+    route: "/524",
+    text: "5/24",
+  },
+  {
+    route: "/loyalty-accounts",
+    text: "Loyalty",
+  },
+  {
+    route: "/card-holders",
+    text: "Card Holders",
+  },
+  {
+    route: "/referrals",
+    text: "Referrals",
+  },
+];
+
 const Header = ({ user, isMobile }) => {
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const activeStyle = {
     color: APP_COLOR_BLUE,
     borderBottom: `4px solid ${APP_COLOR_BLUE}`,
@@ -21,7 +48,7 @@ const Header = ({ user, isMobile }) => {
   useEffect(() => {
     const navMenuHandler = (event) => {
       if (!navRef.current?.contains(event.target)) {
-        setOpen(false);
+        setMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", navMenuHandler);
@@ -32,56 +59,22 @@ const Header = ({ user, isMobile }) => {
   return isMobile ? (
     <header className="smallNavContainer">
       <nav id="smallNavTopHeader">
-        <Burger open={open} setOpen={setOpen} />
+        <Burger open={menuOpen} setOpen={setMenuOpen} />
         <UserProfileSection user={user} />
       </nav>
-      {open && (
-        <nav className="navSmallContent" ref={navRef}>
+      <nav className={`navSmallContent ${menuOpen ? "open" : ""}`} ref={navRef}>
+        {navData.map((nav, index) => (
           <NavLink
-            to="/"
+            key={index}
+            exact={nav.route === "/"}
+            to={nav.route}
             activeStyle={activeStyleMobile}
-            exact
-            onClick={() => setOpen(false)}
+            onClick={() => setMenuOpen(false)}
           >
-            Home
+            {nav.text}
           </NavLink>
-          <NavLink
-            to="/cards"
-            activeStyle={activeStyleMobile}
-            onClick={() => setOpen(false)}
-          >
-            Cards
-          </NavLink>
-          <NavLink
-            to="/524"
-            activeStyle={activeStyleMobile}
-            onClick={() => setOpen(false)}
-          >
-            5/24
-          </NavLink>
-          <NavLink
-            to="/loyalty-accounts"
-            activeStyle={activeStyleMobile}
-            onClick={() => setOpen(false)}
-          >
-            Loyalty
-          </NavLink>
-          <NavLink
-            to="/card-holders"
-            activeStyle={activeStyleMobile}
-            onClick={() => setOpen(false)}
-          >
-            Card Holders
-          </NavLink>
-          <NavLink
-            to="/referrals"
-            activeStyle={activeStyleMobile}
-            onClick={() => setOpen(false)}
-          >
-            Referrals
-          </NavLink>
-        </nav>
-      )}
+        ))}
+      </nav>
     </header>
   ) : (
     <header className="navContainer">
@@ -90,24 +83,16 @@ const Header = ({ user, isMobile }) => {
       </section>
       <section className="headerSectionRight">
         <nav className="navFull">
-          <NavLink to="/" activeStyle={activeStyle} exact>
-            Home
-          </NavLink>
-          <NavLink to="/cards" activeStyle={activeStyle}>
-            Cards
-          </NavLink>
-          <NavLink to="/524" activeStyle={activeStyle}>
-            5/24
-          </NavLink>
-          <NavLink to="/loyalty-accounts" activeStyle={activeStyle}>
-            Loyalty
-          </NavLink>
-          <NavLink to="/card-holders" activeStyle={activeStyle}>
-            Card Holders
-          </NavLink>
-          <NavLink to="/referrals" activeStyle={activeStyle}>
-            Referrals
-          </NavLink>
+          {navData.map((nav, index) => (
+            <NavLink
+              key={index}
+              exact={nav.route === "/"}
+              to={nav.route}
+              activeStyle={activeStyle}
+            >
+              {nav.text}
+            </NavLink>
+          ))}
         </nav>
         <UserProfileSection user={user} />
       </section>

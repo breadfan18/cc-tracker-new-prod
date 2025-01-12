@@ -36,3 +36,56 @@ export function deleteNotificationFromFirebase(notification, firebaseUid) {
     dispatch(deleteNotificationSuccess(notification));
   };
 }
+
+export const deleteCardNotificationsOnCardClosure = (
+  allNotifications,
+  cardId,
+  firebaseUid
+) => {
+  return (dispatch) => {
+    dispatch(beginApiCall());
+    const cardNotifications = allNotifications.filter(
+      (notification) => notification.cardId === cardId
+    );
+
+    cardNotifications.forEach((notification) =>
+      dispatch(deleteNotificationFromFirebase(notification, firebaseUid))
+    );
+  };
+};
+
+export const deleteSpendByNotificationWhenBonusEarned = (
+  allNotifications,
+  cardId,
+  firebaseUid
+) => {
+  return (dispatch) => {
+    dispatch(beginApiCall());
+    const cardSpendByNotfications = allNotifications.filter(
+      (notification) =>
+        notification.cardId === cardId &&
+        notification.notificationType === "spendBy"
+    );
+
+    cardSpendByNotfications.forEach((notification) =>
+      dispatch(deleteNotificationFromFirebase(notification, firebaseUid))
+    );
+  };
+};
+
+export function deleteLoyaltyNotificationOnLoyaltyClosure(
+  allNotifications,
+  loyaltyId,
+  firebaseUid
+) {
+  return (dispatch) => {
+    dispatch(beginApiCall());
+    const loyaltyNotifications = allNotifications.filter(
+      (notification) => notification.loyaltyId === loyaltyId
+    );
+
+    loyaltyNotifications.forEach((notification) =>
+      dispatch(deleteNotificationFromFirebase(notification, firebaseUid))
+    );
+  };
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { PiAirplaneTiltFill } from "react-icons/pi";
 import { GoClockFill } from "react-icons/go";
+import { FaArrowRight } from "react-icons/fa6";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
 import { useDispatch } from "react-redux";
 import { TiDelete } from "react-icons/ti";
@@ -12,6 +13,7 @@ import {
   NOTIFICATIONS_LOYALTY_DATA_TYPE,
 } from "../../../constants";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import { formatDate } from "../../../helpers";
 
 export default function Notification({
   notification,
@@ -20,7 +22,8 @@ export default function Notification({
   setShow,
 }) {
   const dispatch = useDispatch();
-  const { message, dateSent, notificationType, notificationId } = notification;
+  const { sidebarNotification, dateSent, notificationType, notificationId } =
+    notification;
 
   const cardId =
     notificationType === NOTIFICATIONS_LOYALTY_DATA_TYPE
@@ -52,17 +55,17 @@ export default function Notification({
             dispatch(deleteNotificationFromFirebase(notification, firebaseUid));
           }}
         />
-        <p>{message}</p>
+        <p>{sidebarNotification}</p>
         <br />
         <section className="notificationFooter">
-          <p className="notificationDate">{dateSent}</p>
+          <p className="notificationDate">{formatDate(dateSent)}</p>
           {notificationType !== NOTIFICATIONS_LOYALTY_DATA_TYPE ? (
             <Link
               className="notificationCardButton"
               to={`/card/${cardId}`}
               onClick={() => setShow(false)}
             >
-              Go to Card
+              Go to Card <FaArrowRight style={{ marginLeft: "5px" }} />
             </Link>
           ) : (
             <Link
@@ -70,7 +73,7 @@ export default function Notification({
               to={`/loyalty-accounts/`}
               onClick={() => setShow(false)}
             >
-              Loyalty Page
+              Loyalty Page <FaArrowRight style={{ marginLeft: "5px" }} />
             </Link>
           )}
         </section>
