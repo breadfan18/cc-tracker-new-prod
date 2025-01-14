@@ -57,6 +57,10 @@ body {
   font-family: "Exo 2", sans-serif;
 }
 
+pre {
+  font-family: "Exo 2", sans-serif;
+}
+
 .homePageText {
   color: var(--black-or-white-text-color);
   margin-bottom: 15px;
@@ -138,6 +142,15 @@ body {
   margin-right: 5px;
 }
 
+.clickable-tag-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
 .tag-remove-button {
   font-size: 18px;
   cursor: pointer;
@@ -150,6 +163,37 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.tag-description-modal {
+  padding: 20px;
+  border-radius: 5px 5px 0 0;
+  background: var(--modal-color);
+  box-shadow: var(--box-shadow);
+  color: var(--black-or-white-text-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tag-description-modal-footer {
+  background-color: var(--modal-color);
+  color: var(--black-or-white-text-color);
+}
+
+.tag-description-textarea {
+  width: 100%;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid var(--light-gray);
+  color: var(--black-or-white-text-color);
+  background-color: var(--black-or-white-bkgrd);
+}
+
+.tag-description-text {
+  font-size: 12px;
+  white-space: pre-wrap;
 }
 
 .cardDetailsHeaderContainer {
