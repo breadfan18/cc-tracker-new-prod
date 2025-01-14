@@ -131,6 +131,7 @@ pre {
   border-radius: 20px;
   border: 1px solid #ccc;
   background-color: var(--black-or-white-bkgrd);
+  color: var(--black-or-white-text-color);
 }
 
 .tag-input-add-button {
