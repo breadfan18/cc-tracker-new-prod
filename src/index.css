@@ -179,6 +179,8 @@ pre {
 .tag-description-modal-footer {
   background-color: var(--modal-color);
   color: var(--black-or-white-text-color);
+  box-shadow: var(--box-shadow);
+  border: none;
 }
 
 .tag-description-textarea {
