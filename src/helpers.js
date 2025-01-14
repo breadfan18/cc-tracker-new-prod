@@ -73,10 +73,32 @@ export function sortReferralsByDate(referrals) {
 }
 
 export function titleCase(str) {
+  const smallWords = [
+    "a",
+    "an",
+    "and",
+    "the",
+    "but",
+    "or",
+    "on",
+    "in",
+    "with",
+    "to",
+    "of",
+    "at",
+    "by",
+    "for",
+    "nor",
+    "up",
+  ];
   return str
     .toLowerCase()
     .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word, i) =>
+      i !== 0 && smallWords.includes(word)
+        ? word
+        : word.charAt(0).toUpperCase() + word.slice(1)
+    )
     .join(" ");
 }
 
