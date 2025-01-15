@@ -1,16 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { TiDelete } from "react-icons/ti";
-import { IoIosAddCircle } from "react-icons/io";
 import {
   APP_COLOR_BLUE,
   DELETE_COLOR_RED,
   EDIT_COLOR_GREEN,
 } from "../../../constants";
-import {
-  deleteCardTagFromFirebase,
-  saveCardTagToFirebase,
-} from "../../../redux/actions/cardsActions";
+import { saveCardTagToFirebase } from "../../../redux/actions/cardsActions";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { FaCheckCircle } from "react-icons/fa";
@@ -34,21 +29,10 @@ const RewardTags = ({ tags, cardId, firebaseUid }) => {
     }
   }, [isEditing, selectedTag]);
 
-  const handleRemoveTag = (tagToRemove) => {
-    dispatch(deleteCardTagFromFirebase(tagToRemove, cardId, firebaseUid));
-  };
-
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
     setTagDescription(tag.description || "");
     setIsEditing(false);
-    setShowModal(true);
-  };
-
-  const handleAddDescriptionIcon = (tag) => {
-    setSelectedTag(tag);
-    setTagDescription("");
-    setIsEditing(true);
     setShowModal(true);
   };
 
@@ -58,6 +42,8 @@ const RewardTags = ({ tags, cardId, firebaseUid }) => {
     setShowModal(false);
     setIsEditing(false);
   };
+
+  console.log(selectedTag);
 
   return (
     <div className="reward-tags-main-container">
