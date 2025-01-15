@@ -11,6 +11,12 @@ export const Tag = ({ tag, index, cardId, firebaseUid, handleTagClick }) => {
   };
   return (
     <span className="tag-span" key={index} style={{ background: tag.color }}>
+      {!tag.description && (
+        <IoIosAddCircle
+          className="tag-edit-button"
+          onClick={() => handleTagClick(tag)}
+        />
+      )}
       <button
         className="clickable-tag-button"
         onClick={() => handleTagClick(tag)}
@@ -18,18 +24,10 @@ export const Tag = ({ tag, index, cardId, firebaseUid, handleTagClick }) => {
       >
         {tag.label}
       </button>
-      <div>
-        {!tag.description && (
-          <IoIosAddCircle
-            className="tag-edit-button"
-            onClick={() => handleTagClick(tag)}
-          />
-        )}
-        <TiDelete
-          className="tag-remove-button"
-          onClick={() => handleRemoveTag(tag)}
-        />
-      </div>
+      <TiDelete
+        className="tag-remove-button"
+        onClick={() => handleRemoveTag(tag)}
+      />
     </span>
   );
 };
