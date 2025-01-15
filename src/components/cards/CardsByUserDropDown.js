@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CardListCards from "./CardListCards";
 import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
-import { useFilteredData } from "../../hooks/filterCards";
 import { useSelector } from "react-redux";
 import _ from "lodash";
-import useCardsFilter from "../../hooks/filterCards2";
+import useCardsFilter from "../../hooks/filterCards";
 import Filters from "./Filters";
 function CardsByUserDropDown({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
