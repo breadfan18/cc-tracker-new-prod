@@ -43,8 +43,6 @@ const RewardTags = ({ tags, cardId, firebaseUid }) => {
     setIsEditing(false);
   };
 
-  console.log(selectedTag);
-
   return (
     <div className="reward-tags-main-container">
       <h4 style={{ color: APP_COLOR_BLUE }}>Benefit Tags</h4>
