@@ -22,7 +22,7 @@ import CardFavIcon from "./CardFavIcon";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { PageNotifications } from "../common/Notifications/PageNotifications";
-import RewardTags from "./RewardTags";
+import RewardTags from "./tags/RewardTags";
 
 function CardDetailsPage() {
   const { id } = useParams();

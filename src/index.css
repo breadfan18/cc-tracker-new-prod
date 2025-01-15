@@ -147,7 +147,6 @@ pre {
   background: none;
   border: none;
   padding: 0;
-  cursor: pointer;
   color: inherit;
   text-decoration: none;
 }
@@ -158,10 +157,17 @@ pre {
   color: var(--fav-red);
 }
 
+.tag-edit-button {
+  font-size: 15px;
+  cursor: pointer;
+  color: var(--edit-color-green);
+}
+
 .tag-span {
   border-radius: 20px;
   padding: 8px 8px 8px 10px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 5px;
 }
