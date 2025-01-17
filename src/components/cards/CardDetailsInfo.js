@@ -84,26 +84,6 @@ export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
           variant={theme === "dark" ? "dark" : null}
         >
           <tbody className="align-middle">
-            {isMobile && (
-              <tr>
-                <td className="cardDetailsFieldHeaders">Bonus Earn Status</td>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    margin: "5px",
-                    height: "2rem",
-                  }}
-                >
-                  <BonusStatusAndEarnDate
-                    card={card}
-                    inverseColor
-                    iconSize="clamp(1.5rem, 10vw, 3rem)"
-                    isCardDetailsPage
-                  />
-                </div>
-              </tr>
-            )}
             <tr>
               <td className="cardDetailsFieldHeaders">App Date:</td>
               <td className="cardDetailsFieldValues">
