@@ -44,7 +44,10 @@ const RewardTags = ({ tags, cardId, firebaseUid }) => {
   };
 
   return (
-    <div className="reward-tags-main-container">
+    <div
+      className="reward-tags-main-container"
+      style={{ fontSize: "clamp(12px, 3vw, 1rem)" }}
+    >
       <h4 style={{ color: APP_COLOR_BLUE }}>Benefit Tags</h4>
       <div className="reward-tags-container">
         <TagInput cardId={cardId} firebaseUid={firebaseUid} />

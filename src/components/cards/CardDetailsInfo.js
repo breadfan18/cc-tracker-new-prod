@@ -39,16 +39,37 @@ export default function CardDetailsInfo({
         alignSelf: "flex-start",
       }}
     >
-      <Card.Img
-        variant="top"
-        src={card.issuer.img}
-        style={{
-          padding: "2rem",
-          backgroundColor: APP_COLOR_LIGHT_BLUE,
-          maxHeight: "10rem",
-          objectFit: "contain",
-        }}
-      />
+      {isMobile ? (
+        <div
+          style={{
+            backgroundColor: APP_COLOR_LIGHT_BLUE,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src={card.issuer.img}
+            alt=""
+            style={{
+              width: "10rem",
+              padding: "10px",
+              objectFit: "contain",
+            }}
+          />
+        </div>
+      ) : (
+        <Card.Img
+          variant="top"
+          src={card.issuer.img}
+          style={{
+            padding: "2rem",
+            backgroundColor: APP_COLOR_LIGHT_BLUE,
+            maxHeight: "10rem",
+            objectFit: "contain",
+          }}
+        />
+      )}
+
       <article
         className="cardDetailsHeaderContainer"
         style={{ borderBottom: theme === "dark" && "1px solid #4e5359" }}
@@ -56,12 +77,12 @@ export default function CardDetailsInfo({
         <div style={{ padding: "10px 16px" }}>
           <Card.Title
             style={{
-              fontSize: "clamp(0.9rem, 5vw, 1.5rem)",
+              fontSize: "clamp(0.9rem, 4.5vw, 1.5rem)",
             }}
           >
             {card.issuer.name} {card.card}
           </Card.Title>
-          <Card.Title style={{ fontSize: "clamp(0.7rem, 4vw, 1rem)" }}>
+          <Card.Title style={{ fontSize: "clamp(0.7rem, 3.5vw, 1rem)" }}>
             {card.cardholder}
           </Card.Title>
         </div>
@@ -81,41 +102,55 @@ export default function CardDetailsInfo({
           <tbody className="align-middle">
             <tr>
               <td className="cardDetailsFieldHeaders">App Date:</td>
-              <td>{formatDate(card.appDate)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatDate(card.appDate)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Card Type:</td>
-              <td>{card.cardType}</td>
+              <td className="cardDetailsFieldValues">{card.cardType}</td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Annual Fee:</td>
-              <td>{formatCurrency(card.annualFee)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatCurrency(card.annualFee)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Next Fee Date:</td>
-              <td>
+              <td className="cardDetailsFieldValues">
                 {card.nextFeeDate !== "" ? formatDate(card.nextFeeDate) : "N/A"}
               </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Credit Line:</td>
-              <td>{formatCurrency(card.creditLine)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatCurrency(card.creditLine)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Inquiries:</td>
-              <td>{<CreditBureauIcons inquiries={card.inquiries} />}</td>
+              <td className="cardDetailsFieldValues">
+                {<CreditBureauIcons inquiries={card.inquiries} />}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Spend Requirement:</td>
-              <td>{formatCurrency(card.spendReq)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatCurrency(card.spendReq)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Spend By:</td>
-              <td>{card.spendBy !== "" ? formatDate(card.spendBy) : "N/A"}</td>
+              <td className="cardDetailsFieldValues">
+                {card.spendBy !== "" ? formatDate(card.spendBy) : "N/A"}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Card Status:</td>
-              <td>{titleCase(card.status)}</td>
+              <td className="cardDetailsFieldValues">
+                {titleCase(card.status)}
+              </td>
             </tr>
           </tbody>
         </Table>

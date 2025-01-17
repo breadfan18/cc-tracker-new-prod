@@ -55,6 +55,7 @@ body {
   background-image: var(--url-bkgrd);
   /* background-color: #212529; */
   font-family: "Exo 2", sans-serif;
+  padding-bottom: 10px;
 }
 
 pre {
@@ -950,8 +951,12 @@ form {
 
 .cardDetailsFieldHeaders {
   font-weight: bold;
-  font-size: clamp(0.9rem, 5vw, 1.2rem);
+  font-size: clamp(15px, 3.5vw, 1.2rem);
   color: var(--color-blue);
+}
+
+.cardDetailsFieldValues {
+  font-size: clamp(12px, 3vw, 1rem);
 }
 
 .cardHeaders,
@@ -1267,6 +1272,7 @@ p {
   color: black;
   font-weight: bold;
   font-size: 1.1rem;
+  color: var(--black-or-white-text-color);
 }
 
 #cardReferralsCardSectionRight p {
