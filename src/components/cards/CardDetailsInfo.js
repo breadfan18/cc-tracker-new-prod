@@ -11,12 +11,7 @@ import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { useSelector } from "react-redux";
 
-export default function CardDetailsInfo({
-  windowWidth,
-  card,
-  isTablet,
-  isMobile,
-}) {
+export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
   const theme = useSelector((state) => state.theme);
 
   const setCardDetailsBoxShadow = () => {
@@ -40,23 +35,9 @@ export default function CardDetailsInfo({
       }}
     >
       {isMobile ? (
-        <div
-          style={{
-            backgroundColor: APP_COLOR_LIGHT_BLUE,
-            display: "flex",
-            justifyContent: "center",
-            borderRadius: "5px 5px 0 0 ",
-          }}
-        >
-          <img
-            src={card.issuer.img}
-            alt=""
-            style={{
-              width: "10rem",
-              padding: "10px",
-              objectFit: "contain",
-            }}
-          />
+        <div className="cardDetailsMobileImgContainer" s>
+          <img className="cardDetailsMobileImg" src={card.issuer.img} alt="" />
+          ``
         </div>
       ) : (
         <Card.Img
@@ -87,13 +68,15 @@ export default function CardDetailsInfo({
             {card.cardholder}
           </Card.Title>
         </div>
-        <BonusStatusAndEarnDate
-          card={card}
-          isCard
-          inverseColor
-          iconSize="clamp(1.5rem, 10vw, 3rem)"
-          isCardDetailsPage
-        />
+        {!isMobile && (
+          <BonusStatusAndEarnDate
+            card={card}
+            isCard
+            inverseColor
+            iconSize="clamp(1.5rem, 10vw, 3rem)"
+            isCardDetailsPage
+          />
+        )}
       </article>
       <Card.Body>
         <Table
@@ -101,6 +84,26 @@ export default function CardDetailsInfo({
           variant={theme === "dark" ? "dark" : null}
         >
           <tbody className="align-middle">
+            {isMobile && (
+              <tr>
+                <td className="cardDetailsFieldHeaders">Bonus Earn Status</td>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    margin: "5px",
+                    height: "2rem",
+                  }}
+                >
+                  <BonusStatusAndEarnDate
+                    card={card}
+                    inverseColor
+                    iconSize="clamp(1.5rem, 10vw, 3rem)"
+                    isCardDetailsPage
+                  />
+                </div>
+              </tr>
+            )}
             <tr>
               <td className="cardDetailsFieldHeaders">App Date:</td>
               <td className="cardDetailsFieldValues">
