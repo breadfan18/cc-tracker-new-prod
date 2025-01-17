@@ -45,6 +45,7 @@ export default function CardDetailsInfo({
             backgroundColor: APP_COLOR_LIGHT_BLUE,
             display: "flex",
             justifyContent: "center",
+            borderRadius: "5px 5px 0 0 ",
           }}
         >
           <img
