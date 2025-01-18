@@ -75,7 +75,7 @@ const RewardTags = ({ tags, cardId, firebaseUid }) => {
               ref={textAreaRef}
               value={tagDescription}
               onChange={(e) => setTagDescription(e.target.value)}
-              rows="6"
+              rows="15"
               className="tag-description-textarea"
             />
           ) : (
