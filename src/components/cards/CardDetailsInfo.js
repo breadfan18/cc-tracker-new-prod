@@ -164,11 +164,3 @@ export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
     </Card>
   );
 }
-
-/* 
-TO DO:
-- Find place for bonus earn stuff in isMobile
-- With the bonus stuff ribbon removed in isMobile, fix the right margin.. there's too much space there. 
-- Fix the little riboon botton traingle thing hanging there in the small screen.
-- Make card referrals better for isMobile
-*/
