@@ -14,7 +14,7 @@ import { sortNotesByDate } from "../../helpers";
 import CardNotes from "./CardNotes";
 import _ from "lodash";
 import { useUser } from "reactfire";
-import CardReferrals from "./CardReferrals";
+import CardReferrals from "./CardDetailsReferrals";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import CardDetailsInfo from "./CardDetailsInfo";
 import useWindhowWidth from "../../hooks/windowWidth";

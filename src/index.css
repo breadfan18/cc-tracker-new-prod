@@ -17,6 +17,7 @@
   --logos-bkgrd: rgba(0, 0, 0, 0.09);
   --heart-color-unfavorite: rgba(0, 0, 0, 0.09);
   --edit-color-green: #198754;
+  --edit-color-green-opacity: #5daa87;
   --bonus-ribbon-effect: "block";
   --modal-color: white;
   --required-field-color: rgb(69, 15, 1);
@@ -1284,13 +1285,11 @@ p {
 .card-footer {
   padding: 7px 5px 7px 12px;
   align-items: center;
-  /* background: var(--black-opacity); */
 }
 
 #cardReferralsCardSectionRight p span {
   color: black;
   font-weight: bold;
-  font-size: 1.1rem;
   color: var(--black-or-white-text-color);
 }
 
@@ -1304,9 +1303,13 @@ p {
   padding: 10px;
   display: flex;
   border-radius: 10px;
+  font-size: clamp(0.7rem, 3.5vw, 1rem);
 }
 
 .cardDetailsReferralCardBonusSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-radius: 10px;
   padding: 5px;
   min-width: 7rem;
@@ -1315,13 +1318,17 @@ p {
 .cardDetailsReferralCardBonusSectionTop {
   display: flex;
   align-items: center;
-  margin-bottom: -6px;
   align-self: flex-start;
+}
+
+.cardDetailsReferralCardBonusSectionTop p {
+  color: white;
+  font-size: clamp(0.7rem, 5vw, 1rem);
 }
 
 .cardDetailsReferralCardBonusText {
   color: white;
-  font-size: 12px;
+  font-size: clamp(0.7rem, 3vw, 0.7rem);
   margin-left: 5px;
 }
 
