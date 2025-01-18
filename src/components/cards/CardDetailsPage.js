@@ -55,7 +55,7 @@ function CardDetailsPage() {
   function getCardById(cards, id) {
     return cards?.find((card) => card.id === id) || null;
   }
-  const { windowWidth, isTablet, isMobile } = useWindhowWidth();
+  const { windowWidth, isTablet, isMobile, isDesktop } = useWindhowWidth();
 
   const cardNotificationElements = cardNotfications.map(
     (notification, index) => {
@@ -100,9 +100,9 @@ function CardDetailsPage() {
         </section>
       )}
       <div
-        className={`cardDetailsBody ${isTablet && "cardDetailsBodyTablet"} ${
-          isMobile && "cardDetailsBodyMobile"
-        }`}
+        className={`${isDesktop && "cardDetailsBody"} ${
+          isTablet && "cardDetailsBody cardDetailsBodyTablet"
+        } ${isMobile && "cardDetailsBodyMobile"}`}
       >
         <CardDetailsInfo
           windowWidth={windowWidth}

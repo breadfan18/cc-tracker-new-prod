@@ -74,27 +74,24 @@ pre {
   margin: 0 auto;
 }
 
-.cardDetailsBody {
+.cardDetailsBody,
+.cardDetailsBodyMobile {
   display: flex;
   flex-wrap: wrap;
   font-size: clamp(0.6rem, 5vw, 1rem);
 }
 
-.cardDetailsBody > .card {
+.cardDetailsBody > .card,
+.cardDetailsBodyMobile > .card {
   margin-bottom: 1rem;
 }
 
-.cardDetailsBodyTablet,
-.cardDetailsBodyMobile {
+.cardDetailsBodyTablet {
   margin-right: 10px;
 }
 
 .cardDetailsSectionRightTablet {
   display: flex;
-}
-
-.cardDetailsSectionRightTablet > .card:nth-child(1) {
-  margin-right: 1rem;
 }
 
 #cardDetailsSectionRight {
