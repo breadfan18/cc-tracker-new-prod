@@ -70,8 +70,9 @@ export default function BonusStatusAndEarnDate({
       <div className="bonusInfoTextSection">
         <p
           style={{
-            fontSize: isCard ? "1rem" : "1.3rem",
+            fontSize: isCard ? "1rem" : "clamp(15px, 2.5vw, 1rem)",
             color: inverseColor ? "white" : "black",
+            marginBottom: "3px",
           }}
         >
           {noBonus ? "N/A" : card.signupBonus}{" "}
@@ -79,7 +80,7 @@ export default function BonusStatusAndEarnDate({
         <small
           style={{
             color: bonusStatusTextColor,
-            fontSize: "12px",
+            fontSize: "10px",
             marginTop: !isCard && "-7px",
           }}
         >

@@ -6,7 +6,12 @@ import {
   setColorForCardStatus,
   titleCase,
 } from "../../helpers";
-import { APP_COLOR_LIGHT_BLUE } from "../../constants";
+import {
+  APP_COLOR_BLUE_OPACITY,
+  APP_COLOR_LIGHT_BLACK,
+  APP_COLOR_LIGHT_BLUE,
+  EDIT_COLOR_GREEN_OPACITY,
+} from "../../constants";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { useSelector } from "react-redux";
@@ -21,6 +26,8 @@ export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
       ? "2px 0 10px gray"
       : `2px 0 15px ${setColorForCardStatus("cardCard", card.status)}`;
   };
+
+  const noBonus = card.signupBonus === undefined || card.signupBonus === "0";
 
   return (
     <Card
@@ -37,6 +44,22 @@ export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
       {isMobile ? (
         <div className="cardDetailsMobileImgContainer" s>
           <img className="cardDetailsMobileImg" src={card.issuer.img} alt="" />
+          <div
+            style={{
+              backgroundColor: card.bonusEarned
+                ? EDIT_COLOR_GREEN_OPACITY
+                : noBonus
+                ? APP_COLOR_LIGHT_BLACK
+                : APP_COLOR_BLUE_OPACITY,
+            }}
+          >
+            <BonusStatusAndEarnDate
+              card={card}
+              inverseColor
+              iconSize="clamp(1.5rem, 10vw, 2.3rem)"
+              isCardDetailsPage
+            />
+          </div>
         </div>
       ) : (
         <Card.Img

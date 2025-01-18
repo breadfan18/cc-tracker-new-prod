@@ -1230,10 +1230,18 @@ p {
 
 .cardDetailsMobileImgContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 5px 5px 0 0;
   min-height: 5rem;
   background-color: var(--light-blue);
+}
+
+.cardDetailsMobileImgContainer > div {
+  display: flex;
+  align-items: center;
+  border-radius: 20px 0 0 20px;
+  padding: 5px;
 }
 
 .cardDetailsMobileImg {
