@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import PropTypes from "prop-types";
@@ -17,6 +17,11 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
   const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
+
+  useEffect(
+    () => localStorage.setItem("selectedUser", JSON.stringify(selectedUser)),
+    [selectedUser]
   );
 
   const {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardListCards from "./CardListCards";
 import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
@@ -12,6 +12,11 @@ function CardsByUserDropDown({ cards }) {
   const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
+
+  useEffect(
+    () => localStorage.setItem("selectedUser", JSON.stringify(selectedUser)),
+    [selectedUser]
   );
 
   const {
