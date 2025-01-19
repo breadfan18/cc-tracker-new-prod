@@ -1364,7 +1364,7 @@ p {
   border-radius: 5px;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 15px;
+  font-size: clamp(12px, 3vw, 1rem);
   margin-bottom: 15px;
 }
 
