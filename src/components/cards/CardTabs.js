@@ -72,6 +72,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
           setCardTypeFilter={setCardTypeFilter}
           setStatusFilter={setStatusFilter}
           resetFilters={resetFilters}
+          setShowFilter={setShowFilter}
         />
       )}
       <Button

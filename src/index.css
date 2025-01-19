@@ -57,6 +57,7 @@ body {
   /* background-color: #212529; */
   font-family: "Exo 2", sans-serif;
   padding-bottom: 10px;
+  font-size: clamp(12px, 3vw, 1rem);
 }
 
 pre {
@@ -1303,7 +1304,7 @@ p {
   padding: 10px;
   display: flex;
   border-radius: 10px;
-  font-size: clamp(0.7rem, 3.5vw, 1rem);
+  font-size: clamp(12px, 3vw, 1rem);
 }
 
 .cardDetailsReferralCardBonusSection {
@@ -1357,6 +1358,7 @@ p {
 /* Filter Stuff below */
 
 .filtersContainer {
+  position: relative;
   display: flex;
   background-color: var(--black-or-white-bkgrd);
   padding: 5px;
@@ -1426,4 +1428,15 @@ p {
   flex: 1;
   border-radius: 0 10px 10px 0;
   padding-left: 10px;
+}
+
+.filters-close-icon {
+  cursor: pointer;
+  font-size: 2rem;
+  color: var(--fav-red);
+  position: absolute;
+  right: -14px;
+  top: -20px;
+  background-color: white;
+  border-radius: 50%;
 }

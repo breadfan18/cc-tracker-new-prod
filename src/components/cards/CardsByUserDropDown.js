@@ -49,6 +49,7 @@ function CardsByUserDropDown({ cards }) {
           setCardTypeFilter={setCardTypeFilter}
           setStatusFilter={setStatusFilter}
           resetFilters={resetFilters}
+          setShowFilter={setShowFilter}
         />
       )}
       <div id="cardFilterContainer">
