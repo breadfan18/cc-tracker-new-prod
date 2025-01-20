@@ -70,7 +70,7 @@ export default function BonusStatusAndEarnDate({
       <div className="bonusInfoTextSection">
         <p
           style={{
-            fontSize: isCard ? "1rem" : "clamp(15px, 2.5vw, 1rem)",
+            fontSize: isCard ? "1rem" : "clamp(15px, 2.5vw, 1.2rem)",
             color: inverseColor ? "white" : "black",
             marginBottom: "3px",
           }}
