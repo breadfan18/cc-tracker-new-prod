@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import CardListCards from "./CardListCards";
 import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
-import { useFilteredData } from "../../hooks/filterCards";
 import { useSelector } from "react-redux";
 import _ from "lodash";
-import useCardsFilter from "../../hooks/filterCards2";
+import useCardsFilter from "../../hooks/filterCards";
 import Filters from "./Filters";
 function CardsByUserDropDown({ cards }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
@@ -13,6 +12,11 @@ function CardsByUserDropDown({ cards }) {
   const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
+
+  useEffect(
+    () => localStorage.setItem("selectedUser", JSON.stringify(selectedUser)),
+    [selectedUser]
   );
 
   const {
@@ -45,6 +49,7 @@ function CardsByUserDropDown({ cards }) {
           setCardTypeFilter={setCardTypeFilter}
           setStatusFilter={setStatusFilter}
           resetFilters={resetFilters}
+          setShowFilter={setShowFilter}
         />
       )}
       <div id="cardFilterContainer">

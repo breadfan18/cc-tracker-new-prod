@@ -1,31 +1,49 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
-export const useFilteredData = (cardData) => {
-  const [cardsFilter, setCardsFilter] = useState({
-    query: "",
-    cardList: [],
+const useCardsFilter = (initialData) => {
+  const data = [...initialData];
+  const [filters, setFilters] = useState({
+    cardName: "",
+    cardType: "",
+    status: "",
   });
 
-  const filterCards = (query) => {
-    return cardData.filter((card) => {
-      const fullCardName = card.issuer.name + " " + card.card;
-      return fullCardName.toLowerCase().includes(query.toLowerCase());
+  const applyFilters = (card) => {
+    return Object.entries(filters).every(([property, value]) => {
+      const itemValue =
+        property === "cardName"
+          ? `${card.issuer.name} ${card.card}`
+          : card[property];
+
+      return itemValue.toLowerCase().includes(value.toLowerCase());
     });
   };
 
-  const handleCardsFilter = (e) => {
-    const filteredCards =
-      e.target.value === "" ? cardData : filterCards(e.target.value);
-    setCardsFilter({
-      query: e.target.value,
-      cardList: filteredCards,
+  const filteredData = useMemo(
+    () => data.filter(applyFilters),
+    [data, filters]
+  );
+
+  const setFilter = (property, value) => {
+    setFilters((prevFilters) => ({ ...prevFilters, [property]: value }));
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      cardName: "",
+      cardType: "",
+      status: "",
     });
   };
 
   return {
-    cardsFilter,
-    setCardsFilter,
-    handleCardsFilter,
-    filterCards,
+    filteredData,
+    filters,
+    setCardNameFilter: (value) => setFilter("cardName", value),
+    setCardTypeFilter: (value) => setFilter("cardType", value),
+    setStatusFilter: (value) => setFilter("status", value),
+    resetFilters,
   };
 };
+
+export default useCardsFilter;

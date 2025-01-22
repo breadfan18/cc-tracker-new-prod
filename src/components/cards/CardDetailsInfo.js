@@ -6,17 +6,17 @@ import {
   setColorForCardStatus,
   titleCase,
 } from "../../helpers";
-import { APP_COLOR_LIGHT_BLUE } from "../../constants";
+import {
+  APP_COLOR_BLUE_OPACITY,
+  APP_COLOR_LIGHT_BLACK,
+  APP_COLOR_LIGHT_BLUE,
+  EDIT_COLOR_GREEN_OPACITY,
+} from "../../constants";
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { useSelector } from "react-redux";
 
-export default function CardDetailsInfo({
-  windowWidth,
-  card,
-  isTablet,
-  isMobile,
-}) {
+export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
   const theme = useSelector((state) => state.theme);
 
   const setCardDetailsBoxShadow = () => {
@@ -26,6 +26,8 @@ export default function CardDetailsInfo({
       ? "2px 0 10px gray"
       : `2px 0 15px ${setColorForCardStatus("cardCard", card.status)}`;
   };
+
+  const noBonus = card.signupBonus === undefined || card.signupBonus === "0";
 
   return (
     <Card
@@ -39,16 +41,39 @@ export default function CardDetailsInfo({
         alignSelf: "flex-start",
       }}
     >
-      <Card.Img
-        variant="top"
-        src={card.issuer.img}
-        style={{
-          padding: "2rem",
-          backgroundColor: APP_COLOR_LIGHT_BLUE,
-          maxHeight: "10rem",
-          objectFit: "contain",
-        }}
-      />
+      {isMobile ? (
+        <div className="cardDetailsMobileImgContainer" s>
+          <img className="cardDetailsMobileImg" src={card.issuer.img} alt="" />
+          <div
+            style={{
+              backgroundColor: card.bonusEarned
+                ? EDIT_COLOR_GREEN_OPACITY
+                : noBonus
+                ? APP_COLOR_LIGHT_BLACK
+                : APP_COLOR_BLUE_OPACITY,
+            }}
+          >
+            <BonusStatusAndEarnDate
+              card={card}
+              inverseColor
+              iconSize="clamp(1.5rem, 10vw, 2.3rem)"
+              isCardDetailsPage
+            />
+          </div>
+        </div>
+      ) : (
+        <Card.Img
+          variant="top"
+          src={card.issuer.img}
+          style={{
+            padding: "2rem",
+            backgroundColor: APP_COLOR_LIGHT_BLUE,
+            maxHeight: "10rem",
+            objectFit: "contain",
+          }}
+        />
+      )}
+
       <article
         className="cardDetailsHeaderContainer"
         style={{ borderBottom: theme === "dark" && "1px solid #4e5359" }}
@@ -56,22 +81,24 @@ export default function CardDetailsInfo({
         <div style={{ padding: "10px 16px" }}>
           <Card.Title
             style={{
-              fontSize: "clamp(0.9rem, 5vw, 1.5rem)",
+              fontSize: "clamp(0.9rem, 4.5vw, 1.5rem)",
             }}
           >
             {card.issuer.name} {card.card}
           </Card.Title>
-          <Card.Title style={{ fontSize: "clamp(0.7rem, 4vw, 1rem)" }}>
+          <Card.Title style={{ fontSize: "clamp(0.7rem, 3.5vw, 1rem)" }}>
             {card.cardholder}
           </Card.Title>
         </div>
-        <BonusStatusAndEarnDate
-          card={card}
-          isCard
-          inverseColor
-          iconSize="clamp(1.5rem, 10vw, 3rem)"
-          isCardDetailsPage
-        />
+        {!isMobile && (
+          <BonusStatusAndEarnDate
+            card={card}
+            isCard
+            inverseColor
+            iconSize="clamp(1.5rem, 10vw, 3rem)"
+            isCardDetailsPage
+          />
+        )}
       </article>
       <Card.Body>
         <Table
@@ -81,41 +108,55 @@ export default function CardDetailsInfo({
           <tbody className="align-middle">
             <tr>
               <td className="cardDetailsFieldHeaders">App Date:</td>
-              <td>{formatDate(card.appDate)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatDate(card.appDate)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Card Type:</td>
-              <td>{card.cardType}</td>
+              <td className="cardDetailsFieldValues">{card.cardType}</td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Annual Fee:</td>
-              <td>{formatCurrency(card.annualFee)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatCurrency(card.annualFee)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Next Fee Date:</td>
-              <td>
+              <td className="cardDetailsFieldValues">
                 {card.nextFeeDate !== "" ? formatDate(card.nextFeeDate) : "N/A"}
               </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Credit Line:</td>
-              <td>{formatCurrency(card.creditLine)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatCurrency(card.creditLine)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Inquiries:</td>
-              <td>{<CreditBureauIcons inquiries={card.inquiries} />}</td>
+              <td className="cardDetailsFieldValues">
+                {<CreditBureauIcons inquiries={card.inquiries} />}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Spend Requirement:</td>
-              <td>{formatCurrency(card.spendReq)}</td>
+              <td className="cardDetailsFieldValues">
+                {formatCurrency(card.spendReq)}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Spend By:</td>
-              <td>{card.spendBy !== "" ? formatDate(card.spendBy) : "N/A"}</td>
+              <td className="cardDetailsFieldValues">
+                {card.spendBy !== "" ? formatDate(card.spendBy) : "N/A"}
+              </td>
             </tr>
             <tr>
               <td className="cardDetailsFieldHeaders">Card Status:</td>
-              <td>{titleCase(card.status)}</td>
+              <td className="cardDetailsFieldValues">
+                {titleCase(card.status)}
+              </td>
             </tr>
           </tbody>
         </Table>

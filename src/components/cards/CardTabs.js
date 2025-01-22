@@ -6,10 +6,9 @@ import CardListTable from "./CardListTable";
 import { useSelector } from "react-redux";
 import CardListCards from "./CardListCards";
 import { Button } from "react-bootstrap";
-import { useFilteredData } from "../../hooks/filterCards";
 import _ from "lodash";
 import Filters from "./Filters";
-import useCardsFilter from "../../hooks/filterCards2";
+import useCardsFilter from "../../hooks/filterCards";
 
 function CardTabs({ cards, windowWidth, isDesktop }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
@@ -18,6 +17,11 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
   const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
+
+  useEffect(
+    () => localStorage.setItem("selectedUser", JSON.stringify(selectedUser)),
+    [selectedUser]
   );
 
   const {
@@ -35,26 +39,6 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
       : selectedUser === "favorites"
       ? filteredData.filter((card) => card.isFav)
       : filteredData.filter((card) => card.userId === selectedUser);
-
-  const { cardsFilter, setCardsFilter, handleCardsFilter, filterCards } =
-    useFilteredData(cardsForSelectedUser);
-
-  useEffect(() => {
-    localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
-
-    if (cardsFilter.query !== "") {
-      const filteredCards = filterCards(cardsFilter.query);
-      setCardsFilter({
-        query: cardsFilter.query,
-        cardList: filteredCards,
-      });
-    } else {
-      setCardsFilter({
-        query: "",
-        cardList: [...cardsForSelectedUser],
-      });
-    }
-  }, [selectedUser, cards]);
 
   const userTabs = cardholders.map((user) => {
     return (
@@ -88,6 +72,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
           setCardTypeFilter={setCardTypeFilter}
           setStatusFilter={setStatusFilter}
           resetFilters={resetFilters}
+          setShowFilter={setShowFilter}
         />
       )}
       <Button

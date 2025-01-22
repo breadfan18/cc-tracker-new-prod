@@ -2,7 +2,12 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { Table } from "react-bootstrap";
 import { formatDate, sortReferralsByDate } from "../../helpers";
-import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
+import {
+  APP_COLOR_BLUE,
+  APP_COLOR_BLUE_OPACITY,
+  EDIT_COLOR_GREEN,
+  EDIT_COLOR_GREEN_OPACITY,
+} from "../../constants";
 import ReferralsBonusStatusAndEarnDate from "../referrals/ReferralBonusStatusAndEarnDate";
 import { FaCheck, FaRunning } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
@@ -85,19 +90,17 @@ export default function CardReferrals({ cardReferrals, windowWidth }) {
                   className="cardDetailsReferralCardBonusSection"
                   style={{
                     backgroundColor: referral.referralBonusEarned
-                      ? EDIT_COLOR_GREEN
-                      : APP_COLOR_BLUE,
+                      ? EDIT_COLOR_GREEN_OPACITY
+                      : APP_COLOR_BLUE_OPACITY,
                   }}
                 >
                   <div className="cardDetailsReferralCardBonusSectionTop">
                     <BonusEarnStatusIcon
                       bonusEarned={referral.referralBonusEarned}
                       inverseColor
-                      iconSize="2.5rem"
+                      iconSize="clamp(1.5rem, 10vw, 1.5rem)"
                     />
-                    <p style={{ fontSize: "20px", color: "white" }}>
-                      {referral.referralBonus}
-                    </p>
+                    <p>{referral.referralBonus}</p>
                   </div>
                   <small className="cardDetailsReferralCardBonusText">
                     {referral.referralEarnDate?.includes("-") &&

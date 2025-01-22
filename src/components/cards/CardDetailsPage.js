@@ -14,7 +14,7 @@ import { sortNotesByDate } from "../../helpers";
 import CardNotes from "./CardNotes";
 import _ from "lodash";
 import { useUser } from "reactfire";
-import CardReferrals from "./CardReferrals";
+import CardReferrals from "./CardDetailsReferrals";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import CardDetailsInfo from "./CardDetailsInfo";
 import useWindhowWidth from "../../hooks/windowWidth";
@@ -22,7 +22,7 @@ import CardFavIcon from "./CardFavIcon";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { PageNotifications } from "../common/Notifications/PageNotifications";
-import RewardTags from "./RewardTags";
+import RewardTags from "./reward-tags/RewardTags";
 
 function CardDetailsPage() {
   const { id } = useParams();
@@ -55,7 +55,7 @@ function CardDetailsPage() {
   function getCardById(cards, id) {
     return cards?.find((card) => card.id === id) || null;
   }
-  const { windowWidth, isTablet, isMobile } = useWindhowWidth();
+  const { windowWidth, isTablet, isMobile, isDesktop } = useWindhowWidth();
 
   const cardNotificationElements = cardNotfications.map(
     (notification, index) => {
@@ -100,9 +100,9 @@ function CardDetailsPage() {
         </section>
       )}
       <div
-        className={`cardDetailsBody ${isTablet && "cardDetailsBodyTablet"} ${
-          isMobile && "cardDetailsBodyMobile"
-        }`}
+        className={`${isDesktop && "cardDetailsBody"} ${
+          isTablet && "cardDetailsBody cardDetailsBodyTablet"
+        } ${isMobile && "cardDetailsBodyMobile"}`}
       >
         <CardDetailsInfo
           windowWidth={windowWidth}

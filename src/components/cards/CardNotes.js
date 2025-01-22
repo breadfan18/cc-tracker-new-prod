@@ -74,7 +74,11 @@ function CardNotes({
         {cardNotes.length === 0 ? (
           <EmptyList dataType={"note"} />
         ) : (
-          <Table size="sm" variant={theme === "dark" && "dark"}>
+          <Table
+            size="sm"
+            variant={theme === "dark" && "dark"}
+            style={{ fontSize: "clamp(12px, 3vw, 1rem)" }}
+          >
             <thead>
               <tr>
                 <th>Date</th>

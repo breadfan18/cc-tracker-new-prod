@@ -1,12 +1,9 @@
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import useWindhowWidth from "../../hooks/windowWidth";
-import {
-  APP_COLOR_BLACK_OPACITY,
-  APP_COLOR_LIGHT_GRAY,
-  DELETE_COLOR_RED,
-} from "../../constants";
+import { APP_COLOR_BLACK_OPACITY, DELETE_COLOR_RED } from "../../constants";
 import { useSelector } from "react-redux";
+import { TiDelete } from "react-icons/ti";
 
 function Filters({
   filters,
@@ -14,6 +11,7 @@ function Filters({
   setCardTypeFilter,
   setStatusFilter,
   resetFilters,
+  setShowFilter,
 }) {
   const { windowWidth } = useWindhowWidth();
   const theme = useSelector((state) => state.theme);
@@ -122,6 +120,10 @@ function Filters({
         >
           Reset
         </Button>
+        <TiDelete
+          className="filters-close-icon"
+          onClick={() => setShowFilter(false)}
+        />
       </div>
       <hr style={{ color: theme === "dark" ? "white" : null }} />
     </>
