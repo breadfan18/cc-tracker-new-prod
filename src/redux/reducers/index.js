@@ -6,6 +6,7 @@ import referrals from "./referralsReducer";
 import notifications from "./notificationsReducer";
 import apiCallsInProgress from "./apiStatusReducer";
 import theme from "./themeReducer";
+import userLoyaltyPrograms from "./userLoyaltyProgramsReducer";
 import { USER_LOGOUT_SUCCESS } from "../actions/actionTypes";
 
 const appReducer = combineReducers({
@@ -16,6 +17,7 @@ const appReducer = combineReducers({
   referrals,
   notifications,
   theme,
+  userLoyaltyPrograms,
 });
 
 const rootReducer = (state, action) => {

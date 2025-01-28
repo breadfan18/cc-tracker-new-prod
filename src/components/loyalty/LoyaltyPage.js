@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadloyaltyDataFromFirebase } from "../../redux/actions/loyaltyActions";
+import {
+  loadloyaltyDataFromFirebase,
+  loadUserLoyaltyProgramsFromFirebase,
+  saveUserLoyaltyProgramToFirebase,
+} from "../../redux/actions/loyaltyActions";
 import { Spinner } from "../common/Spinner";
 import LoyaltyTabs from "./LoyaltyTabs";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
@@ -9,6 +13,7 @@ import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActio
 import { PageNotifications } from "../common/Notifications/PageNotifications";
 import { PiAirplaneTiltFill } from "react-icons/pi";
 import { APP_COLOR_BLUE } from "../../constants";
+import { Button } from "react-bootstrap";
 
 const LoyaltyPage = () => {
   const { status, data: user } = useUser();
@@ -20,6 +25,10 @@ const LoyaltyPage = () => {
     state.notifications.filter((n) => n.notificationType === "loyalty")
   );
 
+  const userLoyaltyPrograms = useSelector((state) => state.userLoyaltyPrograms);
+
+  console.log("userLoyaltyPrograms", userLoyaltyPrograms);
+
   useEffect(() => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
       dispatch(loadloyaltyDataFromFirebase(user.uid));
@@ -28,7 +37,28 @@ const LoyaltyPage = () => {
     if (cardholders.length === 0 && user) {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
-  }, [status, user, cardholders, loyaltyData.length, dispatch]);
+
+    if (userLoyaltyPrograms.length === 0 && user) {
+      dispatch(loadUserLoyaltyProgramsFromFirebase(user?.uid));
+    }
+
+    // const foo = {
+    //   type: "airlines",
+    //   name: "United MileagePlus",
+    // };
+    // dispatch(saveUserLoyaltyProgramToFirebase(foo, user?.uid));
+  }, [
+    status,
+    user,
+    cardholders,
+    loyaltyData.length,
+    dispatch,
+    userLoyaltyPrograms.length,
+  ]);
+
+  const handleAddProgram = () => {
+    console.log("Add a program");
+  };
 
   const cardNotificationElements = loyaltyNotifications.map(
     (notification, index) => {
@@ -57,6 +87,8 @@ const LoyaltyPage = () => {
           {cardNotificationElements}
         </section>
       )}
+
+      <Button onClick={handleAddProgram}>Add a Program</Button>
       {loading ? (
         <Spinner />
       ) : (
