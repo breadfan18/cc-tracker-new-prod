@@ -30,6 +30,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
     setCardNameFilter,
     setCardTypeFilter,
     setStatusFilter,
+    setAnnualFeeFilter,
     resetFilters,
   } = useCardsFilter(cards);
 
@@ -71,6 +72,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
           setCardNameFilter={setCardNameFilter}
           setCardTypeFilter={setCardTypeFilter}
           setStatusFilter={setStatusFilter}
+          setAnnualFeeFilter={setAnnualFeeFilter}
           resetFilters={resetFilters}
           setShowFilter={setShowFilter}
         />

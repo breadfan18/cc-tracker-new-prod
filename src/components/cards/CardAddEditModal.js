@@ -77,6 +77,14 @@ export default function CardAddEditModal({ card, setModalOpen }) {
       if (inquiries[i] === null) inquiries[i] = false;
     }
 
+    if (cardForModal.annualFee === "0" || cardForModal.annualFee === "") {
+      cardForModal.nextFeeDate = null;
+    }
+
+    if (!cardForModal.spendReq || cardForModal.spendReq === "0") {
+      cardForModal.spendBy = null;
+    }
+
     const finalCard = { ...cardForModal, inquiries: inquiries };
     dispatch(saveCardToFirebase(finalCard, user?.uid));
 

@@ -6,17 +6,26 @@ const useCardsFilter = (initialData) => {
     cardName: "",
     cardType: "",
     status: "",
+    annualFee: "",
   });
 
-  const applyFilters = (card) => {
-    return Object.entries(filters).every(([property, value]) => {
-      const itemValue =
-        property === "cardName"
-          ? `${card.issuer.name} ${card.card}`
-          : card[property];
+  function filterReturnHandler(property, value, card) {
+    const returnValue =
+      property === "cardName"
+        ? `${card.issuer.name} ${card.card}`
+        : property === "annualFee"
+        ? Number(card[property]) > 0 && card["status"] === "open"
+          ? "show"
+          : ""
+        : card[property];
 
-      return itemValue.toLowerCase().includes(value.toLowerCase());
-    });
+    return returnValue.toLowerCase().includes(value.toLowerCase());
+  }
+
+  const applyFilters = (card) => {
+    return Object.entries(filters).every(([property, value]) =>
+      filterReturnHandler(property, value, card)
+    );
   };
 
   const filteredData = useMemo(
@@ -33,6 +42,7 @@ const useCardsFilter = (initialData) => {
       cardName: "",
       cardType: "",
       status: "",
+      annualFee: "",
     });
   };
 
@@ -42,6 +52,7 @@ const useCardsFilter = (initialData) => {
     setCardNameFilter: (value) => setFilter("cardName", value),
     setCardTypeFilter: (value) => setFilter("cardType", value),
     setStatusFilter: (value) => setFilter("status", value),
+    setAnnualFeeFilter: (value) => setFilter("annualFee", value),
     resetFilters,
   };
 };

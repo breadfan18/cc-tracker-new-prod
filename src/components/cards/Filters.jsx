@@ -10,6 +10,7 @@ function Filters({
   setCardNameFilter,
   setCardTypeFilter,
   setStatusFilter,
+  setAnnualFeeFilter,
   resetFilters,
   setShowFilter,
 }) {
@@ -106,6 +107,22 @@ function Filters({
             onChange={() => setStatusFilter("downgraded")}
             checked={filters.status === "downgraded"}
             className="radioFilters"
+          />
+        </div>
+
+        <div
+          className="statusFilters"
+          style={{ padding: windowWidth < 772 ? "20px" : null }}
+        >
+          <Form.Check
+            label="Cards with Annual Fee"
+            type="checkbox"
+            name="cardsWithAnnualFee"
+            onChange={() =>
+              setAnnualFeeFilter(filters.annualFee === "show" ? "" : "show")
+            }
+            className="radioFilters"
+            checked={filters.annualFee === "show"}
           />
         </div>
 
