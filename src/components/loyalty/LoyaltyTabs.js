@@ -69,8 +69,13 @@ function LoyaltyTabs({ loyaltyData }) {
       className="mb-3"
     >
       {loyaltyTabs}
-      <Tab eventKey="add-new" title={<IoMdAddCircle />}>
-        <LoyaltyNewProgramForm />
+      <Tab
+        eventKey="add-new"
+        title={<IoMdAddCircle style={{ fontSize: "1.2rem" }} />}
+      >
+        <div className="modal-body" style={{ padding: 30, borderRadius: 10 }}>
+          <LoyaltyNewProgramForm />
+        </div>
       </Tab>
     </Tabs>
   );

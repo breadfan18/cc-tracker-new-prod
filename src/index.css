@@ -920,7 +920,8 @@ form {
 .addButton {
   background-color: var(--color-blue);
   border-color: var(--color-blue);
-  float: right;
+  display: flex;
+  justify-self: flex-end;
 }
 
 .modalHeader {

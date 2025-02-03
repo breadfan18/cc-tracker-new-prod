@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   loadloyaltyDataFromFirebase,
   loadUserLoyaltyProgramsFromFirebase,
-  saveUserLoyaltyProgramToFirebase,
 } from "../../redux/actions/loyaltyActions";
 import { Spinner } from "../common/Spinner";
 import LoyaltyTabs from "./LoyaltyTabs";
@@ -13,7 +12,6 @@ import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActio
 import { PageNotifications } from "../common/Notifications/PageNotifications";
 import { PiAirplaneTiltFill } from "react-icons/pi";
 import { APP_COLOR_BLUE } from "../../constants";
-import { Button } from "react-bootstrap";
 
 const LoyaltyPage = () => {
   const { status, data: user } = useUser();
@@ -27,8 +25,6 @@ const LoyaltyPage = () => {
 
   const userLoyaltyPrograms = useSelector((state) => state.userLoyaltyPrograms);
 
-  console.log("userLoyaltyPrograms", userLoyaltyPrograms);
-
   useEffect(() => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
       dispatch(loadloyaltyDataFromFirebase(user.uid));
@@ -41,16 +37,10 @@ const LoyaltyPage = () => {
     if (userLoyaltyPrograms.length === 0 && user) {
       dispatch(loadUserLoyaltyProgramsFromFirebase(user?.uid));
     }
-
-    // const foo = {
-    //   type: "airlines",
-    //   name: "United MileagePlus",
-    // };
-    // dispatch(saveUserLoyaltyProgramToFirebase(foo, user?.uid));
   }, [
     status,
     user,
-    cardholders,
+    cardholders.length,
     loyaltyData.length,
     dispatch,
     userLoyaltyPrograms.length,
@@ -76,7 +66,10 @@ const LoyaltyPage = () => {
     <div className="loyaltyContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Loyalty Accounts</h2>
-        <LoyaltyAddEditModal cardholders={cardholders} />
+        <LoyaltyAddEditModal
+          cardholders={cardholders}
+          userAddedPrograms={userLoyaltyPrograms}
+        />
       </section>
       {loyaltyNotifications.length > 0 && (
         <section className="card-details-notifications-container">

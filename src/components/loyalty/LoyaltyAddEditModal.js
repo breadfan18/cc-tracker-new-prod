@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -29,7 +29,7 @@ const newLoyaltyAcc = {
   rewardsExpiration: null,
 };
 
-function LoyaltyAddEditModal({ loyaltyAcc }) {
+function LoyaltyAddEditModal({ loyaltyAcc, userAddedPrograms }) {
   const dispatch = useDispatch();
   const [loyaltyAccForModal, setLoyaltyAccForModal] = useState(
     loyaltyAcc ? { ...loyaltyAcc } : newLoyaltyAcc
@@ -39,18 +39,18 @@ function LoyaltyAddEditModal({ loyaltyAcc }) {
   const { data: user } = useUser();
   const cardholders = useSelector((state) => state.cardholders);
   const [errors, setErrors] = useState({});
+  const combinedPrograms = [...PROGRAMS, ...(userAddedPrograms || [])];
 
   const toggleShow = () => setShow(!show);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     if (value !== "" || value !== null) {
       delete errors[name];
     }
 
     if (name === LOYALTY_DATA_KEYS.loyaltyType) {
-      const filteredPrograms = PROGRAMS.filter(
+      const filteredPrograms = combinedPrograms.filter(
         (program) => program.type === value
       );
       setFilteredPrograms(filteredPrograms);
@@ -61,13 +61,14 @@ function LoyaltyAddEditModal({ loyaltyAcc }) {
         userId: value,
       }));
     }
+
     setLoyaltyAccForModal((prevValue) => ({
       ...prevValue,
       [name]:
         name === "id"
           ? parseInt(value, 10)
           : name === LOYALTY_DATA_KEYS.program
-          ? PROGRAMS.find((program) => program.id === parseInt(value))
+          ? combinedPrograms.find((program) => program.id === value)
           : value,
     }));
   };
