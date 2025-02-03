@@ -2,24 +2,32 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/input-fields/TextInput";
 import SelectInput from "../common/input-fields/SelectInput";
-import { ACCOUNT_TYPE, LOYALTY_DATA_KEYS } from "../../constants";
+import {
+  ACCOUNT_TYPE,
+  DELETE_COLOR_RED,
+  LOYALTY_DATA_KEYS,
+} from "../../constants";
 import { titleCase } from "../../helpers";
 import { useDispatch } from "react-redux";
 import { saveUserLoyaltyProgramToFirebase } from "../../redux/actions/loyaltyActions";
 import { useUser } from "reactfire";
+import { isEmpty } from "lodash";
 
 const LoyaltyNewProgramForm = () => {
   const { data: user } = useUser();
-  const dispatch = useDispatch();
-  const [newProgram, setNewProgram] = useState({
+  const initialNewProgramState = {
     loyaltyType: "",
     programName: "",
-  });
+  };
+  const dispatch = useDispatch();
+  const [newProgram, setNewProgram] = useState(initialNewProgramState);
   const [errors, setErrors] = useState({});
 
   const handleSaveProgram = (e) => {
     e.preventDefault();
+    if (!formIsValid()) return;
     dispatch(saveUserLoyaltyProgramToFirebase(newProgram, user?.uid));
+    setNewProgram(initialNewProgramState);
   };
 
   const handleChange = (e) => {
@@ -30,18 +38,27 @@ const LoyaltyNewProgramForm = () => {
     }));
   };
 
+  function formIsValid() {
+    const { loyaltyType, programName } = newProgram;
+    const errors = {};
+    if (!loyaltyType) errors.loyaltyType = "Required";
+    if (!programName) errors.programName = "Required";
+    setErrors(errors);
+    // Form is valid if the errors objects has no properties
+    return Object.keys(errors).length === 0;
+  }
   return (
     <form onSubmit={handleSaveProgram} className="singleColumnForm">
-      {/* {!isEmpty(errors) && (
+      {!isEmpty(errors) && (
         <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
           Please fill out required fields
         </div>
-      )} */}
+      )}
 
       <SelectInput
         name={LOYALTY_DATA_KEYS.loyaltyType}
         label="Program Type"
-        value={newProgram.accountType}
+        value={newProgram.loyaltyType || ""}
         defaultOption="Select Account Type"
         options={ACCOUNT_TYPE.map((type) => ({
           value: type,
@@ -49,7 +66,7 @@ const LoyaltyNewProgramForm = () => {
         }))}
         onChange={handleChange}
         requiredField
-        // error={errors.loyaltyType}
+        error={errors.loyaltyType}
       />
       <TextInput
         name="programName"
@@ -57,7 +74,7 @@ const LoyaltyNewProgramForm = () => {
         value={newProgram.programName}
         onChange={handleChange}
         requiredField
-        // error={errors.title}
+        error={errors.programName}
       />
       <hr />
       <button
@@ -81,3 +98,7 @@ LoyaltyNewProgramForm.propTypes = {
 };
 
 export default LoyaltyNewProgramForm;
+
+/* 
+- need to setup errors and form validation in this page
+*/
