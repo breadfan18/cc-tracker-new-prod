@@ -56,10 +56,6 @@ const LoyaltyPage = () => {
     userLoyaltyPrograms.length,
   ]);
 
-  const handleAddProgram = () => {
-    console.log("Add a program");
-  };
-
   const cardNotificationElements = loyaltyNotifications.map(
     (notification, index) => {
       return (
@@ -87,8 +83,6 @@ const LoyaltyPage = () => {
           {cardNotificationElements}
         </section>
       )}
-
-      <Button onClick={handleAddProgram}>Add a Program</Button>
       {loading ? (
         <Spinner />
       ) : (

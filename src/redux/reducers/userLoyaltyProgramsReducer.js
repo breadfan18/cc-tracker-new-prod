@@ -10,8 +10,6 @@ export default function userLoyaltyProgramsReducer(
   state = initialState.userLoyaltyPrograms,
   action
 ) {
-  console.log("action", action);
-
   switch (action.type) {
     case LOAD_LOYALTY_PROGRAMS_SUCCESS:
       return action.programs;
