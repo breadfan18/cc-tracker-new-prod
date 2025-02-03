@@ -4,15 +4,22 @@ import TextInput from "../common/input-fields/TextInput";
 import SelectInput from "../common/input-fields/SelectInput";
 import { ACCOUNT_TYPE, LOYALTY_DATA_KEYS } from "../../constants";
 import { titleCase } from "../../helpers";
+import { useDispatch } from "react-redux";
+import { saveUserLoyaltyProgramToFirebase } from "../../redux/actions/loyaltyActions";
+import { useUser } from "reactfire";
 
-const LoyaltyNewProgramForm = ({ errors = {} }) => {
+const LoyaltyNewProgramForm = () => {
+  const { data: user } = useUser();
+  const dispatch = useDispatch();
   const [newProgram, setNewProgram] = useState({
     loyaltyType: "",
     programName: "",
   });
+  const [errors, setErrors] = useState({});
+
   const handleSaveProgram = (e) => {
     e.preventDefault();
-    console.log("new program");
+    dispatch(saveUserLoyaltyProgramToFirebase(newProgram, user?.uid));
   };
 
   const handleChange = (e) => {
@@ -30,6 +37,7 @@ const LoyaltyNewProgramForm = ({ errors = {} }) => {
           Please fill out required fields
         </div>
       )} */}
+
       <SelectInput
         name={LOYALTY_DATA_KEYS.loyaltyType}
         label="Program Type"
