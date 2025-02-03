@@ -4,6 +4,8 @@ import SelectInput from "../common/input-fields/SelectInput";
 import {
   ACCOUNT_TYPE,
   AIRLINE_PROGRAMS_IMG,
+  HOTELS_PROGRAMS_IMG,
+  MISC_PROGRAMS_IMG,
   APP_COLOR_BLUE,
   DELETE_COLOR_RED,
 } from "../../constants";
@@ -18,7 +20,7 @@ const LoyaltyNewProgramForm = () => {
   const initialNewProgramState = {
     type: "",
     name: "",
-    img: AIRLINE_PROGRAMS_IMG,
+    img: "",
   };
   const dispatch = useDispatch();
   const [newProgram, setNewProgram] = useState(initialNewProgramState);
@@ -27,7 +29,19 @@ const LoyaltyNewProgramForm = () => {
   const handleSaveProgram = (e) => {
     e.preventDefault();
     if (!formIsValid()) return;
-    dispatch(saveUserLoyaltyProgramToFirebase(newProgram, user?.uid));
+
+    const imgToAdd =
+      newProgram.type === "airlines"
+        ? AIRLINE_PROGRAMS_IMG
+        : newProgram.type === "hotels"
+        ? HOTELS_PROGRAMS_IMG
+        : MISC_PROGRAMS_IMG;
+    dispatch(
+      saveUserLoyaltyProgramToFirebase(
+        { ...newProgram, img: imgToAdd },
+        user?.uid
+      )
+    );
     setNewProgram(initialNewProgramState);
   };
 
@@ -93,3 +107,10 @@ const LoyaltyNewProgramForm = () => {
 };
 
 export default LoyaltyNewProgramForm;
+
+/*
+TO DO:
+- Toast message for successful save
+- Show user added programs in the new programs tab? 
+- Allow edit and/or delete functionality?
+*/
