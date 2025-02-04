@@ -366,7 +366,7 @@ export const CLOSED_CARD_STAMP = "https://i.imgur.com/uAgLvwh.png";
 export const DOWNGRADED_CARD_STAMP = "https://i.imgur.com/CWz7lFi.png";
 export const AIRLINE_PROGRAMS_IMG = "https://i.imgur.com/B7Jvm5b.png";
 export const HOTELS_PROGRAMS_IMG = "https://i.imgur.com/fx3xMcJ.png";
-export const MISC_PROGRAMS_IMG = "https://i.imgur.com/L1R9k1H.png";
+export const MISC_PROGRAMS_IMG = "https://i.imgur.com/v0x6olF.png";
 
 export const NOTIFICATIONS_AF_DATA_TYPE = "annualFee";
 export const NOTIFICATIONS_SPEND_BY_DATA_TYPE = "spendBy";

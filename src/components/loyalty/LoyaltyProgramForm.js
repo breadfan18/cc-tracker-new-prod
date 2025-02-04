@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { saveUserLoyaltyProgramToFirebase } from "../../redux/actions/loyaltyActions";
 import { useUser } from "reactfire";
 import { isEmpty } from "lodash";
+import { toast } from "react-toastify";
 
 const LoyaltyNewProgramForm = () => {
   const { data: user } = useUser();
@@ -43,6 +44,7 @@ const LoyaltyNewProgramForm = () => {
       )
     );
     setNewProgram(initialNewProgramState);
+    toast.success("New Loyalty Program Created");
   };
 
   const handleChange = (e) => {
@@ -112,5 +114,6 @@ export default LoyaltyNewProgramForm;
 TO DO:
 - Toast message for successful save
 - Show user added programs in the new programs tab? 
-- Allow edit and/or delete functionality?
+- Allow edit and/or delete functionality? If a program is being used, dont allow deletion? 
+- Redirect to the first tab after save?
 */
