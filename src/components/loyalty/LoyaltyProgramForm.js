@@ -17,9 +17,8 @@ import { useUser } from "reactfire";
 import { isEmpty } from "lodash";
 import { FaCircleCheck } from "react-icons/fa6";
 
-const LoyaltyNewProgramForm = () => {
+const LoyaltyNewProgramForm = ({ showProgramCreated, setProgramCreated }) => {
   const { data: user } = useUser();
-  const [showProgramCreated, setProgramCreated] = useState(false);
   const initialNewProgramState = {
     type: "",
     name: "",

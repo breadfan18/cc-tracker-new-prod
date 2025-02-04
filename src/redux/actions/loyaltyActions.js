@@ -110,9 +110,7 @@ export function saveUserLoyaltyProgramToFirebase(program, firebaseUid) {
     */
     // dispatch(beginApiCall());
     dispatch(beginApiCall());
-
-    const programId = `program-${uid()}`;
-
+    const programId = `${program.type}-${slugify(program.name)}-${uid()}`;
     writeToFirebase("userLoyaltyPrograms", program, programId, firebaseUid);
     dispatch(createLoyaltyProgramSuccess(program));
   };
