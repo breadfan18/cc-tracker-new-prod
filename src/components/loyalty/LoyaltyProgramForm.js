@@ -46,8 +46,8 @@ const LoyaltyNewProgramForm = () => {
         user?.uid
       )
     );
-    setNewProgram(initialNewProgramState);
     setProgramCreated(true);
+    setNewProgram(initialNewProgramState);
   };
 
   const handleChange = (e) => {
@@ -124,9 +124,11 @@ const LoyaltyNewProgramForm = () => {
         </form>
       ) : (
         <div className="program-created-container">
-          <h4
-            style={{ color: APP_COLOR_BLUE }}
-          >{`New ${newProgram.type} program has been created`}</h4>
+          <h4 style={{ color: APP_COLOR_BLUE }}>{`Loyalty Program added`}</h4>
+          <p>
+            The newly added program will be available for selection in the Add
+            Loyalty Account form{" "}
+          </p>
           <FaCircleCheck
             style={{ color: EDIT_COLOR_GREEN, fontSize: "8rem" }}
           />
@@ -143,9 +145,3 @@ const LoyaltyNewProgramForm = () => {
 };
 
 export default LoyaltyNewProgramForm;
-
-/*
-TO DO:
-- Show user added programs in the new programs tab? 
-- Allow edit and/or delete functionality? If a program is being used, dont allow deletion? 
-*/

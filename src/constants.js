@@ -313,6 +313,12 @@ export const PROGRAMS = [
     name: "Amtrak",
     img: "https://imgur.com/HJoyVAz.png",
   },
+  {
+    id: "hotels-marriott-bonvoy",
+    type: "hotels",
+    name: "Marriott Bonvoy",
+    img: "https://www.marriott.com/sign-in.mi",
+  },
 ];
 
 export const USERS = [
