@@ -1441,3 +1441,10 @@ p {
   background-color: white;
   border-radius: 50%;
 }
+
+.program-created-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}

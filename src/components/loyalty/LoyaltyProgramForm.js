@@ -8,16 +8,18 @@ import {
   MISC_PROGRAMS_IMG,
   APP_COLOR_BLUE,
   DELETE_COLOR_RED,
+  EDIT_COLOR_GREEN,
 } from "../../constants";
 import { titleCase } from "../../helpers";
 import { useDispatch } from "react-redux";
 import { saveUserLoyaltyProgramToFirebase } from "../../redux/actions/loyaltyActions";
 import { useUser } from "reactfire";
 import { isEmpty } from "lodash";
-import { toast } from "react-toastify";
+import { FaCircleCheck } from "react-icons/fa6";
 
 const LoyaltyNewProgramForm = () => {
   const { data: user } = useUser();
+  const [showProgramCreated, setProgramCreated] = useState(false);
   const initialNewProgramState = {
     type: "",
     name: "",
@@ -45,7 +47,7 @@ const LoyaltyNewProgramForm = () => {
       )
     );
     setNewProgram(initialNewProgramState);
-    toast.success("New Loyalty Program Created");
+    setProgramCreated(true);
   };
 
   const handleChange = (e) => {
@@ -68,59 +70,74 @@ const LoyaltyNewProgramForm = () => {
     return Object.keys(errors).length === 0;
   }
 
-  console.log(errors);
-
   return (
     <>
-      <form onSubmit={handleSaveProgram} className="singleColumnForm">
-        <h4 style={{ color: APP_COLOR_BLUE }}>Add a Loyalty Program</h4>
-        {!isEmpty(errors) && (
-          <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
-            {(errors.name || errors.type) && (
-              <p>Please enter requried fields</p>
-            )}
-            {errors.url && <p>Please enter a valid url</p>}
-          </div>
-        )}
+      {!showProgramCreated ? (
+        <form onSubmit={handleSaveProgram} className="singleColumnForm">
+          <h4 style={{ color: APP_COLOR_BLUE }}>Add a Loyalty Program</h4>
+          {!isEmpty(errors) && (
+            <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
+              {(errors.name || errors.type) && (
+                <p>Please enter requried fields</p>
+              )}
+              {errors.url && <p>Please enter a valid url</p>}
+            </div>
+          )}
 
-        <SelectInput
-          name="type"
-          label="Program Type"
-          value={newProgram.type || ""}
-          defaultOption="Select Account Type"
-          options={ACCOUNT_TYPE.map((type) => ({
-            value: type,
-            text: titleCase(type),
-          }))}
-          onChange={handleChange}
-          requiredField
-          error={errors.type}
-        />
-        <TextInput
-          name="name"
-          label="Program Name"
-          value={titleCase(newProgram.name)}
-          onChange={handleChange}
-          requiredField
-          error={errors.name}
-        />
-        <TextInput
-          name="url"
-          label="Program URL"
-          value={newProgram.url}
-          onChange={handleChange}
-          error={errors.url}
-          onB
-        />
-        <hr />
-        <button
-          type="submit"
-          // disabled={saving}
-          className="btn btn-primary addButton"
-        >
-          Add Program
-        </button>
-      </form>
+          <SelectInput
+            name="type"
+            label="Program Type"
+            value={newProgram.type || ""}
+            defaultOption="Select Account Type"
+            options={ACCOUNT_TYPE.map((type) => ({
+              value: type,
+              text: titleCase(type),
+            }))}
+            onChange={handleChange}
+            requiredField
+            error={errors.type}
+          />
+          <TextInput
+            name="name"
+            label="Program Name"
+            value={titleCase(newProgram.name)}
+            onChange={handleChange}
+            requiredField
+            error={errors.name}
+          />
+          <TextInput
+            name="url"
+            label="Program URL"
+            value={newProgram.url}
+            onChange={handleChange}
+            error={errors.url}
+            onB
+          />
+          <hr />
+          <button
+            type="submit"
+            // disabled={saving}
+            className="btn btn-primary addButton"
+          >
+            Add Program
+          </button>
+        </form>
+      ) : (
+        <div className="program-created-container">
+          <h4
+            style={{ color: APP_COLOR_BLUE }}
+          >{`New ${newProgram.type} program has been created`}</h4>
+          <FaCircleCheck
+            style={{ color: EDIT_COLOR_GREEN, fontSize: "8rem" }}
+          />
+          <button
+            className="btn btn-primary addButton"
+            onClick={() => setProgramCreated(false)}
+          >
+            Add Another Program
+          </button>
+        </div>
+      )}
     </>
   );
 };
@@ -129,8 +146,6 @@ export default LoyaltyNewProgramForm;
 
 /*
 TO DO:
-- Toast message for successful save
 - Show user added programs in the new programs tab? 
 - Allow edit and/or delete functionality? If a program is being used, dont allow deletion? 
-- Redirect to the first tab after save?
 */
