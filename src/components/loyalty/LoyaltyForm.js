@@ -7,7 +7,6 @@ import {
   ACCOUNT_TYPE,
   DELETE_COLOR_RED,
   LOYALTY_DATA_KEYS,
-  PROGRAMS,
 } from "../../constants";
 import { titleCase } from "../../helpers";
 import DateInput from "../common/input-fields/DateInput";
@@ -20,18 +19,10 @@ const LoyaltyForm = ({
   cardholders,
   errors = {},
 }) => {
-  const programsToDisplay =
-    filteredPrograms.length === 0
-      ? PROGRAMS.filter(
-          (program) => program.type === loyaltyAcc?.loyaltyType
-        ).map((program) => ({
-          value: program.id,
-          text: program.name,
-        }))
-      : filteredPrograms.map((program) => ({
-          value: program.id,
-          text: program.name,
-        }));
+  const programsToDisplay = filteredPrograms.map((program) => ({
+    value: program.id,
+    text: program.name,
+  }));
   return (
     <form onSubmit={onSave} className="singleColumnForm">
       {!isEmpty(errors) && (

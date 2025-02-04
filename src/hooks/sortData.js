@@ -1,11 +1,14 @@
 import { useMemo, useState } from "react";
 import { CARD_DATA_KEYS, PROGRAMS } from "../constants";
+import { useSelector } from "react-redux";
 
 export const useSortableData = (data) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: null,
   });
+
+  const userAddedPrograms = useSelector((state) => state.userLoyaltyPrograms);
 
   const sortedData = useMemo(() => {
     let dataCopy = data.map((i) => {
@@ -43,12 +46,14 @@ export const useSortableData = (data) => {
       if (i.hasOwnProperty("program")) {
         return {
           ...i,
-          program: PROGRAMS.find((p) => p.name === i.program),
+          program: [...PROGRAMS, ...userAddedPrograms].find(
+            (p) => p.name === i.program
+          ),
         };
       }
       return i;
     });
-  }, [data, sortConfig]);
+  }, [data, sortConfig, userAddedPrograms]);
 
   const requestSort = (key) => {
     let direction = "ascending";
