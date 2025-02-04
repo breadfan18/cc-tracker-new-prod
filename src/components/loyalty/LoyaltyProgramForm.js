@@ -22,6 +22,7 @@ const LoyaltyNewProgramForm = () => {
     type: "",
     name: "",
     img: "",
+    url: "",
   };
   const dispatch = useDispatch();
   const [newProgram, setNewProgram] = useState(initialNewProgramState);
@@ -56,21 +57,29 @@ const LoyaltyNewProgramForm = () => {
   };
 
   function formIsValid() {
-    const { type, name } = newProgram;
+    const { type, name, url } = newProgram;
     const errors = {};
     if (!type) errors.type = "Required";
     if (!name) errors.name = "Required";
+    if (url && !/^(ftp|http|https):\/\/[^ "]+$/.test(url))
+      errors.url = "Invalid URL format";
     setErrors(errors);
     // Form is valid if the errors objects has no properties
     return Object.keys(errors).length === 0;
   }
+
+  console.log(errors);
+
   return (
     <>
       <form onSubmit={handleSaveProgram} className="singleColumnForm">
         <h4 style={{ color: APP_COLOR_BLUE }}>Add a Loyalty Program</h4>
         {!isEmpty(errors) && (
           <div style={{ color: DELETE_COLOR_RED, fontWeight: "bold" }}>
-            Please fill out required fields
+            {(errors.name || errors.type) && (
+              <p>Please enter requried fields</p>
+            )}
+            {errors.url && <p>Please enter a valid url</p>}
           </div>
         )}
 
@@ -90,10 +99,18 @@ const LoyaltyNewProgramForm = () => {
         <TextInput
           name="name"
           label="Program Name"
-          value={newProgram.name}
+          value={titleCase(newProgram.name)}
           onChange={handleChange}
           requiredField
           error={errors.name}
+        />
+        <TextInput
+          name="url"
+          label="Program URL"
+          value={newProgram.url}
+          onChange={handleChange}
+          error={errors.url}
+          onB
         />
         <hr />
         <button
