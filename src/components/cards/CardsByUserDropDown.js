@@ -25,6 +25,7 @@ function CardsByUserDropDown({ cards }) {
     setCardNameFilter,
     setCardTypeFilter,
     setStatusFilter,
+    setAnnualFeeFilter,
     resetFilters,
   } = useCardsFilter(cards);
 
@@ -48,6 +49,7 @@ function CardsByUserDropDown({ cards }) {
           setCardNameFilter={setCardNameFilter}
           setCardTypeFilter={setCardTypeFilter}
           setStatusFilter={setStatusFilter}
+          setAnnualFeeFilter={setAnnualFeeFilter}
           resetFilters={resetFilters}
           setShowFilter={setShowFilter}
         />

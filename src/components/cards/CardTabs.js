@@ -9,6 +9,7 @@ import { Button } from "react-bootstrap";
 import _ from "lodash";
 import Filters from "./Filters";
 import useCardsFilter from "../../hooks/filterCards";
+import { AiFillHeart } from "react-icons/ai";
 
 function CardTabs({ cards, windowWidth, isDesktop }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
@@ -30,6 +31,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
     setCardNameFilter,
     setCardTypeFilter,
     setStatusFilter,
+    setAnnualFeeFilter,
     resetFilters,
   } = useCardsFilter(cards);
 
@@ -71,6 +73,7 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
           setCardNameFilter={setCardNameFilter}
           setCardTypeFilter={setCardTypeFilter}
           setStatusFilter={setStatusFilter}
+          setAnnualFeeFilter={setAnnualFeeFilter}
           resetFilters={resetFilters}
           setShowFilter={setShowFilter}
         />
@@ -106,7 +109,10 @@ function CardTabs({ cards, windowWidth, isDesktop }) {
           )}
         </Tab>
         {userTabs}
-        <Tab eventKey="favorites" title="Favorites">
+        <Tab
+          eventKey="favorites"
+          title={<AiFillHeart style={{ fontSize: "1.3rem" }} />}
+        >
           {isDesktop ? (
             <CardListTable
               cards={cardsForSelectedUser}

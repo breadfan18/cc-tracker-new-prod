@@ -6,6 +6,7 @@ const initialState = {
   referrals: [],
   notifications: [],
   theme: "light",
+  userLoyaltyPrograms: [],
 };
 
 export default initialState;
