@@ -15,9 +15,21 @@ import {
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { useSelector } from "react-redux";
+import { Card as CardType } from "../../types/cardsTypes";
+import { MainReduxState } from "../../types/redux";
 
-export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
-  const theme = useSelector((state) => state.theme);
+type CardDetailsInfoProps = {
+  windowWidth: number;
+  card: CardType;
+  isMobile: boolean;
+};
+
+export default function CardDetailsInfo({
+  windowWidth,
+  card,
+  isMobile,
+}: CardDetailsInfoProps) {
+  const theme = useSelector((state: MainReduxState) => state.theme);
 
   const setCardDetailsBoxShadow = () => {
     return theme === "dark"
@@ -36,13 +48,13 @@ export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
       style={{
         width: windowWidth > 1000 ? "30rem" : windowWidth,
         backgroundColor: setColorForCardStatus("cardCard", card.status),
-        marginRight: windowWidth > 1000 ? "20px" : null,
+        marginRight: windowWidth > 1000 ? "20px" : undefined,
         boxShadow: setCardDetailsBoxShadow(),
         alignSelf: "flex-start",
       }}
     >
       {isMobile ? (
-        <div className="cardDetailsMobileImgContainer" s>
+        <div className="cardDetailsMobileImgContainer">
           <img className="cardDetailsMobileImg" src={card.issuer.img} alt="" />
           <div
             style={{
@@ -76,7 +88,9 @@ export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
 
       <article
         className="cardDetailsHeaderContainer"
-        style={{ borderBottom: theme === "dark" && "1px solid #4e5359" }}
+        style={{
+          borderBottom: theme === "dark" ? "1px solid #4e5359" : undefined,
+        }}
       >
         <div style={{ padding: "10px 16px" }}>
           <Card.Title
@@ -103,7 +117,7 @@ export default function CardDetailsInfo({ windowWidth, card, isMobile }) {
       <Card.Body>
         <Table
           className={setColorForCardStatus("cardTable", card.status)}
-          variant={theme === "dark" ? "dark" : null}
+          variant={theme === "dark" ? "dark" : undefined}
         >
           <tbody className="align-middle">
             <tr>

@@ -8,6 +8,16 @@ import {
 } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
 import { useSelector } from "react-redux";
+import { Referral } from "../../types/cardsTypes";
+import { MainReduxState } from "../../types/redux";
+
+type ReferralsBonusStatusAndEarnDateProps = {
+  referral: Referral;
+  isCardTitle?: boolean;
+  isCard?: boolean;
+  inverseColor?: boolean;
+  iconSize?: string;
+};
 
 export default function ReferralsBonusStatusAndEarnDate({
   referral,
@@ -15,11 +25,11 @@ export default function ReferralsBonusStatusAndEarnDate({
   isCard,
   inverseColor,
   iconSize,
-}) {
+}: ReferralsBonusStatusAndEarnDateProps) {
   const { isDesktop, windowWidth, isMobileXS } = useWindhowWidth();
   const hasEarnDate =
     referral.referralEarnDate?.includes("-") && referral.referralBonusEarned;
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: MainReduxState) => state.theme);
 
   const backgroundColor = !isCard
     ? "none"
@@ -46,19 +56,19 @@ export default function ReferralsBonusStatusAndEarnDate({
   return (
     <div
       className={`bonusInfoContainer ${isCard && "bonusInforContainerCard"}`}
-      style={{ backgroundColor, padding: isCard && "5px" }}
+      style={{ backgroundColor, padding: isCard ? "5px" : undefined }}
     >
       {isCard && (
         <BonusEarnStatusIcon
           bonusEarned={referral.referralBonusEarned}
-          iconSize={iconSize}
+          iconSize={iconSize || undefined}
           inverseColor={inverseColor}
         />
       )}
       <div className="bonusInfoTextSection">
         <p
           style={{
-            fontSize: isCardTitle ? "1rem" : null,
+            fontSize: isCardTitle ? "1rem" : undefined,
             color:
               (isDesktop && theme === "dark") || inverseColor
                 ? "white"

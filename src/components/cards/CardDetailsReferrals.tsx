@@ -14,9 +14,18 @@ import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { useSelector } from "react-redux";
+import { MainReduxState } from "../../types/redux";
+import { Referral } from "../../types/cardsTypes";
 
-export default function CardReferrals({ cardReferrals, windowWidth }) {
-  const theme = useSelector((state) => state.theme);
+type CardReferralsProps = {
+  cardReferrals: Referral[];
+  windowWidth: number;
+};
+export default function CardReferrals({
+  cardReferrals,
+  windowWidth,
+}: CardReferralsProps) {
+  const theme = useSelector((state: MainReduxState) => state.theme);
 
   return (
     <Card
@@ -37,7 +46,7 @@ export default function CardReferrals({ cardReferrals, windowWidth }) {
           <Table
             size="sm"
             style={{ marginBottom: 0 }}
-            variant={theme === "dark" && "dark"}
+            variant={theme === "dark" ? "dark" : undefined}
           >
             <thead>
               <tr>
