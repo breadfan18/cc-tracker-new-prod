@@ -5,7 +5,13 @@
     "noImplicitAny": false,
     "outDir": "./dist/",
     "allowJs": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "es2015"]
   },
-  "files": ["src/tools/excelDataMigrator.js", "src/ts/createTestCard.js"]
+  "exclude": ["node_modules"]
+  // "files": ["src/tools/excelDataMigrator.js", "src/ts/createTestCard.js"]
 }

@@ -12,7 +12,7 @@ import useCardsFilter from "../../hooks/filterCards";
 import { AiFillHeart } from "react-icons/ai";
 
 import { MainReduxState } from "../../types/redux";
-import { Cardholder, CardTabsProps } from "../../types/cardTypes";
+import { Cardholder, CardTabsProps } from "../../types/cardsTypes";
 
 function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser") || "null");

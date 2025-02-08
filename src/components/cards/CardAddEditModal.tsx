@@ -164,21 +164,15 @@ export default function CardAddEditModal({
   function handleEditButtonClick(e) {
     e.stopPropagation();
     toggleShow();
-    try {
-      setModalOpen(true);
-    } catch (err) {
-      console.log("setModalOpen func is not passed for this component");
-    }
+    if (setModalOpen) setModalOpen(true);
+    else console.log("setModalOpen func is not passed for this component");
   }
 
   function toggleModal() {
     toggleShow();
     setErrors({});
-    try {
-      setModalOpen(false);
-    } catch (err) {
-      console.log("setModalOpen func is not passed for this component");
-    }
+    if (setModalOpen) setModalOpen(false);
+    else console.log("setModalOpen func is not passed for this component");
   }
 
   return (

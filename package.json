@@ -44,7 +44,8 @@
     "card-localSendProd": "node functions/src/localCardEmails.js",
     "card-localSendTest": "REACT_APP_ENV_TEST=test node functions/src/localCardEmails.js",
     "loyalty-localSendProd": "node functions/src/localLoyaltyEmails.js",
-    "loyalty-localSendTest": "REACT_APP_ENV_TEST=test node functions/src/localLoyaltyEmails.js"
+    "loyalty-localSendTest": "REACT_APP_ENV_TEST=test node functions/src/localLoyaltyEmails.js",
+    "type-check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
