@@ -23,22 +23,26 @@ import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { PageNotifications } from "../common/Notifications/PageNotifications";
 import RewardTags from "./reward-tags/RewardTags";
+import { MainReduxState } from "../../types/redux";
 
 function CardDetailsPage() {
   const { id } = useParams();
-  const cards = useSelector((state) => state.cards);
+  const cards = useSelector((state: MainReduxState) => state.cards);
   const card = getCardById(cards, id);
   const { status, data: user } = useUser();
-  const referrals = useSelector((state) => state.referrals);
+  const referrals = useSelector((state: MainReduxState) => state.referrals);
   const referralsForThisCard = referrals.filter(
     (referral) => referral.referringCardId === card.id
   );
   const dispatch = useDispatch();
   const loading = useSelector(
-    (state) => state.apiCallsInProgress > 0 || state.cards.length === 0
+    (state: MainReduxState) =>
+      state.apiCallsInProgress > 0 || state.cards.length === 0
   );
 
-  const notifications = useSelector((state) => state.notifications);
+  const notifications = useSelector(
+    (state: MainReduxState) => state.notifications
+  );
 
   const cardNotfications = notifications.filter(
     (notifications) => notifications.cardId === card?.id
@@ -50,7 +54,7 @@ function CardDetailsPage() {
     } else if (referrals.length === 0 && status === "success") {
       dispatch(loadReferralsFromFirebase(user?.uid));
     }
-  }, [card, user, referrals]);
+  }, [cards.length, dispatch, status, user, referrals]);
 
   function getCardById(cards, id) {
     return cards?.find((card) => card.id === id) || null;
@@ -107,7 +111,6 @@ function CardDetailsPage() {
         <CardDetailsInfo
           windowWidth={windowWidth}
           card={card}
-          isTablet={isTablet}
           isMobile={isMobile}
         />
         <div id="cardDetailsSectionRight">

@@ -7,7 +7,6 @@ import { deleteLoyaltyDataFromFirebase } from "../../redux/actions/loyaltyAction
 import { deleteCardholderFromFirebase } from "../../redux/actions/cardholderActions";
 import { toast } from "react-toastify";
 import { DeleteButton } from "./DeleteButton";
-import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useUser } from "reactfire";
 import { DELETE_MODAL_TYPES } from "../../constants";
@@ -16,6 +15,19 @@ import {
   deleteLoyaltyNotificationOnLoyaltyClosure,
   deleteCardNotificationsOnCardClosure,
 } from "../../redux/actions/notificationsActions";
+import { MainReduxState } from "../../types/redux";
+import { Card, Cardholder, Referral } from "../../types/cardsTypes";
+import { LoyaltyData } from "../../types/loyaltyTypes";
+
+type ConfirmDeleteModalProps = {
+  data: Card | LoyaltyData | Cardholder | Referral;
+  dataType: string;
+  setModalOpen?: (modalOpen: boolean) => void;
+  redirect?: boolean;
+  disableBtn?: boolean;
+  showAsRectangle?: boolean;
+};
+
 export default function ConfirmDeleteModal({
   data,
   dataType,
@@ -23,13 +35,15 @@ export default function ConfirmDeleteModal({
   redirect,
   disableBtn = false,
   showAsRectangle,
-}) {
+}: ConfirmDeleteModalProps) {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
   const history = useHistory();
   const { data: user } = useUser();
   const dispatch = useDispatch();
-  const notifications = useSelector((state) => state.notifications);
+  const notifications = useSelector(
+    (state: MainReduxState) => state.notifications
+  );
 
   function setDataText() {
     switch (dataType) {
@@ -89,20 +103,14 @@ export default function ConfirmDeleteModal({
   function handleDeleteButtonClick(e) {
     e.stopPropagation();
     toggleShow();
-    try {
-      setModalOpen(true);
-    } catch (err) {
-      console.log("setModalOpen func is not passed for this component");
-    }
+    if (setModalOpen) setModalOpen(true);
+    else console.log("setModalOpen func is not passed for this component");
   }
 
   function toggleModal() {
     toggleShow();
-    try {
-      setModalOpen(false);
-    } catch (err) {
-      console.log("setModalOpen func is not passed for this component");
-    }
+    if (setModalOpen) setModalOpen(false);
+    else console.log("setModalOpen func is not passed for this component");
   }
 
   const dataText = setDataText();
@@ -133,10 +141,3 @@ export default function ConfirmDeleteModal({
     </>
   );
 }
-
-ConfirmDeleteModal.propTypes = {
-  data: PropTypes.object.isRequired,
-  dataType: PropTypes.string.isRequired,
-  setModalOpen: PropTypes.func || undefined,
-  redirect: PropTypes.bool,
-};

@@ -15,22 +15,34 @@ import {
   deleteCardNotificationsOnCardClosure,
   deleteSpendByNotificationWhenBonusEarned,
 } from "../../redux/actions/notificationsActions";
+import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cardsTypes";
 
-export default function CardAddEditModal({ card, setModalOpen }) {
+type CardAddEditModalProps = {
+  card: Card | null;
+  setModalOpen?: (isOpen: boolean) => void;
+};
+export default function CardAddEditModal({
+  card,
+  setModalOpen,
+}: CardAddEditModalProps) {
   const [cardForModal, setCardForModal] = useState(
     card ? { ...card } : NEW_CARD
   );
+
   const [inquiries, setInquiries] = useState({ ...cardForModal.inquiries });
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const toggleShow = () => setShow(!show);
   const { isDesktop } = useWindhowWidth();
   const { data: user } = useUser();
-  const notifications = useSelector((state) => state.notifications);
-  const cardholders = useSelector((state) => state.cardholders);
+  const notifications = useSelector(
+    (state: MainReduxState) => state.notifications
+  );
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const dispatch = useDispatch();
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value, checked } = event.target;
 
     if (value !== "" || value !== null) {
@@ -42,18 +54,14 @@ export default function CardAddEditModal({ card, setModalOpen }) {
     }
 
     if (name === "inquiries") {
-      // eslint-disable-next-line no-unused-expressions
-      value === "experian"
-        ? setInquiries((prev) => ({ ...prev, [value]: checked }))
-        : value === "equifax"
-        ? setInquiries((prev) => ({ ...prev, [value]: checked }))
-        : value === "transunion"
-        ? setInquiries((prev) => ({ ...prev, [value]: checked }))
-        : null;
+      if (["experian", "equifax", "transunion"].includes(value)) {
+        setInquiries((prev) => ({ ...prev, [value]: checked }));
+      }
     } else if (name === "userId") {
       setCardForModal((prevCard) => ({
         ...prevCard,
-        cardholder: cardholders.find((holder) => holder.id === value).name,
+        cardholder:
+          cardholders.find((holder) => holder.id === value)?.name || "",
         userId: value,
       }));
     } else {
@@ -133,7 +141,7 @@ export default function CardAddEditModal({ card, setModalOpen }) {
       nextFeeDate,
       annualFee,
     } = cardForModal;
-    const errors = {};
+    const errors: Record<string, string> = {};
 
     if (!status) errors.status = "Required";
     if (!appDate) errors.appDate = "Required";

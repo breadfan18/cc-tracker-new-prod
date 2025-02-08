@@ -66,6 +66,7 @@
   },
   "devDependencies": {
     "@tsconfig/node16": "^16.1.0",
+    "@types/lodash": "^4.17.15",
     "typescript": "^5.1.6"
   }
 }

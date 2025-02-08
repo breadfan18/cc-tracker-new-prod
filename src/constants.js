@@ -28,14 +28,15 @@ export const INQUIRIES = {
 };
 
 export const NEW_CARD = {
-  id: null,
+  id: "",
+  appDate: "",
   issuer: {
     name: null,
     img: null,
   },
   card: "",
-  cardType: null,
-  userId: null,
+  cardType: "",
+  userId: "",
   inquiries: INQUIRIES,
   annualFee: 0,
   nextFeeDate: null,
@@ -43,9 +44,10 @@ export const NEW_CARD = {
   spendReq: 0,
   spendBy: null,
   signupBonus: null,
+  bonusEarned: false,
   bonusEarnDate: null,
   status: null,
-  cardholder: null,
+  cardholder: "",
 };
 
 export const NEW_NOTE = {

@@ -6,18 +6,21 @@ import CardListTable from "./CardListTable";
 import { useSelector } from "react-redux";
 import CardListCards from "./CardListCards";
 import { Button } from "react-bootstrap";
-import _ from "lodash";
+import { sortBy } from "lodash";
 import Filters from "./Filters";
 import useCardsFilter from "../../hooks/filterCards";
 import { AiFillHeart } from "react-icons/ai";
 
-function CardTabs({ cards, windowWidth, isDesktop }) {
-  const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
+import { MainReduxState } from "../../types/redux";
+import { Cardholder, CardTabsProps } from "../../types/cardTypes";
+
+function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
+  const storedUser = JSON.parse(localStorage.getItem("selectedUser") || "null");
   const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
   const [showFilter, setShowFilter] = useState(false);
-  const cardholders = useSelector((state) =>
-    _.sortBy(state.cardholders, (o) => o.isPrimary)
+  const cardholders = useSelector((state: MainReduxState) =>
+    sortBy(state.cardholders, (o: Cardholder) => o.isPrimary)
   );
 
   useEffect(
