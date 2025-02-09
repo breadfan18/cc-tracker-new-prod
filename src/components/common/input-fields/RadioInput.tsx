@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import { DELETE_COLOR_RED } from "../../../constants";
+import { RadioInputProps } from "./input-types";
 
 const RadioInput = ({
   name,
@@ -10,7 +11,7 @@ const RadioInput = ({
   inquiriesStatus,
   onChange,
   requiredField,
-}) => {
+}: RadioInputProps) => {
   return (
     <div className="radioFieldContainer">
       <label htmlFor={name} className="labels inputLabels">

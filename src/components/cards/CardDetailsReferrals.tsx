@@ -93,7 +93,7 @@ export default function CardReferrals({
           </Table>
         ) : (
           <>
-            {sortReferralsByDate(cardReferrals).map((referral) => (
+            {sortReferralsByDate(cardReferrals).map((referral: Referral) => (
               <article className="cardDetailsReferralCardContainer">
                 <div
                   className="cardDetailsReferralCardBonusSection"

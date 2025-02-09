@@ -42,7 +42,7 @@ export default function CardAddEditModal({
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const dispatch = useDispatch();
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(event) {
     const { name, value, checked } = event.target;
 
     if (value !== "" || value !== null) {
@@ -177,7 +177,7 @@ export default function CardAddEditModal({
 
   return (
     <>
-      {cardForModal.id !== null ? (
+      {cardForModal.id !== "" ? (
         <Button
           variant="success"
           onClick={handleEditButtonClick}

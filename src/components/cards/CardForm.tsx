@@ -18,9 +18,26 @@ import { formDisabledCheck, titleCase } from "../../helpers";
 import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
+import { MainReduxState } from "../../types/redux";
 
-const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
-  const cardholders = useSelector((state) => state.cardholders);
+type CardFormProps = {
+  card: any;
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  saving?: boolean;
+  errors?: any;
+};
+
+const CardForm = ({
+  card,
+  onSave,
+  onChange,
+  saving,
+  errors = {},
+}: CardFormProps) => {
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   return (
     <>
       <Form onSubmit={onSave}>
@@ -83,7 +100,6 @@ const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
             <SelectInput
               name={CARD_DATA_KEYS.issuer}
               label="Issuer"
-              w
               value={card.issuer.name || ""}
               defaultOption="Select Issuer"
               options={ISSUERS.map((issuer) => ({
