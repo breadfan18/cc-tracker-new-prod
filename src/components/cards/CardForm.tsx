@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TextInput from "../common/input-fields/TextInput";
 import SelectInput from "../common/input-fields/SelectInput";
 import {
@@ -19,15 +18,17 @@ import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
 import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cardsTypes";
+import { Errors } from "../common/input-fields/input-types";
 
 type CardFormProps = {
-  card: any;
+  card: Card;
   onSave: (event: React.FormEvent<HTMLFormElement>) => void;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   saving?: boolean;
-  errors?: any;
+  errors?: Errors;
 };
 
 const CardForm = ({
@@ -240,14 +241,6 @@ const CardForm = ({
       </Form>
     </>
   );
-};
-
-CardForm.propTypes = {
-  card: PropTypes.object.isRequired,
-  errors: PropTypes.object,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
 };
 
 export default CardForm;

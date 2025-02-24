@@ -17,6 +17,7 @@ import {
 } from "../../redux/actions/notificationsActions";
 import { MainReduxState } from "../../types/redux";
 import { Card } from "../../types/cardsTypes";
+import { Errors } from "../common/input-fields/input-types";
 
 type CardAddEditModalProps = {
   card: Card | null;
@@ -86,11 +87,11 @@ export default function CardAddEditModal({
     }
 
     if (cardForModal.annualFee === "0" || cardForModal.annualFee === "") {
-      cardForModal.nextFeeDate = null;
+      cardForModal.nextFeeDate = "";
     }
 
     if (!cardForModal.spendReq || cardForModal.spendReq === "0") {
-      cardForModal.spendBy = null;
+      cardForModal.spendBy = "";
     }
 
     const finalCard = { ...cardForModal, inquiries: inquiries };
@@ -141,7 +142,7 @@ export default function CardAddEditModal({
       nextFeeDate,
       annualFee,
     } = cardForModal;
-    const errors: Record<string, string> = {};
+    const errors: Errors = {};
 
     if (!status) errors.status = "Required";
     if (!appDate) errors.appDate = "Required";

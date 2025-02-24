@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TextInput from "../common/input-fields/TextInput";
 import SelectInput from "../common/input-fields/SelectInput";
 import {
@@ -13,18 +12,32 @@ import DateInput from "../common/input-fields/DateInput";
 import RadioInput from "../common/input-fields/RadioInput";
 import Form from "react-bootstrap/Form";
 import { formDisabledCheck, titleCase } from "../../helpers";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
+import { Card } from "../../types/cardsTypes";
+import { Errors } from "../common/input-fields/input-types";
+import { MainReduxState } from "../../types/redux";
+
+type CardFormResponsiveProps = {
+  card: Card | null;
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  saving?: boolean;
+  errors?: Errors;
+};
 
 const CardFormResponsive = ({
   card,
   onSave,
   onChange,
   saving,
-  cardholders,
   errors = {},
-}) => {
+}: CardFormResponsiveProps) => {
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
+
   return (
     <>
       <Form onSubmit={onSave} className="singleColumnForm">
@@ -38,14 +51,14 @@ const CardFormResponsive = ({
           type="switch"
           label="Bonus Earned"
           value={CARD_DATA_KEYS.bonusEarned}
-          checked={card.bonusEarned}
+          checked={card?.bonusEarned}
           onChange={onChange}
           className="bonusEarnedCheck"
         />
         <SelectInput
           name={CARD_DATA_KEYS.status}
           label="Account Status"
-          value={card.status || ""}
+          value={card?.status || ""}
           defaultOption="Select Status"
           options={CARD_STATUS.map((status) => ({
             value: status,
@@ -59,14 +72,14 @@ const CardFormResponsive = ({
           name={CARD_DATA_KEYS.appDate}
           label="Application Date"
           onChange={onChange}
-          value={card.appDate}
+          value={card?.appDate}
           error={errors.appDate}
           requiredField
         />
         <SelectInput
           name={CARD_DATA_KEYS.userId}
           label="Card Holder"
-          value={card.userId || ""}
+          value={card?.userId || ""}
           defaultOption="Select Card Holder"
           options={cardholders.map((user) => ({
             value: user.id,
@@ -79,7 +92,7 @@ const CardFormResponsive = ({
         <SelectInput
           name={CARD_DATA_KEYS.issuer}
           label="Issuer"
-          value={card.issuer.name || ""}
+          value={card?.issuer.name || ""}
           defaultOption="Select Issuer"
           options={ISSUERS.map((issuer) => ({
             value: issuer.name,
@@ -93,7 +106,7 @@ const CardFormResponsive = ({
         <TextInput
           name={CARD_DATA_KEYS.card}
           label="Card"
-          value={titleCase(card.card) || ""}
+          value={titleCase(card?.card) || ""}
           onChange={onChange}
           error={errors.card}
           requiredField
@@ -101,7 +114,7 @@ const CardFormResponsive = ({
         <SelectInput
           name={CARD_DATA_KEYS.cardType}
           label="Card Type"
-          value={card.cardType || ""}
+          value={card?.cardType || ""}
           defaultOption="Select Card Type"
           options={CARD_TYPE.map((type) => ({
             value: type,
@@ -114,7 +127,7 @@ const CardFormResponsive = ({
         <NumberInput
           name={CARD_DATA_KEYS.creditLine}
           label="Credit Line"
-          value={card.creditLine || ""}
+          value={card?.creditLine || ""}
           onChange={onChange}
           error={errors.creditLine}
           isCurrency={true}
@@ -124,7 +137,7 @@ const CardFormResponsive = ({
         <NumberInput
           name={CARD_DATA_KEYS.annualFee}
           label="Annual Fee"
-          value={card.annualFee}
+          value={card?.annualFee}
           onChange={onChange}
           error={errors.title}
           isCurrency={true}
@@ -134,14 +147,14 @@ const CardFormResponsive = ({
           name={CARD_DATA_KEYS.nextFeeDate}
           label="Next Annual Fee Due"
           onChange={onChange}
-          value={formDisabledCheck(card.annualFee) ? "" : card.nextFeeDate}
-          disabled={formDisabledCheck(card.annualFee)}
+          value={formDisabledCheck(card?.annualFee) ? "" : card?.nextFeeDate}
+          disabled={formDisabledCheck(card?.annualFee)}
         />
 
         <NumberInput
           name={CARD_DATA_KEYS.spendReq}
           label="Spending Requirement"
-          value={card.spendReq}
+          value={card?.spendReq}
           onChange={onChange}
           error={errors.title}
           isCurrency={true}
@@ -150,13 +163,13 @@ const CardFormResponsive = ({
           name={CARD_DATA_KEYS.spendBy}
           label="Spend By"
           onChange={onChange}
-          value={formDisabledCheck(card.spendReq) ? "" : card.spendBy}
-          disabled={formDisabledCheck(card.spendReq)}
+          value={formDisabledCheck(card?.spendReq) ? "" : card?.spendBy}
+          disabled={formDisabledCheck(card?.spendReq)}
         />
         <TextInput
           name={CARD_DATA_KEYS.signupBonus}
           label="Signup Bonus (Max 20 characters)"
-          value={card.signupBonus}
+          value={card?.signupBonus}
           onChange={onChange}
           error={errors.title}
           length={20}
@@ -165,13 +178,13 @@ const CardFormResponsive = ({
           name={CARD_DATA_KEYS.bonusEarnDate}
           label="Bonus Earn Date"
           onChange={onChange}
-          value={card.bonusEarnDate}
-          disabled={!card.bonusEarned}
+          value={card?.bonusEarnDate}
+          disabled={!card?.bonusEarned}
         />
         <RadioInput
           name={CARD_DATA_KEYS.inquiries}
           label="Inquiries"
-          inquiriesStatus={card.inquiries}
+          inquiriesStatus={card?.inquiries}
           error={errors.inquiries}
           onChange={onChange}
           requiredField
@@ -182,25 +195,11 @@ const CardFormResponsive = ({
           disabled={saving}
           className="btn btn-primary addButton"
         >
-          {card.id === null ? "Add Card" : "Save Changes"}
+          {card?.id === null ? "Add Card" : "Save Changes"}
         </button>
       </Form>
     </>
   );
 };
 
-CardFormResponsive.propTypes = {
-  card: PropTypes.object.isRequired,
-  errors: PropTypes.object,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
-};
-
-const mapStateToProps = (state) => ({
-  cardholders: state.cardholders,
-});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardFormResponsive);
+export default CardFormResponsive;

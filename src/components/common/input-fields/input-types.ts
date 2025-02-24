@@ -34,9 +34,13 @@ export type SelectInputProps = BaseInputProps & {
 };
 
 export type RadioInputProps = BaseInputProps & {
-  inquiriesStatus: {
-    equifax: boolean;
-    experian: boolean;
-    transunion: boolean;
-  };
+  inquiriesStatus:
+    | {
+        equifax: boolean;
+        experian: boolean;
+        transunion: boolean;
+      }
+    | undefined;
 };
+
+export type Errors = Record<string, string>;
