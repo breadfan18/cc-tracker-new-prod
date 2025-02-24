@@ -8,6 +8,15 @@ import {
   EDIT_COLOR_GREEN_OPACITY,
 } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
+import { Card } from "../../types/cardsTypes";
+
+type BonusStatusAndEarnDateProps = {
+  card: Card;
+  isCard?: boolean;
+  inverseColor?: boolean;
+  iconSize: string;
+  isCardDetailsPage: boolean;
+};
 
 export default function BonusStatusAndEarnDate({
   card,
@@ -15,7 +24,7 @@ export default function BonusStatusAndEarnDate({
   inverseColor,
   iconSize,
   isCardDetailsPage,
-}) {
+}: BonusStatusAndEarnDateProps) {
   const { windowWidth, isMobileXS } = useWindhowWidth();
   const hasBonusEarnDate =
     card.bonusEarnDate?.includes("-") || card.bonusEarned;
@@ -56,9 +65,10 @@ export default function BonusStatusAndEarnDate({
       style={{
         // "--bonus-info-container-bkgrd": backgroundColor,
         backgroundColor,
-        paddingRight: isCardDetailsPage && "27px",
-        padding: isCard && "5px",
-        borderBottomRightRadius: isCardDetailsPage && isMobileXS && "15px",
+        paddingRight: isCardDetailsPage ? "27px" : undefined,
+        padding: isCard ? "5px" : undefined,
+        borderBottomRightRadius:
+          isCardDetailsPage && isMobileXS ? "15px" : undefined,
       }}
     >
       <BonusEarnStatusIcon
@@ -81,7 +91,7 @@ export default function BonusStatusAndEarnDate({
           style={{
             color: bonusStatusTextColor,
             fontSize: "10px",
-            marginTop: !isCard && "-7px",
+            marginTop: (!isCard && "-7px") || undefined,
           }}
         >
           {hasBonusEarnDate

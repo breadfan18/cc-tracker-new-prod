@@ -22,30 +22,32 @@ export const REMINDERS_TEXT_BONUS_DATE_PASSED =
 
 // Data
 export const INQUIRIES = {
-  experian: null,
-  equifax: null,
-  transunion: null,
+  experian: false,
+  equifax: false,
+  transunion: false,
 };
 
 export const NEW_CARD = {
-  id: null,
+  id: "",
+  appDate: "",
   issuer: {
-    name: null,
-    img: null,
+    name: "",
+    img: "",
   },
   card: "",
-  cardType: null,
-  userId: null,
+  cardType: "",
+  userId: "",
   inquiries: INQUIRIES,
-  annualFee: 0,
-  nextFeeDate: null,
-  creditLine: null,
-  spendReq: 0,
-  spendBy: null,
-  signupBonus: null,
-  bonusEarnDate: null,
-  status: null,
-  cardholder: null,
+  annualFee: "0",
+  nextFeeDate: "",
+  creditLine: "",
+  spendReq: "0",
+  spendBy: "",
+  signupBonus: "",
+  bonusEarned: false,
+  bonusEarnDate: "",
+  status: "",
+  cardholder: "",
 };
 
 export const NEW_NOTE = {

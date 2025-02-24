@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import { DELETE_COLOR_RED } from "../../../constants";
+import { SelectInputProps } from "./input-types";
 
 const SelectInput = ({
   name,
@@ -14,7 +15,7 @@ const SelectInput = ({
   bkgrdColor,
   disableDefaultOption = true,
   requiredField,
-}) => {
+}: SelectInputProps) => {
   return (
     <div className="formFieldContainer">
       <label htmlFor={name} className="labels inputLabels">

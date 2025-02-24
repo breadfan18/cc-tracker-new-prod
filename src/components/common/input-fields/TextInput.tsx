@@ -1,12 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
-  APP_COLOR_BLACK_OPACITY,
   APP_COLOR_BLUE,
   APP_COLOR_LIGHT_GRAY,
-  CANCELLED_COLOR_RED,
   DELETE_COLOR_RED,
 } from "../../../constants";
+import { TextInputProps } from "./input-types";
 
 const TextInput = ({
   name,
@@ -20,7 +17,7 @@ const TextInput = ({
   rewardsBalanceText,
   requiredField,
   length,
-}) => {
+}: TextInputProps) => {
   return (
     <div className="formFieldContainer">
       <label htmlFor={name} className="labels inputLabels">
@@ -65,16 +62,6 @@ const TextInput = ({
       </div>
     </div>
   );
-};
-
-TextInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string || PropTypes.number,
-  isCurrency: PropTypes.bool,
-  error: PropTypes.string,
 };
 
 export default TextInput;

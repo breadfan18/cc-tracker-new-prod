@@ -1,4 +1,3 @@
-import React from "react";
 import {
   TbSquareRoundedCheckFilled,
   TbSquareRoundedChevronsRightFilled,
@@ -7,12 +6,19 @@ import {
 import PropTypes from "prop-types";
 import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 
+type BonusEarnStatusIconProps = {
+  bonusEarned: boolean;
+  iconSize?: string;
+  inverseColor?: boolean;
+  noBonus?: boolean;
+};
+
 export default function BonusEarnStatusIcon({
   bonusEarned,
   iconSize,
   inverseColor,
   noBonus,
-}) {
+}: BonusEarnStatusIconProps) {
   return bonusEarned ? (
     <TbSquareRoundedCheckFilled
       style={{

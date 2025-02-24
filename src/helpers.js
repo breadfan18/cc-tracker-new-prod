@@ -186,13 +186,13 @@ export function setColorForCardStatus(componentType, cardStatus) {
       ? "table-danger"
       : cardStatus === "downgraded"
       ? "table-warning"
-      : null;
+      : undefined;
   } else if (componentType === "cardCard") {
     return cardStatus === "closed"
       ? CARD_COLOR_CLOSED
       : cardStatus === "downgraded"
       ? CARD_COLOR_DOWNGRADED
-      : null;
+      : undefined;
   }
 }
 

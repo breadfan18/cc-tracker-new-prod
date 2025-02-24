@@ -15,19 +15,32 @@ import {
   deleteCardNotificationsOnCardClosure,
   deleteSpendByNotificationWhenBonusEarned,
 } from "../../redux/actions/notificationsActions";
+import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cardsTypes";
+import { Errors } from "../common/input-fields/input-types";
 
-export default function CardAddEditModal({ card, setModalOpen }) {
+type CardAddEditModalProps = {
+  card: Card | null;
+  setModalOpen?: (isOpen: boolean) => void;
+};
+export default function CardAddEditModal({
+  card,
+  setModalOpen,
+}: CardAddEditModalProps) {
   const [cardForModal, setCardForModal] = useState(
     card ? { ...card } : NEW_CARD
   );
+
   const [inquiries, setInquiries] = useState({ ...cardForModal.inquiries });
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const toggleShow = () => setShow(!show);
   const { isDesktop } = useWindhowWidth();
   const { data: user } = useUser();
-  const notifications = useSelector((state) => state.notifications);
-  const cardholders = useSelector((state) => state.cardholders);
+  const notifications = useSelector(
+    (state: MainReduxState) => state.notifications
+  );
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const dispatch = useDispatch();
 
   function handleChange(event) {
@@ -42,18 +55,14 @@ export default function CardAddEditModal({ card, setModalOpen }) {
     }
 
     if (name === "inquiries") {
-      // eslint-disable-next-line no-unused-expressions
-      value === "experian"
-        ? setInquiries((prev) => ({ ...prev, [value]: checked }))
-        : value === "equifax"
-        ? setInquiries((prev) => ({ ...prev, [value]: checked }))
-        : value === "transunion"
-        ? setInquiries((prev) => ({ ...prev, [value]: checked }))
-        : null;
+      if (["experian", "equifax", "transunion"].includes(value)) {
+        setInquiries((prev) => ({ ...prev, [value]: checked }));
+      }
     } else if (name === "userId") {
       setCardForModal((prevCard) => ({
         ...prevCard,
-        cardholder: cardholders.find((holder) => holder.id === value).name,
+        cardholder:
+          cardholders.find((holder) => holder.id === value)?.name || "",
         userId: value,
       }));
     } else {
@@ -78,11 +87,11 @@ export default function CardAddEditModal({ card, setModalOpen }) {
     }
 
     if (cardForModal.annualFee === "0" || cardForModal.annualFee === "") {
-      cardForModal.nextFeeDate = null;
+      cardForModal.nextFeeDate = "";
     }
 
     if (!cardForModal.spendReq || cardForModal.spendReq === "0") {
-      cardForModal.spendBy = null;
+      cardForModal.spendBy = "";
     }
 
     const finalCard = { ...cardForModal, inquiries: inquiries };
@@ -133,7 +142,7 @@ export default function CardAddEditModal({ card, setModalOpen }) {
       nextFeeDate,
       annualFee,
     } = cardForModal;
-    const errors = {};
+    const errors: Errors = {};
 
     if (!status) errors.status = "Required";
     if (!appDate) errors.appDate = "Required";
@@ -156,26 +165,20 @@ export default function CardAddEditModal({ card, setModalOpen }) {
   function handleEditButtonClick(e) {
     e.stopPropagation();
     toggleShow();
-    try {
-      setModalOpen(true);
-    } catch (err) {
-      console.log("setModalOpen func is not passed for this component");
-    }
+    if (setModalOpen) setModalOpen(true);
+    else console.log("setModalOpen func is not passed for this component");
   }
 
   function toggleModal() {
     toggleShow();
     setErrors({});
-    try {
-      setModalOpen(false);
-    } catch (err) {
-      console.log("setModalOpen func is not passed for this component");
-    }
+    if (setModalOpen) setModalOpen(false);
+    else console.log("setModalOpen func is not passed for this component");
   }
 
   return (
     <>
-      {cardForModal.id !== null ? (
+      {cardForModal.id !== "" ? (
         <Button
           variant="success"
           onClick={handleEditButtonClick}

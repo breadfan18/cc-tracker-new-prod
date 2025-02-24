@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
@@ -49,11 +48,4 @@ export const PageNotifications = ({
       {!lastReminder && <hr style={{ color: "gray", margin: "7px 0" }} />}
     </>
   );
-};
-
-PageNotifications.propTypes = {
-  text: PropTypes.string.isRequired,
-  Icon: PropTypes.func.isRequired,
-  iconColor: PropTypes.string.isRequired,
-  lastReminder: PropTypes.bool.isRequired,
 };

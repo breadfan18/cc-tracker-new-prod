@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TextInput from "../common/input-fields/TextInput";
 import SelectInput from "../common/input-fields/SelectInput";
 import {
@@ -18,9 +17,28 @@ import { formDisabledCheck, titleCase } from "../../helpers";
 import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
+import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cardsTypes";
+import { Errors } from "../common/input-fields/input-types";
 
-const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
-  const cardholders = useSelector((state) => state.cardholders);
+type CardFormProps = {
+  card: Card;
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  saving?: boolean;
+  errors?: Errors;
+};
+
+const CardForm = ({
+  card,
+  onSave,
+  onChange,
+  saving,
+  errors = {},
+}: CardFormProps) => {
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   return (
     <>
       <Form onSubmit={onSave}>
@@ -83,7 +101,6 @@ const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
             <SelectInput
               name={CARD_DATA_KEYS.issuer}
               label="Issuer"
-              w
               value={card.issuer.name || ""}
               defaultOption="Select Issuer"
               options={ISSUERS.map((issuer) => ({
@@ -224,14 +241,6 @@ const CardForm = ({ card, onSave, onChange, saving, errors = {} }) => {
       </Form>
     </>
   );
-};
-
-CardForm.propTypes = {
-  card: PropTypes.object.isRequired,
-  errors: PropTypes.object,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
 };
 
 export default CardForm;
