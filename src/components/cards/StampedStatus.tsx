@@ -1,7 +1,6 @@
-import React from "react";
 import { setColorForCardStatus } from "../../helpers";
 
-export default function StampedStatus({ status }) {
+export default function StampedStatus({ status }: { status: string }) {
   return (
     <div
       className="stamp"
