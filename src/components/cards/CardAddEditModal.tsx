@@ -8,7 +8,7 @@ import CardFormResponsive from "./CardFormResponsive";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
-import { INQUIRIES, ISSUERS, NEW_CARD } from "../../constants";
+import { ISSUERS, NEW_CARD } from "../../constants";
 import { useUser } from "reactfire";
 import useWindhowWidth from "../../hooks/windowWidth";
 import {
@@ -31,7 +31,6 @@ export default function CardAddEditModal({
     card ? { ...card } : NEW_CARD
   );
 
-  const [inquiries, setInquiries] = useState({ ...cardForModal.inquiries });
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const toggleShow = () => setShow(!show);
@@ -55,9 +54,10 @@ export default function CardAddEditModal({
     }
 
     if (name === "inquiries") {
-      if (["experian", "equifax", "transunion"].includes(value)) {
-        setInquiries((prev) => ({ ...prev, [value]: checked }));
-      }
+      setCardForModal((prevCard) => ({
+        ...prevCard,
+        inquiries: { ...prevCard.inquiries, [value]: checked },
+      }));
     } else if (name === "userId") {
       setCardForModal((prevCard) => ({
         ...prevCard,
@@ -82,10 +82,6 @@ export default function CardAddEditModal({
     event.preventDefault();
     if (!formIsValid()) return;
 
-    for (let i in inquiries) {
-      if (inquiries[i] === null) inquiries[i] = false;
-    }
-
     if (cardForModal.annualFee === "0" || cardForModal.annualFee === "") {
       cardForModal.nextFeeDate = "";
     }
@@ -94,7 +90,7 @@ export default function CardAddEditModal({
       cardForModal.spendBy = "";
     }
 
-    const finalCard = { ...cardForModal, inquiries: inquiries };
+    const finalCard = { ...cardForModal };
     dispatch(saveCardToFirebase(finalCard, user?.uid));
 
     if (finalCard.status === "closed") {
@@ -125,7 +121,6 @@ export default function CardAddEditModal({
     setCardForModal(NEW_CARD);
     toggleShow();
     setErrors({});
-    setInquiries(INQUIRIES);
   }
 
   function formIsValid() {
@@ -141,6 +136,7 @@ export default function CardAddEditModal({
       bonusEarnDate,
       nextFeeDate,
       annualFee,
+      inquiries,
     } = cardForModal;
     const errors: Errors = {};
 

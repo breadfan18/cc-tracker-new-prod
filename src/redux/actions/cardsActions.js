@@ -68,7 +68,7 @@ export function saveCardToFirebase(card, firebaseUid) {
     dispatch(beginApiCall());
     dispatch(beginApiCall());
     const cardId =
-      card.id === null
+      card.id === ""
         ? slugify(
             card.issuer.name + " " + card.card + " " + card.userId + " " + uid()
           )
