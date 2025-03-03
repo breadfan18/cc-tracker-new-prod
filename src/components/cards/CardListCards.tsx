@@ -1,5 +1,4 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import { Card as BootstrapCard } from "react-bootstrap";
 import {
   APP_COLOR_BLACK_OPACITY,
   DELETE_MODAL_TYPES,
@@ -8,7 +7,6 @@ import {
   REMINDERS_TEXT_AF,
   REMINDERS_TEXT_BONUS,
 } from "../../constants";
-import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
@@ -21,16 +19,25 @@ import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
+import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cardsTypes";
+
+type CardListCardsProps = {
+  cards: Card[];
+  showEditDelete: boolean;
+  showUserName: boolean;
+  showBonusInfo: boolean;
+};
 export default function CardListCards({
   cards,
   showEditDelete,
   showUserName,
   showBonusInfo,
-}) {
+}: CardListCardsProps) {
   const history = useHistory();
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: MainReduxState) => state.theme);
 
-  const routeChange = (card) => {
+  const routeChange = (card: Card) => {
     let path = `/card/${card.id}`;
     history.push(path);
   };
@@ -40,21 +47,21 @@ export default function CardListCards({
     const { isSpendByDateClose, spendDaysRemaining, showAnnualFeeDueIcon } =
       getRemindersData(card);
     return (
-      <Card
+      <BootstrapCard
         key={card.id}
         className={`cardCard ${theme === "dark" && "bg-dark"}`}
       >
-        <Card.Body style={{ padding: "0" }}>
+        <BootstrapCard.Body style={{ padding: "0" }}>
           <div
             style={{
               backgroundColor: APP_COLOR_BLACK_OPACITY,
             }}
           >
-            <Card.Title
+            <BootstrapCard.Title
               className="cardCardTitle"
               style={{
                 backgroundColor: cardTitleColor,
-                borderBottom: theme === "dark" && "1px solid #4e5359",
+                borderBottom: theme === "dark" ? "1px solid #4e5359" : "",
               }}
             >
               <div style={{ padding: "10px" }}>
@@ -72,13 +79,12 @@ export default function CardListCards({
               {showBonusInfo && (
                 <BonusStatusAndEarnDate
                   card={card}
-                  isCardTitle
                   isCard
                   iconSize="2rem"
                   inverseColor
                 />
               )}
-            </Card.Title>
+            </BootstrapCard.Title>
           </div>
           <section id="cardBody" onClick={() => routeChange(card)}>
             <div>
@@ -90,10 +96,10 @@ export default function CardListCards({
               <img src={card.issuer.img} alt="Issuer" className="issuerLogos" />
             </div>
           </section>
-        </Card.Body>
-        <Card.Footer
+        </BootstrapCard.Body>
+        <BootstrapCard.Footer
           className="cardsCardFooter"
-          style={{ borderTop: theme === "dark" && "1px solid #4e5359" }}
+          style={{ borderTop: theme === "dark" ? "1px solid #4e5359" : "" }}
         >
           <div>
             {showAnnualFeeDueIcon && (
@@ -107,7 +113,7 @@ export default function CardListCards({
               />
             )}
             {(card.spendBy && spendDaysRemaining && isSpendByDateClose) ||
-              (spendDaysRemaining < 0 && (
+              (spendDaysRemaining && spendDaysRemaining < 0 && (
                 <BsFillBellFill
                   style={{
                     color: "orange",
@@ -128,8 +134,8 @@ export default function CardListCards({
               />
             </div>
           )}
-        </Card.Footer>
-      </Card>
+        </BootstrapCard.Footer>
+      </BootstrapCard>
     );
   });
   return cards.length === 0 ? (
@@ -138,10 +144,3 @@ export default function CardListCards({
     <div id="cardCardContainer">{allCards}</div>
   );
 }
-
-CardListCards.propTypes = {
-  cards: PropTypes.array.isRequired,
-  showEditDelete: PropTypes.bool,
-  showUserName: PropTypes.bool,
-  showBonusInfo: PropTypes.bool,
-};
