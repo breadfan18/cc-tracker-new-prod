@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CardListCards from "./CardListCards";
-import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 import useCardsFilter from "../../hooks/filterCards";
 import Filters from "./Filters";
-function CardsByUserDropDown({ cards }) {
-  const storedUser = JSON.parse(localStorage.getItem("selectedUser"));
-  const [selectedUser, setSelectedUser] = useState(storedUser || "all-cards");
+import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cardsTypes";
+
+function CardsByUserDropDown({ cards }: { cards: Card[] }) {
+  const storedUser = JSON.parse(localStorage.getItem("selectedUser") || "");
+  const [selectedUser, setSelectedUser] = useState<string>(
+    storedUser || "all-cards"
+  );
   const [showFilter, setShowFilter] = useState(false);
-  const cardholders = useSelector((state) =>
+  const cardholders = useSelector((state: MainReduxState) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
 
@@ -32,7 +36,7 @@ function CardsByUserDropDown({ cards }) {
   const showAllUsers =
     selectedUser === undefined || selectedUser === "all-cards";
 
-  const cardsForSelectedUser = showAllUsers
+  const cardsForSelectedUser: Card[] = showAllUsers
     ? filteredData
     : selectedUser === "favorites"
     ? filteredData.filter((card) => card.isFav)
@@ -95,10 +99,5 @@ function CardsByUserDropDown({ cards }) {
     </div>
   );
 }
-
-CardsByUserDropDown.propTypes = {
-  cards: PropTypes.array.isRequired,
-  cardholders: PropTypes.array.isRequired,
-};
 
 export default CardsByUserDropDown;

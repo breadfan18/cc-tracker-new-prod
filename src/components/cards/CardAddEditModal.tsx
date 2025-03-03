@@ -20,16 +20,14 @@ import { Card } from "../../types/cardsTypes";
 import { Errors } from "../common/input-fields/input-types";
 
 type CardAddEditModalProps = {
-  card: Card | null;
+  card?: Card;
   setModalOpen?: (isOpen: boolean) => void;
 };
 export default function CardAddEditModal({
   card,
   setModalOpen,
 }: CardAddEditModalProps) {
-  const [cardForModal, setCardForModal] = useState(
-    card ? { ...card } : NEW_CARD
-  );
+  const [cardForModal, setCardForModal] = useState(card ?? NEW_CARD);
 
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});

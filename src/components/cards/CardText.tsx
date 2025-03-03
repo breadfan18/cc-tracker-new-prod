@@ -1,10 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { formatCurrency, formatDate } from "../../helpers";
 import { CARD_DATA_KEYS } from "../../constants";
+import { Card } from "../../types/cardsTypes";
 
-function CardText({ card, dataType }) {
-  const setCardDataType = (card, dataType) => {
+type CardTextProps = {
+  card: Card;
+  dataType: string;
+};
+
+function CardText({ card, dataType }: CardTextProps) {
+  const setCardDataType = (card: Card, dataType: string) => {
     switch (dataType) {
       case CARD_DATA_KEYS.appDate:
         return {
@@ -47,16 +51,11 @@ function CardText({ card, dataType }) {
   const cardDataType = setCardDataType(card, dataType);
   return (
     <p className="mb-0 cardBodyText">
-      <b>{cardDataType.fieldName}</b>
+      <b>{cardDataType?.fieldName}</b>
       {": "}
-      <small className="cardTextValue">{cardDataType.value}</small>
+      <small className="cardTextValue">{cardDataType?.value}</small>
     </p>
   );
 }
-
-CardText.propTypes = {
-  card: PropTypes.object.isRequired,
-  dataType: PropTypes.string.isRequired,
-};
 
 export default CardText;
