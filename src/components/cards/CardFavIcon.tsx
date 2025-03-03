@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";
 import { Card } from "../../types/cardsTypes";
 
-type CardFavIconProps = { card: Card; firebaseUid: string | undefined };
+type CardFavIconProps = { card: Card; firebaseUid?: string | undefined };
 
 export default function CardFavIcon({ card, firebaseUid }: CardFavIconProps) {
   const dispatch = useDispatch();

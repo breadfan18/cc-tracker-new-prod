@@ -15,7 +15,7 @@ type BonusStatusAndEarnDateProps = {
   isCard?: boolean;
   inverseColor?: boolean;
   iconSize: string;
-  isCardDetailsPage: boolean;
+  isCardDetailsPage?: boolean;
 };
 
 export default function BonusStatusAndEarnDate({

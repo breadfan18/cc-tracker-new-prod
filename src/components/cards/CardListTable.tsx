@@ -26,6 +26,16 @@ import { getRemindersData } from "../../hooks/reminderData";
 import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
 import StampedStatus from "./StampedStatus";
+import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cardsTypes";
+
+type CardListTableProps = {
+  cards: Card[];
+  showEditDelete: boolean;
+  showUser: boolean;
+  showCompactTable: boolean;
+  windowWidth: number;
+};
 
 export default function CardListTable({
   cards,
@@ -33,13 +43,13 @@ export default function CardListTable({
   showUser,
   showCompactTable,
   windowWidth,
-}) {
+}: CardListTableProps) {
   const { data, requestSort } = useSortableData(cards);
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: MainReduxState) => state.theme);
 
-  const routeChange = (card, e) => {
+  const routeChange = (card: Card, e) => {
     let path = `/card/${card.id}`;
     if (!modalOpen && e.target.tagName !== "path") history.push(path);
   };
@@ -49,7 +59,7 @@ export default function CardListTable({
       e.target.parentNode.className = "table-active";
     }
   }
-  function handleTrColorReset(e, card) {
+  function handleTrColorReset(e) {
     if (e.target.parentNode.tagName === "TR") {
       e.target.parentNode.className = null;
     }
@@ -58,7 +68,7 @@ export default function CardListTable({
   return cards.length === 0 ? (
     <EmptyList dataType={"card"} />
   ) : (
-    <Table variant={theme === "dark" ? "dark" : null}>
+    <Table variant={theme === "dark" ? "dark" : undefined}>
       <thead>
         <tr>
           {!showCompactTable && <th></th>}
@@ -106,7 +116,7 @@ export default function CardListTable({
         </tr>
       </thead>
       <tbody className="align-middle">
-        {data.map((card) => {
+        {data.map((card: Card) => {
           const {
             nextFeeText,
             nextFeeColor,
@@ -140,7 +150,7 @@ export default function CardListTable({
             <tr
               key={id}
               onMouseEnter={handleTrColorOnHover}
-              onMouseLeave={(e) => handleTrColorReset(e, card)}
+              onMouseLeave={(e) => handleTrColorReset(e)}
               style={{ cursor: "pointer" }}
               onClick={(e) => routeChange(card, e)}
             >
@@ -197,7 +207,7 @@ export default function CardListTable({
                       </div>
                       <small
                         style={{
-                          color: nextFeeColor,
+                          color: nextFeeColor ?? "",
                           fontSize: "12px",
                         }}
                       >
@@ -217,7 +227,7 @@ export default function CardListTable({
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div className="flexAndVerticalCenter">
                       {((spendBy && spendDaysRemaining && isSpendByDateClose) ||
-                        spendDaysRemaining < 0) && (
+                        (spendDaysRemaining && spendDaysRemaining < 0)) && (
                         <BsFillBellFill
                           style={{
                             color: "orange",
@@ -230,7 +240,10 @@ export default function CardListTable({
                       <p>{formatDate(spendBy)}</p>
                     </div>
                     <small
-                      style={{ fontSize: "12px", color: spendByTextColor }}
+                      style={{
+                        fontSize: "12px",
+                        color: spendByTextColor ?? "",
+                      }}
                     >
                       {spendDaysRemainingText}
                     </small>
@@ -257,11 +270,3 @@ export default function CardListTable({
     </Table>
   );
 }
-
-CardListTable.propTypes = {
-  cards: PropTypes.array.isRequired,
-  history: PropTypes.object,
-  showEditDelete: PropTypes.bool.isRequired,
-  showUser: PropTypes.bool.isRequired,
-  showCompactTable: PropTypes.bool.isRequired,
-};

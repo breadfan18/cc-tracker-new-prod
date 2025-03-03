@@ -5,8 +5,23 @@ import {
   isDateApproaching,
   setNextFeeDataForTable,
 } from "../helpers";
+import { Card } from "../types/cardsTypes";
 
-export const getRemindersData = (card) => {
+type ReminderDataReturn = {
+  nextFeeText: string;
+  nextFeeColor: string | null;
+  isAnnualFeeClose: boolean | undefined;
+  isSpendByDateClose: boolean | undefined;
+  spendDaysRemaining: number | null;
+  spendDaysRemainingText: string;
+  spendByTextColor: string | null;
+  bonusNotEarned: boolean | undefined;
+  isLastReminder: boolean;
+  showAnnualFeeDueIcon: boolean;
+  annualFeeDatePassed: boolean;
+};
+
+export const getRemindersData = (card: Card): ReminderDataReturn => {
   const { nextFeeText, nextFeeColor } = setNextFeeDataForTable(card);
   const isAnnualFeeClose =
     isDateApproaching(card, CARD_DATA_KEYS.nextFeeDate, 90) &&
