@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "react-bootstrap/Card";
 import { Table } from "react-bootstrap";
 import { formatDate, sortReferralsByDate } from "../../helpers";

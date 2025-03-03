@@ -1,4 +1,3 @@
-import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";

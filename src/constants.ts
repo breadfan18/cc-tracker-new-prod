@@ -52,7 +52,7 @@ export const NEW_CARD = {
 
 export const NEW_NOTE = {
   note: "",
-  date: null,
+  date: "",
 };
 
 export const CARD_DATA_KEYS = {

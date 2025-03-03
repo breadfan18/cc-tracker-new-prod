@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { formatDate } from "../../helpers";
 import {

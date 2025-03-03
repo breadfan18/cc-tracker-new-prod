@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";

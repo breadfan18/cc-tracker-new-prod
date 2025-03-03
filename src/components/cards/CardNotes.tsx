@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import {
   saveCardNoteToFirebase,
   deleteCardNoteFromFirebase,
@@ -19,15 +18,19 @@ import { toast } from "react-toastify";
 import EmptyList from "../common/EmptyList";
 import { useUser } from "reactfire";
 import { useSelector } from "react-redux";
+import { MainReduxState } from "../../types/redux";
+import { CardNote } from "../../types/cardsTypes";
 
-function CardNotes({
-  cardId,
-  cardNotes,
-  saveCardNoteToFirebase,
-  deleteCardNoteFromFirebase,
-  loading,
-}) {
-  const theme = useSelector((state) => state.theme);
+type CardNotesProps = {
+  cardId: string;
+  cardNotes: CardNote[];
+};
+function CardNotes({ cardId, cardNotes }: CardNotesProps) {
+  const theme = useSelector((state: MainReduxState) => state.theme);
+  const loading = useSelector(
+    (state: MainReduxState) => state.apiCallsInProgress > 0
+  );
+  const dispatch = useDispatch();
   const [note, setNote] = useState(NEW_NOTE);
   const { data: user } = useUser();
 
@@ -40,7 +43,7 @@ function CardNotes({
 
   function handleSave(e) {
     e.preventDefault();
-    saveCardNoteToFirebase(note, cardId, user?.uid);
+    dispatch(saveCardNoteToFirebase(note, cardId, user?.uid));
     toast.success("Note Added");
     setNote(NEW_NOTE);
   }
@@ -53,7 +56,7 @@ function CardNotes({
   function handleSaveOnEnter(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
-      saveCardNoteToFirebase(note, cardId, user?.uid);
+      dispatch(saveCardNoteToFirebase(note, cardId, user?.uid));
       toast.success("Note Added");
       setNote(NEW_NOTE);
     }
@@ -76,7 +79,7 @@ function CardNotes({
         ) : (
           <Table
             size="sm"
-            variant={theme === "dark" && "dark"}
+            variant={theme === "dark" ? "dark" : ""}
             style={{ fontSize: "clamp(12px, 3vw, 1rem)" }}
           >
             <thead>
@@ -111,8 +114,8 @@ function CardNotes({
         className="text-muted notesFooter"
         style={{
           padding: "10px",
-          borderTop: theme === "dark" && "1px solid #4e5359",
-          backgroundColor: theme === "light" && APP_COLOR_LIGHT_BLUE,
+          borderTop: theme === "dark" ? "1px solid #4e5359" : "",
+          backgroundColor: theme === "light" ? APP_COLOR_LIGHT_BLUE : "",
         }}
       >
         <Form.Control
@@ -134,23 +137,4 @@ function CardNotes({
   );
 }
 
-CardNotes.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  saveCardNoteToFirebase: PropTypes.func.isRequired,
-  deleteCardNoteFromFirebase: PropTypes.func.isRequired,
-  cardId: PropTypes.object.isRequired,
-  cardNotes: PropTypes.object.isRequired,
-};
-
-function mapStateToProps(state) {
-  return {
-    loading: state.apiCallsInProgress > 0,
-  };
-}
-
-const mapDispatchToProps = {
-  saveCardNoteToFirebase,
-  deleteCardNoteFromFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardNotes);
+export default CardNotes;
