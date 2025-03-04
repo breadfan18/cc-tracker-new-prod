@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { generateLightHexColor, titleCase } from "../../../helpers";
 import { useDispatch } from "react-redux";
 import { saveCardTagToFirebase } from "../../../redux/actions/cardsActions";
 
-export default function TagInput({ cardId, firebaseUid }) {
+export default function TagInput({
+  cardId,
+  firebaseUid,
+}: {
+  cardId: string;
+  firebaseUid: string;
+}) {
   const [newTag, setNewTag] = useState("");
   const dispatch = useDispatch();
 

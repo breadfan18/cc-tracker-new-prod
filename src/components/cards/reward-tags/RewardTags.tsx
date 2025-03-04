@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   APP_COLOR_BLUE,
@@ -14,13 +14,20 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { useEffect } from "react";
 import TagInput from "./TagInput";
 import { Tag } from "./Tag";
+import { Tag as TagType } from "../../../types/cards-types";
 
-const RewardTags = ({ tags, cardId, firebaseUid }) => {
+type RewardTagsProps = {
+  tags: TagType[];
+  cardId: string;
+  firebaseUid: string;
+};
+
+const RewardTags = ({ tags, cardId, firebaseUid }: RewardTagsProps) => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedTag, setSelectedTag] = useState(null);
+  const [selectedTag, setSelectedTag] = useState<TagType | null>(null);
   const [tagDescription, setTagDescription] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const textAreaRef = useRef(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -75,7 +82,7 @@ const RewardTags = ({ tags, cardId, firebaseUid }) => {
               ref={textAreaRef}
               value={tagDescription}
               onChange={(e) => setTagDescription(e.target.value)}
-              rows="15"
+              rows={15}
               className="tag-description-textarea"
             />
           ) : (
