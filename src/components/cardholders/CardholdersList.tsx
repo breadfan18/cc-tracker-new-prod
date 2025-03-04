@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
@@ -10,6 +9,7 @@ import LoyaltyDataMiniTable from "./LoyaltyDataMiniTable";
 import CardholderPhoto from "./CardholderPhoto";
 import InquiriesMiniTable from "./InquiriesMiniTable";
 import { useSelector } from "react-redux";
+import { MainReduxState } from "../../types/redux";
 
 const CardholdersList = ({
   cardsByHolder,
@@ -17,12 +17,12 @@ const CardholdersList = ({
   cardholders,
   inquiriesByHolder,
 }) => {
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: MainReduxState) => state.theme);
 
   return cardholders.length === 0 ? (
     <EmptyList dataType={"card holders"} />
   ) : (
-    <Table size="sm" variant={theme === "dark" ? "dark" : null}>
+    <Table size="sm" variant={theme === "dark" ? "dark" : ""}>
       <thead>
         <tr>
           <th className="tableHeader"></th>
@@ -66,6 +66,7 @@ const CardholdersList = ({
                 <CardHolderAddEditModal
                   cardholder={holder}
                   disableBtn={holder.isPrimary}
+                  isNewCardholder={false}
                 />
                 <ConfirmDeleteModal
                   data={holder}

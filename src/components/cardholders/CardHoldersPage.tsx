@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import CardHolderAddEditModal from "./CardHolderAddEditModal";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
@@ -11,17 +11,20 @@ import _ from "lodash";
 import CardholderCards from "./CardholderCards";
 import { calculateCurrentInquiries } from "../../helpers";
 import useWindhowWidth from "../../hooks/windowWidth";
+import { MainReduxState } from "../../types/redux";
 
 const CardHoldersPage = () => {
   const { isDesktop } = useWindhowWidth();
   const dispatch = useDispatch();
   const { status, data: user } = useUser();
-  const cardholders = useSelector((state) =>
+  const cardholders = useSelector((state: MainReduxState) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
-  const loading = useSelector((state) => state.apiCallsInProgress > 0);
-  const cards = useSelector((state) => state.cards);
-  const loyaltyData = useSelector((state) => state.loyaltyData);
+  const loading = useSelector(
+    (state: MainReduxState) => state.apiCallsInProgress > 0
+  );
+  const cards = useSelector((state: MainReduxState) => state.cards);
+  const loyaltyData = useSelector((state: MainReduxState) => state.loyaltyData);
 
   useEffect(() => {
     if (cardholders.length === 0 && status !== "loading") {
@@ -52,18 +55,9 @@ const CardHoldersPage = () => {
     <div className="cardHoldersContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Card Holders</h2>
-        <CardHolderAddEditModal />
+        <CardHolderAddEditModal isNewCardholder={true} />
       </section>
-      <p
-        style={{
-          border: "1px solid gray",
-          padding: "10px",
-          borderRadius: "10px",
-          color: "gray",
-          marginBottom: "15px",
-          fontSize: "14px",
-        }}
-      >
+      <p className="cardholders-page-note">
         NOTE - Card Holders with existing cards or loyalty accounts cannot be
         deleted. Please delete all their cards and/or loyalty accounts first.
       </p>

@@ -46,7 +46,7 @@ export function saveCardholderToFirebase(cardholder, firebaseUid) {
     dispatch(beginApiCall());
 
     const cardholderId =
-      cardholder.id === null ? slugify(cardholder.name) : cardholder.id;
+      cardholder.id === "" ? slugify(cardholder.name) : cardholder.id;
 
     writeToFirebase("cardHolders", cardholder, cardholderId, firebaseUid);
     dispatch(createCardholderSuccess(cardholder));

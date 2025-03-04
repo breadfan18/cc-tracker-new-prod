@@ -1,6 +1,6 @@
 import { formatCurrency, formatDate } from "../../helpers";
 import { CARD_DATA_KEYS } from "../../constants";
-import { Card } from "../../types/cardsTypes";
+import { Card } from "../../types/cards-types";
 
 type CardTextProps = {
   card: Card;

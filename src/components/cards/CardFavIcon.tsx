@@ -1,7 +1,7 @@
 import { AiFillHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";
-import { Card } from "../../types/cardsTypes";
+import { Card } from "../../types/cards-types";
 
 type CardFavIconProps = { card: Card; firebaseUid?: string | undefined };
 

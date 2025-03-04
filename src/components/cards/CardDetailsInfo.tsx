@@ -14,7 +14,7 @@ import {
 import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { useSelector } from "react-redux";
-import { Card as CardType } from "../../types/cardsTypes";
+import { Card as CardType } from "../../types/cards-types";
 import { MainReduxState } from "../../types/redux";
 
 type CardDetailsInfoProps = {

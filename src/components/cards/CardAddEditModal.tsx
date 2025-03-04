@@ -16,7 +16,7 @@ import {
   deleteSpendByNotificationWhenBonusEarned,
 } from "../../redux/actions/notificationsActions";
 import { MainReduxState } from "../../types/redux";
-import { Card } from "../../types/cardsTypes";
+import { Card } from "../../types/cards-types";
 import { Errors } from "../common/input-fields/input-types";
 
 type CardAddEditModalProps = {

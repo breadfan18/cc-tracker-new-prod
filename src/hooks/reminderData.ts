@@ -5,7 +5,7 @@ import {
   isDateApproaching,
   setNextFeeDataForTable,
 } from "../helpers";
-import { Card } from "../types/cardsTypes";
+import { Card } from "../types/cards-types";
 
 type ReminderDataReturn = {
   nextFeeText: string;

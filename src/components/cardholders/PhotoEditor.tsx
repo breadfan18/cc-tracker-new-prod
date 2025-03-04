@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 
-const PhotoEditor = ({ image, setEditor }) => {
+type PhotoEditorProps = {
+  image: string;
+  setEditor: (ref: any) => void;
+};
+const PhotoEditor = ({ image, setEditor }: PhotoEditorProps) => {
   const [scale, setScale] = useState(1);
 
   const handleScaleChange = (e) => {

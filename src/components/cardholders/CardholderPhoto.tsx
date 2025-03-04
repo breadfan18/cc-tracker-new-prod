@@ -1,8 +1,18 @@
-import React from "react";
+import { CSSProperties } from "react";
 import { CARDHOLDER_STOCK_IMG } from "../../constants";
 
-export default function CardholderPhoto({ img, heightAndWidth, imgOnCard }) {
-  const baseStyles = {
+type CardholderPhotoProps = {
+  img: string;
+  heightAndWidth: string;
+  imgOnCard?: boolean;
+};
+
+export default function CardholderPhoto({
+  img,
+  heightAndWidth,
+  imgOnCard,
+}: CardholderPhotoProps) {
+  const baseStyles: CSSProperties = {
     height: heightAndWidth,
     width: heightAndWidth,
     borderRadius: "50%",
@@ -19,14 +29,18 @@ export default function CardholderPhoto({ img, heightAndWidth, imgOnCard }) {
   const finalStyles = imgOnCard
     ? { ...baseStyles, ...photoOnCardStyles }
     : baseStyles;
+
   return (
     <>
       <img
         src={img || CARDHOLDER_STOCK_IMG}
-        onError={(e) => (e.target.src = CARDHOLDER_STOCK_IMG)}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = CARDHOLDER_STOCK_IMG;
+        }}
         alt="AA"
         style={{ ...finalStyles }}
-        className={imgOnCard && "cardholderCardImg"}
+        className={imgOnCard ? "cardholderCardImg" : ""}
       />
     </>
   );

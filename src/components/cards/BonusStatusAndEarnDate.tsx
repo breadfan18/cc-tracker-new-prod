@@ -8,7 +8,7 @@ import {
   EDIT_COLOR_GREEN_OPACITY,
 } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
-import { Card } from "../../types/cardsTypes";
+import { Card } from "../../types/cards-types";
 
 type BonusStatusAndEarnDateProps = {
   card: Card;

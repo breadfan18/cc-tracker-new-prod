@@ -1,11 +1,15 @@
-import React from "react";
 import { groupBy } from "lodash";
 import { APP_COLOR_LIGHT_GRAY, CARD_STATUS } from "../../constants";
 import { titleCase } from "../../helpers";
+import { CardsDataMiniTableProps } from "../../types/cardholder-types";
 
-export default function CardsDataMiniTable({ cards, layout, isLoadedInCard }) {
+export default function CardsDataMiniTable({
+  cards,
+  layout,
+  isLoadedInCard,
+}: CardsDataMiniTableProps) {
   const cardsByStatus = groupBy(cards, "status");
-  const miniDataSectionMarginRight = layout === "list" && "1.5rem";
+  const miniDataSectionMarginRight = layout === "list" ? "1.5rem" : "";
   return isLoadedInCard ? (
     <article>
       <p>Cards</p>

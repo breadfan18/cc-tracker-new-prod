@@ -1,20 +1,16 @@
-import React from "react";
-import {
-  APP_COLOR_BLACK_OPACITY,
-  APP_COLOR_LIGHT_GRAY,
-  CREDIT_BUREAUS,
-} from "../../constants";
+import { APP_COLOR_LIGHT_GRAY, CREDIT_BUREAUS } from "../../constants";
 import { titleCase } from "../../helpers";
+import { InquiriesMiniTableProps } from "../../types/cardholder-types";
 
 export default function InquiriesMiniTable({
   inquiries,
   layout,
   isLoadedInCard,
-}) {
+}: InquiriesMiniTableProps) {
   const totalInquiries = inquiries
     ? Object.keys(inquiries).reduce((total, i) => (total += inquiries[i]), 0)
     : 0;
-  const miniDataSectionMarginRight = layout === "list" && "1.5rem";
+  const miniDataSectionMarginRight = layout === "list" ? "1.5rem" : "";
 
   const inquiriesByBureau = CREDIT_BUREAUS.map((bureau) => {
     return {

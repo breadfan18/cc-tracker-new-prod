@@ -75,6 +75,15 @@ pre {
   margin: 0 auto;
 }
 
+.cardholders-page-note {
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+  color: gray;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
 .cardDetailsBody,
 .cardDetailsBodyMobile {
   display: flex;

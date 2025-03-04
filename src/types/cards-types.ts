@@ -49,14 +49,6 @@ export type CardTabsProps = {
   isDesktop: boolean;
 };
 
-export type Cardholder = {
-  id: string;
-  img: string;
-  name: string;
-  email?: string;
-  isPrimary?: boolean;
-};
-
 export type Referral = {
   id: string;
   issuer: Issuer;

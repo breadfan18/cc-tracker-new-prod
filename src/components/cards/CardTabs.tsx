@@ -10,9 +10,8 @@ import { sortBy } from "lodash";
 import Filters from "./Filters";
 import useCardsFilter from "../../hooks/filterCards";
 import { AiFillHeart } from "react-icons/ai";
-
 import { MainReduxState } from "../../types/redux";
-import { Cardholder, CardTabsProps } from "../../types/cardsTypes";
+import { CardTabsProps } from "../../types/cards-types";
 
 function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser") || "null");
@@ -20,7 +19,7 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
   const handleSelectTab = (tabKey) => setSelectedUser(tabKey.toString());
   const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state: MainReduxState) =>
-    sortBy(state.cardholders, (o: Cardholder) => o.isPrimary)
+    sortBy(state.cardholders, (o) => o.isPrimary)
   );
 
   useEffect(

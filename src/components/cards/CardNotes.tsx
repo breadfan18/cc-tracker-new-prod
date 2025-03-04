@@ -19,7 +19,7 @@ import EmptyList from "../common/EmptyList";
 import { useUser } from "reactfire";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
-import { CardNote } from "../../types/cardsTypes";
+import { CardNote } from "../../types/cards-types";
 
 type CardNotesProps = {
   cardId: string;

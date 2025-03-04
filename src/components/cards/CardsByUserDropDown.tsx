@@ -6,7 +6,7 @@ import _ from "lodash";
 import useCardsFilter from "../../hooks/filterCards";
 import Filters from "./Filters";
 import { MainReduxState } from "../../types/redux";
-import { Card } from "../../types/cardsTypes";
+import { Card } from "../../types/cards-types";
 
 function CardsByUserDropDown({ cards }: { cards: Card[] }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser") || "");

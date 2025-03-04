@@ -14,7 +14,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
-import { Referral } from "../../types/cardsTypes";
+import { Referral } from "../../types/cards-types";
 
 type CardReferralsProps = {
   cardReferrals: Referral[];

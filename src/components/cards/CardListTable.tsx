@@ -26,7 +26,7 @@ import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
 import StampedStatus from "./StampedStatus";
 import { MainReduxState } from "../../types/redux";
-import { Card } from "../../types/cardsTypes";
+import { Card } from "../../types/cards-types";
 
 type CardListTableProps = {
   cards: Card[];

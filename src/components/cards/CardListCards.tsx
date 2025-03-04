@@ -20,7 +20,7 @@ import { BsFillBellFill } from "react-icons/bs";
 import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
-import { Card } from "../../types/cardsTypes";
+import { Card } from "../../types/cards-types";
 
 type CardListCardsProps = {
   cards: Card[];

@@ -1,15 +1,15 @@
-import React from "react";
 import { groupBy } from "lodash";
 import { titleCase } from "../../helpers";
 import { ACCOUNT_TYPE, APP_COLOR_LIGHT_GRAY } from "../../constants";
+import { LoyaltyDataMiniTableProps } from "../../types/cardholder-types";
 
 export default function LoyaltyDataMiniTable({
   loyaltyData,
   layout,
   isLoadedInCard,
-}) {
+}: LoyaltyDataMiniTableProps) {
   const loyaltyByType = groupBy(loyaltyData, "loyaltyType");
-  const miniDataSectionMarginRight = layout === "list" && "1.5rem";
+  const miniDataSectionMarginRight = layout === "list" ? "1.5rem" : "";
   return isLoadedInCard ? (
     <article>
       <p>Loyalty</p>
