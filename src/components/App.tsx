@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import CardHoldersPage from "./cardholders/CardHoldersPage";
@@ -18,7 +18,7 @@ import { useSigninCheck } from "reactfire";
 import ReferralsPage from "./referrals/ReferralsPage";
 import useWindhowWidth from "../hooks/windowWidth";
 import ThemeToggle from "./header/ThemeToggle";
-export const WindowWidthContext = createContext();
+export const WindowWidthContext = createContext<number | null>(null);
 
 function App() {
   const { status, data: signinResult } = useSigninCheck();

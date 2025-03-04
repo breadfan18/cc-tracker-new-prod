@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Burger from "../common/Burger";
 import { APP_COLOR_BLUE, HEADER_CARD_LOGO } from "../../constants";
 import UserProfileSection from "./UserProfileSection";
+import { UserProfile } from "firebase/auth";
 
 const navData = [
   {
@@ -31,7 +32,13 @@ const navData = [
   },
 ];
 
-const Header = ({ user, isMobile }) => {
+const Header = ({
+  user,
+  isMobile,
+}: {
+  user: UserProfile;
+  isMobile: boolean;
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const activeStyle = {
     color: APP_COLOR_BLUE,
@@ -43,11 +50,11 @@ const Header = ({ user, isMobile }) => {
     backgroundColor: "white",
     borderRadius: "5px",
   };
-  let navRef = useRef();
+  let navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const navMenuHandler = (event) => {
-      if (!navRef.current?.contains(event.target)) {
+    const navMenuHandler = (event: MouseEvent) => {
+      if (!navRef.current?.contains(event.target as Node)) {
         setMenuOpen(false);
       }
     };

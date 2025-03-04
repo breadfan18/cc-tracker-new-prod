@@ -1,10 +1,8 @@
-import React from "react";
 import { toast } from "react-toastify";
-import { APP_COLOR_BLACK_OPACITY } from "../../constants";
 import { IoCopyOutline } from "react-icons/io5";
 
-export default function CopyIcon({ dataToCopy }) {
-  const copyFileNameToClipboard = (dataToCopy) => {
+export default function CopyIcon({ dataToCopy }: { dataToCopy: string }) {
+  const copyFileNameToClipboard = (dataToCopy: string) => {
     navigator.clipboard
       .writeText(dataToCopy)
       .then(() => toast.info("Data copied to clipboard"))

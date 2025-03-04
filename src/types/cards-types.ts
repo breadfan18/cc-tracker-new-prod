@@ -5,11 +5,7 @@ export type Card = {
   card: string;
   cardType: string;
   userId: string;
-  inquiries: {
-    equifax: boolean;
-    experian: boolean;
-    transunion: boolean;
-  };
+  inquiries: Inquiries;
   annualFee: string;
   nextFeeDate: string;
   creditLine: string;
@@ -23,6 +19,12 @@ export type Card = {
   cardNotes?: CardNote[];
   cardholder: string;
   isFav?: boolean;
+};
+
+export type Inquiries = {
+  equifax: boolean;
+  experian: boolean;
+  transunion: boolean;
 };
 
 export type Tag = {

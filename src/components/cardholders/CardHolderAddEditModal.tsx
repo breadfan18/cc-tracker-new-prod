@@ -75,12 +75,12 @@ function CardholderAddEditModal({
   const [imgEditor, setImgEditor] = useState(null);
   const [errors, setErrors] = useState({});
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = event.target;
 
     setCardHolderForModal((prevValue) => ({
       ...prevValue,
-      [name]: name === "imgFile" ? files[0] : value.trim(" "),
+      [name]: name === "imgFile" && files ? files[0] : value.trim(),
     }));
   };
 

@@ -165,15 +165,6 @@ export function formDisabledCheck(dataType) {
   );
 }
 
-// export function handleInquiriesList(inq, delimiter) {
-//   const inqArr = Object.keys(inq).filter((i) => inq[i]);
-//   const lastInq = inqArr[inqArr.length - 1];
-//   return inqArr.reduce(
-//     (output, i) => (output += titleCase(i) + (i === lastInq ? "" : delimiter)),
-//     ""
-//   );
-// }
-
 export function handleInquiriesList(inq) {
   return Object.keys(inq)
     .filter((i) => inq[i])

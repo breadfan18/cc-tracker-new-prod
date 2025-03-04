@@ -1,10 +1,13 @@
-import React from "react";
 import { TbPhotoEdit } from "react-icons/tb";
 
-export default function PhotoEditButton({ onChange }) {
+export default function PhotoEditButton({
+  onChange,
+}: {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
   return (
     <div className="image-upload">
-      <label for="file-input">
+      <label htmlFor="file-input">
         <TbPhotoEdit className="editPhotoIcon" />
       </label>
       <input

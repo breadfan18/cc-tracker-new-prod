@@ -1,9 +1,16 @@
-import React from "react";
 import { Button } from "react-bootstrap";
 import { BsTrash3 } from "react-icons/bs";
-import PropTypes from "prop-types";
 
-export function DeleteButton({ onClick, disableBtn, showAsRectangle }) {
+type DeleteButtonProps = {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  disableBtn: boolean;
+  showAsRectangle?: boolean;
+};
+export function DeleteButton({
+  onClick,
+  disableBtn,
+  showAsRectangle,
+}: DeleteButtonProps) {
   return (
     <Button
       variant="danger"
@@ -15,7 +22,3 @@ export function DeleteButton({ onClick, disableBtn, showAsRectangle }) {
     </Button>
   );
 }
-
-DeleteButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};

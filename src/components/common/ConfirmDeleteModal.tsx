@@ -62,6 +62,8 @@ export default function ConfirmDeleteModal({
   }
 
   function handleDelete(data) {
+    console.log(data);
+
     switch (dataType) {
       case "card":
         dispatch(deleteCardFromFirebase(data, user?.uid));
@@ -101,7 +103,7 @@ export default function ConfirmDeleteModal({
     toggleModal();
   }
 
-  function handleDeleteButtonClick(e) {
+  function handleDeleteButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.stopPropagation();
     toggleShow();
     if (setModalOpen) setModalOpen(true);
