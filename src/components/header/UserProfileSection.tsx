@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { auth } from "../../tools/firebase";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { userLogout } from "../../redux/actions/authActions";
@@ -7,27 +7,26 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
-import {
-  APP_COLOR_BLUE,
-  APP_COLOR_LIGHT_BLACK,
-  CARDHOLDER_STOCK_IMG,
-} from "../../constants";
+import { APP_COLOR_BLUE, APP_COLOR_LIGHT_BLACK } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
 import ThemeToggle from "./ThemeToggle";
 import { loadNotificationsFromFirebase } from "../../redux/actions/notificationsActions";
 import NotificationsDrawer from "../common/Notifications/NotificationsDrawer";
+import { MainReduxState } from "../../types/redux";
 
 function UserProfileSection({ user }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { isMobile } = useWindhowWidth();
-  const theme = useSelector((selector) => selector.theme);
-  const notifications = useSelector((state) => state.notifications);
+  const theme = useSelector((state: MainReduxState) => state.theme);
+  const notifications = useSelector(
+    (state: MainReduxState) => state.notifications
+  );
   const [notificationsLoaded, setNotificationsLoaded] = useState(false);
-  const showMenuRef = useRef(null);
-  const userSectionRef = useRef(null);
-  const notificationsDrawerRef = useRef(null);
+  const showMenuRef = useRef<HTMLDivElement>(null);
+  const userSectionRef = useRef<HTMLElement>(null);
+  const notificationsDrawerRef = useRef<HTMLDivElement>(null);
 
   const handleEscapeKey = (event) => {
     if (event.key === "Escape") {
@@ -42,11 +41,15 @@ function UserProfileSection({ user }) {
     }
   }, [dispatch, notifications.length, notificationsLoaded, user.uid]);
 
-  const hideShowMenuOnDocumentClick = (event) => {
-    const isClickInsideMenu = showMenuRef.current?.contains(event.target);
-    const isClickOnUserSection = userSectionRef.current?.contains(event.target);
+  const hideShowMenuOnDocumentClick = (event: MouseEvent) => {
+    const isClickInsideMenu = showMenuRef.current?.contains(
+      event.target as Node
+    );
+    const isClickOnUserSection = userSectionRef.current?.contains(
+      event.target as Node
+    );
     const isClickOnNotificationOption =
-      notificationsDrawerRef.current?.contains(event.target);
+      notificationsDrawerRef.current?.contains(event.target as Node);
 
     if (
       !isClickInsideMenu &&
@@ -87,11 +90,13 @@ function UserProfileSection({ user }) {
         id="userSection"
         ref={userSectionRef}
         style={{
-          boxShadow: !isMobile && `-4px 0 8px -6px ${APP_COLOR_LIGHT_BLACK}`,
+          boxShadow: !isMobile
+            ? `-4px 0 8px -6px ${APP_COLOR_LIGHT_BLACK}`
+            : "",
         }}
         onClick={toggleShowMenu}
       >
-        <div class="user-img-container">
+        <div className="user-img-container">
           <img
             src={user.photoURL}
             // src={CARDHOLDER_STOCK_IMG}
@@ -103,7 +108,7 @@ function UserProfileSection({ user }) {
             }}
             title={user.displayName}
           />
-          {notifications.length > 0 && <span class="notification-dot" />}
+          {notifications.length > 0 && <span className="notification-dot" />}
         </div>
         <article>
           <p
@@ -143,7 +148,7 @@ function UserProfileSection({ user }) {
         <div
           className="userProfileMenu"
           ref={showMenuRef}
-          style={{ backgroundColor: theme === "dark" && "black" }}
+          style={{ backgroundColor: theme === "dark" ? "black" : "" }}
         >
           <div className="themeTogglePlacement">
             <ThemeToggle displayToggle={true} />

@@ -7,7 +7,7 @@ import { Notification as NotificationType } from "../../../types/cards-types";
 
 type NotificationsDrawerProps = {
   notifications: NotificationType[];
-  notificationsRef: React.MutableRefObject<null>;
+  notificationsRef: React.RefObject<HTMLDivElement>;
   firebaseUid: string;
 };
 function NotificationsDrawer({

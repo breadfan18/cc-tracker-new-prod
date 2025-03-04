@@ -3,7 +3,6 @@ import {
   TbSquareRoundedChevronsRightFilled,
   TbSquareRoundedNumber0Filled,
 } from "react-icons/tb";
-import PropTypes from "prop-types";
 import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 
 type BonusEarnStatusIconProps = {
@@ -45,7 +44,3 @@ export default function BonusEarnStatusIcon({
     />
   );
 }
-BonusEarnStatusIcon.propTypes = {
-  bonusEarned: PropTypes.bool || undefined,
-  iconSize: PropTypes.string,
-};

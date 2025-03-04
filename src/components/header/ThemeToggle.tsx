@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./ThemeToggle.css";
 import { useDispatch } from "react-redux";
 import { changeReduxTheme } from "../../redux/actions/themeActions";
 import { MdWbSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 
-const ThemeToggle = ({ displayToggle }) => {
+const ThemeToggle = ({ displayToggle }: { displayToggle: boolean }) => {
   const savedTheme = localStorage.getItem("theme") || "light";
   const [theme, setTheme] = useState(savedTheme);
   const dispatch = useDispatch();
