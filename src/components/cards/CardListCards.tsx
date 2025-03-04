@@ -26,8 +26,9 @@ type CardListCardsProps = {
   cards: Card[];
   showEditDelete: boolean;
   showUserName: boolean;
-  showBonusInfo: boolean;
+  showBonusInfo?: boolean;
 };
+
 export default function CardListCards({
   cards,
   showEditDelete,

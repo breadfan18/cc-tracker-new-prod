@@ -1,8 +1,14 @@
-import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import PropTypes from "prop-types";
 
-export function FiveTwentyFourStatus({ percent, label }) {
+type FiveTwentyFourStatusProps = {
+  percent: number;
+  label: string;
+  // key?: string;
+};
+export function FiveTwentyFourStatus({
+  percent,
+  label,
+}: FiveTwentyFourStatusProps) {
   return (
     <>
       <p style={{ marginBottom: "2px" }}>524 Status Tracker</p>
@@ -27,8 +33,3 @@ export function FiveTwentyFourStatus({ percent, label }) {
     </>
   );
 }
-
-FiveTwentyFourStatus.propTypes = {
-  percent: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
-};

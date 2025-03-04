@@ -33,7 +33,7 @@ type CardListTableProps = {
   showEditDelete: boolean;
   showUser: boolean;
   showCompactTable: boolean;
-  windowWidth: number;
+  windowWidth?: number;
 };
 
 export default function CardListTable({
@@ -90,21 +90,23 @@ export default function CardListTable({
           <th className="tableHeader">
             Type <FaSort onClick={() => requestSort(CARD_DATA_KEYS.cardType)} />
           </th>
-          {windowWidth > 1505 && (
+          {windowWidth && windowWidth > 1505 && (
             <th className="tableHeader">
               Credit Line{" "}
               <FaSort onClick={() => requestSort(CARD_DATA_KEYS.creditLine)} />
             </th>
           )}
-          {windowWidth > 1550 && <th className="tableHeader">Credit Pull</th>}
+          {windowWidth && windowWidth > 1550 && (
+            <th className="tableHeader">Credit Pull</th>
+          )}
           <th className="tableHeader">
             Annual Fee{" "}
             <FaSort onClick={() => requestSort(CARD_DATA_KEYS.annualFee)} />
           </th>
-          {windowWidth > 1380 && !showCompactTable && (
+          {windowWidth && windowWidth > 1380 && !showCompactTable && (
             <th className="tableHeader">Spend Req</th>
           )}
-          {windowWidth > 1380 && !showCompactTable && (
+          {windowWidth && windowWidth > 1380 && !showCompactTable && (
             <th className="tableHeader">Spend By</th>
           )}
           {showEditDelete && (
@@ -181,8 +183,10 @@ export default function CardListTable({
                 {`  ${cardName}`}
               </td>
               <td>{cardType}</td>
-              {windowWidth > 1505 && <td>{formatCurrency(creditLine)}</td>}
-              {windowWidth > 1550 && (
+              {windowWidth && windowWidth > 1505 && (
+                <td>{formatCurrency(creditLine)}</td>
+              )}
+              {windowWidth && windowWidth > 1550 && (
                 <td>
                   <CreditBureauIcons inquiries={inquiries} />
                 </td>
@@ -218,10 +222,10 @@ export default function CardListTable({
                   <StampedStatus status={status} />
                 )}
               </td>
-              {windowWidth > 1380 && !showCompactTable && (
+              {windowWidth && windowWidth > 1380 && !showCompactTable && (
                 <td>{formatCurrency(spendReq)}</td>
               )}
-              {windowWidth > 1380 && !showCompactTable && (
+              {windowWidth && windowWidth > 1380 && !showCompactTable && (
                 <td>
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div className="flexAndVerticalCenter">
