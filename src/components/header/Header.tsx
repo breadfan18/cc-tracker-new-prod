@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Burger from "../common/Burger";
 import { APP_COLOR_BLUE, HEADER_CARD_LOGO } from "../../constants";
 import UserProfileSection from "./UserProfileSection";
-import { UserProfile } from "firebase/auth";
+import { UserInfo } from "firebase/auth";
 
 const navData = [
   {
@@ -32,13 +32,7 @@ const navData = [
   },
 ];
 
-const Header = ({
-  user,
-  isMobile,
-}: {
-  user: UserProfile;
-  isMobile: boolean;
-}) => {
+const Header = ({ user, isMobile }: { user: UserInfo; isMobile: boolean }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const activeStyle = {
     color: APP_COLOR_BLUE,

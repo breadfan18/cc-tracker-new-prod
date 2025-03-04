@@ -13,8 +13,9 @@ import ThemeToggle from "./ThemeToggle";
 import { loadNotificationsFromFirebase } from "../../redux/actions/notificationsActions";
 import NotificationsDrawer from "../common/Notifications/NotificationsDrawer";
 import { MainReduxState } from "../../types/redux";
+import { UserInfo } from "firebase/auth";
 
-function UserProfileSection({ user }) {
+function UserProfileSection({ user }: { user: UserInfo }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -28,7 +29,7 @@ function UserProfileSection({ user }) {
   const userSectionRef = useRef<HTMLElement>(null);
   const notificationsDrawerRef = useRef<HTMLDivElement>(null);
 
-  const handleEscapeKey = (event) => {
+  const handleEscapeKey = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       setShowMenu(false);
     }
@@ -98,7 +99,7 @@ function UserProfileSection({ user }) {
       >
         <div className="user-img-container">
           <img
-            src={user.photoURL}
+            src={user.photoURL || ""}
             // src={CARDHOLDER_STOCK_IMG}
             alt=""
             style={{
@@ -106,7 +107,7 @@ function UserProfileSection({ user }) {
               height: "2.8rem",
               marginRight: "8px",
             }}
-            title={user.displayName}
+            title={user.displayName || ""}
           />
           {notifications.length > 0 && <span className="notification-dot" />}
         </div>
