@@ -17,7 +17,7 @@ import {
 } from "../../redux/actions/notificationsActions";
 import { MainReduxState } from "../../types/redux";
 import { Card } from "../../types/cards-types";
-import { Errors } from "../common/input-fields/input-types";
+import { Errors } from "../../types/input-types";
 
 type CardAddEditModalProps = {
   card?: Card;

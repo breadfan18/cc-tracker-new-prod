@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { DELETE_COLOR_RED } from "../../../constants";
-import { NumberInputProps } from "./input-types";
+import { NumberInputProps } from "../../../types/input-types";
 
 const NumberInput = ({
   name,

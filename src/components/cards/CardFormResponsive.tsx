@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
 import { Card } from "../../types/cards-types";
-import { Errors } from "../common/input-fields/input-types";
+import { Errors } from "../../types/input-types";
 import { MainReduxState } from "../../types/redux";
 
 type CardFormResponsiveProps = {

@@ -3,8 +3,18 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { FaBell } from "react-icons/fa";
 import { APP_COLOR_BLUE, DELETE_COLOR_RED } from "../../../constants";
 import Notification from "./Notification";
+import { Notification as NotificationType } from "../../../types/cards-types";
 
-function NotificationsDrawer({ notifications, notificationsRef, firebaseUid }) {
+type NotificationsDrawerProps = {
+  notifications: NotificationType[];
+  notificationsRef: React.MutableRefObject<null>;
+  firebaseUid: string;
+};
+function NotificationsDrawer({
+  notifications,
+  notificationsRef,
+  firebaseUid,
+}: NotificationsDrawerProps) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -13,7 +23,7 @@ function NotificationsDrawer({ notifications, notificationsRef, firebaseUid }) {
     <>
       <li className="userMenuOptions" onClick={handleShow}>
         <span
-          class="userMenuNotificationsBadge"
+          className="userMenuNotificationsBadge"
           style={{
             marginRight: "10px",
             backgroundColor:

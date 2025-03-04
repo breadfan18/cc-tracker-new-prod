@@ -3,7 +3,7 @@ import {
   APP_COLOR_LIGHT_GRAY,
   DELETE_COLOR_RED,
 } from "../../../constants";
-import { TextInputProps } from "./input-types";
+import { TextInputProps } from "../../../types/input-types";
 
 const TextInput = ({
   name,

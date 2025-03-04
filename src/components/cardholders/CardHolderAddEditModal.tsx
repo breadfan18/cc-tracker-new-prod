@@ -16,7 +16,7 @@ import CardholderPhoto from "./CardholderPhoto";
 import PhotoEditor from "./PhotoEditor";
 import PhotoEditButton from "../common/PhotoEditButton";
 import { MainReduxState } from "../../types/redux";
-import { Errors } from "../common/input-fields/input-types";
+import { Errors } from "../../types/input-types";
 import { Cardholder } from "../../types/cardholder-types";
 
 const NEW_CARDHOLDER = {

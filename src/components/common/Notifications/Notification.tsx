@@ -1,6 +1,4 @@
-import React from "react";
 import { PiAirplaneTiltFill } from "react-icons/pi";
-import { GoClockFill } from "react-icons/go";
 import { FaArrowRight } from "react-icons/fa6";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
 import { useDispatch } from "react-redux";

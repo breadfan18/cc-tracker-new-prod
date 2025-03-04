@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import { DELETE_COLOR_RED } from "../../../constants";
-import { DateInputProps } from "./input-types";
+import { DateInputProps } from "../../../types/input-types";
 
 const DateInput = ({
   name,

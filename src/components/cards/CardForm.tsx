@@ -19,7 +19,7 @@ import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
 import { MainReduxState } from "../../types/redux";
 import { Card } from "../../types/cards-types";
-import { Errors } from "../common/input-fields/input-types";
+import { Errors } from "../../types/input-types";
 
 type CardFormProps = {
   card: Card;

@@ -1,8 +1,17 @@
-import React from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { deleteNotificationFromFirebase } from "../../../redux/actions/notificationsActions";
 import { formatDate } from "../../../helpers";
+import { Notification } from "../../../types/cards-types";
+import { IconType } from "react-icons/lib";
+
+type PageNotificationsProps = {
+  notification: Notification;
+  Icon: IconType;
+  iconColor: string;
+  lastReminder: boolean;
+  firebaseUid: string;
+};
 
 export const PageNotifications = ({
   notification,
@@ -10,7 +19,7 @@ export const PageNotifications = ({
   iconColor,
   lastReminder,
   firebaseUid,
-}) => {
+}: PageNotificationsProps) => {
   const dispatch = useDispatch();
 
   return (

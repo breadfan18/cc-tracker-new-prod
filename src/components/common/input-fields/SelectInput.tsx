@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import { DELETE_COLOR_RED } from "../../../constants";
-import { SelectInputProps } from "./input-types";
+import { SelectInputProps } from "../../../types/input-types";
 
 const SelectInput = ({
   name,
