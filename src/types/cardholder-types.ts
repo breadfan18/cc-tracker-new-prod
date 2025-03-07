@@ -11,6 +11,14 @@ export type Cardholder = {
   hasLoyalty?: boolean;
 };
 
+export type CardholderForModalType = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  img: string;
+  imgFile?: any;
+};
+
 type MiniTableProps<T, K extends string> = {
   [key in K]: T;
 } & {

@@ -1,47 +1,61 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveLoyaltyDataToFirebase } from "../../redux/actions/loyaltyActions";
 import { toast } from "react-toastify";
-import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { LOYALTY_DATA_KEYS, PROGRAMS } from "../../constants";
 import { maskPwd } from "../../helpers";
 import LoyaltyForm from "./LoyaltyForm";
 import { useUser } from "reactfire";
+import { MainReduxState } from "../../types/redux";
+import { LoyaltyData, LoyaltyProgram } from "../../types/loyalty-types";
+import { Errors } from "../../types/input-types";
 
 const newLoyaltyAcc = {
-  id: null,
+  id: "",
   loyaltyType: "",
   program: {
-    id: null,
-    type: null,
-    name: null,
-    img: null,
+    id: "",
+    type: "",
+    name: "",
+    img: "",
   },
-  memberId: null,
-  loginId: null,
-  password: null,
-  userId: null,
-  accountHolder: null,
-  rewardsBalance: null,
-  rewardsExpiration: null,
+  memberId: "",
+  loginId: "",
+  password: "",
+  userId: "",
+  accountHolder: "",
+  rewardsBalance: "",
+  rewardsExpiration: "",
 };
 
-function LoyaltyAddEditModal({ loyaltyAcc, userAddedPrograms }) {
+type LoyaltyAddEditModalProps = {
+  loyaltyAcc?: LoyaltyData;
+  userAddedPrograms: LoyaltyProgram[];
+};
+
+function LoyaltyAddEditModal({
+  loyaltyAcc,
+  userAddedPrograms,
+}: LoyaltyAddEditModalProps) {
   const dispatch = useDispatch();
   const [loyaltyAccForModal, setLoyaltyAccForModal] = useState(
     loyaltyAcc ? { ...loyaltyAcc } : newLoyaltyAcc
   );
-  const [programsFilteredByType, setFilteredPrograms] = useState([]);
+  const [programsFilteredByType, setFilteredPrograms] = useState<
+    LoyaltyProgram[]
+  >([]);
   const [show, setShow] = useState(false);
   const { data: user } = useUser();
-  const cardholders = useSelector((state) => state.cardholders);
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const [errors, setErrors] = useState({});
   const combinedPrograms = [...PROGRAMS, ...(userAddedPrograms || [])];
 
   const toggleShow = () => setShow(!show);
+
+  // BUG - why does the loyalty program field in the form not populate with the correct value when editing a loyalty account?
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -53,11 +67,13 @@ function LoyaltyAddEditModal({ loyaltyAcc, userAddedPrograms }) {
       const filteredPrograms = combinedPrograms.filter(
         (program) => program.type === value
       );
+
       setFilteredPrograms(filteredPrograms);
     } else if (name === "userId") {
       setLoyaltyAccForModal((prevAcc) => ({
         ...prevAcc,
-        accountHolder: cardholders.find((holder) => holder.id === value).name,
+        accountHolder:
+          cardholders.find((holder) => holder.id === value)?.name || "",
         userId: value,
       }));
     }
@@ -102,7 +118,7 @@ function LoyaltyAddEditModal({ loyaltyAcc, userAddedPrograms }) {
 
   function formIsValid() {
     const { userId, loyaltyType, program } = loyaltyAccForModal;
-    const errors = {};
+    const errors: Errors = {};
     if (!userId) errors.userId = "Required";
     if (!loyaltyType) errors.loyaltyType = "Required";
     if (!program.name) errors.program = "Required";
@@ -120,7 +136,7 @@ function LoyaltyAddEditModal({ loyaltyAcc, userAddedPrograms }) {
 
   return (
     <>
-      {loyaltyAccForModal.id !== null ? (
+      {loyaltyAccForModal.id !== "" ? (
         <Button
           variant="success"
           onClick={toggleShow}
@@ -158,9 +174,5 @@ function LoyaltyAddEditModal({ loyaltyAcc, userAddedPrograms }) {
     </>
   );
 }
-
-LoyaltyAddEditModal.propTypes = {
-  loyaltyAcc: PropTypes.object,
-};
 
 export default LoyaltyAddEditModal;

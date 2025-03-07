@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadloyaltyDataFromFirebase,
@@ -12,18 +12,23 @@ import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActio
 import { PageNotifications } from "../common/Notifications/PageNotifications";
 import { PiAirplaneTiltFill } from "react-icons/pi";
 import { APP_COLOR_BLUE } from "../../constants";
+import { MainReduxState } from "../../types/redux";
 
 const LoyaltyPage = () => {
   const { status, data: user } = useUser();
   const dispatch = useDispatch();
-  const loyaltyData = useSelector((state) => state.loyaltyData);
-  const loading = useSelector((state) => state.apiCallsInProgress > 0);
-  const cardholders = useSelector((state) => state.cardholders);
-  const loyaltyNotifications = useSelector((state) =>
+  const loyaltyData = useSelector((state: MainReduxState) => state.loyaltyData);
+  const loading = useSelector(
+    (state: MainReduxState) => state.apiCallsInProgress > 0
+  );
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
+  const loyaltyNotifications = useSelector((state: MainReduxState) =>
     state.notifications.filter((n) => n.notificationType === "loyalty")
   );
 
-  const userLoyaltyPrograms = useSelector((state) => state.userLoyaltyPrograms);
+  const userLoyaltyPrograms = useSelector(
+    (state: MainReduxState) => state.userLoyaltyPrograms
+  );
 
   useEffect(() => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
@@ -66,21 +71,14 @@ const LoyaltyPage = () => {
     <div className="loyaltyContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Loyalty Accounts</h2>
-        <LoyaltyAddEditModal
-          cardholders={cardholders}
-          userAddedPrograms={userLoyaltyPrograms}
-        />
+        <LoyaltyAddEditModal userAddedPrograms={userLoyaltyPrograms} />
       </section>
       {loyaltyNotifications.length > 0 && (
         <section className="card-details-notifications-container">
           {cardNotificationElements}
         </section>
       )}
-      {loading ? (
-        <Spinner />
-      ) : (
-        <LoyaltyTabs loyaltyData={loyaltyData} showEditDelete={true} />
-      )}
+      {loading ? <Spinner /> : <LoyaltyTabs loyaltyData={loyaltyData} />}
     </div>
   );
 };

@@ -8,7 +8,7 @@ import { saveLoyaltyDataToFirebase } from "../../redux/actions/loyaltyActions";
 import { toast } from "react-toastify";
 import { MdModeEditOutline } from "react-icons/md";
 import { useUser } from "reactfire";
-import CardholderForm from "../loyalty/CardholderForm";
+import CardholderForm from "./CardholderForm";
 import { titleCase } from "../../helpers";
 import _ from "lodash";
 import { getFirebaseImgUrlForDataURL } from "../../tools/firebase";
@@ -17,7 +17,10 @@ import PhotoEditor from "./PhotoEditor";
 import PhotoEditButton from "../common/PhotoEditButton";
 import { MainReduxState } from "../../types/redux";
 import { Errors } from "../../types/input-types";
-import { Cardholder } from "../../types/cardholder-types";
+import {
+  Cardholder,
+  CardholderForModalType,
+} from "../../types/cardholder-types";
 
 const NEW_CARDHOLDER = {
   id: "",
@@ -31,14 +34,6 @@ type CardholderAddEditModalProps = {
   cardholder?: Cardholder;
   disableBtn?: boolean;
   showAsRectangle?: boolean;
-};
-
-type CardholderForModalType = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  img: string;
-  imgFile?: any;
 };
 
 function CardholderAddEditModal({
@@ -75,12 +70,19 @@ function CardholderAddEditModal({
   const [imgEditor, setImgEditor] = useState(null);
   const [errors, setErrors] = useState({});
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, files } = event.target;
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
 
     setCardHolderForModal((prevValue) => ({
       ...prevValue,
-      [name]: name === "imgFile" && files ? files[0] : value.trim(),
+      [name]:
+        name === "imgFile" &&
+        event.target instanceof HTMLInputElement &&
+        event.target.files
+          ? event.target.files[0]
+          : value.trim(),
     }));
   };
 

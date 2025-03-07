@@ -6,7 +6,6 @@ import { saveCardToFirebase } from "../../redux/actions/cardsActions";
 import CardForm from "./CardForm";
 import CardFormResponsive from "./CardFormResponsive";
 import { toast } from "react-toastify";
-import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { ISSUERS, NEW_CARD } from "../../constants";
 import { useUser } from "reactfire";
@@ -223,8 +222,3 @@ export default function CardAddEditModal({
     </>
   );
 }
-
-CardAddEditModal.propTypes = {
-  card: PropTypes.object,
-  setModalOpen: PropTypes.func,
-};

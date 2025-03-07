@@ -1,6 +1,6 @@
 import { Cardholder } from "./cardholder-types";
 import { Card, Referral, Notification } from "./cards-types";
-import { LoyaltyData, UserLoyaltyPrograms } from "./loyalty-types";
+import { LoyaltyData, LoyaltyProgram } from "./loyalty-types";
 
 export type MainReduxState = {
   cards: Card[];
@@ -10,5 +10,5 @@ export type MainReduxState = {
   referrals: Referral[];
   notifications: Notification[];
   theme: string;
-  userLoyaltyPrograms: UserLoyaltyPrograms[];
+  userLoyaltyPrograms: LoyaltyProgram[];
 };

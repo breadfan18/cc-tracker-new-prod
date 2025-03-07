@@ -67,7 +67,7 @@ export function saveLoyaltyDataToFirebase(loyaltyAcc, firebaseUid) {
     dispatch(beginApiCall());
 
     const loyaltyId =
-      loyaltyAcc.id === null
+      loyaltyAcc.id === ""
         ? slugify(
             loyaltyAcc.program.name + "-" + loyaltyAcc.userId + "-" + uid()
           )

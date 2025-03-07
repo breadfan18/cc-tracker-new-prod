@@ -1,11 +1,18 @@
-import React from "react";
 import { Accordion } from "react-bootstrap";
-import PropTypes from "prop-types";
 import useWindhowWidth from "../../hooks/windowWidth";
 import { useSelector } from "react-redux";
-export default function LoyaltyAccordion({ accordionBody, user }) {
+import { MainReduxState } from "../../types/redux";
+
+export default function LoyaltyAccordion({
+  accordionBody,
+  user,
+}: {
+  accordionBody: JSX.Element;
+  user: string;
+}) {
   const { isDesktop } = useWindhowWidth();
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: MainReduxState) => state.theme);
+
   return (
     <Accordion defaultActiveKey="1" className="customAccordions">
       <Accordion.Item eventKey="1">
@@ -17,7 +24,7 @@ export default function LoyaltyAccordion({ accordionBody, user }) {
                 ? "#212529"
                 : theme === "dark"
                 ? "black"
-                : null,
+                : "",
           }}
         >
           {accordionBody}
@@ -26,8 +33,3 @@ export default function LoyaltyAccordion({ accordionBody, user }) {
     </Accordion>
   );
 }
-
-LoyaltyAccordion.propTypes = {
-  accordionBody: PropTypes.element || null,
-  user: PropTypes.string.isRequired,
-};

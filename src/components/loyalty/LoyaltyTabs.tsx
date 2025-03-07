@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import PropTypes from "prop-types";
 import LoyaltyList from "./LoyaltyList";
 import { ACCOUNT_TYPE } from "../../constants";
 import { sortNumberDesc, titleCase } from "../../helpers";
@@ -12,8 +11,9 @@ import EmptyList from "../common/EmptyList";
 import useWindhowWidth from "../../hooks/windowWidth";
 import LoyaltyNewProgramForm from "./LoyaltyProgramForm";
 import { IoMdAddCircle } from "react-icons/io";
+import { LoyaltyData } from "../../types/loyalty-types";
 
-function LoyaltyTabs({ loyaltyData }) {
+function LoyaltyTabs({ loyaltyData }: { loyaltyData: LoyaltyData[] }) {
   const { windowWidth, isDesktop } = useWindhowWidth();
   const loyaltyByType = _.groupBy(loyaltyData, (o) => o.loyaltyType);
   const [showNewLoyaltyProgramCreated, setNewLoyaltyProgramCreated] =
@@ -41,7 +41,6 @@ function LoyaltyTabs({ loyaltyData }) {
         <>
           <LoyaltyAccordion
             accordionBody={loyaltyList}
-            dataType={"Accounts"}
             user={accountHolderName}
           />
           <br />
@@ -92,9 +91,5 @@ function LoyaltyTabs({ loyaltyData }) {
     </Tabs>
   );
 }
-
-LoyaltyTabs.propTypes = {
-  loyaltyData: PropTypes.array.isRequired,
-};
 
 export default LoyaltyTabs;

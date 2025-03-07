@@ -1,6 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import { FaSort } from "react-icons/fa";
@@ -15,15 +13,30 @@ import {
 import { formatDate } from "../../helpers";
 import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
 import CopyIcon from "../common/CopyIcon";
+import { MainReduxState } from "../../types/redux";
+import { LoyaltyData } from "../../types/loyalty-types";
 
-const LoyaltyList = ({ loyaltyData, showEditDelete, isDesktop }) => {
+type LoyaltyListProps = {
+  loyaltyData: LoyaltyData[];
+  showEditDelete?: boolean;
+  isDesktop?: boolean;
+};
+
+const LoyaltyList = ({
+  loyaltyData,
+  showEditDelete,
+  isDesktop,
+}: LoyaltyListProps) => {
   const { data, requestSort } = useSortableData(loyaltyData);
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: MainReduxState) => state.theme);
+  const userLoyaltyPrograms = useSelector(
+    (state: MainReduxState) => state.userLoyaltyPrograms
+  );
 
   return loyaltyData.length === 0 ? (
     <EmptyList dataType={"loyalty account"} />
   ) : (
-    <Table variant={theme === "dark" ? "dark" : null}>
+    <Table variant={theme === "dark" ? "dark" : ""}>
       <thead>
         <tr>
           <th></th>
@@ -124,7 +137,10 @@ const LoyaltyList = ({ loyaltyData, showEditDelete, isDesktop }) => {
               {showEditDelete && (
                 <>
                   <td className="editDeleteCard">
-                    <LoyaltyAddEditModal loyaltyAcc={acc} />
+                    <LoyaltyAddEditModal
+                      loyaltyAcc={acc}
+                      userAddedPrograms={userLoyaltyPrograms}
+                    />
                     <ConfirmDeleteModal
                       data={acc}
                       dataType={DELETE_MODAL_TYPES.loyaltyAcc}
@@ -140,17 +156,4 @@ const LoyaltyList = ({ loyaltyData, showEditDelete, isDesktop }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    state,
-    ownProps,
-  };
-};
-
-LoyaltyList.propTypes = {
-  loyaltyData: PropTypes.array.isRequired,
-  history: PropTypes.object,
-  showEditDelete: PropTypes.bool.isRequired,
-};
-
-export default connect(mapStateToProps)(LoyaltyList);
+export default LoyaltyList;

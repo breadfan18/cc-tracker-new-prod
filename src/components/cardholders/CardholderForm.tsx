@@ -1,7 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TextInput from "../common/input-fields/TextInput";
-// import PhotoEditor from "../cardholders/PhotoEditor";
+import { CardholderForModalType } from "../../types/cardholder-types";
+import { Errors } from "../../types/input-types";
+
+type CardholderFormProps = {
+  cardholder: CardholderForModalType;
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  errors?: Errors;
+  saving?: boolean;
+};
 
 const CardholderForm = ({
   cardholder,
@@ -9,7 +19,7 @@ const CardholderForm = ({
   onChange,
   errors = {},
   saving,
-}) => {
+}: CardholderFormProps) => {
   const buttonText = saving
     ? "Saving..."
     : cardholder.id === null
@@ -45,13 +55,6 @@ const CardholderForm = ({
       </button>
     </form>
   );
-};
-
-CardholderForm.propTypes = {
-  cardholder: PropTypes.object.isRequired,
-  errors: PropTypes.object,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default CardholderForm;
