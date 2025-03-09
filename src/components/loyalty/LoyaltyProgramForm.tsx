@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TextInput from "../common/input-fields/TextInput";
 import SelectInput from "../common/input-fields/SelectInput";
 import {
@@ -16,8 +16,17 @@ import { saveUserLoyaltyProgramToFirebase } from "../../redux/actions/loyaltyAct
 import { useUser } from "reactfire";
 import { isEmpty } from "lodash";
 import { FaCircleCheck } from "react-icons/fa6";
+import { Errors } from "../../types/input-types";
 
-const LoyaltyNewProgramForm = ({ showProgramCreated, setProgramCreated }) => {
+type LoyaltyNewProgramFormProps = {
+  showProgramCreated: boolean;
+  setProgramCreated: (value: boolean) => void;
+};
+
+const LoyaltyNewProgramForm = ({
+  showProgramCreated,
+  setProgramCreated,
+}: LoyaltyNewProgramFormProps) => {
   const { data: user } = useUser();
   const initialNewProgramState = {
     type: "",
@@ -27,7 +36,7 @@ const LoyaltyNewProgramForm = ({ showProgramCreated, setProgramCreated }) => {
   };
   const dispatch = useDispatch();
   const [newProgram, setNewProgram] = useState(initialNewProgramState);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Errors>({});
 
   const handleSaveProgram = (e) => {
     e.preventDefault();
@@ -59,7 +68,7 @@ const LoyaltyNewProgramForm = ({ showProgramCreated, setProgramCreated }) => {
 
   function formIsValid() {
     const { type, name, url } = newProgram;
-    const errors = {};
+    const errors: Errors = {};
     if (!type) errors.type = "Required";
     if (!name) errors.name = "Required";
     if (url && !/^(ftp|http|https):\/\/[^ "]+$/.test(url))
@@ -110,7 +119,6 @@ const LoyaltyNewProgramForm = ({ showProgramCreated, setProgramCreated }) => {
             value={newProgram.url}
             onChange={handleChange}
             error={errors.url}
-            onB
           />
           <hr />
           <button
