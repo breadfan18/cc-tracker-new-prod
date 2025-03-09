@@ -1,12 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { DELETE_COLOR_RED } from "../../constants";
+
+type LoyaltyCardExpirationTextProps = {
+  expirationDate: string;
+  daysForExpiration?: number;
+};
 
 function LoyaltyCardExpirationText({
   expirationDate,
   daysForExpiration,
-  theme,
-}) {
+}: LoyaltyCardExpirationTextProps) {
   return (
     <p
       className="mb-0 cardBodyText"
@@ -32,10 +34,5 @@ function LoyaltyCardExpirationText({
     </p>
   );
 }
-
-LoyaltyCardExpirationText.propTypes = {
-  expirationDate: PropTypes.string.isRequired,
-  daysForExpiration: PropTypes.string.isRequired,
-};
 
 export default LoyaltyCardExpirationText;

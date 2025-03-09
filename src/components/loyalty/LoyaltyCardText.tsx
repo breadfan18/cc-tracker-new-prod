@@ -1,11 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { LOYALTY_DATA_KEYS } from "../../constants";
 import { formatDate } from "../../helpers";
 import CopyIcon from "../common/CopyIcon";
+import { LoyaltyData } from "../../types/loyalty-types";
 
-function LoyaltyCardText({ account, dataType, showCopyIcon, dataToCopy }) {
-  const setLoyaltyAccountType = (account, dataType) => {
+type LoyaltyCardTextProps = {
+  account: LoyaltyData;
+  dataType: string;
+  showCopyIcon?: boolean;
+  dataToCopy?: string;
+};
+
+type LoyaltyAccountType = {
+  fieldName: string;
+  value: string;
+};
+
+function LoyaltyCardText({
+  account,
+  dataType,
+  showCopyIcon,
+  dataToCopy,
+}: LoyaltyCardTextProps) {
+  const setLoyaltyAccountType = (
+    account: LoyaltyData,
+    dataType: string
+  ): LoyaltyAccountType => {
     switch (dataType) {
       case LOYALTY_DATA_KEYS.memberId:
         return {
@@ -35,7 +54,10 @@ function LoyaltyCardText({ account, dataType, showCopyIcon, dataToCopy }) {
           value: formatDate(account.rewardsExpiration),
         };
       default:
-        break;
+        return {
+          fieldName: "",
+          value: "",
+        };
     }
   };
 
@@ -49,15 +71,10 @@ function LoyaltyCardText({ account, dataType, showCopyIcon, dataToCopy }) {
         style={{ whiteSpace: "nowrap", overflow: "hidden" }}
       >
         {loyaltyAccountType.value}{" "}
-        {showCopyIcon && <CopyIcon dataToCopy={dataToCopy} />}
+        {showCopyIcon && dataToCopy && <CopyIcon dataToCopy={dataToCopy} />}
       </small>
     </p>
   );
 }
-
-LoyaltyCardText.propTypes = {
-  account: PropTypes.object.isRequired,
-  dataType: PropTypes.string.isRequired,
-};
 
 export default LoyaltyCardText;

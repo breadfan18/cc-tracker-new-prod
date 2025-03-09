@@ -10,6 +10,7 @@ export type LoyaltyData = {
     img: string;
     name: string;
     url?: string;
+    type?: string;
   };
   rewardsBalance: string;
   rewardsExpiration: string;

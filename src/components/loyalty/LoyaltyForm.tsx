@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { isEmpty } from "lodash";
 import TextInput from "../common/input-fields/TextInput";
 import SelectInput from "../common/input-fields/SelectInput";
@@ -10,6 +8,20 @@ import {
 } from "../../constants";
 import { titleCase } from "../../helpers";
 import DateInput from "../common/input-fields/DateInput";
+import { LoyaltyData, LoyaltyProgram } from "../../types/loyalty-types";
+import { Cardholder } from "../../types/cardholder-types";
+import { Errors } from "../../types/input-types";
+
+type LoyaltyFormProps = {
+  loyaltyAcc: LoyaltyData;
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  filteredPrograms: LoyaltyProgram[];
+  cardholders: Cardholder[];
+  errors?: Errors;
+};
 
 const LoyaltyForm = ({
   loyaltyAcc,
@@ -18,7 +30,7 @@ const LoyaltyForm = ({
   filteredPrograms,
   cardholders,
   errors = {},
-}) => {
+}: LoyaltyFormProps) => {
   const programsToDisplay = filteredPrograms.map((program) => ({
     value: program.id,
     text: program.name,
@@ -117,15 +129,6 @@ const LoyaltyForm = ({
       </button>
     </form>
   );
-};
-
-LoyaltyForm.propTypes = {
-  loyaltyAcc: PropTypes.object.isRequired,
-  errors: PropTypes.object,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
-  filteredPrograms: PropTypes.array.isRequired,
 };
 
 export default LoyaltyForm;

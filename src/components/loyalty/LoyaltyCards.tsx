@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
@@ -10,9 +9,18 @@ import LoyaltyCardExpirationText from "./LoyaltyCardExpirationText";
 import { formatDate } from "../../helpers";
 import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
 import { useSelector } from "react-redux";
+import { MainReduxState } from "../../types/redux";
+import { LoyaltyData } from "../../types/loyalty-types";
 
-export default function LoyaltyCards({ loyaltyData }) {
-  const theme = useSelector((state) => state.theme);
+export default function LoyaltyCards({
+  loyaltyData,
+}: {
+  loyaltyData: LoyaltyData[];
+}) {
+  const theme = useSelector((state: MainReduxState) => state.theme);
+  const userAddedPrograms = useSelector(
+    (state: MainReduxState) => state.userLoyaltyPrograms
+  );
   const allCards = loyaltyData.map((acc) => {
     const { daysForRewardExpiration, rewardsExpirationIcon } =
       getRewardsExpirationStuff(acc);
@@ -30,7 +38,9 @@ export default function LoyaltyCards({ loyaltyData }) {
           >
             <Card.Subtitle
               className="mb-0 loyaltyCardTitle"
-              style={{ borderBottom: theme === "dark" && "1px solid #4e5359" }}
+              style={{
+                borderBottom: theme === "dark" ? "1px solid #4e5359" : "",
+              }}
             >
               <a
                 href={acc.program.url}
@@ -80,10 +90,13 @@ export default function LoyaltyCards({ loyaltyData }) {
           </section>
         </Card.Body>
         <Card.Footer
-          style={{ borderTop: theme === "dark" && "1px solid #4e5359" }}
+          style={{ borderTop: theme === "dark" ? "1px solid #4e5359" : "" }}
         >
           <div className="editDeleteCard editDeleteOnCards">
-            <LoyaltyAddEditModal loyaltyAcc={acc} />
+            <LoyaltyAddEditModal
+              loyaltyAcc={acc}
+              userAddedPrograms={userAddedPrograms}
+            />
             <ConfirmDeleteModal
               data={acc}
               dataType={DELETE_MODAL_TYPES.loyaltyAcc}
