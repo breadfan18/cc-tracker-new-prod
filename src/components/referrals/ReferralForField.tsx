@@ -1,4 +1,3 @@
-import React from "react";
 import { APP_COLOR_BLUE, EDIT_COLOR_GREEN } from "../../constants";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { titleCase } from "../../helpers";
@@ -6,18 +5,17 @@ import { titleCase } from "../../helpers";
 export default function ReferrerField({
   referralBonusEarned,
   referringCardholder,
+}: {
+  referralBonusEarned: boolean;
+  referringCardholder: string;
 }) {
   return (
     <div
+      className="referrerField"
       style={{
         backgroundColor: referralBonusEarned
           ? EDIT_COLOR_GREEN
           : APP_COLOR_BLUE,
-        borderRadius: "0 30px 30px 0",
-        padding: "5px 3px",
-        display: "flex",
-        color: "white",
-        alignItems: "center",
       }}
     >
       {

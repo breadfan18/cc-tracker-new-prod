@@ -25,3 +25,7 @@ export type ReferralCardTextProps = {
   dataType: string;
   cardsByHolder: CardsByHolder;
 };
+
+export type ReferralForModalType = Referral & {
+  imgFile?: any;
+};

@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import TextInput from "../common/input-fields/TextInput";
 import { DELETE_COLOR_RED, ISSUERS, REFERRAL_DATA_KEYS } from "../../constants";
 import SelectInput from "../common/input-fields/SelectInput";
@@ -7,6 +5,23 @@ import { useSelector } from "react-redux";
 import DateInput from "../common/input-fields/DateInput";
 import Form from "react-bootstrap/Form";
 import { isEmpty } from "lodash";
+import { Referral } from "../../types/referral-types";
+import { Cardholder } from "../../types/cardholder-types";
+import { Card } from "../../types/cards-types";
+import { Errors } from "../../types/input-types";
+import { MainReduxState } from "../../types/redux";
+
+type ReferralFormProps = {
+  referral: Referral;
+  cardholders: Cardholder[];
+  filteredCards: Card[];
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  errors?: Errors;
+  saving?: boolean;
+};
 
 const ReferralForm = ({
   referral,
@@ -16,14 +31,14 @@ const ReferralForm = ({
   onChange,
   errors = {},
   saving,
-}) => {
+}: ReferralFormProps) => {
   const buttonText = saving
     ? "Saving..."
     : referral.id === null
     ? "Add Referral"
     : "Save Changes";
 
-  const cards = useSelector((state) => state.cards);
+  const cards = useSelector((state: MainReduxState) => state.cards);
   const filteredCardsToDisplay = referral.id
     ? cards
         .filter(
@@ -50,7 +65,7 @@ const ReferralForm = ({
         name={REFERRAL_DATA_KEYS.referralBonusEarned}
         type="switch"
         label="Referral Earned"
-        value={referral.referralBonusEarned || null}
+        value={referral.referralBonusEarned.toString()}
         checked={referral.referralBonusEarned}
         onChange={onChange}
         className="bonusEarnedCheck"
@@ -90,7 +105,7 @@ const ReferralForm = ({
         value={referral.referredCard || ""}
         onChange={onChange}
         error={errors.referredCard}
-        requiredField={referral.issuer.name && true}
+        requiredField={referral.issuer.name ? true : false}
       />
       <SelectInput
         name={REFERRAL_DATA_KEYS.referrerId}
@@ -151,13 +166,6 @@ const ReferralForm = ({
       </button>
     </form>
   );
-};
-
-ReferralForm.propTypes = {
-  cardholder: PropTypes.object.isRequired,
-  errors: PropTypes.object,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default ReferralForm;

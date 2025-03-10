@@ -18,8 +18,6 @@ const ReferralsList = ({
   referrals,
   cardsByHolder,
 }: ReferralsListAndCardProps) => {
-  console.log(cardsByHolder);
-
   const theme = useSelector((state: MainReduxState) => state.theme);
 
   return referrals.length === 0 ? (

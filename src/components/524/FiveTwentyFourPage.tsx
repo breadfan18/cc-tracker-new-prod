@@ -38,14 +38,15 @@ const FiveTwentyFourPage = () => {
   }, {});
 
   useEffect(() => {
-    if (cards.length === 0 && status !== "loading" && user !== null) {
+    if (!user || status !== "success") return;
+    if (cards.length === 0) {
       dispatch(loadCardsFromFirebase(user.uid));
     }
 
-    if (cardholders.length === 0 && user) {
+    if (cardholders.length === 0) {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
-  }, [status, user]);
+  }, [cardholders.length, cards.length, dispatch, status, user]);
 
   const cardholders524Status = _.map(cardholders, "id").map((holder) => {
     const cardholderName = cardholders.find((u) => u.id === holder)?.name;

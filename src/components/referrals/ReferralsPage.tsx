@@ -34,16 +34,25 @@ const ReferralsPage = () => {
   );
 
   useEffect(() => {
-    if (referrals.length === 0 && status !== "loading") {
+    if (!user || status !== "success") return;
+
+    if (referrals.length === 0) {
       dispatch(loadReferralsFromFirebase(user.uid));
     }
-    if (cardholders.length === 0 && status !== "loading") {
+    if (cardholders.length === 0) {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
-    if (cards.length === 0 && status !== "loading" && user !== null) {
+    if (cards.length === 0) {
       dispatch(loadCardsFromFirebase(user.uid));
     }
-  }, [cardholders, cards, dispatch, referrals, status, user]);
+  }, [
+    dispatch,
+    referrals.length,
+    cardholders.length,
+    cards.length,
+    status,
+    user,
+  ]);
 
   const cardsByHolder = _.groupBy(cards, (o) => o.userId);
 

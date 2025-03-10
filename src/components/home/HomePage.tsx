@@ -30,7 +30,9 @@ function HomePage() {
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
 
   useEffect(() => {
-    if (cardholders.length === 0 && status !== "loading" && user !== null) {
+    if (!user || status !== "success") return;
+
+    if (cardholders.length === 0) {
       dispatch(loadCardholdersFromFirebase(user.uid));
 
       setUserData({

@@ -1,45 +1,50 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveReferralToFirebase } from "../../redux/actions/referralActions";
 import { toast } from "react-toastify";
-import PropTypes from "prop-types";
 import { MdModeEditOutline } from "react-icons/md";
 import { useUser } from "reactfire";
 import _ from "lodash";
 import ReferralForm from "./ReferralForm";
 import { ISSUERS, REFERRAL_DATA_KEYS } from "../../constants";
+import { Referral, ReferralForModalType } from "../../types/referral-types";
+import { MainReduxState } from "../../types/redux";
+import { Card } from "../../types/cards-types";
+import { Errors } from "../../types/input-types";
 
 const NEW_REFERRAL = {
-  id: null,
-  referralFor: null,
-  referralDate: null,
+  id: "",
+  referralFor: "",
+  referralDate: "",
   issuer: {
-    name: null,
-    img: null,
+    name: "",
+    img: "",
   },
-  referredCard: null,
-  referralBonus: null,
-  referralLink: null,
-  referrerId: null,
-  referringCardId: null,
-  referralBonusEarned: null,
-  referralEarnDate: null,
+  referredCard: "",
+  referralBonus: "",
+  referralLink: "",
+  referrerId: "",
+  referringCardId: "",
+  referralBonusEarned: false,
+  referralEarnDate: "",
 };
-function ReferralAddEditModal({ referral }) {
-  const [referralForModal, setReferralForModal] = useState(
-    referral || NEW_REFERRAL
-  );
+
+function ReferralAddEditModal({ referral }: { referral?: Referral }) {
+  const [referralForModal, setReferralForModal] =
+    useState<ReferralForModalType>(referral || NEW_REFERRAL);
 
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
   const [saving, setSaving] = useState(false);
   const { data: user } = useUser();
-  const cards = useSelector((state) => _.groupBy(state.cards, (o) => o.userId));
-  const cardholders = useSelector((state) => state.cardholders);
-  const [filteredCards, setFilteredCards] = useState([]);
+  const cards = useSelector((state: MainReduxState) =>
+    _.groupBy(state.cards, (o) => o.userId)
+  );
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
+  const [filteredCards, setFilteredCards] = useState<Card[]>([]);
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
@@ -75,7 +80,7 @@ function ReferralAddEditModal({ referral }) {
       issuer,
       referredCard,
     } = referralForModal;
-    const errors = {};
+    const errors: Errors = {};
     if (!referralFor) errors.referralFor = "Required";
     if (!referralDate) errors.referralDate = "Required";
     if (!referrerId) errors.referrerId = "Required";
@@ -113,7 +118,7 @@ function ReferralAddEditModal({ referral }) {
 
   return (
     <>
-      {referralForModal.id !== null ? (
+      {referralForModal.id !== "" ? (
         <Button
           variant="success"
           onClick={toggleShow}
@@ -160,10 +165,5 @@ function ReferralAddEditModal({ referral }) {
     </>
   );
 }
-
-ReferralAddEditModal.propTypes = {
-  referral: PropTypes.object,
-  saveLoyaltyDataToFirebase: PropTypes.func,
-};
 
 export default ReferralAddEditModal;

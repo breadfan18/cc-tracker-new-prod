@@ -26,18 +26,27 @@ const CardsPage = () => {
   const referrals = useSelector((state: MainReduxState) => state.referrals);
 
   useEffect(() => {
-    if (cards.length === 0 && status !== "loading" && user !== null) {
+    if (!user || status !== "success") return;
+
+    if (cards.length === 0) {
       dispatch(loadCardsFromFirebase(user.uid));
     }
 
-    if (cardholders.length === 0 && user) {
+    if (cardholders.length === 0) {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
 
-    if (referrals.length === 0 && user) {
+    if (referrals.length === 0) {
       dispatch(loadReferralsFromFirebase(user.uid));
     }
-  }, [status, user, cardholders]);
+  }, [
+    dispatch,
+    referrals.length,
+    cardholders.length,
+    cards.length,
+    status,
+    user,
+  ]);
 
   return (
     <div className="cardsContainer">

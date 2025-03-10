@@ -31,23 +31,25 @@ const LoyaltyPage = () => {
   );
 
   useEffect(() => {
-    if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
+    if (!user || status !== "success") return;
+
+    if (loyaltyData.length === 0) {
       dispatch(loadloyaltyDataFromFirebase(user.uid));
     }
 
-    if (cardholders.length === 0 && user) {
+    if (cardholders.length === 0) {
       dispatch(loadCardholdersFromFirebase(user.uid));
     }
 
-    if (userLoyaltyPrograms.length === 0 && user) {
+    if (userLoyaltyPrograms.length === 0) {
       dispatch(loadUserLoyaltyProgramsFromFirebase(user?.uid));
     }
   }, [
+    dispatch,
     status,
     user,
     cardholders.length,
     loyaltyData.length,
-    dispatch,
     userLoyaltyPrograms.length,
   ]);
 
