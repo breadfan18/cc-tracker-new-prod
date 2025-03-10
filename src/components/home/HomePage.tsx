@@ -1,18 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useUser } from "reactfire";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { slugify } from "../../helpers";
 import { writeToFirebase } from "../../tools/firebase";
+import { MainReduxState } from "../../types/redux";
 
-function HomePage({ cardholders, loadCardholdersFromFirebase }) {
+type UserDataType = {
+  id: string;
+  name: string;
+  img: string;
+  isPrimary: boolean;
+  email: string;
+};
+
+const INITIAL_USER_DATA: UserDataType = {
+  id: "",
+  name: "",
+  img: "",
+  isPrimary: false,
+  email: "",
+};
+
+function HomePage() {
+  const dispatch = useDispatch();
   const { status, data: user } = useUser();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<UserDataType>(INITIAL_USER_DATA);
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
 
   useEffect(() => {
     if (cardholders.length === 0 && status !== "loading" && user !== null) {
-      loadCardholdersFromFirebase(user.uid);
+      dispatch(loadCardholdersFromFirebase(user.uid));
 
       setUserData({
         id: slugify(user.displayName),
@@ -22,13 +41,13 @@ function HomePage({ cardholders, loadCardholdersFromFirebase }) {
         email: user.email,
       });
     }
-  }, [user]);
+  }, [cardholders, dispatch, status, user]);
 
   useEffect(() => {
     if (cardholders.length === 0 && userData.name && user !== null) {
       writeToFirebase("cardHolders", userData, userData.id, user.uid);
     }
-  }, [cardholders]);
+  }, [cardholders, user, userData]);
 
   return (
     <div className="jumbotron">
@@ -43,12 +62,4 @@ function HomePage({ cardholders, loadCardholdersFromFirebase }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  cardholders: state.cardholders,
-});
-
-const mapDispatchToProps = {
-  loadCardholdersFromFirebase,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

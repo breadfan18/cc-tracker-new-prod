@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Login.css";
 import { ImEyeBlocked, ImEye } from "react-icons/im";
 import { AiOutlineUser, AiFillLock } from "react-icons/ai";
-import { BsGoogle, BsMeta, BsLinkedin } from "react-icons/bs";
+import { BsGoogle } from "react-icons/bs";
+// import { BsGoogle, BsMeta, BsLinkedin } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import SocialLoginButton from "./SocialLoginButton";
 import useWindhowWidth from "../../hooks/windowWidth";
 import ThemeToggle from "../header/ThemeToggle";
 
-export default function Login({ windowWidth }) {
+export default function Login() {
   const [showPwd, setShowPwd] = useState(false);
   const [pwdType, setPwdType] = useState("password");
 
@@ -46,7 +47,6 @@ export default function Login({ windowWidth }) {
           <p>Only Google Login is active at this time</p>
           <SocialLoginButton
             Icon={BsGoogle}
-            loginType="google"
             btnColor="rgba(234, 67, 53)"
             btnDisabled={false}
           />
