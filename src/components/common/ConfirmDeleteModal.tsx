@@ -16,9 +16,10 @@ import {
   deleteCardNotificationsOnCardClosure,
 } from "../../redux/actions/notificationsActions";
 import { MainReduxState } from "../../types/redux";
-import { Card, Referral } from "../../types/cards-types";
+import { Card } from "../../types/cards-types";
 import { LoyaltyData } from "../../types/loyalty-types";
 import { Cardholder } from "../../types/cardholder-types";
+import { Referral } from "../../types/referral-types";
 
 type ConfirmDeleteModalProps = {
   data: Card | LoyaltyData | Cardholder | Referral;

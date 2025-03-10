@@ -51,20 +51,6 @@ export type CardTabsProps = {
   isDesktop: boolean;
 };
 
-export type Referral = {
-  id: string;
-  issuer: Issuer;
-  referralBonus: string;
-  referralBonusEarned: boolean;
-  referralDate: string;
-  referralEarnDate: string;
-  referralFor: string;
-  referralLink: string;
-  referredCard: string;
-  referrerId: string;
-  referringCardId: string;
-};
-
 export type Notification = {
   cardId: string;
   dateSent: string;

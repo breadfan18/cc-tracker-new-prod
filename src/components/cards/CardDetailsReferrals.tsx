@@ -14,12 +14,13 @@ import { Link } from "react-router-dom/cjs/react-router-dom";
 import BonusEarnStatusIcon from "../common/BonusEarnStatusIcon";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
-import { Referral } from "../../types/cards-types";
+import { Referral } from "../../types/referral-types";
 
 type CardReferralsProps = {
   cardReferrals: Referral[];
   windowWidth: number;
 };
+
 export default function CardReferrals({
   cardReferrals,
   windowWidth,

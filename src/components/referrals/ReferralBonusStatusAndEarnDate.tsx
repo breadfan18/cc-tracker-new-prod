@@ -8,7 +8,7 @@ import {
 } from "../../constants";
 import useWindhowWidth from "../../hooks/windowWidth";
 import { useSelector } from "react-redux";
-import { Referral } from "../../types/cards-types";
+import { Referral } from "../../types/referral-types";
 import { MainReduxState } from "../../types/redux";
 
 type ReferralsBonusStatusAndEarnDateProps = {
