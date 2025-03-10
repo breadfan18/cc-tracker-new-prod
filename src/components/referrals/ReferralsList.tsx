@@ -12,15 +12,12 @@ import ReferrerField from "./ReferralForField";
 import { getReferralData } from "../../hooks/referralsData";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
-import { Referral } from "../../types/cards-types";
-import { CardsByHolder } from "../../types/cardholder-types";
+import { ReferralsListAndCardProps } from "../../types/referral-types";
 
-type ReferralsListProps = {
-  referrals: Referral[];
-  cardsByHolder: CardsByHolder;
-};
-
-const ReferralsList = ({ referrals, cardsByHolder }: ReferralsListProps) => {
+const ReferralsList = ({
+  referrals,
+  cardsByHolder,
+}: ReferralsListAndCardProps) => {
   console.log(cardsByHolder);
 
   const theme = useSelector((state: MainReduxState) => state.theme);

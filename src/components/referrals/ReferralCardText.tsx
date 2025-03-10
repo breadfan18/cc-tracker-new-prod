@@ -1,14 +1,7 @@
 import { formatDate } from "../../helpers";
 import { REFERRAL_DATA_KEYS } from "../../constants";
 import { getReferralData } from "../../hooks/referralsData";
-import { Referral } from "../../types/cards-types";
-import { CardsByHolder } from "../../types/cardholder-types";
-
-type ReferralCardTextProps = {
-  referral: Referral;
-  dataType: string;
-  cardsByHolder: CardsByHolder;
-};
+import { ReferralCardTextProps } from "../../types/referral-types";
 
 function ReferralCardText({
   referral,

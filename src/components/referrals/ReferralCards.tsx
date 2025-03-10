@@ -13,18 +13,12 @@ import ReferralAddEditModal from "./ReferralAddEditModal";
 import { FaLink } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
-import { Referral } from "../../types/cards-types";
-import { CardsByHolder } from "../../types/cardholder-types";
-
-type ReferralsListProps = {
-  referrals: Referral[];
-  cardsByHolder: CardsByHolder;
-};
+import { ReferralsListAndCardProps } from "../../types/referral-types";
 
 export default function ReferralCards({
   referrals,
   cardsByHolder,
-}: ReferralsListProps) {
+}: ReferralsListAndCardProps) {
   const theme = useSelector((state: MainReduxState) => state.theme);
 
   const referralsData = referrals.map((referral) => {
