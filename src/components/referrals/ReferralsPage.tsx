@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCardsFromFirebase } from "../../redux/actions/cardsActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
@@ -11,21 +11,22 @@ import ReferralAddEditModal from "./ReferralAddEditModal";
 import ReferralCards from "./ReferralCards";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import useWindhowWidth from "../../hooks/windowWidth";
+import { MainReduxState } from "../../types/redux";
 
 const ReferralsPage = () => {
   const { isDesktop } = useWindhowWidth();
   const dispatch = useDispatch();
   const { status, data: user } = useUser();
-  const cards = useSelector((state) => state.cards);
-  const cardholders = useSelector((state) =>
+  const cards = useSelector((state: MainReduxState) => state.cards);
+  const cardholders = useSelector((state: MainReduxState) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
-  const referrals = useSelector((state) =>
+  const referrals = useSelector((state: MainReduxState) =>
     sortReferralsByDate(state.referrals)
   );
 
   const loading = useSelector(
-    (state) =>
+    (state: MainReduxState) =>
       state.apiCallsInProgress > 0 ||
       cardholders.length === 0 ||
       referrals.length === 0 ||
@@ -42,7 +43,7 @@ const ReferralsPage = () => {
     if (cards.length === 0 && status !== "loading" && user !== null) {
       dispatch(loadCardsFromFirebase(user.uid));
     }
-  }, [user]);
+  }, [cardholders, cards, dispatch, referrals, status, user]);
 
   const cardsByHolder = _.groupBy(cards, (o) => o.userId);
 

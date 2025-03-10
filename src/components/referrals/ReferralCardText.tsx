@@ -1,10 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { formatDate } from "../../helpers";
 import { REFERRAL_DATA_KEYS } from "../../constants";
 import { getReferralData } from "../../hooks/referralsData";
+import { Referral } from "../../types/cards-types";
+import { CardsByHolder } from "../../types/cardholder-types";
 
-function ReferralCardText({ referral, dataType, cardsByHolder }) {
+type ReferralCardTextProps = {
+  referral: Referral;
+  dataType: string;
+  cardsByHolder: CardsByHolder;
+};
+
+function ReferralCardText({
+  referral,
+  dataType,
+  cardsByHolder,
+}: ReferralCardTextProps) {
   const { referralFor, referredCard, issuer } = getReferralData(
     referral,
     cardsByHolder
@@ -28,7 +38,10 @@ function ReferralCardText({ referral, dataType, cardsByHolder }) {
           value: `${issuer.name} ${referredCard}`,
         };
       default:
-        break;
+        return {
+          fieldName: "",
+          value: "",
+        };
     }
   };
 
@@ -42,10 +55,5 @@ function ReferralCardText({ referral, dataType, cardsByHolder }) {
     </p>
   );
 }
-
-ReferralCardText.propTypes = {
-  card: PropTypes.object.isRequired,
-  dataType: PropTypes.string.isRequired,
-};
 
 export default ReferralCardText;

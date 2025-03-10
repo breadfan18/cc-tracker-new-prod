@@ -1,11 +1,9 @@
-import React from "react";
 import { Card } from "react-bootstrap";
 import {
   APP_COLOR_BLACK_OPACITY,
   DELETE_MODAL_TYPES,
   REFERRAL_DATA_IN_CARD_VIEW,
 } from "../../constants";
-import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import ReferralCardText from "./ReferralCardText";
@@ -14,9 +12,21 @@ import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 import { FaLink } from "react-icons/fa6";
 import { useSelector } from "react-redux";
+import { MainReduxState } from "../../types/redux";
+import { Referral } from "../../types/cards-types";
+import { CardsByHolder } from "../../types/cardholder-types";
 
-export default function ReferralCards({ referrals, cardsByHolder }) {
-  const theme = useSelector((state) => state.theme);
+type ReferralsListProps = {
+  referrals: Referral[];
+  cardsByHolder: CardsByHolder;
+};
+
+export default function ReferralCards({
+  referrals,
+  cardsByHolder,
+}: ReferralsListProps) {
+  const theme = useSelector((state: MainReduxState) => state.theme);
+
   const referralsData = referrals.map((referral) => {
     const { id, referralLink, referringCardholder, referringCard } =
       getReferralData(referral, cardsByHolder);
@@ -26,7 +36,9 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
           <div style={{ backgroundColor: APP_COLOR_BLACK_OPACITY }}>
             <Card.Title
               className="cardCardTitle"
-              style={{ borderBottom: theme === "dark" && "1px solid #4e5359" }}
+              style={{
+                borderBottom: theme === "dark" ? "1px solid #4e5359" : "",
+              }}
             >
               <div style={{ padding: "10px" }}>
                 <p>{referringCardholder}</p>
@@ -62,19 +74,19 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
           </section>
         </Card.Body>
         <Card.Footer
-          style={{ borderTop: theme === "dark" && "1px solid #4e5359" }}
+          style={{ borderTop: theme === "dark" ? "1px solid #4e5359" : "" }}
         >
           <div className="editDeleteCard editDeleteOnCards">
             <a
               href={referralLink}
               target="_blank"
               rel="noreferrer"
-              className={referralLink === "" && "linkDisabled"}
+              className={referralLink === "" ? "linkDisabled" : ""}
             >
               <FaLink
                 id="referralLink"
                 style={{
-                  color: referralLink === "" && "gray",
+                  color: referralLink === "" ? "gray" : "",
                   border: "2px solid gray",
                 }}
               />
@@ -95,8 +107,3 @@ export default function ReferralCards({ referrals, cardsByHolder }) {
     <div id="cardCardContainer">{referralsData}</div>
   );
 }
-
-ReferralCards.propTypes = {
-  referrals: PropTypes.array.isRequired,
-  cardsByHolder: PropTypes.object.isRequired,
-};

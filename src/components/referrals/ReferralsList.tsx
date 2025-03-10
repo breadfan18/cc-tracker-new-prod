@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
@@ -13,14 +11,24 @@ import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferrerField from "./ReferralForField";
 import { getReferralData } from "../../hooks/referralsData";
 import { useSelector } from "react-redux";
+import { MainReduxState } from "../../types/redux";
+import { Referral } from "../../types/cards-types";
+import { CardsByHolder } from "../../types/cardholder-types";
 
-const ReferralsList = ({ referrals, cardsByHolder }) => {
-  const theme = useSelector((state) => state.theme);
+type ReferralsListProps = {
+  referrals: Referral[];
+  cardsByHolder: CardsByHolder;
+};
+
+const ReferralsList = ({ referrals, cardsByHolder }: ReferralsListProps) => {
+  console.log(cardsByHolder);
+
+  const theme = useSelector((state: MainReduxState) => state.theme);
 
   return referrals.length === 0 ? (
     <EmptyList dataType={"referrals"} />
   ) : (
-    <Table size="sm" variant={theme === "dark" ? "dark" : null}>
+    <Table size="sm" variant={theme === "dark" ? "dark" : ""}>
       <thead>
         <tr>
           <th className="tableHeader">Referrer</th>
@@ -91,11 +99,11 @@ const ReferralsList = ({ referrals, cardsByHolder }) => {
                   href={referralLink}
                   target="_blank"
                   rel="noreferrer"
-                  className={referralLink === "" && "linkDisabled"}
+                  className={referralLink === "" ? "linkDisabled" : ""}
                 >
                   <FaLink
                     id="referralLink"
-                    style={{ color: referralLink === "" && "gray" }}
+                    style={{ color: referralLink === "" ? "gray" : "" }}
                   />
                 </a>
                 <ReferralAddEditModal referral={referral} />
@@ -110,12 +118,6 @@ const ReferralsList = ({ referrals, cardsByHolder }) => {
       </tbody>
     </Table>
   );
-};
-
-ReferralsList.propTypes = {
-  referrals: PropTypes.array.isRequired,
-  cardholders: PropTypes.array.isRequired,
-  cardsByHolder: PropTypes.object.isRequired,
 };
 
 export default ReferralsList;

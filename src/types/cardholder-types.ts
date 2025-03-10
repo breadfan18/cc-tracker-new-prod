@@ -27,10 +27,12 @@ type MiniTableProps<T, K extends string> = {
 };
 
 export type CardsDataMiniTableProps = MiniTableProps<Card[], "cards">;
+
 export type LoyaltyDataMiniTableProps = MiniTableProps<
   LoyaltyData[],
   "loyaltyData"
 >;
+
 export type InquiriesMiniTableProps = MiniTableProps<
   { [key in "experian" | "equifax" | "transunion"]: number },
   "inquiries"
