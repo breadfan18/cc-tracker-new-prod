@@ -21,7 +21,7 @@ import CreditBureauIcons from "../common/CreditBureauIcons";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
-import { getRemindersData } from "../../hooks/reminderData";
+import { getRemindersData } from "../../utils/reminderData";
 import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
 import StampedStatus from "./StampedStatus";

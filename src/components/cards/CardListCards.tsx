@@ -14,7 +14,7 @@ import CardText from "./CardText";
 import { setColorForCardStatus } from "../../helpers";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import BonusStatusAndEarnDate from "./BonusStatusAndEarnDate";
-import { getRemindersData } from "../../hooks/reminderData";
+import { getRemindersData } from "../../utils/reminderData";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import CardFavIcon from "./CardFavIcon";
