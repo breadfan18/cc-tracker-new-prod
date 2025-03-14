@@ -1,15 +1,27 @@
 import { useState, useMemo } from "react";
+import { Card } from "../types/cards-types";
 
-const useCardsFilter = (initialData) => {
+type Filters = {
+  cardName: string;
+  cardType: string;
+  status: string;
+  annualFee: string;
+};
+
+const useCardsFilter = (initialData: Card[]) => {
   const data = [...initialData];
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     cardName: "",
     cardType: "",
     status: "",
     annualFee: "",
   });
 
-  function filterReturnHandler(property, value, card) {
+  function filterReturnHandler(
+    property: string,
+    value: string,
+    card: Card
+  ): boolean {
     const returnValue =
       property === "cardName"
         ? `${card.issuer.name} ${card.card}`
@@ -22,7 +34,7 @@ const useCardsFilter = (initialData) => {
     return returnValue.toLowerCase().includes(value.toLowerCase());
   }
 
-  const applyFilters = (card) => {
+  const applyFilters = (card: Card): boolean => {
     return Object.entries(filters).every(([property, value]) =>
       filterReturnHandler(property, value, card)
     );
@@ -33,11 +45,11 @@ const useCardsFilter = (initialData) => {
     [data, filters]
   );
 
-  const setFilter = (property, value) => {
+  const setFilter = (property: string, value: string): void => {
     setFilters((prevFilters) => ({ ...prevFilters, [property]: value }));
   };
 
-  const resetFilters = () => {
+  const resetFilters = (): void => {
     setFilters({
       cardName: "",
       cardType: "",
@@ -49,10 +61,10 @@ const useCardsFilter = (initialData) => {
   return {
     filteredData,
     filters,
-    setCardNameFilter: (value) => setFilter("cardName", value),
-    setCardTypeFilter: (value) => setFilter("cardType", value),
-    setStatusFilter: (value) => setFilter("status", value),
-    setAnnualFeeFilter: (value) => setFilter("annualFee", value),
+    setCardNameFilter: (value: string) => setFilter("cardName", value),
+    setCardTypeFilter: (value: string) => setFilter("cardType", value),
+    setStatusFilter: (value: string) => setFilter("status", value),
+    setAnnualFeeFilter: (value: string) => setFilter("annualFee", value),
     resetFilters,
   };
 };
