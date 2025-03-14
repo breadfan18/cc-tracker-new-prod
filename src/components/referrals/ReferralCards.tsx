@@ -7,7 +7,7 @@ import {
 import EmptyList from "../common/EmptyList";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import ReferralCardText from "./ReferralCardText";
-import { getReferralData } from "../../hooks/referralsData";
+import { getReferralData } from "../../utils/referralsData";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferralAddEditModal from "./ReferralAddEditModal";
 import { FaLink } from "react-icons/fa6";

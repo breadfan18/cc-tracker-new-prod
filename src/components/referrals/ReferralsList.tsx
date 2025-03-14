@@ -9,7 +9,7 @@ import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
 import ReferralsBonusStatusAndEarnDate from "./ReferralBonusStatusAndEarnDate";
 import ReferrerField from "./ReferralForField";
-import { getReferralData } from "../../hooks/referralsData";
+import { getReferralData } from "../../utils/referralsData";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
 import { ReferralsListAndCardProps } from "../../types/referral-types";

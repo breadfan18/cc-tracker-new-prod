@@ -1,6 +1,6 @@
 import { formatDate } from "../../helpers";
 import { REFERRAL_DATA_KEYS } from "../../constants";
-import { getReferralData } from "../../hooks/referralsData";
+import { getReferralData } from "../../utils/referralsData";
 import { ReferralCardTextProps } from "../../types/referral-types";
 
 function ReferralCardText({
