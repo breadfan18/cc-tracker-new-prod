@@ -2,18 +2,28 @@ import { daysTillRewardsExpiration } from "../helpers";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import { DELETE_COLOR_RED } from "../constants";
+import { LoyaltyData } from "../types/loyalty-types";
 
-export const getRewardsExpirationStuff = (acc) => {
+type RewardsExpirationStuff = {
+  daysForRewardExpiration?: number;
+  rewardsExpirationIcon: JSX.Element | string;
+};
+
+export const getRewardsExpirationStuff = (
+  loyaltyAcc: LoyaltyData
+): RewardsExpirationStuff => {
   const daysForRewardExpiration = daysTillRewardsExpiration(
-    acc.rewardsExpiration
+    loyaltyAcc.rewardsExpiration
   );
 
   const rewardsExpirationIcon =
-    daysForRewardExpiration > 30 && daysForRewardExpiration <= 90 ? (
+    daysForRewardExpiration &&
+    daysForRewardExpiration > 30 &&
+    daysForRewardExpiration <= 90 ? (
       <BsFillBellFill
         style={{ color: "orange", fontSize: "1.3rem", marginRight: "5px" }}
       />
-    ) : daysForRewardExpiration <= 30 ? (
+    ) : daysForRewardExpiration && daysForRewardExpiration <= 30 ? (
       <TbAlertOctagonFilled
         style={{
           color: DELETE_COLOR_RED,

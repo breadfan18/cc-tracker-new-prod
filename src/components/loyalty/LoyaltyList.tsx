@@ -11,7 +11,7 @@ import {
   LOYALTY_DATA_KEYS,
 } from "../../constants";
 import { formatDate } from "../../helpers";
-import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
+import { getRewardsExpirationStuff } from "../../utils/rewardsExpiration";
 import CopyIcon from "../common/CopyIcon";
 import { MainReduxState } from "../../types/redux";
 import { LoyaltyData } from "../../types/loyalty-types";

@@ -7,7 +7,7 @@ import LoyaltyCardText from "./LoyaltyCardText";
 import { DELETE_MODAL_TYPES, LOYALTY_DATA_KEYS } from "../../constants";
 import LoyaltyCardExpirationText from "./LoyaltyCardExpirationText";
 import { formatDate } from "../../helpers";
-import { getRewardsExpirationStuff } from "../../hooks/rewardsExpiration";
+import { getRewardsExpirationStuff } from "../../utils/rewardsExpiration";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
 import { LoyaltyData } from "../../types/loyalty-types";
