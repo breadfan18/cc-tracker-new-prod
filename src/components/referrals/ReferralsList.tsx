@@ -44,9 +44,9 @@ const ReferralsList = ({
             referralDate,
             issuer,
             referringCard,
+            referralFor,
             referringCardholder,
             referralBonusEarned,
-            referralFor,
           } = getReferralData(referral, cardsByHolder);
 
           return (
@@ -61,7 +61,7 @@ const ReferralsList = ({
               <td>
                 <img
                   className="issuerLogos"
-                  src={referringCard.issuer.img}
+                  src={referringCard?.issuer.img}
                   alt=""
                 />{" "}
                 {referringCard?.card}{" "}

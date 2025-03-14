@@ -42,7 +42,7 @@ export default function ReferralCards({
                     color: "rgba(33, 37, 41, 0.75)",
                   }}
                 >
-                  {referringCard.issuer.name} {referringCard.card}
+                  {referringCard?.issuer.name} {referringCard?.card}
                 </p>
               </div>
 
