@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import { FaSort } from "react-icons/fa";
-import { useSortableData } from "../../hooks/sortData";
+import { isLoyaltyData, useSortableData } from "../../hooks/sortData";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
 import {
@@ -82,6 +82,8 @@ const LoyaltyList = ({
       </thead>
       <tbody className="align-middle">
         {data.map((acc) => {
+          if (!isLoyaltyData(acc)) return null;
+
           const { daysForRewardExpiration, rewardsExpirationIcon } =
             getRewardsExpirationStuff(acc);
           return (

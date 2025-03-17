@@ -2,7 +2,7 @@ import { useState } from "react";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import { FaSort } from "react-icons/fa";
-import { useSortableData } from "../../hooks/sortData";
+import { isCardData, useSortableData } from "../../hooks/sortData";
 import { formatDate, formatCurrency } from "../../helpers";
 import CardAddEditModal from "./CardAddEditModal";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
@@ -117,7 +117,9 @@ export default function CardListTable({
         </tr>
       </thead>
       <tbody className="align-middle">
-        {data.map((card: Card) => {
+        {data.map((card) => {
+          if (!isCardData(card)) return null;
+
           const {
             nextFeeText,
             nextFeeColor,
