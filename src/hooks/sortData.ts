@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { LoyaltyData } from "../types/loyalty-types";
 import { Card } from "../types/cards-types";
+import { CARD_DATA_KEYS, LOYALTY_DATA_KEYS } from "../constants";
 
 type SortDirection = "ascending" | "descending" | "";
 
@@ -12,11 +13,30 @@ type SortConfig = {
 export const isLoyaltyData = (
   data: Card | LoyaltyData
 ): data is LoyaltyData => {
-  return "program" in data;
+  return LOYALTY_DATA_KEYS.program in data;
 };
 
 export const isCardData = (data: Card | LoyaltyData): data is Card => {
-  return "annualFee" in data;
+  return CARD_DATA_KEYS.annualFee in data;
+};
+
+const getSortValue = (item: Card | LoyaltyData, sortConfig: SortConfig) => {
+  if (isLoyaltyData(item)) {
+    if (sortConfig.key === LOYALTY_DATA_KEYS.program) {
+      return item.program.name;
+    }
+  } else if (sortConfig.key === CARD_DATA_KEYS.creditLine) {
+    return parseInt(item[CARD_DATA_KEYS.creditLine]) || 0;
+  } else if (sortConfig.key === CARD_DATA_KEYS.annualFee) {
+    if (item.status === "downgraded") {
+      return -1;
+    } else if (item.status === "closed") {
+      return -2;
+    } else if (item.status === "open") {
+      return parseInt(item[CARD_DATA_KEYS.annualFee]) || 0;
+    }
+  }
+  return item[sortConfig.key];
 };
 
 export const useSortableData = (
@@ -31,15 +51,8 @@ export const useSortableData = (
     if (!sortConfig.key) return data;
 
     return [...data].sort((a, b) => {
-      const getSortValue = (item: Card | LoyaltyData) => {
-        if (isLoyaltyData(item) && sortConfig.key === "program") {
-          return item.program.name;
-        }
-        return item[sortConfig.key as keyof (Card | LoyaltyData)];
-      };
-
-      const a_value = getSortValue(a);
-      const b_value = getSortValue(b);
+      const a_value = getSortValue(a, sortConfig);
+      const b_value = getSortValue(b, sortConfig);
 
       if (a_value < b_value) {
         return sortConfig.direction === "ascending" ? -1 : 1;

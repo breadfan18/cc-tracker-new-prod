@@ -72,7 +72,7 @@ export const CARD_DATA_KEYS = {
   signupBonus: "signupBonus",
   inquiries: "inquiries",
   cardholder: "cardholder",
-};
+} as const;
 
 export const CARD_DATA_IN_CARD_VIEW = {
   appDate: "appDate",
@@ -91,7 +91,7 @@ export const LOYALTY_DATA_KEYS = {
   userId: "userId",
   rewardsBalance: "rewardsBalance",
   rewardsExpiration: "rewardsExpiration",
-};
+} as const;
 
 export const REFERRAL_DATA_KEYS = {
   referralFor: "referralFor",
@@ -104,7 +104,7 @@ export const REFERRAL_DATA_KEYS = {
   referringCardId: "referringCardId",
   referralBonusEarned: "referralBonusEarned",
   referralEarnDate: "referralEarnDate",
-};
+} as const;
 
 export const REFERRAL_DATA_IN_CARD_VIEW = {
   referralDate: "referralDate",
