@@ -47,5 +47,5 @@ export type LoyaltyByHolder = {
 };
 
 export type InquiriesByHolder = {
-  [key in "experian" | "equifax" | "transunion"]: boolean;
+  [key: string]: { [key in "experian" | "equifax" | "transunion"]: number };
 };

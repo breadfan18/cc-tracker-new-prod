@@ -12,6 +12,7 @@ import CardholderCards from "./CardholderCards";
 import { calculateCurrentInquiries } from "../../helpers";
 import useWindhowWidth from "../../hooks/windowWidth";
 import { MainReduxState } from "../../types/redux";
+import { CardsByHolder, LoyaltyByHolder } from "../../types/cardholder-types";
 
 const CardHoldersPage = () => {
   const { isDesktop } = useWindhowWidth();
@@ -39,8 +40,12 @@ const CardHoldersPage = () => {
     }
   }, [user]);
 
-  const cardsByHolder = _.groupBy(cards, (o) => o.userId);
-  const loyaltyByHolder = _.groupBy(loyaltyData, (o) => o.userId);
+  const cardsByHolder: CardsByHolder = _.groupBy(cards, (o) => o.userId);
+  const loyaltyByHolder: LoyaltyByHolder = _.groupBy(
+    loyaltyData,
+    (o) => o.userId
+  );
+
   const inquiriesByHolder = calculateCurrentInquiries(cardsByHolder);
 
   const cardholdersFinal = cardholders.map((holder) => {

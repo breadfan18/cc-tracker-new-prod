@@ -106,7 +106,7 @@ const CardFormResponsive = ({
         <TextInput
           name={CARD_DATA_KEYS.card}
           label="Card"
-          value={titleCase(card?.card) || ""}
+          value={titleCase(card?.card || "") || ""}
           onChange={onChange}
           error={errors.card}
           requiredField

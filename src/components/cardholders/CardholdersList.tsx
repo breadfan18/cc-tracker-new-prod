@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import EmptyList from "../common/EmptyList";
 import Table from "react-bootstrap/Table";
 import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
@@ -10,13 +9,26 @@ import CardholderPhoto from "./CardholderPhoto";
 import InquiriesMiniTable from "./InquiriesMiniTable";
 import { useSelector } from "react-redux";
 import { MainReduxState } from "../../types/redux";
+import {
+  Cardholder,
+  CardsByHolder,
+  InquiriesByHolder,
+  LoyaltyByHolder,
+} from "../../types/cardholder-types";
+
+type CardholdersListProps = {
+  cardsByHolder: CardsByHolder;
+  loyaltyByHolder: LoyaltyByHolder;
+  cardholders: Cardholder[];
+  inquiriesByHolder: InquiriesByHolder;
+};
 
 const CardholdersList = ({
   cardsByHolder,
   loyaltyByHolder,
   cardholders,
   inquiriesByHolder,
-}) => {
+}: CardholdersListProps) => {
   const theme = useSelector((state: MainReduxState) => state.theme);
 
   return cardholders.length === 0 ? (
@@ -82,10 +94,6 @@ const CardholdersList = ({
       </tbody>
     </Table>
   );
-};
-
-CardholdersList.propTypes = {
-  cardholders: PropTypes.array.isRequired,
 };
 
 export default CardholdersList;
