@@ -8,10 +8,13 @@ import { Provider as ReduxProvider } from "react-redux";
 import { FirebaseAppProvider, AuthProvider } from "reactfire";
 import {
   auth,
+  isTest,
   firebaseConfig,
   firebaseTestConfig,
-  isTest,
 } from "./tools/firebase";
+
+// import firebaseConfig from "./firebase-config.json";
+// import firebaseTestConfig from "./firebase-config-test.json";
 
 const store = configureStore();
 

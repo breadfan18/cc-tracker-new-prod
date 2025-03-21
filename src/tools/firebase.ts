@@ -8,6 +8,8 @@ import {
   ref as storageRef,
   uploadString,
 } from "firebase/storage";
+// import firebaseConfig from "../firebase-config.json";
+// import firebaseTestConfig from "../firebase-config-test.json";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBUS_jXqW-xQdBzeiiAGmYC-tl1Byzfhw8",
@@ -36,9 +38,14 @@ const app = initializeApp(isTest ? firebaseTestConfig : firebaseConfig);
 export const db = getDatabase(app);
 
 // DATABASE FUNCTIONS
-export function getFireBaseData(endpoint, dispatch, dispatchFunc, firebaseUid) {
+export function getFireBaseData(
+  endpoint: string,
+  dispatch,
+  dispatchFunc,
+  firebaseUid
+) {
   onValue(ref(db, `/users/${firebaseUid}/${endpoint}`), (snap) => {
-    const allData = [];
+    const allData: any[] = [];
     snap.forEach((data) => {
       const childData = data.val();
       allData.push(childData);

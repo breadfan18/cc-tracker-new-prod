@@ -13,3 +13,8 @@ export type MainReduxState = {
   theme: string;
   userLoyaltyPrograms: LoyaltyProgram[];
 };
+
+export type ActionTypes = {
+  type: string;
+  payload?: any;
+};
