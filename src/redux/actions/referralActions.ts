@@ -10,26 +10,33 @@ import {
   writeToFirebase,
 } from "../../tools/firebase";
 import { uid } from "uid";
+import { ActionThunkReturn, ActionTypes } from "../../types/redux";
+import { Referral } from "../../types/referral-types";
 
-function loadReferralsSuccess(referrals) {
-  return { type: LOAD_REFERRAL_SUCCESS, referrals };
+function loadReferralsSuccess(referrals: Referral[]): ActionTypes {
+  return { type: LOAD_REFERRAL_SUCCESS, payload: referrals };
 }
-function createReferralSuccess(referral) {
-  return { type: CREATE_REFERRAL_SUCCESS, referral };
-}
-
-function deleteReferralSuccess(referral) {
-  return { type: DELETE_REFERRAL_SUCCESS, referral };
+function createReferralSuccess(referral: Referral): ActionTypes {
+  return { type: CREATE_REFERRAL_SUCCESS, payload: referral };
 }
 
-export function loadReferralsFromFirebase(firebaseUid) {
+function deleteReferralSuccess(referral: Referral): ActionTypes {
+  return { type: DELETE_REFERRAL_SUCCESS, payload: referral };
+}
+
+export function loadReferralsFromFirebase(
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     dispatch(beginApiCall());
     getFireBaseData("referrals", dispatch, loadReferralsSuccess, firebaseUid);
   };
 }
 
-export function saveReferralToFirebase(referral, firebaseUid) {
+export function saveReferralToFirebase(
+  referral: Referral,
+  firebaseUid: string
+): ActionThunkReturn {
   return async (dispatch) => {
     /*
       BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
@@ -46,7 +53,10 @@ export function saveReferralToFirebase(referral, firebaseUid) {
   };
 }
 
-export function deleteReferralFromFirebase(referral, firebaseUid) {
+export function deleteReferralFromFirebase(
+  referral: Referral,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     // Same reason to dispatch apiCall twice here as mentioned above in save function
     dispatch(beginApiCall());

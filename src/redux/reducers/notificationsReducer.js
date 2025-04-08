@@ -10,11 +10,11 @@ export default function notificationsReducer(
 ) {
   switch (action.type) {
     case LOAD_NOTIFICATIONS_SUCCESS:
-      return action.notifications;
+      return action.payload;
     case DELETE_NOTIFICATION_SUCCESS:
       return state.filter(
         (notification) =>
-          notification.notificationId !== action.notification.notificationId
+          notification.notificationId !== action.payload.notificationId
       );
     default:
       return state;

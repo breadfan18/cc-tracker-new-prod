@@ -4,16 +4,20 @@ import {
   DELETE_NOTIFICATION_SUCCESS,
 } from "./actionTypes";
 import { deleteFromFirebase, getFireBaseData } from "../../tools/firebase";
+import { ActionThunkReturn, ActionTypes } from "../../types/redux";
+import { Notification } from "../../types/cards-types";
 
-function loadNotificationsSuccess(notifications) {
-  return { type: LOAD_NOTIFICATIONS_SUCCESS, notifications };
+function loadNotificationsSuccess(notifications: Notification[]): ActionTypes {
+  return { type: LOAD_NOTIFICATIONS_SUCCESS, payload: notifications };
 }
 
-function deleteNotificationSuccess(notification) {
-  return { type: DELETE_NOTIFICATION_SUCCESS, notification };
+function deleteNotificationSuccess(notification: Notification): ActionTypes {
+  return { type: DELETE_NOTIFICATION_SUCCESS, payload: notification };
 }
 
-export function loadNotificationsFromFirebase(firebaseUid) {
+export function loadNotificationsFromFirebase(
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     dispatch(beginApiCall());
     getFireBaseData(
@@ -25,7 +29,10 @@ export function loadNotificationsFromFirebase(firebaseUid) {
   };
 }
 
-export function deleteNotificationFromFirebase(notification, firebaseUid) {
+export function deleteNotificationFromFirebase(
+  notification: Notification,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     dispatch(beginApiCall());
     deleteFromFirebase(
@@ -38,10 +45,10 @@ export function deleteNotificationFromFirebase(notification, firebaseUid) {
 }
 
 export const deleteCardNotificationsOnCardClosure = (
-  allNotifications,
-  cardId,
-  firebaseUid
-) => {
+  allNotifications: Notification[],
+  cardId: string,
+  firebaseUid: string
+): ActionThunkReturn => {
   return (dispatch) => {
     dispatch(beginApiCall());
     const cardNotifications = allNotifications.filter(
@@ -55,10 +62,10 @@ export const deleteCardNotificationsOnCardClosure = (
 };
 
 export const deleteSpendByNotificationWhenBonusEarned = (
-  allNotifications,
-  cardId,
-  firebaseUid
-) => {
+  allNotifications: Notification[],
+  cardId: string,
+  firebaseUid: string
+): ActionThunkReturn => {
   return (dispatch) => {
     dispatch(beginApiCall());
     const cardSpendByNotfications = allNotifications.filter(
@@ -74,10 +81,10 @@ export const deleteSpendByNotificationWhenBonusEarned = (
 };
 
 export function deleteLoyaltyNotificationOnLoyaltyClosure(
-  allNotifications,
-  loyaltyId,
-  firebaseUid
-) {
+  allNotifications: Notification[],
+  loyaltyId: string,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     dispatch(beginApiCall());
     const loyaltyNotifications = allNotifications.filter(

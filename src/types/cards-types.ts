@@ -52,7 +52,8 @@ export type CardTabsProps = {
 };
 
 export type Notification = {
-  cardId: string;
+  cardId?: string;
+  loyaltyId?: string;
   dateSent: string;
   notificationId: string;
   notificationType: string;
