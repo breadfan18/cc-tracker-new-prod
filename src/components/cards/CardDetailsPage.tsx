@@ -89,7 +89,7 @@ function CardDetailsPage() {
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Card Details</h2>
         <div className="editDeleteCard">
-          <CardFavIcon card={card} firebaseUid={user?.uid} />
+          <CardFavIcon card={card} />
           <CardAddEditModal card={card} />
           <ConfirmDeleteModal
             data={card}

@@ -22,9 +22,15 @@ type RewardTagsProps = {
   firebaseUid: string;
 };
 
+const baseTag = {
+  description: "",
+  color: "",
+  label: "",
+};
+
 const RewardTags = ({ tags, cardId, firebaseUid }: RewardTagsProps) => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedTag, setSelectedTag] = useState<TagType | null>(null);
+  const [selectedTag, setSelectedTag] = useState<TagType>(baseTag);
   const [tagDescription, setTagDescription] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);

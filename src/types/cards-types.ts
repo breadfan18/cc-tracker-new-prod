@@ -28,14 +28,14 @@ export type Inquiries = {
 };
 
 export type Tag = {
-  id: string;
+  id?: string;
   description: string;
   color: string;
   label: string;
 };
 
 export type CardNote = {
-  id: string;
+  id?: string;
   date: string;
   note: string;
 };

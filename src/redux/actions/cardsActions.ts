@@ -4,12 +4,10 @@ import {
   DELETE_CARD_NOTES_SUCCESS,
   DELETE_CARD_SUCCESS,
   LOAD_CARDS_SUCCESS,
-  UPDATE_CARDS_SUCCESS,
   CREATE_TAG_SUCCESS,
   DELETE_TAG_SUCCESS,
 } from "./actionTypes";
-import * as cardsApi from "../../api/cardsApi";
-import { apiCallError, beginApiCall } from "./apiStatusActions";
+import { beginApiCall } from "./apiStatusActions";
 import {
   deleteFromFirebase,
   getFireBaseData,
@@ -17,47 +15,49 @@ import {
 } from "../../tools/firebase";
 import { slugify } from "../../helpers";
 import { uid } from "uid";
+import { ActionThunkReturn, ActionTypes } from "../../types/redux";
+import { Dispatch } from "redux";
+import { Card, CardNote, Tag } from "../../types/cards-types";
 
-function loadCardsSuccess(cards) {
-  return { type: LOAD_CARDS_SUCCESS, cards };
+function loadCardsSuccess(cards: Card[]): ActionTypes {
+  return { type: LOAD_CARDS_SUCCESS, payload: cards };
 }
 
-function createCardSuccess(card) {
-  return { type: CREATE_CARDS_SUCCESS, card };
+function createCardSuccess(card: Card) {
+  return { type: CREATE_CARDS_SUCCESS, payload: card };
 }
 
-function updateCardSuccess(card) {
-  return { type: UPDATE_CARDS_SUCCESS, card };
+function deleteCardSuccess(card: Card) {
+  return { type: DELETE_CARD_SUCCESS, payload: card };
 }
 
-function deleteCardSuccess(card) {
-  return { type: DELETE_CARD_SUCCESS, card };
+function createCardNotesSuccess(cardNote: CardNote) {
+  return { type: CREATE_CARD_NOTES_SUCCESS, payload: cardNote };
 }
 
-function createCardNotesSuccess(cardNote) {
-  return { type: CREATE_CARD_NOTES_SUCCESS, cardNote };
+function deleteCardNotesSuccess(cardNote: CardNote) {
+  return { type: DELETE_CARD_NOTES_SUCCESS, payload: cardNote };
 }
 
-function deleteCardNotesSuccess(cardNote) {
-  return { type: DELETE_CARD_NOTES_SUCCESS, cardNote };
+function createCardTagSuccess(tag: Tag) {
+  return { type: CREATE_TAG_SUCCESS, payload: tag };
 }
 
-function createCardTagSuccess(tag) {
-  return { type: CREATE_TAG_SUCCESS, tag };
+function deleteCardTagSuccess(tag: Tag) {
+  return { type: DELETE_TAG_SUCCESS, payload: tag };
 }
 
-function deleteCardTagSuccess(tag) {
-  return { type: DELETE_TAG_SUCCESS, tag };
-}
-
-export function loadCardsFromFirebase(firebaseUid) {
-  return (dispatch) => {
+export function loadCardsFromFirebase(firebaseUid: string) {
+  return (dispatch: Dispatch) => {
     dispatch(beginApiCall());
     getFireBaseData("cards", dispatch, loadCardsSuccess, firebaseUid);
   };
 }
 
-export function saveCardToFirebase(card, firebaseUid) {
+export function saveCardToFirebase(
+  card: Card,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     /*
       BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
@@ -79,7 +79,10 @@ export function saveCardToFirebase(card, firebaseUid) {
   };
 }
 
-export function deleteCardFromFirebase(card, firebaseUid) {
+export function deleteCardFromFirebase(
+  card: Card,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     // Same reason to dispatch apiCall twice here as mentioned above in save function
     dispatch(beginApiCall());
@@ -89,7 +92,11 @@ export function deleteCardFromFirebase(card, firebaseUid) {
   };
 }
 
-export function saveCardNoteToFirebase(note, cardId, firebaseUid) {
+export function saveCardNoteToFirebase(
+  note: CardNote,
+  cardId: string,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     /*
       BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
@@ -105,7 +112,11 @@ export function saveCardNoteToFirebase(note, cardId, firebaseUid) {
   };
 }
 
-export function deleteCardNoteFromFirebase(note, cardId, firebaseUid) {
+export function deleteCardNoteFromFirebase(
+  note: CardNote,
+  cardId: string,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     // Same reason to dispatch apiCall twice here as mentioned above in save function
     dispatch(beginApiCall());
@@ -115,7 +126,11 @@ export function deleteCardNoteFromFirebase(note, cardId, firebaseUid) {
   };
 }
 
-export function saveCardTagToFirebase(tag, cardId, firebaseUid) {
+export function saveCardTagToFirebase(
+  tag: Tag,
+  cardId: string,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     dispatch(beginApiCall());
     dispatch(beginApiCall());
@@ -126,59 +141,16 @@ export function saveCardTagToFirebase(tag, cardId, firebaseUid) {
   };
 }
 
-export function deleteCardTagFromFirebase(tag, cardId, firebaseUid) {
+export function deleteCardTagFromFirebase(
+  tag: Tag,
+  cardId: string,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     // Same reason to dispatch apiCall twice here as mentioned above in save function
     dispatch(beginApiCall());
     dispatch(beginApiCall());
     deleteFromFirebase(`cards/${cardId}/tags`, tag.id, firebaseUid);
     dispatch(deleteCardTagSuccess(tag));
-  };
-}
-
-// JSON Server Functions for testing
-export function loadCardsFromJsonServer() {
-  return (dispatch) => {
-    dispatch(beginApiCall());
-    return cardsApi
-      .getCards()
-      .then((cards) => {
-        dispatch(loadCardsSuccess(cards));
-      })
-      .catch((error) => {
-        dispatch(apiCallError(error));
-        throw error;
-      });
-  };
-}
-
-export function saveCardToJsonServer(card) {
-  return (dispatch) => {
-    dispatch(beginApiCall());
-    return cardsApi
-      .saveCard(card)
-      .then((savedCard) => {
-        card.id
-          ? dispatch(updateCardSuccess(savedCard))
-          : dispatch(createCardSuccess(savedCard));
-      })
-      .catch((error) => {
-        dispatch(apiCallError(error));
-        throw error;
-      });
-  };
-}
-
-export function deleteCardFromJsonServer(card) {
-  return (dispatch) => {
-    return cardsApi
-      .deleteCard(card)
-      .then(() => {
-        dispatch(deleteCardSuccess(card));
-      })
-      .catch((error) => {
-        dispatch(apiCallError(error));
-        throw error;
-      });
   };
 }

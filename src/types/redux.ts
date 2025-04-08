@@ -2,6 +2,7 @@ import { Cardholder } from "./cardholder-types";
 import { Card, Notification } from "./cards-types";
 import { LoyaltyData, LoyaltyProgram } from "./loyalty-types";
 import { Referral } from "./referral-types";
+import { ThunkAction } from "redux-thunk";
 
 export type MainReduxState = {
   cards: Card[];
@@ -14,7 +15,14 @@ export type MainReduxState = {
   userLoyaltyPrograms: LoyaltyProgram[];
 };
 
-export type ActionTypes = {
+export type ActionTypes<T = any> = {
   type: string;
-  payload?: any;
+  payload?: T;
 };
+
+export type ActionThunkReturn = ThunkAction<
+  void,
+  MainReduxState,
+  unknown,
+  ActionTypes
+>;
