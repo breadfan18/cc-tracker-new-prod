@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  Auth,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import {
   DatabaseReference,
   DataSnapshot,
@@ -17,7 +22,8 @@ import {
   uploadString,
 } from "firebase/storage";
 import { Dispatch } from "redux";
-import { ActionTypes } from "../types/redux";
+import { ActionTypes, AllDataTypes } from "../types/redux";
+import { CardholderForModalType } from "../types/cardholder-types";
 // import firebaseConfig from "../firebase-config.json";
 // import firebaseTestConfig from "../firebase-config-test.json";
 
@@ -65,7 +71,12 @@ export function getFireBaseData<T>(
   });
 }
 
-export function writeToFirebase(endpoint, data, id, firebaseUid) {
+export function writeToFirebase<T extends AllDataTypes>(
+  endpoint: string,
+  data: T,
+  id: string,
+  firebaseUid: string
+) {
   set(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`), {
     ...data,
     id,
@@ -81,24 +92,30 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 const auth = getAuth(app);
 
-const login = async (auth) => {
+const login = async (auth: Auth): Promise<void> => {
   await signInWithPopup(auth, provider);
 };
 
-const logout = (auth) => auth.signOut();
+const logout = (auth: Auth): Promise<void> => auth.signOut();
 
 export { login, logout, auth };
 
 // STORAGE FUNCTIONS
 export const storage = getStorage(app);
 
-export const getFirebaseImgUrl = async (cardholder) => {
+// Upload cardholder image to Firebase Storage
+export const getFirebaseImgUrl = async (
+  cardholder: CardholderForModalType
+): Promise<string> => {
   const imgRef = storageRef(storage, `images/${cardholder.imgFile?.name}`);
   const snapshot = await uploadBytes(imgRef, cardholder.imgFile);
   return await getDownloadURL(snapshot.ref);
 };
 
-export const getFirebaseImgUrlForDataURL = async (cardholder, url) => {
+export const getFirebaseImgUrlForDataURL = async (
+  cardholder: CardholderForModalType,
+  url: string
+): Promise<string> => {
   const imgRef = storageRef(storage, `images/${cardholder.imgFile?.name}`);
   const snapshot = await uploadString(imgRef, url, "data_url");
   const scaledImg = await getDownloadURL(snapshot.ref);

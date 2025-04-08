@@ -26,7 +26,7 @@ import {
   DELETE_LOYALTY_PROGRAM_SUCCESS,
 } from "../redux/actions/actionTypes";
 import { Cardholder } from "./cardholder-types";
-import { Card, Notification } from "./cards-types";
+import { Card, CardNote, Notification, Tag } from "./cards-types";
 import { LoyaltyData, LoyaltyProgram } from "./loyalty-types";
 import { Referral } from "./referral-types";
 import { ThunkAction } from "redux-thunk";
@@ -53,6 +53,16 @@ export type ActionThunkReturn = ThunkAction<
   unknown,
   ActionTypes
 >;
+
+export type AllDataTypes =
+  | Card
+  | Cardholder
+  | LoyaltyData
+  | Referral
+  | Notification
+  | CardNote
+  | Tag
+  | LoyaltyProgram;
 
 export type ApiActionTypes =
   | { type: typeof BEGIN_API_CALL }
