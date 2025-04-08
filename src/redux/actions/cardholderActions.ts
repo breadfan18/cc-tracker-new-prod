@@ -10,19 +10,24 @@ import {
   writeToFirebase,
 } from "../../tools/firebase";
 import { slugify } from "../../helpers";
+import { ActionThunkReturn, ActionTypes } from "../../types/redux";
+import { Cardholder } from "../../types/cardholder-types";
 
-function loadCardholdersSuccess(cardholders) {
-  return { type: LOAD_CARDHOLDERS_SUCCESS, cardholders };
-}
-function createCardholderSuccess(cardholder) {
-  return { type: CREATE_CARDHOLDER_SUCCESS, cardholder };
-}
-
-function deleteCardholderSuccess(cardholder) {
-  return { type: DELETE_CARDHOLDER_SUCCESS, cardholder };
+function loadCardholdersSuccess(cardholders: Cardholder[]): ActionTypes {
+  return { type: LOAD_CARDHOLDERS_SUCCESS, payload: cardholders };
 }
 
-export function loadCardholdersFromFirebase(firebaseUid) {
+function createCardholderSuccess(cardholder: Cardholder): ActionTypes {
+  return { type: CREATE_CARDHOLDER_SUCCESS, payload: cardholder };
+}
+
+function deleteCardholderSuccess(cardholder: Cardholder): ActionTypes {
+  return { type: DELETE_CARDHOLDER_SUCCESS, payload: cardholder };
+}
+
+export function loadCardholdersFromFirebase(
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     dispatch(beginApiCall());
     getFireBaseData(
@@ -34,7 +39,10 @@ export function loadCardholdersFromFirebase(firebaseUid) {
   };
 }
 
-export function saveCardholderToFirebase(cardholder, firebaseUid) {
+export function saveCardholderToFirebase(
+  cardholder: Cardholder,
+  firebaseUid: string
+): ActionThunkReturn {
   return async (dispatch) => {
     /*
       BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
@@ -53,7 +61,10 @@ export function saveCardholderToFirebase(cardholder, firebaseUid) {
   };
 }
 
-export function deleteCardholderFromFirebase(cardholder, firebaseUid) {
+export function deleteCardholderFromFirebase(
+  cardholder: Cardholder,
+  firebaseUid: string
+): ActionThunkReturn {
   return (dispatch) => {
     // Same reason to dispatch apiCall twice here as mentioned above in save function
     dispatch(beginApiCall());

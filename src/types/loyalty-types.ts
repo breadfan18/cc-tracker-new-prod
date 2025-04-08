@@ -18,7 +18,7 @@ export type LoyaltyData = {
 };
 
 export type LoyaltyProgram = {
-  id: string;
+  id?: string;
   img: string;
   name: string;
   type: string;

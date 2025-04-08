@@ -1,6 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getDatabase, onValue, ref, remove, set } from "firebase/database";
+import {
+  DatabaseReference,
+  DataSnapshot,
+  getDatabase,
+  onValue,
+  ref,
+  remove,
+  set,
+} from "firebase/database";
 import {
   getStorage,
   getDownloadURL,
@@ -8,6 +16,8 @@ import {
   ref as storageRef,
   uploadString,
 } from "firebase/storage";
+import { Dispatch } from "redux";
+import { ActionTypes } from "../types/redux";
 // import firebaseConfig from "../firebase-config.json";
 // import firebaseTestConfig from "../firebase-config-test.json";
 
@@ -38,13 +48,14 @@ const app = initializeApp(isTest ? firebaseTestConfig : firebaseConfig);
 export const db = getDatabase(app);
 
 // DATABASE FUNCTIONS
-export function getFireBaseData(
+export function getFireBaseData<T>(
   endpoint: string,
-  dispatch,
-  dispatchFunc,
-  firebaseUid
-) {
-  onValue(ref(db, `/users/${firebaseUid}/${endpoint}`), (snap) => {
+  dispatch: Dispatch,
+  dispatchFunc: (data: T[]) => ActionTypes,
+  firebaseUid: string
+): void {
+  const dbRef: DatabaseReference = ref(db, `/users/${firebaseUid}/${endpoint}`);
+  onValue(dbRef, (snap: DataSnapshot) => {
     const allData: any[] = [];
     snap.forEach((data) => {
       const childData = data.val();

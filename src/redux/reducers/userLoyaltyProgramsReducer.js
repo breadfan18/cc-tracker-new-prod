@@ -12,7 +12,7 @@ export default function userLoyaltyProgramsReducer(
 ) {
   switch (action.type) {
     case LOAD_LOYALTY_PROGRAMS_SUCCESS:
-      return action.programs;
+      return action.payload;
     case CREATE_LOYALTY_PROGRAM_SUCCESS:
       /* This is just returning state instead of [...state, { ...action.loyalty }]
       because Firebase real time database adds new data immediately..
@@ -20,10 +20,10 @@ export default function userLoyaltyProgramsReducer(
       return state;
     case UPDATE_LOYALTY_PROGRAM_SUCCESS:
       return state.map((program) =>
-        program.id === action.loyalty.id ? action.loyalty : program
+        program.id === action.payload.id ? action.payload : program
       );
     case DELETE_LOYALTY_PROGRAM_SUCCESS:
-      return state.filter((loyaltyAcc) => loyaltyAcc.id !== action.loyalty.id);
+      return state.filter((loyaltyAcc) => loyaltyAcc.id !== action.payload.id);
     default:
       return state;
   }

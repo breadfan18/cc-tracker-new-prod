@@ -32,7 +32,7 @@ const LoyaltyForm = ({
   errors = {},
 }: LoyaltyFormProps) => {
   const programsToDisplay = filteredPrograms.map((program) => ({
-    value: program.id,
+    value: program.id ?? "",
     text: program.name,
   }));
   return (
