@@ -4,11 +4,13 @@ import {
   LOAD_REFERRAL_SUCCESS,
   DELETE_REFERRAL_SUCCESS,
 } from "../actions/actionTypes";
+import { ReferralActionTypes } from "../../types/redux";
+import { Referral } from "../../types/referral-types";
 
 export default function referralsReducer(
-  state = initialState.referrals,
-  action
-) {
+  state: Referral[] = initialState.referrals,
+  action: ReferralActionTypes
+): Referral[] {
   switch (action.type) {
     case LOAD_REFERRAL_SUCCESS:
       return action.payload;

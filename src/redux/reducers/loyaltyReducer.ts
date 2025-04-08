@@ -5,11 +5,13 @@ import {
   LOAD_LOYALTY_DATA_SUCCESS,
   UPDATE_LOYALTY_DATA_SUCCESS,
 } from "../actions/actionTypes";
+import { LoyaltyData } from "../../types/loyalty-types";
+import { LoyaltyActionTypes } from "../../types/redux";
 
 export default function loyaltyReducer(
-  state = initialState.loyaltyData,
-  action
-) {
+  state: LoyaltyData[] = initialState.loyaltyData,
+  action: LoyaltyActionTypes
+): LoyaltyData[] {
   switch (action.type) {
     case LOAD_LOYALTY_DATA_SUCCESS:
       return action.payload;

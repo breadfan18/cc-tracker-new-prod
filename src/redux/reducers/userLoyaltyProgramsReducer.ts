@@ -5,11 +5,13 @@ import {
   UPDATE_LOYALTY_PROGRAM_SUCCESS,
   DELETE_LOYALTY_PROGRAM_SUCCESS,
 } from "../actions/actionTypes";
+import { LoyaltyProgram } from "../../types/loyalty-types";
+import { LoyaltyProgramActionTypes } from "../../types/redux";
 
 export default function userLoyaltyProgramsReducer(
-  state = initialState.userLoyaltyPrograms,
-  action
-) {
+  state: LoyaltyProgram[] = initialState.userLoyaltyPrograms,
+  action: LoyaltyProgramActionTypes
+): LoyaltyProgram[] {
   switch (action.type) {
     case LOAD_LOYALTY_PROGRAMS_SUCCESS:
       return action.payload;

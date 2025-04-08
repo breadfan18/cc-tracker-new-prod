@@ -5,11 +5,13 @@ import {
   DELETE_CARDHOLDER_SUCCESS,
   UPDATE_CARDHOLDER_SUCCESS,
 } from "../actions/actionTypes";
+import { Cardholder } from "../../types/cardholder-types";
+import { CardholderActionTypes } from "../../types/redux";
 
 export default function cardholdersReducer(
-  state = initialState.cardholders,
-  action
-) {
+  state: Cardholder[] = initialState.cardholders,
+  action: CardholderActionTypes
+): Cardholder[] {
   switch (action.type) {
     case LOAD_CARDHOLDERS_SUCCESS:
       return action.payload;

@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { AnyAction, combineReducers } from "redux";
 import cards from "./cardsReducer";
 import loyaltyData from "./loyaltyReducer";
 import cardholders from "./cardholdersReducer";
@@ -20,7 +20,9 @@ const appReducer = combineReducers({
   userLoyaltyPrograms,
 });
 
-const rootReducer = (state, action) => {
+export type RootState = ReturnType<typeof appReducer>;
+
+const rootReducer = (state: RootState, action: AnyAction) => {
   // The following is done in order to reset the state on logout.
   if (action.type === USER_LOGOUT_SUCCESS) {
     return appReducer(undefined, action);

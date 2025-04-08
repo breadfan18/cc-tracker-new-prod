@@ -1,4 +1,6 @@
-const initialState = {
+import { MainReduxState } from "../../types/redux";
+
+const initialState: MainReduxState = {
   cards: [],
   loyaltyData: [],
   apiCallsInProgress: 0,
