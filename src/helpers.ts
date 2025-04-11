@@ -14,10 +14,14 @@ import { Card, CardNote, Inquiries } from "./types/cards-types";
 import { LoyaltyData } from "./types/loyalty-types";
 import { Referral } from "./types/referral-types";
 
-export const pipe =
-  (...fns) =>
-  (x) =>
-    fns.reduce((v, f) => f(v), x);
+// export const pipe =
+//   (...fns) =>
+//   (x) =>
+//     fns.reduce((v, f) => f(v), x);
+
+export function pipe<T>(...fns: Array<(arg: T) => T>) {
+  return (x: T): T => fns.reduce((v, f) => f(v), x);
+}
 
 export function wasCardOpenedWithinLast24Months(appDate: string): boolean {
   const twoYearsAgoFromToday = Date.parse(
