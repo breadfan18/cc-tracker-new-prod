@@ -2,3 +2,4 @@ db.json
 local/
 dist/
 firebase-service-account*
+firebase-config*

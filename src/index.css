@@ -75,6 +75,15 @@ pre {
   margin: 0 auto;
 }
 
+.cardholders-page-note {
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+  color: gray;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
 .cardDetailsBody,
 .cardDetailsBodyMobile {
   display: flex;
@@ -420,7 +429,7 @@ nav a {
 }
 
 .notificationIcon.loyalty {
-  color: var(--color-blue);
+  color: var(--edit-color-green);
 }
 
 .notificationFooter {
@@ -1250,6 +1259,14 @@ p {
   width: 10rem;
   padding: 10px;
   object-fit: contain;
+}
+
+.referrerField {
+  border-radius: 0 30px 30px 0;
+  padding: 5px 3px;
+  display: flex;
+  color: white;
+  align-items: center;
 }
 
 #referralLink {
