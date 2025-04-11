@@ -93,7 +93,7 @@ const LoyaltyList = ({
               </td>
               <td>
                 <a
-                  href={acc.program.url}
+                  href={acc.program.url || undefined}
                   target="_blank"
                   rel="noreferrer"
                   style={{ textDecoration: "none" }}

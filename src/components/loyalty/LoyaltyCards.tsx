@@ -43,7 +43,7 @@ export default function LoyaltyCards({
               }}
             >
               <a
-                href={acc.program.url}
+                href={acc.program.url || undefined}
                 style={{ textDecoration: "none" }}
                 target="_blank"
                 rel="noreferrer"
