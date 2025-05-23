@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -41,8 +41,12 @@ function LoyaltyAddEditModal({
   userAddedPrograms,
 }: LoyaltyAddEditModalProps) {
   const dispatch = useDispatch();
-  const [loyaltyAccForModal, setLoyaltyAccForModal] = useState(
-    loyaltyAcc ? { ...loyaltyAcc } : newLoyaltyAcc
+  const [loyaltyAccForModal, setLoyaltyAccForModal] = useState<LoyaltyData>(
+    loyaltyAcc ? { ...loyaltyAcc } : { ...newLoyaltyAcc }
+  );
+  const combinedPrograms = useMemo(
+    () => [...PROGRAMS, ...(userAddedPrograms || [])],
+    [userAddedPrograms]
   );
   const [programsFilteredByType, setFilteredPrograms] = useState<
     LoyaltyProgram[]
@@ -51,70 +55,85 @@ function LoyaltyAddEditModal({
   const { data: user } = useUser();
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const [errors, setErrors] = useState({});
-  const combinedPrograms = [...PROGRAMS, ...(userAddedPrograms || [])];
 
   const toggleShow = () => setShow(!show);
 
-  // BUG - why does the loyalty program field in the form not populate with the correct value when editing a loyalty account?
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (value !== "" || value !== null) {
-      delete errors[name];
-    }
-
-    if (name === LOYALTY_DATA_KEYS.loyaltyType) {
-      const filteredPrograms = combinedPrograms.filter(
-        (program) => program.type === value
+  useEffect(() => {
+    if (loyaltyAcc?.program.type) {
+      setFilteredPrograms(
+        combinedPrograms.filter(
+          (program) => program.type === loyaltyAcc.program.type
+        )
       );
-
-      setFilteredPrograms(filteredPrograms);
-    } else if (name === "userId") {
-      setLoyaltyAccForModal((prevAcc) => ({
-        ...prevAcc,
-        accountHolder:
-          cardholders.find((holder) => holder.id === value)?.name || "",
-        userId: value,
-      }));
+    } else {
+      setFilteredPrograms([]);
     }
+  }, [combinedPrograms, loyaltyAcc]);
 
-    setLoyaltyAccForModal((prevValue) => ({
-      ...prevValue,
-      [name]:
-        name === "id"
-          ? parseInt(value, 10)
-          : name === LOYALTY_DATA_KEYS.program
-          ? combinedPrograms.find((program) => program.id === value)
-          : value,
-    }));
-  };
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const { name, value } = event.target;
+      if (value !== "" || value !== null) {
+        delete errors[name];
+      }
 
-  const handleSave = (event) => {
-    event.preventDefault();
-    if (!formIsValid()) return;
+      if (name === LOYALTY_DATA_KEYS.loyaltyType) {
+        const filteredPrograms = combinedPrograms.filter(
+          (program) => program.type === value
+        );
 
-    const memberId = loyaltyAccForModal.memberId || "N/A";
-    const loginId = loyaltyAccForModal.loginId || "N/A";
-    const password = loyaltyAccForModal.password
-      ? maskPwd(loyaltyAccForModal.password)
-      : "N/A";
+        setFilteredPrograms(filteredPrograms);
+      } else if (name === "userId") {
+        setLoyaltyAccForModal((prevAcc) => ({
+          ...prevAcc,
+          accountHolder:
+            cardholders.find((holder) => holder.id === value)?.name || "",
+          userId: value,
+        }));
+      }
 
-    const finalData = {
-      ...loyaltyAccForModal,
-      memberId,
-      loginId,
-      password,
-    };
+      setLoyaltyAccForModal((prevValue) => ({
+        ...prevValue,
+        [name]:
+          name === "id"
+            ? parseInt(value, 10)
+            : name === LOYALTY_DATA_KEYS.program
+            ? combinedPrograms.find((program) => program.id === value)
+            : value,
+      }));
+    },
+    [cardholders, combinedPrograms, errors]
+  );
 
-    dispatch(saveLoyaltyDataToFirebase(finalData, user?.uid));
+  const handleSave = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!formIsValid()) return;
 
-    toast.success(
-      loyaltyAccForModal?.id === null
-        ? "Loyalty Account Created"
-        : "Loyalty Account Updated"
-    );
-    toggleShow();
-  };
+      const memberId = loyaltyAccForModal.memberId || "N/A";
+      const loginId = loyaltyAccForModal.loginId || "N/A";
+      const password = loyaltyAccForModal.password
+        ? maskPwd(loyaltyAccForModal.password)
+        : "N/A";
+
+      const finalData = {
+        ...loyaltyAccForModal,
+        memberId,
+        loginId,
+        password,
+      };
+
+      dispatch(saveLoyaltyDataToFirebase(finalData, user?.uid));
+
+      toast.success(
+        loyaltyAccForModal?.id === null
+          ? "Loyalty Account Created"
+          : "Loyalty Account Updated"
+      );
+      toggleShow();
+    },
+    [dispatch, loyaltyAccForModal, toggleShow, user?.uid]
+  );
 
   function formIsValid() {
     const { userId, loyaltyType, program } = loyaltyAccForModal;
