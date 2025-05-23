@@ -28,7 +28,10 @@ export default function BonusStatusAndEarnDate({
   const { windowWidth, isMobileXS } = useWindhowWidth();
   const hasBonusEarnDate =
     card.bonusEarnDate?.includes("-") || card.bonusEarned;
-  const noBonus = card.signupBonus === undefined || card.signupBonus === "0";
+  const noBonus =
+    card.signupBonus === undefined ||
+    card.signupBonus === "0" ||
+    card.signupBonus === "";
 
   const backgroundColor = !isCard
     ? "none"

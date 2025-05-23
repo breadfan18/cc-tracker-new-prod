@@ -147,8 +147,10 @@ export default function CardListTable({
             issuer,
           } = card;
 
-          const noBonus = signupBonus === undefined || signupBonus === "0";
-
+          const noBonus =
+            signupBonus === undefined ||
+            signupBonus === "0" ||
+            signupBonus === "";
           return (
             <tr
               key={id}
