@@ -44,6 +44,11 @@ function LoyaltyAddEditModal({
   const [loyaltyAccForModal, setLoyaltyAccForModal] = useState<LoyaltyData>(
     loyaltyAcc ? { ...loyaltyAcc } : { ...newLoyaltyAcc }
   );
+  const [show, setShow] = useState(false);
+  const { data: user } = useUser();
+  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
+  const [errors, setErrors] = useState({});
+  const toggleShow = useCallback(() => setShow((prev) => !prev), []);
   const combinedPrograms = useMemo(
     () => [...PROGRAMS, ...(userAddedPrograms || [])],
     [userAddedPrograms]
@@ -51,12 +56,6 @@ function LoyaltyAddEditModal({
   const [programsFilteredByType, setFilteredPrograms] = useState<
     LoyaltyProgram[]
   >([]);
-  const [show, setShow] = useState(false);
-  const { data: user } = useUser();
-  const cardholders = useSelector((state: MainReduxState) => state.cardholders);
-  const [errors, setErrors] = useState({});
-
-  const toggleShow = () => setShow(!show);
 
   useEffect(() => {
     if (loyaltyAcc?.program.type) {
@@ -107,6 +106,17 @@ function LoyaltyAddEditModal({
 
   const handleSave = useCallback(
     (event) => {
+      function formIsValid() {
+        const { userId, loyaltyType, program } = loyaltyAccForModal;
+        const errors: Errors = {};
+        if (!userId) errors.userId = "Required";
+        if (!loyaltyType) errors.loyaltyType = "Required";
+        if (!program.name) errors.program = "Required";
+        setErrors(errors);
+        // Form is valid if the errors objects has no properties
+        return Object.keys(errors).length === 0;
+      }
+
       event.preventDefault();
       if (!formIsValid()) return;
 
@@ -134,17 +144,6 @@ function LoyaltyAddEditModal({
     },
     [dispatch, loyaltyAccForModal, toggleShow, user?.uid]
   );
-
-  function formIsValid() {
-    const { userId, loyaltyType, program } = loyaltyAccForModal;
-    const errors: Errors = {};
-    if (!userId) errors.userId = "Required";
-    if (!loyaltyType) errors.loyaltyType = "Required";
-    if (!program.name) errors.program = "Required";
-    setErrors(errors);
-    // Form is valid if the errors objects has no properties
-    return Object.keys(errors).length === 0;
-  }
 
   function clearLoyaltyAccState() {
     setLoyaltyAccForModal(newLoyaltyAcc);
