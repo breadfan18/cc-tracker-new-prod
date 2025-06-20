@@ -49,7 +49,7 @@ function CardNotes({ cardId, cardNotes }: CardNotesProps) {
   }
 
   function handleDelete(note) {
-    deleteCardNoteFromFirebase(note, cardId, user?.uid);
+    dispatch(deleteCardNoteFromFirebase(note, cardId, user?.uid));
     toast.success("Note Deleted");
   }
 
