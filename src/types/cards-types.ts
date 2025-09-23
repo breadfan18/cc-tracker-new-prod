@@ -36,8 +36,8 @@ export type Tag = {
 
 export type CardNote = {
   id?: string;
-  date: string;
   note: string;
+  date: string;
 };
 
 export type Issuer = {

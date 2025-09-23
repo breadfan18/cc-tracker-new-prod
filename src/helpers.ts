@@ -129,11 +129,25 @@ export function maskPwd(str: string): string {
   );
 }
 
-export function formatDate(dateStr) {
+export function formatDate(dateStr: string) {
   if (!dateStr || dateStr === undefined || dateStr === "") return "N/A";
 
+  // If ISO date-time string, use Date object
+  if (dateStr.includes("T")) {
+    const date = new Date(dateStr);
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const dd = String(date.getDate()).padStart(2, "0");
+    const yyyy = date.getFullYear();
+    return `${mm}-${dd}-${yyyy}`;
+  }
+
+  // Otherwise, assume YYYY-MM-DD and split
   const dateSplit = dateStr.split("-");
-  return `${dateSplit[1]}-${dateSplit[2]}-${dateSplit[0]}`;
+  if (dateSplit.length === 3) {
+    return `${dateSplit[1]}-${dateSplit[2]}-${dateSplit[0]}`;
+  }
+
+  return dateStr;
 }
 
 export function formatCurrency(currencyStr: string) {

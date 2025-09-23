@@ -37,7 +37,7 @@ function CardNotes({ cardId, cardNotes }: CardNotesProps) {
   function handleChange(e) {
     setNote({
       note: e.target.value,
-      date: new Date().toISOString().split("T")[0],
+      date: new Date().toISOString(), // Save full ISO date-time
     });
   }
 
@@ -62,6 +62,12 @@ function CardNotes({ cardId, cardNotes }: CardNotesProps) {
     }
   }
 
+  const sortedNotes = [...cardNotes].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  console.log(sortedNotes);
+
   return loading ? (
     <Spinner />
   ) : (
@@ -74,7 +80,7 @@ function CardNotes({ cardId, cardNotes }: CardNotesProps) {
     >
       <Card.Header className="cardHeaders">Card Notes</Card.Header>
       <Card.Body style={{ textAlign: "left" }}>
-        {cardNotes.length === 0 ? (
+        {sortedNotes.length === 0 ? (
           <EmptyList dataType={"note"} />
         ) : (
           <Table
@@ -90,7 +96,7 @@ function CardNotes({ cardId, cardNotes }: CardNotesProps) {
               </tr>
             </thead>
             <tbody>
-              {cardNotes.map((note) => (
+              {sortedNotes.map((note) => (
                 <tr key={note.id}>
                   <td style={{ minWidth: "100px" }}>{formatDate(note.date)}</td>
                   <td style={{ maxWidth: "500px" }}>{note.note}</td>
