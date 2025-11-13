@@ -41,6 +41,7 @@ function Filters({
           style={{ padding: windowWidth < 772 ? "20px" : null }}
         >
           <Form.Check
+            id="cardType-all"
             label="All"
             type="radio"
             name="cardType"
@@ -50,6 +51,7 @@ function Filters({
             checked={filters.cardType === ""}
           />
           <Form.Check
+            id="cardType-personal"
             label="Personal"
             type="radio"
             name="cardType"
@@ -59,6 +61,7 @@ function Filters({
             checked={filters.cardType === "Personal"}
           />
           <Form.Check
+            id="cardType-business"
             label="Business"
             type="radio"
             name="cardType"
@@ -73,6 +76,7 @@ function Filters({
           style={{ padding: windowWidth < 772 ? "20px" : null }}
         >
           <Form.Check
+            id="status-all"
             label="All"
             type="radio"
             name="status"
@@ -82,6 +86,7 @@ function Filters({
             checked={filters.status === ""}
           />
           <Form.Check
+            id="status-open"
             label="Open"
             type="radio"
             name="status"
@@ -91,6 +96,7 @@ function Filters({
             className="radioFilters"
           />
           <Form.Check
+            id="status-closed"
             label="Closed"
             type="radio"
             name="status"
@@ -100,6 +106,7 @@ function Filters({
             className="radioFilters"
           />
           <Form.Check
+            id="status-downgraded"
             label="Downgraded"
             type="radio"
             name="status"
@@ -109,12 +116,12 @@ function Filters({
             className="radioFilters"
           />
         </div>
-
         <div
           className="statusFilters"
           style={{ padding: windowWidth < 772 ? "20px" : null }}
         >
           <Form.Check
+            id="annual-fee-toggle"
             label="Cards with Annual Fee"
             type="checkbox"
             name="cardsWithAnnualFee"
