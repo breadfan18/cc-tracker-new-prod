@@ -27,8 +27,8 @@ type CardNotesProps = {
 };
 function CardNotes({ cardId, cardNotes }: CardNotesProps) {
   const theme = useSelector((state: MainReduxState) => state.theme);
-  const loading = useSelector(
-    (state: MainReduxState) => state.apiCallsInProgress > 0
+  const loading = useSelector((state: MainReduxState) =>
+    Boolean(state.loading?.cards)
   );
   const dispatch = useDispatch();
   const [note, setNote] = useState(NEW_NOTE);

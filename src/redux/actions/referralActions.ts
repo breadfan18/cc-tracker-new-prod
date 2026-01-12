@@ -1,4 +1,5 @@
-import { beginApiCall } from "./apiStatusActions";
+// api status removed; using per-slice loading for initial data
+import { sliceLoadingDone, sliceLoadingStart } from "./uiLoadingActions";
 import {
   CREATE_REFERRAL_SUCCESS,
   LOAD_REFERRAL_SUCCESS,
@@ -6,7 +7,7 @@ import {
 } from "./actionTypes";
 import {
   deleteFromFirebase,
-  getFireBaseData,
+  subscribeToFirebaseData,
   writeToFirebase,
 } from "../../tools/firebase";
 import { uid } from "uid";
@@ -28,8 +29,14 @@ export function loadReferralsFromFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return (dispatch) => {
-    dispatch(beginApiCall());
-    getFireBaseData("referrals", dispatch, loadReferralsSuccess, firebaseUid);
+    dispatch(sliceLoadingStart("referrals"));
+    subscribeToFirebaseData<Referral>(
+      "referrals",
+      dispatch,
+      loadReferralsSuccess,
+      firebaseUid,
+      () => dispatch(sliceLoadingDone("referrals"))
+    );
   };
 }
 
@@ -38,17 +45,8 @@ export function saveReferralToFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return async (dispatch) => {
-    /*
-      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
-      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
-      - This causes apiCallsInProgress to go negative. 
-      - Need to understand why the LOAD action fires on Create/Update
-    */
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
-
     const referralId = referral.id === "" ? `referral-${uid()}` : referral.id;
-    writeToFirebase("referrals", referral, referralId, firebaseUid);
+    await writeToFirebase("referrals", referral, referralId, firebaseUid);
     dispatch(createReferralSuccess(referral));
   };
 }
@@ -57,11 +55,8 @@ export function deleteReferralFromFirebase(
   referral: Referral,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    // Same reason to dispatch apiCall twice here as mentioned above in save function
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
-    deleteFromFirebase("referrals", referral.id, firebaseUid);
+  return async (dispatch) => {
+    await deleteFromFirebase("referrals", referral.id, firebaseUid);
     dispatch(deleteReferralSuccess(referral));
   };
 }

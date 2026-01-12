@@ -51,7 +51,7 @@ export default function BonusStatusAndEarnDate({
         "block"
       );
     }
-  }, [windowWidth]);
+  }, [isCardDetailsPage, isMobileXS, windowWidth]);
 
   const bonusStatusTextColor = inverseColor
     ? "white"

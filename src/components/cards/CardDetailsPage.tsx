@@ -25,6 +25,11 @@ import { PageNotifications } from "../common/Notifications/PageNotifications";
 import RewardTags from "./reward-tags/RewardTags";
 import { MainReduxState } from "../../types/redux";
 
+/* 
+TO DO 
+-- card details page crashing on page reload. WHY?? 
+*/
+
 function CardDetailsPage() {
   const { id } = useParams();
   const cards = useSelector((state: MainReduxState) => state.cards);
@@ -35,13 +40,15 @@ function CardDetailsPage() {
     (referral) => referral.referringCardId === card.id
   );
   const dispatch = useDispatch();
-  const loading = useSelector(
-    (state: MainReduxState) =>
-      state.apiCallsInProgress > 0 || state.cards.length === 0
-  );
-
   const notifications = useSelector(
     (state: MainReduxState) => state.notifications
+  );
+  const loading = useSelector((state: MainReduxState) =>
+    Boolean(
+      state.loading?.cards ||
+        state.loading?.referrals ||
+        state.loading?.notifications
+    )
   );
 
   const cardNotfications = notifications.filter(
@@ -82,6 +89,7 @@ function CardDetailsPage() {
       );
     }
   );
+
   return loading ? (
     <Spinner />
   ) : (

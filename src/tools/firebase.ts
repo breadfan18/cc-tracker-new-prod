@@ -54,13 +54,32 @@ const app = initializeApp(isTest ? firebaseTestConfig : firebaseConfig);
 export const db = getDatabase(app);
 
 // DATABASE FUNCTIONS
-export function getFireBaseData<T>(
+// export async function getFireBaseData<T>(
+//   endpoint: string,
+//   dispatch: Dispatch,
+//   dispatchFunc: (data: T[]) => ActionTypes,
+//   firebaseUid: string
+// ): Promise<void> {
+//   const dbRef: DatabaseReference = ref(db, `/users/${firebaseUid}/${endpoint}`);
+//   const snap: DataSnapshot = await get(dbRef);
+//   const allData: any[] = [];
+//   snap.forEach((data) => {
+//     const childData = data.val();
+//     allData.push(childData);
+//   });
+//   dispatch(dispatchFunc(allData));
+// }
+
+// Subscribe to realtime updates; call onInitialLoaded after first snapshot
+export function subscribeToFirebaseData<T>(
   endpoint: string,
   dispatch: Dispatch,
   dispatchFunc: (data: T[]) => ActionTypes,
-  firebaseUid: string
+  firebaseUid: string,
+  onInitialLoaded?: () => void
 ): void {
   const dbRef: DatabaseReference = ref(db, `/users/${firebaseUid}/${endpoint}`);
+  let initialEmitted = false;
   onValue(dbRef, (snap: DataSnapshot) => {
     const allData: any[] = [];
     snap.forEach((data) => {
@@ -68,6 +87,10 @@ export function getFireBaseData<T>(
       allData.push(childData);
     });
     dispatch(dispatchFunc(allData));
+    if (!initialEmitted) {
+      initialEmitted = true;
+      onInitialLoaded && onInitialLoaded();
+    }
   });
 }
 
@@ -76,15 +99,19 @@ export function writeToFirebase<T extends AllDataTypes>(
   data: T,
   id: string,
   firebaseUid: string
-) {
-  set(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`), {
+): Promise<void> {
+  return set(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`), {
     ...data,
     id,
   });
 }
 
-export function deleteFromFirebase(endpoint, id, firebaseUid) {
-  remove(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`));
+export function deleteFromFirebase(
+  endpoint: string,
+  id: string,
+  firebaseUid: string
+): Promise<void> {
+  return remove(ref(db, `/users/${firebaseUid}/${endpoint}/${id}`));
 }
 
 // AUTH FUNCTIONS

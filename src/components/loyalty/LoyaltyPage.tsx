@@ -18,8 +18,12 @@ const LoyaltyPage = () => {
   const { status, data: user } = useUser();
   const dispatch = useDispatch();
   const loyaltyData = useSelector((state: MainReduxState) => state.loyaltyData);
-  const loading = useSelector(
-    (state: MainReduxState) => state.apiCallsInProgress > 0
+  const loading = useSelector((state: MainReduxState) =>
+    Boolean(
+      state.loading?.loyaltyData ||
+        state.loading?.cardholders ||
+        state.loading?.userLoyaltyPrograms
+    )
   );
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const loyaltyNotifications = useSelector((state: MainReduxState) =>

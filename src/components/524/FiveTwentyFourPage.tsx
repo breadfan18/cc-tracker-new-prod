@@ -25,11 +25,11 @@ const FiveTwentyFourPage = () => {
   const cards = useSelector((state: MainReduxState) =>
     sortCardsByDate(state.cards)
   );
-  const loading = useSelector(
-    (state: MainReduxState) => state.apiCallsInProgress > 0
-  );
   const cardholders = useSelector((state: MainReduxState) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
+  );
+  const loading = useSelector((state: MainReduxState) =>
+    Boolean(state.loading?.cards || state.loading?.cardholders)
   );
 
   const cardsByHolder = cardholders.reduce((obj, holder) => {

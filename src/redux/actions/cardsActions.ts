@@ -7,10 +7,10 @@ import {
   CREATE_TAG_SUCCESS,
   DELETE_TAG_SUCCESS,
 } from "./actionTypes";
-import { beginApiCall } from "./apiStatusActions";
+import { sliceLoadingDone, sliceLoadingStart } from "./uiLoadingActions";
 import {
   deleteFromFirebase,
-  getFireBaseData,
+  subscribeToFirebaseData,
   writeToFirebase,
 } from "../../tools/firebase";
 import { slugify } from "../../helpers";
@@ -49,8 +49,14 @@ function deleteCardTagSuccess(tag: Tag) {
 
 export function loadCardsFromFirebase(firebaseUid: string) {
   return (dispatch: Dispatch) => {
-    dispatch(beginApiCall());
-    getFireBaseData("cards", dispatch, loadCardsSuccess, firebaseUid);
+    dispatch(sliceLoadingStart("cards"));
+    subscribeToFirebaseData<Card>(
+      "cards",
+      dispatch,
+      loadCardsSuccess,
+      firebaseUid,
+      () => dispatch(sliceLoadingDone("cards"))
+    );
   };
 }
 
@@ -58,15 +64,7 @@ export function saveCardToFirebase(
   card: Card,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    /*
-      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
-      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
-      - This causes apiCallsInProgress to go negative. 
-      - Need to understand why the LOAD action fires on Create/Update
-    */
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
+  return async (dispatch) => {
     const cardId =
       card.id === ""
         ? slugify(
@@ -74,7 +72,7 @@ export function saveCardToFirebase(
           )
         : card.id;
 
-    writeToFirebase("cards", card, cardId, firebaseUid);
+    await writeToFirebase("cards", card, cardId, firebaseUid);
     dispatch(createCardSuccess(card));
   };
 }
@@ -83,11 +81,8 @@ export function deleteCardFromFirebase(
   card: Card,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    // Same reason to dispatch apiCall twice here as mentioned above in save function
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
-    deleteFromFirebase("cards", card.id, firebaseUid);
+  return async (dispatch) => {
+    await deleteFromFirebase("cards", card.id, firebaseUid);
     dispatch(deleteCardSuccess(card));
   };
 }
@@ -97,17 +92,9 @@ export function saveCardNoteToFirebase(
   cardId: string,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    /*
-      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
-      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
-      - This causes apiCallsInProgress to go negative. 
-      - Need to understand why the LOAD action fires on Create/Update
-    */
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
+  return async (dispatch) => {
     const uuid = note.id === null || note.id === undefined ? uid() : note.id;
-    writeToFirebase(`cards/${cardId}/cardNotes`, note, uuid, firebaseUid);
+    await writeToFirebase(`cards/${cardId}/cardNotes`, note, uuid, firebaseUid);
     dispatch(createCardNotesSuccess(note));
   };
 }
@@ -117,11 +104,12 @@ export function deleteCardNoteFromFirebase(
   cardId: string,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    // Same reason to dispatch apiCall twice here as mentioned above in save function
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
-    deleteFromFirebase(`cards/${cardId}/cardNotes`, note.id, firebaseUid);
+  return async (dispatch) => {
+    await deleteFromFirebase(
+      `cards/${cardId}/cardNotes`,
+      note.id!,
+      firebaseUid
+    );
     dispatch(deleteCardNotesSuccess(note));
   };
 }
@@ -131,12 +119,10 @@ export function saveCardTagToFirebase(
   cardId: string,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
+  return async (dispatch) => {
     const uuid =
       tag.id === null || tag.id === undefined ? `tag_${uid()}` : tag.id;
-    writeToFirebase(`cards/${cardId}/tags`, tag, uuid, firebaseUid);
+    await writeToFirebase(`cards/${cardId}/tags`, tag, uuid, firebaseUid);
     dispatch(createCardTagSuccess(tag));
   };
 }
@@ -146,11 +132,8 @@ export function deleteCardTagFromFirebase(
   cardId: string,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    // Same reason to dispatch apiCall twice here as mentioned above in save function
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
-    deleteFromFirebase(`cards/${cardId}/tags`, tag.id, firebaseUid);
+  return async (dispatch) => {
+    await deleteFromFirebase(`cards/${cardId}/tags`, tag.id!, firebaseUid);
     dispatch(deleteCardTagSuccess(tag));
   };
 }

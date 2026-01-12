@@ -4,7 +4,7 @@ import loyaltyData from "./loyaltyReducer";
 import cardholders from "./cardholdersReducer";
 import referrals from "./referralsReducer";
 import notifications from "./notificationsReducer";
-import apiCallsInProgress from "./apiStatusReducer";
+import loading from "./loadingReducer";
 import theme from "./themeReducer";
 import userLoyaltyPrograms from "./userLoyaltyProgramsReducer";
 import { USER_LOGOUT_SUCCESS } from "../actions/actionTypes";
@@ -13,7 +13,7 @@ import { ActionTypes } from "../../types/redux";
 const appReducer = combineReducers({
   cards,
   loyaltyData,
-  apiCallsInProgress,
+  loading,
   cardholders,
   referrals,
   notifications,

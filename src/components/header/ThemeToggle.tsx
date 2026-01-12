@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import "./ThemeToggle.css";
 import { useDispatch } from "react-redux";
 import { changeReduxTheme } from "../../redux/actions/themeActions";
 import { MdWbSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
+import "./ThemeToggle.css";
 
 const ThemeToggle = ({ displayToggle }: { displayToggle: boolean }) => {
   const savedTheme = localStorage.getItem("theme") || "light";
@@ -14,7 +14,7 @@ const ThemeToggle = ({ displayToggle }: { displayToggle: boolean }) => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
     dispatch(changeReduxTheme(theme));
-  }, [theme]);
+  }, [dispatch, theme]);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));

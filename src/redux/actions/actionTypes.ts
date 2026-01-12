@@ -9,9 +9,11 @@ export const DELETE_TAG_SUCCESS = "DELETE_TAG_SUCCESS";
 //Users Actions
 export const LOAD_USERS_SUCCESS = "LOAD_USERS_SUCCESS";
 
-//API Status Actions
-export const BEGIN_API_CALL = "BEGIN_API_CALL";
-export const API_CALL_ERROR = "API_CALL_ERROR";
+//API Status Actions (deprecated)
+
+// UI Loading (per-slice)
+export const SLICE_LOADING_START = "SLICE_LOADING_START";
+export const SLICE_LOADING_DONE = "SLICE_LOADING_DONE";
 
 // Loyalty Actions
 export const LOAD_LOYALTY_DATA_SUCCESS = "LOAD_LOYALTY_DATA_SUCCESS";

@@ -1,9 +1,12 @@
-import { beginApiCall } from "./apiStatusActions";
+// api status removed; using per-slice loading for initial data
 import {
   LOAD_NOTIFICATIONS_SUCCESS,
   DELETE_NOTIFICATION_SUCCESS,
 } from "./actionTypes";
-import { deleteFromFirebase, getFireBaseData } from "../../tools/firebase";
+import {
+  deleteFromFirebase,
+  subscribeToFirebaseData,
+} from "../../tools/firebase";
 import { ActionThunkReturn, ActionTypes } from "../../types/redux";
 import { Notification } from "../../types/cards-types";
 
@@ -19,12 +22,12 @@ export function loadNotificationsFromFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return (dispatch) => {
-    dispatch(beginApiCall());
-    getFireBaseData(
+    subscribeToFirebaseData<Notification>(
       "notifications",
       dispatch,
       loadNotificationsSuccess,
-      firebaseUid
+      firebaseUid,
+      undefined
     );
   };
 }
@@ -33,9 +36,8 @@ export function deleteNotificationFromFirebase(
   notification: Notification,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    dispatch(beginApiCall());
-    deleteFromFirebase(
+  return async (dispatch) => {
+    await deleteFromFirebase(
       "notifications",
       notification.notificationId,
       firebaseUid
@@ -50,7 +52,6 @@ export const deleteCardNotificationsOnCardClosure = (
   firebaseUid: string
 ): ActionThunkReturn => {
   return (dispatch) => {
-    dispatch(beginApiCall());
     const cardNotifications = allNotifications.filter(
       (notification) => notification.cardId === cardId
     );
@@ -67,7 +68,6 @@ export const deleteSpendByNotificationWhenBonusEarned = (
   firebaseUid: string
 ): ActionThunkReturn => {
   return (dispatch) => {
-    dispatch(beginApiCall());
     const cardSpendByNotfications = allNotifications.filter(
       (notification) =>
         notification.cardId === cardId &&
@@ -86,7 +86,6 @@ export function deleteLoyaltyNotificationOnLoyaltyClosure(
   firebaseUid: string
 ): ActionThunkReturn {
   return (dispatch) => {
-    dispatch(beginApiCall());
     const loyaltyNotifications = allNotifications.filter(
       (notification) => notification.loyaltyId === loyaltyId
     );

@@ -3,8 +3,6 @@ import {
   CREATE_LOYALTY_DATA_SUCCESS,
   UPDATE_LOYALTY_DATA_SUCCESS,
   DELETE_LOYALTY_ACC_SUCCESS,
-  BEGIN_API_CALL,
-  API_CALL_ERROR,
   LOAD_CARDHOLDERS_SUCCESS,
   CREATE_CARDHOLDER_SUCCESS,
   DELETE_CARDHOLDER_SUCCESS,
@@ -34,7 +32,7 @@ import { ThunkAction } from "redux-thunk";
 export type MainReduxState = {
   cards: Card[];
   loyaltyData: LoyaltyData[];
-  apiCallsInProgress: number;
+  loading?: Record<string, boolean>;
   cardholders: Cardholder[];
   referrals: Referral[];
   notifications: Notification[];
@@ -64,10 +62,7 @@ export type AllDataTypes =
   | Tag
   | LoyaltyProgram;
 
-export type ApiActionTypes =
-  | { type: typeof BEGIN_API_CALL }
-  | { type: typeof API_CALL_ERROR }
-  | { type: string };
+export type ApiActionTypes = { type: string };
 
 export type LoyaltyActionTypes =
   | { type: typeof LOAD_LOYALTY_DATA_SUCCESS; payload: LoyaltyData[] }

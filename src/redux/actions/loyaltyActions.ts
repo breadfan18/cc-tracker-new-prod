@@ -1,4 +1,4 @@
-import { beginApiCall } from "./apiStatusActions";
+import { sliceLoadingDone, sliceLoadingStart } from "./uiLoadingActions";
 import {
   CREATE_LOYALTY_DATA_SUCCESS,
   DELETE_LOYALTY_ACC_SUCCESS,
@@ -8,7 +8,7 @@ import {
 } from "./actionTypes";
 import {
   deleteFromFirebase,
-  getFireBaseData,
+  subscribeToFirebaseData,
   writeToFirebase,
 } from "../../tools/firebase";
 import { slugify } from "../../helpers";
@@ -46,12 +46,13 @@ export function loadloyaltyDataFromFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return (dispatch) => {
-    dispatch(beginApiCall());
-    getFireBaseData(
+    dispatch(sliceLoadingStart("loyaltyData"));
+    subscribeToFirebaseData<LoyaltyData>(
       "loyaltyData",
       dispatch,
       loadLoyaltyDataSuccess,
-      firebaseUid
+      firebaseUid,
+      () => dispatch(sliceLoadingDone("loyaltyData"))
     );
   };
 }
@@ -61,15 +62,6 @@ export function saveLoyaltyDataToFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return async (dispatch) => {
-    /*
-      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
-      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
-      - This causes apiCallsInProgress to go negative. 
-      - Need to understand why the LOAD action fires on Create/Update
-    */
-    // dispatch(beginApiCall());
-    dispatch(beginApiCall());
-
     const loyaltyId =
       loyaltyAcc.id === ""
         ? slugify(
@@ -77,7 +69,7 @@ export function saveLoyaltyDataToFirebase(
           )
         : loyaltyAcc.id;
 
-    writeToFirebase("loyaltyData", loyaltyAcc, loyaltyId, firebaseUid);
+    await writeToFirebase("loyaltyData", loyaltyAcc, loyaltyId, firebaseUid);
     dispatch(createLoyaltyAccSuccess(loyaltyAcc));
   };
 }
@@ -86,11 +78,8 @@ export function deleteLoyaltyDataFromFirebase(
   loyaltyAcc: LoyaltyData,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    // Same reason to dispatch apiCall twice here as mentioned above in save function
-    // dispatch(beginApiCall());
-    dispatch(beginApiCall());
-    deleteFromFirebase("loyaltyData", loyaltyAcc.id, firebaseUid);
+  return async (dispatch) => {
+    await deleteFromFirebase("loyaltyData", loyaltyAcc.id, firebaseUid);
     dispatch(deleteLoyaltyAccSuccess(loyaltyAcc));
   };
 }
@@ -99,12 +88,13 @@ export function loadUserLoyaltyProgramsFromFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return (dispatch) => {
-    dispatch(beginApiCall());
-    getFireBaseData(
+    dispatch(sliceLoadingStart("userLoyaltyPrograms"));
+    subscribeToFirebaseData<LoyaltyProgram>(
       "userLoyaltyPrograms",
       dispatch,
       loadLoyaltyProgramsSuccess,
-      firebaseUid
+      firebaseUid,
+      () => dispatch(sliceLoadingDone("userLoyaltyPrograms"))
     );
   };
 }
@@ -114,16 +104,13 @@ export function saveUserLoyaltyProgramToFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return async (dispatch) => {
-    /*
-      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
-      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
-      - This causes apiCallsInProgress to go negative. 
-      - Need to understand why the LOAD action fires on Create/Update
-    */
-    // dispatch(beginApiCall());
-    dispatch(beginApiCall());
     const programId = `${program.type}-${slugify(program.name)}-${uid()}`;
-    writeToFirebase("userLoyaltyPrograms", program, programId, firebaseUid);
+    await writeToFirebase(
+      "userLoyaltyPrograms",
+      program,
+      programId,
+      firebaseUid
+    );
     dispatch(createLoyaltyProgramSuccess(program));
   };
 }

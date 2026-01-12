@@ -21,11 +21,15 @@ const CardHoldersPage = () => {
   const cardholders = useSelector((state: MainReduxState) =>
     _.sortBy(state.cardholders, (o) => o.isPrimary)
   );
-  const loading = useSelector(
-    (state: MainReduxState) => state.apiCallsInProgress > 0
-  );
   const cards = useSelector((state: MainReduxState) => state.cards);
   const loyaltyData = useSelector((state: MainReduxState) => state.loyaltyData);
+  const loading = useSelector((state: MainReduxState) =>
+    Boolean(
+      state.loading?.cardholders ||
+        state.loading?.cards ||
+        state.loading?.loyaltyData
+    )
+  );
 
   useEffect(() => {
     if (cardholders.length === 0 && status !== "loading") {
@@ -38,7 +42,14 @@ const CardHoldersPage = () => {
     if (loyaltyData.length === 0 && status !== "loading" && user !== null) {
       dispatch(loadloyaltyDataFromFirebase(user.uid));
     }
-  }, [user]);
+  }, [
+    cardholders.length,
+    cards.length,
+    dispatch,
+    loyaltyData.length,
+    status,
+    user,
+  ]);
 
   const cardsByHolder: CardsByHolder = _.groupBy(cards, (o) => o.userId);
   const loyaltyByHolder: LoyaltyByHolder = _.groupBy(

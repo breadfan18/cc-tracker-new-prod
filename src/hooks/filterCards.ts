@@ -9,7 +9,6 @@ type Filters = {
 };
 
 const useCardsFilter = (initialData: Card[]) => {
-  const data = [...initialData];
   const [filters, setFilters] = useState<Filters>({
     cardName: "",
     cardType: "",
@@ -34,16 +33,14 @@ const useCardsFilter = (initialData: Card[]) => {
     return returnValue.toLowerCase().includes(value.toLowerCase());
   }
 
-  const applyFilters = (card: Card): boolean => {
-    return Object.entries(filters).every(([property, value]) =>
-      filterReturnHandler(property, value, card)
-    );
-  };
-
-  const filteredData = useMemo(
-    () => data.filter(applyFilters),
-    [data, filters]
-  );
+  const filteredData = useMemo(() => {
+    const applyFilters = (card: Card): boolean => {
+      return Object.entries(filters).every(([property, value]) =>
+        filterReturnHandler(property, value, card)
+      );
+    };
+    return initialData.filter(applyFilters);
+  }, [initialData, filters]);
 
   const setFilter = (property: string, value: string): void => {
     setFilters((prevFilters) => ({ ...prevFilters, [property]: value }));

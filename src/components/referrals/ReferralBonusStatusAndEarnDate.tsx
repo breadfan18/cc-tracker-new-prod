@@ -45,7 +45,7 @@ export default function ReferralsBonusStatusAndEarnDate({
       );
       document.documentElement.style.setProperty("--foo-right", "-8.5px");
     }
-  }, [windowWidth]);
+  }, [isMobileXS, windowWidth]);
 
   const bonusStatusTextColor = inverseColor
     ? "white"

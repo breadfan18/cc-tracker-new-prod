@@ -25,12 +25,12 @@ const ReferralsPage = () => {
     sortReferralsByDate(state.referrals)
   );
 
-  const loading = useSelector(
-    (state: MainReduxState) =>
-      state.apiCallsInProgress > 0 ||
-      cardholders.length === 0 ||
-      referrals.length === 0 ||
-      cards.length === 0
+  const loading = useSelector((state: MainReduxState) =>
+    Boolean(
+      state.loading?.referrals ||
+        state.loading?.cardholders ||
+        state.loading?.cards
+    )
   );
 
   useEffect(() => {

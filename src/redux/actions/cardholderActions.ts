@@ -1,4 +1,5 @@
-import { beginApiCall } from "./apiStatusActions";
+// api status removed; using per-slice loading for initial data
+import { sliceLoadingDone, sliceLoadingStart } from "./uiLoadingActions";
 import {
   CREATE_CARDHOLDER_SUCCESS,
   LOAD_CARDHOLDERS_SUCCESS,
@@ -6,7 +7,7 @@ import {
 } from "./actionTypes";
 import {
   deleteFromFirebase,
-  getFireBaseData,
+  subscribeToFirebaseData,
   writeToFirebase,
 } from "../../tools/firebase";
 import { slugify } from "../../helpers";
@@ -29,12 +30,13 @@ export function loadCardholdersFromFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return (dispatch) => {
-    dispatch(beginApiCall());
-    getFireBaseData(
+    dispatch(sliceLoadingStart("cardholders"));
+    subscribeToFirebaseData<Cardholder>(
       "cardHolders",
       dispatch,
       loadCardholdersSuccess,
-      firebaseUid
+      firebaseUid,
+      () => dispatch(sliceLoadingDone("cardholders"))
     );
   };
 }
@@ -44,19 +46,10 @@ export function saveCardholderToFirebase(
   firebaseUid: string
 ): ActionThunkReturn {
   return async (dispatch) => {
-    /*
-      BUG: dispatching beginApiCall twice here..This is a workaround for the followinsg issue:
-      - Everytime new data is created or saved, redux fires LOAD and CREATE/UPDATE SUCCESS
-      - This causes apiCallsInProgress to go negative. 
-      - Need to understand why the LOAD action fires on Create/Update
-    */
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
-
     const cardholderId =
       cardholder.id === "" ? slugify(cardholder.name) : cardholder.id;
 
-    writeToFirebase("cardHolders", cardholder, cardholderId, firebaseUid);
+    await writeToFirebase("cardHolders", cardholder, cardholderId, firebaseUid);
     dispatch(createCardholderSuccess(cardholder));
   };
 }
@@ -65,11 +58,8 @@ export function deleteCardholderFromFirebase(
   cardholder: Cardholder,
   firebaseUid: string
 ): ActionThunkReturn {
-  return (dispatch) => {
-    // Same reason to dispatch apiCall twice here as mentioned above in save function
-    dispatch(beginApiCall());
-    dispatch(beginApiCall());
-    deleteFromFirebase("cardHolders", cardholder.id, firebaseUid);
+  return async (dispatch) => {
+    await deleteFromFirebase("cardHolders", cardholder.id, firebaseUid);
     dispatch(deleteCardholderSuccess(cardholder));
   };
 }

@@ -20,8 +20,12 @@ const CardsPage = () => {
   const cards = useSelector((state: MainReduxState) =>
     sortCardsByDate(state.cards)
   );
-  const loading = useSelector(
-    (state: MainReduxState) => state.apiCallsInProgress > 0
+  const loading = useSelector((state: MainReduxState) =>
+    Boolean(
+      state.loading?.cards ||
+        state.loading?.cardholders ||
+        state.loading?.referrals
+    )
   );
   const referrals = useSelector((state: MainReduxState) => state.referrals);
 
