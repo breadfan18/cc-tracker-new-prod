@@ -66,8 +66,6 @@ function CardNotes({ cardId, cardNotes }: CardNotesProps) {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-  console.log(sortedNotes);
-
   return loading ? (
     <Spinner />
   ) : (
