@@ -53,24 +53,6 @@ export const isTest = process.env.REACT_APP_ENV_TEST === "test";
 const app = initializeApp(isTest ? firebaseTestConfig : firebaseConfig);
 export const db = getDatabase(app);
 
-// DATABASE FUNCTIONS
-// export async function getFireBaseData<T>(
-//   endpoint: string,
-//   dispatch: Dispatch,
-//   dispatchFunc: (data: T[]) => ActionTypes,
-//   firebaseUid: string
-// ): Promise<void> {
-//   const dbRef: DatabaseReference = ref(db, `/users/${firebaseUid}/${endpoint}`);
-//   const snap: DataSnapshot = await get(dbRef);
-//   const allData: any[] = [];
-//   snap.forEach((data) => {
-//     const childData = data.val();
-//     allData.push(childData);
-//   });
-//   dispatch(dispatchFunc(allData));
-// }
-
-// Subscribe to realtime updates; call onInitialLoaded after first snapshot
 export function subscribeToFirebaseData<T>(
   endpoint: string,
   dispatch: Dispatch,
