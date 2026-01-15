@@ -13,6 +13,7 @@
     "lib": ["dom", "es2015"],
     "noUnusedLocals": true
   },
+  "include": ["src", "**/*.d.ts"],
   "exclude": ["node_modules"]
   // "files": ["src/tools/excelDataMigrator.js", "src/ts/createTestCard.js"]
 }
