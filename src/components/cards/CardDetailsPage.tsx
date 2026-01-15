@@ -25,20 +25,15 @@ import { PageNotifications } from "../common/Notifications/PageNotifications";
 import RewardTags from "./reward-tags/RewardTags";
 import { MainReduxState } from "../../types/redux";
 
-/* 
-TO DO 
--- card details page crashing on page reload. WHY?? 
-*/
-
 function CardDetailsPage() {
   const { id } = useParams();
   const cards = useSelector((state: MainReduxState) => state.cards);
   const card = getCardById(cards, id);
   const { status, data: user } = useUser();
   const referrals = useSelector((state: MainReduxState) => state.referrals);
-  const referralsForThisCard = referrals.filter(
-    (referral) => referral.referringCardId === card.id
-  );
+  const referralsForThisCard = card
+    ? referrals.filter((referral) => referral.referringCardId === card.id)
+    : [];
   const dispatch = useDispatch();
   const notifications = useSelector(
     (state: MainReduxState) => state.notifications
@@ -50,18 +45,20 @@ function CardDetailsPage() {
         state.loading?.notifications
     )
   );
-
-  const cardNotfications = notifications.filter(
-    (notifications) => notifications.cardId === card?.id
-  );
+  const cardNotfications = card
+    ? notifications.filter((notification) => notification.cardId === card.id)
+    : [];
 
   useEffect(() => {
-    if (cards.length === 0 && status === "success") {
-      dispatch(loadCardsFromFirebase(user?.uid));
-    } else if (referrals.length === 0 && status === "success") {
-      dispatch(loadReferralsFromFirebase(user?.uid));
+    if (status === "success") {
+      if (cards.length === 0) {
+        dispatch(loadCardsFromFirebase(user?.uid));
+      }
+      if (referrals.length === 0) {
+        dispatch(loadReferralsFromFirebase(user?.uid));
+      }
     }
-  }, [cards.length, dispatch, status, user, referrals]);
+  }, [cards.length, referrals.length, dispatch, status, user]);
 
   function getCardById(cards, id) {
     return cards?.find((card) => card.id === id) || null;
@@ -90,9 +87,13 @@ function CardDetailsPage() {
     }
   );
 
-  return loading ? (
-    <Spinner />
-  ) : (
+  if (loading) {
+    return <Spinner />;
+  }
+
+  const shouldRenderDetailsPage = !loading && cards.length > 0 && card;
+
+  return shouldRenderDetailsPage ? (
     <div className="cardDetailsContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Card Details</h2>
@@ -141,6 +142,11 @@ function CardDetailsPage() {
           />
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="cardNotFoundContainer">
+      <h2>Card not found</h2>
+      <p>The card you are looking for does not exist.</p>
     </div>
   );
 }

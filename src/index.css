@@ -75,6 +75,30 @@ pre {
   margin: 0 auto;
 }
 
+.cardNotFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 20vh;
+  padding: 2rem;
+  background: var(--background, #fff);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+.cardNotFoundContainer h2 {
+  margin-bottom: 1rem;
+  color: #d32f2f;
+}
+
+.cardNotFoundContainer p {
+  color: #555;
+  text-align: center;
+}
+
 .cardholders-page-note {
   border: 1px solid gray;
   padding: 10px;
