@@ -11,16 +11,16 @@ import { Card } from "../../types/cards-types";
 function CardsByUserDropDown({ cards }: { cards: Card[] }) {
   const storedUser = JSON.parse(localStorage.getItem("selectedUser") || "");
   const [selectedUser, setSelectedUser] = useState<string>(
-    storedUser || "all-cards"
+    storedUser || "all-cards",
   );
   const [showFilter, setShowFilter] = useState(false);
   const cardholders = useSelector((state: MainReduxState) =>
-    _.sortBy(state.cardholders, (o) => o.isPrimary)
+    _.sortBy(state.cardholders, (o) => o.isPrimary),
   );
 
   useEffect(
     () => localStorage.setItem("selectedUser", JSON.stringify(selectedUser)),
-    [selectedUser]
+    [selectedUser],
   );
 
   const {
@@ -39,25 +39,25 @@ function CardsByUserDropDown({ cards }: { cards: Card[] }) {
   const cardsForSelectedUser: Card[] = showAllUsers
     ? filteredData
     : selectedUser === "favorites"
-    ? filteredData.filter((card) => card.isFav)
-    : filteredData.filter((card) => card.userId === selectedUser);
+      ? filteredData.filter((card) => card.isFav)
+      : filteredData.filter((card) => card.userId === selectedUser);
 
   const handleUserChange = (event) =>
     setSelectedUser(event.target.value || "all-cards");
 
   return (
     <div className="cardsDropDownContainer">
-      {showFilter && (
-        <Filters
-          filters={filters}
-          setCardNameFilter={setCardNameFilter}
-          setCardTypeFilter={setCardTypeFilter}
-          setStatusFilter={setStatusFilter}
-          setAnnualFeeFilter={setAnnualFeeFilter}
-          resetFilters={resetFilters}
-          setShowFilter={setShowFilter}
-        />
-      )}
+      <Filters
+        showFilter={showFilter}
+        closeOnSelect
+        filters={filters}
+        setCardNameFilter={setCardNameFilter}
+        setCardTypeFilter={setCardTypeFilter}
+        setStatusFilter={setStatusFilter}
+        setAnnualFeeFilter={setAnnualFeeFilter}
+        resetFilters={resetFilters}
+        setShowFilter={setShowFilter}
+      />
       <div id="cardFilterContainer">
         <Form.Select
           id="cardFilterUserSelect"
@@ -76,10 +76,10 @@ function CardsByUserDropDown({ cards }: { cards: Card[] }) {
         </Form.Select>
         <Button
           className="filterButtonSmallScreen"
-          onClick={() => setShowFilter(!showFilter)}
+          onClick={() => setShowFilter(true)}
           style={{ minWidth: "10rem" }}
         >
-          {showFilter ? "Hide Filters" : "Show Filters"}
+          Filters
         </Button>
       </div>
       <Button

@@ -1,11 +1,10 @@
-import { Button } from "react-bootstrap";
+import { Button, Offcanvas } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import useWindhowWidth from "../../hooks/windowWidth";
-import { APP_COLOR_BLACK_OPACITY, DELETE_COLOR_RED } from "../../constants";
-import { useSelector } from "react-redux";
-import { TiDelete } from "react-icons/ti";
+import { DELETE_COLOR_RED } from "../../constants";
 
 function Filters({
+  showFilter,
+  closeOnSelect = false,
   filters,
   setCardNameFilter,
   setCardTypeFilter,
@@ -14,143 +13,167 @@ function Filters({
   resetFilters,
   setShowFilter,
 }) {
-  const { windowWidth } = useWindhowWidth();
-  const theme = useSelector((state) => state.theme);
+  const sectionStyle = { borderBottom: "1px solid #e9ecef" };
+  const optionStyle = { color: "#6c757d", fontSize: "0.9rem" };
+
+  const applyFilterAndMaybeClose = (setFilter, value) => {
+    setFilter(value);
+    if (closeOnSelect) {
+      setShowFilter(false);
+    }
+  };
 
   return (
-    <>
-      <hr style={{ color: theme === "dark" ? "white" : null }} />
+    <Offcanvas
+      show={showFilter}
+      onHide={() => setShowFilter(false)}
+      placement="end"
+      style={{ width: "min(92vw, 420px)" }}
+    >
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title>Filters</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
+        <Form>
+          <Form.Group
+            className="mb-3 pb-3"
+            style={sectionStyle}
+            controlId="filter-card-name"
+          >
+            <Form.Label className="fw-semibold">Card Name Or Issuer</Form.Label>
+            <Form.Control
+              type="text"
+              value={filters.cardName || ""}
+              placeholder="Search cards"
+              onChange={(e) => setCardNameFilter(e.target.value)}
+            />
+          </Form.Group>
 
-      <div
-        className="filtersContainer"
-        style={{
-          display: windowWidth < 772 ? "grid" : null,
-          backgroundColor: theme === "light" && APP_COLOR_BLACK_OPACITY,
-        }}
-      >
-        <input
-          type="text"
-          value={filters.cardName || ""}
-          placeholder="Filter by card name"
-          onChange={(e) => setCardNameFilter(e.target.value)}
-          className="inputFilters"
-          style={{ padding: windowWidth < 772 ? "20px" : null }}
-        />
-        <div
-          className="statusFilters"
-          style={{ padding: windowWidth < 772 ? "20px" : null }}
-        >
-          <Form.Check
-            id="cardType-all"
-            label="All"
-            type="radio"
-            name="cardType"
-            value={filters.cardType}
-            onChange={() => setCardTypeFilter("")}
-            className="radioFilters"
-            checked={filters.cardType === ""}
-          />
-          <Form.Check
-            id="cardType-personal"
-            label="Personal"
-            type="radio"
-            name="cardType"
-            value={filters.cardType}
-            onChange={() => setCardTypeFilter("Personal")}
-            className="radioFilters"
-            checked={filters.cardType === "Personal"}
-          />
-          <Form.Check
-            id="cardType-business"
-            label="Business"
-            type="radio"
-            name="cardType"
-            value={filters.cardType}
-            onChange={() => setCardTypeFilter("Business")}
-            checked={filters.cardType === "Business"}
-            className="radioFilters"
-          />
-        </div>
-        <div
-          className="statusFilters"
-          style={{ padding: windowWidth < 772 ? "20px" : null }}
-        >
-          <Form.Check
-            id="status-all"
-            label="All"
-            type="radio"
-            name="status"
-            value={filters.status}
-            onChange={() => setStatusFilter("")}
-            className="radioFilters"
-            checked={filters.status === ""}
-          />
-          <Form.Check
-            id="status-open"
-            label="Open"
-            type="radio"
-            name="status"
-            value={filters.status}
-            onChange={() => setStatusFilter("open")}
-            checked={filters.status === "open"}
-            className="radioFilters"
-          />
-          <Form.Check
-            id="status-closed"
-            label="Closed"
-            type="radio"
-            name="status"
-            value={filters.status}
-            onChange={() => setStatusFilter("closed")}
-            checked={filters.status === "closed"}
-            className="radioFilters"
-          />
-          <Form.Check
-            id="status-downgraded"
-            label="Downgraded"
-            type="radio"
-            name="status"
-            value={filters.status}
-            onChange={() => setStatusFilter("downgraded")}
-            checked={filters.status === "downgraded"}
-            className="radioFilters"
-          />
-        </div>
-        <div
-          className="statusFilters"
-          style={{ padding: windowWidth < 772 ? "20px" : null }}
-        >
-          <Form.Check
-            id="annual-fee-toggle"
-            label="Cards with Annual Fee"
-            type="checkbox"
-            name="cardsWithAnnualFee"
-            onChange={() =>
-              setAnnualFeeFilter(filters.annualFee === "show" ? "" : "show")
-            }
-            className="radioFilters"
-            checked={filters.annualFee === "show"}
-          />
-        </div>
+          <Form.Group className="mb-3 pb-3" style={sectionStyle}>
+            <Form.Label className="fw-semibold">Card Type</Form.Label>
+            <Form.Check
+              id="cardType-all"
+              label="All"
+              type="radio"
+              name="cardType"
+              value={filters.cardType}
+              onChange={() => applyFilterAndMaybeClose(setCardTypeFilter, "")}
+              checked={filters.cardType === ""}
+              style={optionStyle}
+            />
+            <Form.Check
+              id="cardType-personal"
+              label="Personal"
+              type="radio"
+              name="cardType"
+              value={filters.cardType}
+              onChange={() =>
+                applyFilterAndMaybeClose(setCardTypeFilter, "Personal")
+              }
+              checked={filters.cardType === "Personal"}
+              style={optionStyle}
+            />
+            <Form.Check
+              id="cardType-business"
+              label="Business"
+              type="radio"
+              name="cardType"
+              value={filters.cardType}
+              onChange={() =>
+                applyFilterAndMaybeClose(setCardTypeFilter, "Business")
+              }
+              checked={filters.cardType === "Business"}
+              style={optionStyle}
+            />
+          </Form.Group>
 
-        <Button
-          onClick={resetFilters}
-          style={{
-            backgroundColor: DELETE_COLOR_RED,
-            border: "none",
-            fontSize: "12px",
-            width: windowWidth < 772 ? "98%" : null,
-          }}
-        >
-          Reset
-        </Button>
-        <TiDelete
-          className="filters-close-icon"
-          onClick={() => setShowFilter(false)}
-        />
-      </div>
-      <hr style={{ color: theme === "dark" ? "white" : null }} />
-    </>
+          <Form.Group className="mb-3 pb-3" style={sectionStyle}>
+            <Form.Label className="fw-semibold">Card Status</Form.Label>
+            <Form.Check
+              id="status-all"
+              label="All"
+              type="radio"
+              name="status"
+              value={filters.status}
+              onChange={() => applyFilterAndMaybeClose(setStatusFilter, "")}
+              checked={filters.status === ""}
+              style={optionStyle}
+            />
+            <Form.Check
+              id="status-open"
+              label="Open"
+              type="radio"
+              name="status"
+              value={filters.status}
+              onChange={() => applyFilterAndMaybeClose(setStatusFilter, "open")}
+              checked={filters.status === "open"}
+              style={optionStyle}
+            />
+            <Form.Check
+              id="status-closed"
+              label="Closed"
+              type="radio"
+              name="status"
+              value={filters.status}
+              onChange={() =>
+                applyFilterAndMaybeClose(setStatusFilter, "closed")
+              }
+              checked={filters.status === "closed"}
+              style={optionStyle}
+            />
+            <Form.Check
+              id="status-downgraded"
+              label="Downgraded"
+              type="radio"
+              name="status"
+              value={filters.status}
+              onChange={() =>
+                applyFilterAndMaybeClose(setStatusFilter, "downgraded")
+              }
+              checked={filters.status === "downgraded"}
+              style={optionStyle}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3 pb-3" style={sectionStyle}>
+            <Form.Label className="fw-semibold">Annual Fee</Form.Label>
+            <Form.Check
+              id="annual-fee-toggle"
+              label="Cards with annual fee"
+              type="checkbox"
+              name="cardsWithAnnualFee"
+              onChange={() =>
+                applyFilterAndMaybeClose(
+                  setAnnualFeeFilter,
+                  filters.annualFee === "show" ? "" : "show",
+                )
+              }
+              checked={filters.annualFee === "show"}
+              style={optionStyle}
+            />
+          </Form.Group>
+
+          <div className="d-grid gap-2 mt-2">
+            <Button
+              onClick={resetFilters}
+              style={{
+                backgroundColor: DELETE_COLOR_RED,
+                border: "none",
+                fontSize: "14px",
+              }}
+            >
+              Reset Filters
+            </Button>
+            <Button
+              variant="outline-secondary"
+              onClick={() => setShowFilter(false)}
+            >
+              Close
+            </Button>
+          </div>
+        </Form>
+      </Offcanvas.Body>
+    </Offcanvas>
   );
 }
 
