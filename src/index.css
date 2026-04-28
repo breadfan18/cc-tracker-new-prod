@@ -1483,6 +1483,44 @@ p {
   border-radius: 50%;
 }
 
+.filter-drawer {
+  width: min(92vw, 420px);
+}
+
+.filter-section {
+  border-bottom: 1px solid #e9ecef;
+}
+
+.filter-option-label {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.filter-input {
+  padding-right: 2.2rem;
+  font-size: 0.9rem;
+}
+
+.filter-clear-button {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter-reset-button {
+  background-color: var(--fav-red);
+  border: none;
+  font-size: 14px;
+}
+
 .program-created-container {
   display: flex;
   flex-direction: column;

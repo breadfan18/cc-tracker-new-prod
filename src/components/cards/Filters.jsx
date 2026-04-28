@@ -1,10 +1,13 @@
 import { Button, Offcanvas } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { DELETE_COLOR_RED } from "../../constants";
+import { TiDelete } from "react-icons/ti";
 
 function Filters({
   showFilter,
   closeOnSelect = false,
+  closeActionLabel = "Close",
+  closeActionVariant = "outline-secondary",
+  closeActionStyle = {},
   filters,
   setCardNameFilter,
   setCardTypeFilter,
@@ -13,9 +16,6 @@ function Filters({
   resetFilters,
   setShowFilter,
 }) {
-  const sectionStyle = { borderBottom: "1px solid #e9ecef" };
-  const optionStyle = { color: "#6c757d", fontSize: "0.9rem" };
-
   const applyFilterAndMaybeClose = (setFilter, value) => {
     setFilter(value);
     if (closeOnSelect) {
@@ -28,7 +28,7 @@ function Filters({
       show={showFilter}
       onHide={() => setShowFilter(false)}
       placement="end"
-      style={{ width: "min(92vw, 420px)" }}
+      className="filter-drawer"
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Filters</Offcanvas.Title>
@@ -36,20 +36,32 @@ function Filters({
       <Offcanvas.Body>
         <Form>
           <Form.Group
-            className="mb-3 pb-3"
-            style={sectionStyle}
+            className="mb-3 pb-3 filter-section"
             controlId="filter-card-name"
           >
-            <Form.Label className="fw-semibold">Card Name Or Issuer</Form.Label>
-            <Form.Control
-              type="text"
-              value={filters.cardName || ""}
-              placeholder="Search cards"
-              onChange={(e) => setCardNameFilter(e.target.value)}
-            />
+            <Form.Label className="fw-semibold">Card Name</Form.Label>
+            <div style={{ position: "relative" }}>
+              <Form.Control
+                type="text"
+                value={filters.cardName || ""}
+                placeholder="Search cards"
+                onChange={(e) => setCardNameFilter(e.target.value)}
+                className="filter-input"
+              />
+              {filters.cardName ? (
+                <button
+                  type="button"
+                  onClick={() => setCardNameFilter("")}
+                  aria-label="Clear card name filter"
+                  className="filter-clear-button"
+                >
+                  <TiDelete size={20} />
+                </button>
+              ) : null}
+            </div>
           </Form.Group>
 
-          <Form.Group className="mb-3 pb-3" style={sectionStyle}>
+          <Form.Group className="mb-3 pb-3 filter-section">
             <Form.Label className="fw-semibold">Card Type</Form.Label>
             <Form.Check
               id="cardType-all"
@@ -59,7 +71,7 @@ function Filters({
               value={filters.cardType}
               onChange={() => applyFilterAndMaybeClose(setCardTypeFilter, "")}
               checked={filters.cardType === ""}
-              style={optionStyle}
+              className="filter-option-label"
             />
             <Form.Check
               id="cardType-personal"
@@ -71,7 +83,7 @@ function Filters({
                 applyFilterAndMaybeClose(setCardTypeFilter, "Personal")
               }
               checked={filters.cardType === "Personal"}
-              style={optionStyle}
+              className="filter-option-label"
             />
             <Form.Check
               id="cardType-business"
@@ -83,11 +95,11 @@ function Filters({
                 applyFilterAndMaybeClose(setCardTypeFilter, "Business")
               }
               checked={filters.cardType === "Business"}
-              style={optionStyle}
+              className="filter-option-label"
             />
           </Form.Group>
 
-          <Form.Group className="mb-3 pb-3" style={sectionStyle}>
+          <Form.Group className="mb-3 pb-3 filter-section">
             <Form.Label className="fw-semibold">Card Status</Form.Label>
             <Form.Check
               id="status-all"
@@ -97,7 +109,7 @@ function Filters({
               value={filters.status}
               onChange={() => applyFilterAndMaybeClose(setStatusFilter, "")}
               checked={filters.status === ""}
-              style={optionStyle}
+              className="filter-option-label"
             />
             <Form.Check
               id="status-open"
@@ -107,7 +119,7 @@ function Filters({
               value={filters.status}
               onChange={() => applyFilterAndMaybeClose(setStatusFilter, "open")}
               checked={filters.status === "open"}
-              style={optionStyle}
+              className="filter-option-label"
             />
             <Form.Check
               id="status-closed"
@@ -119,7 +131,7 @@ function Filters({
                 applyFilterAndMaybeClose(setStatusFilter, "closed")
               }
               checked={filters.status === "closed"}
-              style={optionStyle}
+              className="filter-option-label"
             />
             <Form.Check
               id="status-downgraded"
@@ -131,11 +143,11 @@ function Filters({
                 applyFilterAndMaybeClose(setStatusFilter, "downgraded")
               }
               checked={filters.status === "downgraded"}
-              style={optionStyle}
+              className="filter-option-label"
             />
           </Form.Group>
 
-          <Form.Group className="mb-3 pb-3" style={sectionStyle}>
+          <Form.Group className="mb-3 pb-3 filter-section">
             <Form.Label className="fw-semibold">Annual Fee</Form.Label>
             <Form.Check
               id="annual-fee-toggle"
@@ -149,26 +161,20 @@ function Filters({
                 )
               }
               checked={filters.annualFee === "show"}
-              style={optionStyle}
+              className="filter-option-label"
             />
           </Form.Group>
 
           <div className="d-grid gap-2 mt-2">
-            <Button
-              onClick={resetFilters}
-              style={{
-                backgroundColor: DELETE_COLOR_RED,
-                border: "none",
-                fontSize: "14px",
-              }}
-            >
+            <Button onClick={resetFilters} className="filter-reset-button">
               Reset Filters
             </Button>
             <Button
-              variant="outline-secondary"
+              variant={closeActionVariant}
+              style={closeActionStyle}
               onClick={() => setShowFilter(false)}
             >
-              Close
+              {closeActionLabel}
             </Button>
           </div>
         </Form>
