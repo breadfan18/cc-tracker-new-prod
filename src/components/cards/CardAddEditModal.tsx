@@ -7,13 +7,14 @@ import CardForm from "./CardForm";
 import CardFormResponsive from "./CardFormResponsive";
 import { toast } from "react-toastify";
 import { MdModeEditOutline } from "react-icons/md";
-import { ISSUERS, NEW_CARD } from "../../constants";
+import { CARD_DATA_KEYS, ISSUERS, NEW_CARD } from "../../constants";
 import { useUser } from "reactfire";
 import useWindhowWidth from "../../hooks/windowWidth";
 import {
   deleteCardNotificationsOnCardClosure,
   deleteSpendByNotificationWhenBonusEarned,
 } from "../../redux/actions/notificationsActions";
+import { normalizeNumberInput } from "../../helpers";
 import { MainReduxState } from "../../types/redux";
 import { Card } from "../../types/cards-types";
 import { Errors } from "../../types/input-types";
@@ -34,23 +35,38 @@ export default function CardAddEditModal({
   const { isDesktop } = useWindhowWidth();
   const { data: user } = useUser();
   const notifications = useSelector(
-    (state: MainReduxState) => state.notifications
+    (state: MainReduxState) => state.notifications,
   );
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const dispatch = useDispatch();
 
+  const {
+    creditLine,
+    annualFee,
+    spendReq,
+    nextFeeDate,
+    inquiries,
+    bonusEarned,
+  } = CARD_DATA_KEYS;
+
   function handleChange(event) {
     const { name, value, checked } = event.target;
 
-    if (value !== "" || value !== null) {
+    // Normalize currency/number fields by removing commas
+    const currencyFields = [creditLine, annualFee, spendReq];
+    const normalizedValue = currencyFields.includes(name)
+      ? normalizeNumberInput(value)
+      : value;
+
+    if (normalizedValue !== "" || normalizedValue !== null) {
       delete errors[name];
     }
 
-    if (name === "annualFee" && value === "0") {
-      delete errors["nextFeeDate"];
+    if (name === annualFee && normalizedValue === "0") {
+      delete errors[nextFeeDate];
     }
 
-    if (name === "inquiries") {
+    if (name === inquiries) {
       setCardForModal((prevCard) => ({
         ...prevCard,
         inquiries: { ...prevCard.inquiries, [value]: checked },
@@ -66,11 +82,11 @@ export default function CardAddEditModal({
       setCardForModal((prevCard) => ({
         ...prevCard,
         [name]:
-          name === "bonusEarned"
+          name === bonusEarned
             ? checked
             : name === "issuer"
-            ? ISSUERS.find((issuer) => issuer.name === value)
-            : value,
+              ? ISSUERS.find((issuer) => issuer.name === value)
+              : normalizedValue,
       }));
     }
   }
@@ -95,8 +111,8 @@ export default function CardAddEditModal({
         deleteCardNotificationsOnCardClosure(
           notifications,
           finalCard.id,
-          user?.uid
-        )
+          user?.uid,
+        ),
       );
     }
 
@@ -105,8 +121,8 @@ export default function CardAddEditModal({
         deleteSpendByNotificationWhenBonusEarned(
           notifications,
           finalCard.id,
-          user?.uid
-        )
+          user?.uid,
+        ),
       );
     }
 

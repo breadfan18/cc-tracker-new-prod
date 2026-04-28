@@ -14,18 +14,15 @@ import { Card, CardNote, Inquiries } from "./types/cards-types";
 import { LoyaltyData } from "./types/loyalty-types";
 import { Referral } from "./types/referral-types";
 
-// export const pipe =
-//   (...fns) =>
-//   (x) =>
-//     fns.reduce((v, f) => f(v), x);
-
 export function pipe<T>(...fns: Array<(arg: T) => T>) {
   return (x: T): T => fns.reduce((v, f) => f(v), x);
 }
 
 export function wasCardOpenedWithinLast24Months(appDate: string): boolean {
   const twoYearsAgoFromToday = Date.parse(
-    new Date(new Date().setFullYear(new Date().getFullYear() - 2)).toISOString()
+    new Date(
+      new Date().setFullYear(new Date().getFullYear() - 2),
+    ).toISOString(),
   );
   const today = Date.now();
   const parsedAppDate = Date.parse(appDate);
@@ -35,7 +32,7 @@ export function wasCardOpenedWithinLast24Months(appDate: string): boolean {
 export function isDateApproaching(
   data: Card | LoyaltyData,
   dataType: string,
-  numberOfDays: number = 30
+  numberOfDays: number = 30,
 ): boolean | undefined {
   if (!data[dataType]) return;
   const formattedDate = new Date(data[dataType]);
@@ -43,8 +40,8 @@ export function isDateApproaching(
   const today = Date.now();
   const daysBeforeDate = Date.parse(
     new Date(
-      formattedDate.setDate(formattedDate.getDate() - numberOfDays)
-    ).toISOString()
+      formattedDate.setDate(formattedDate.getDate() - numberOfDays),
+    ).toISOString(),
   );
   return today >= daysBeforeDate && today <= parsedDate;
 }
@@ -56,7 +53,7 @@ export function dateHasPassed(dateString: string): boolean {
 }
 
 export function daysTillRewardsExpiration(
-  rewardsExpirationDate: string
+  rewardsExpirationDate: string,
 ): number | undefined {
   if (!rewardsExpirationDate) return;
   const expirationDate = Date.parse(rewardsExpirationDate);
@@ -78,7 +75,7 @@ export function addUserNameToCard(card: Card, cardholders: Cardholder[]): Card {
 
 export function sortCardsByDate(cards: Card[]): Card[] {
   return [...cards].sort(
-    (a, b) => Date.parse(b.appDate) - Date.parse(a.appDate)
+    (a, b) => Date.parse(b.appDate) - Date.parse(a.appDate),
   );
 }
 
@@ -88,7 +85,7 @@ export function sortNotesByDate(notes: CardNote[]): CardNote[] {
 
 export function sortReferralsByDate(referrals: Referral[]): Referral[] {
   return [...referrals].sort(
-    (a, b) => Date.parse(b.referralDate) - Date.parse(a.referralDate)
+    (a, b) => Date.parse(b.referralDate) - Date.parse(a.referralDate),
   );
 }
 
@@ -117,7 +114,7 @@ export function titleCase(str: string): string {
     .map((word, i) =>
       i !== 0 && smallWords.includes(word)
         ? word
-        : word.charAt(0).toUpperCase() + word.slice(1)
+        : word.charAt(0).toUpperCase() + word.slice(1),
     )
     .join(" ");
 }
@@ -150,12 +147,20 @@ export function formatDate(dateStr: string) {
   return dateStr;
 }
 
+export function normalizeNumberInput(input: string | number): string {
+  // Convert to string if it's a number
+  const str = String(input);
+  // Remove commas and any non-numeric characters except decimal point
+  return str.replace(/,/g, "").replace(/[^\d.]/g, "");
+}
+
 export function formatCurrency(currencyStr: string) {
+  const normalized = normalizeNumberInput(currencyStr);
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
-  }).format(Number(currencyStr) || 0);
+  }).format(Number(normalized) || 0);
 }
 
 export const slugify = (str: string): string => {
@@ -210,31 +215,31 @@ export function handleInquiriesList(inq: Inquiries): {
     .filter((i) => inq[i])
     .map((inq) => CREDIT_BUREAUS.find((i) => inq === i.name))
     .filter(
-      (item): item is { img: string; name: string } => item !== undefined
+      (item): item is { img: string; name: string } => item !== undefined,
     );
 }
 
 export function setColorForCardStatus(
   componentType: string,
-  cardStatus: string
+  cardStatus: string,
 ): string | undefined {
   if (componentType === "cardTable") {
     return cardStatus === "closed"
       ? "table-danger"
       : cardStatus === "downgraded"
-      ? "table-warning"
-      : undefined;
+        ? "table-warning"
+        : undefined;
   } else if (componentType === "cardCard") {
     return cardStatus === "closed"
       ? CARD_COLOR_CLOSED
       : cardStatus === "downgraded"
-      ? CARD_COLOR_DOWNGRADED
-      : undefined;
+        ? CARD_COLOR_DOWNGRADED
+        : undefined;
   }
 }
 
 export function calculateCurrentInquiries(
-  cardsByHolder: CardsByHolder
+  cardsByHolder: CardsByHolder,
 ): InquiriesByHolder {
   return Object.fromEntries(
     Object.entries(cardsByHolder).map(([holder, cards]) => {
@@ -248,11 +253,11 @@ export function calculateCurrentInquiries(
 
           return acc;
         },
-        { experian: 0, equifax: 0, transunion: 0 }
+        { experian: 0, equifax: 0, transunion: 0 },
       );
 
       return [holder, totalInq];
-    })
+    }),
   );
 }
 
@@ -298,7 +303,7 @@ export function setNextFeeDataForTable(card: Card): {
 
 export function getSpendByRemainingDays(
   bonusEarned: boolean,
-  spendByDate: string
+  spendByDate: string,
 ): {
   spendDaysRemaining: number | null;
   spendDaysRemainingText: string;
@@ -323,8 +328,8 @@ export function getSpendByRemainingDays(
       spendDaysRemaining < 0
         ? "Spend date has passed"
         : spendByDate
-        ? `${spendDaysRemaining} days remaining`
-        : "No Spend By date",
+          ? `${spendDaysRemaining} days remaining`
+          : "No Spend By date",
     spendByTextColor,
   };
 }
