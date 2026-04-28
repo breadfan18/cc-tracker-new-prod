@@ -8,6 +8,23 @@ type Filters = {
   annualFee: string;
 };
 
+const ISSUER_NAME_ALIASES: Record<string, string[]> = {
+  capone: ["Capital One", "Cap One"],
+  amex: ["American Express", "AmEx"],
+  chase: ["JP Morgan Chase", "Chase Bank"],
+  citi: ["Citibank", "Citi"],
+};
+
+const normalizeSearchValue = (value: string): string =>
+  value.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+const getIssuerSearchValue = (issuerName: string): string => {
+  const normalizedIssuerName = normalizeSearchValue(issuerName);
+  const aliases = ISSUER_NAME_ALIASES[normalizedIssuerName] || [];
+
+  return [issuerName, ...aliases].join(" ");
+};
+
 const useCardsFilter = (initialData: Card[]) => {
   const [filters, setFilters] = useState<Filters>({
     cardName: "",
@@ -19,16 +36,16 @@ const useCardsFilter = (initialData: Card[]) => {
   function filterReturnHandler(
     property: string,
     value: string,
-    card: Card
+    card: Card,
   ): boolean {
     const returnValue =
       property === "cardName"
-        ? `${card.issuer.name} ${card.card}`
+        ? `${getIssuerSearchValue(card.issuer.name)} ${card.card}`
         : property === "annualFee"
-        ? Number(card[property]) > 0 && card["status"] === "open"
-          ? "show"
-          : ""
-        : card[property];
+          ? Number(card[property]) > 0 && card["status"] === "open"
+            ? "show"
+            : ""
+          : card[property];
 
     return returnValue.toLowerCase().includes(value.toLowerCase());
   }
@@ -36,7 +53,7 @@ const useCardsFilter = (initialData: Card[]) => {
   const filteredData = useMemo(() => {
     const applyFilters = (card: Card): boolean => {
       return Object.entries(filters).every(([property, value]) =>
-        filterReturnHandler(property, value, card)
+        filterReturnHandler(property, value, card),
       );
     };
     return initialData.filter(applyFilters);
