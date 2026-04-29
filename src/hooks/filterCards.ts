@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card } from "../types/cards-types";
 
 type Filters = {
@@ -6,6 +6,45 @@ type Filters = {
   cardType: string;
   status: string;
   annualFee: string;
+};
+
+const FILTERS_STORAGE_KEY = "selectedCardFilters";
+
+const DEFAULT_FILTERS: Filters = {
+  cardName: "",
+  cardType: "",
+  status: "",
+  annualFee: "",
+};
+
+const getStoredFilters = (): Filters => {
+  try {
+    const rawFilters = localStorage.getItem(FILTERS_STORAGE_KEY);
+    if (!rawFilters) {
+      return DEFAULT_FILTERS;
+    }
+
+    const parsedFilters = JSON.parse(rawFilters);
+
+    return {
+      cardName:
+        typeof parsedFilters?.cardName === "string"
+          ? parsedFilters.cardName
+          : "",
+      cardType:
+        typeof parsedFilters?.cardType === "string"
+          ? parsedFilters.cardType
+          : "",
+      status:
+        typeof parsedFilters?.status === "string" ? parsedFilters.status : "",
+      annualFee:
+        typeof parsedFilters?.annualFee === "string"
+          ? parsedFilters.annualFee
+          : "",
+    };
+  } catch {
+    return DEFAULT_FILTERS;
+  }
 };
 
 const ISSUER_NAME_ALIASES: Record<string, string[]> = {
@@ -26,12 +65,11 @@ const getIssuerSearchValue = (issuerName: string): string => {
 };
 
 const useCardsFilter = (initialData: Card[]) => {
-  const [filters, setFilters] = useState<Filters>({
-    cardName: "",
-    cardType: "",
-    status: "",
-    annualFee: "",
-  });
+  const [filters, setFilters] = useState<Filters>(getStoredFilters);
+
+  useEffect(() => {
+    localStorage.setItem(FILTERS_STORAGE_KEY, JSON.stringify(filters));
+  }, [filters]);
 
   function filterReturnHandler(
     property: string,
@@ -64,12 +102,7 @@ const useCardsFilter = (initialData: Card[]) => {
   };
 
   const resetFilters = (): void => {
-    setFilters({
-      cardName: "",
-      cardType: "",
-      status: "",
-      annualFee: "",
-    });
+    setFilters(DEFAULT_FILTERS);
   };
 
   return {
