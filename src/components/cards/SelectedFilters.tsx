@@ -12,25 +12,31 @@ type SelectedFiltersProps = {
   resetFilters: () => void;
 };
 
-const getActiveFilters = (filters: FilterValues): string[] => {
-  const activeFilters: string[] = [];
+type ActiveFilter = {
+  label: string;
+  value: string;
+};
+
+const getActiveFilters = (filters: FilterValues): ActiveFilter[] => {
+  const activeFilters: ActiveFilter[] = [];
 
   if (filters.cardName) {
-    activeFilters.push(`Card Name: ${filters.cardName}`);
+    activeFilters.push({ label: "Card Name", value: filters.cardName });
   }
 
   if (filters.cardType) {
-    activeFilters.push(`Type: ${filters.cardType}`);
+    activeFilters.push({ label: "Type", value: filters.cardType });
   }
 
   if (filters.status) {
-    activeFilters.push(
-      `Status: ${filters.status.charAt(0).toUpperCase()}${filters.status.slice(1)}`,
-    );
+    activeFilters.push({
+      label: "Status",
+      value: `${filters.status.charAt(0).toUpperCase()}${filters.status.slice(1)}`,
+    });
   }
 
   if (filters.annualFee === "show") {
-    activeFilters.push("Annual Fee Only");
+    activeFilters.push({ label: "Annual Fee", value: "Only" });
   }
 
   return activeFilters;
@@ -47,8 +53,11 @@ function SelectedFilters({ filters, resetFilters }: SelectedFiltersProps) {
     <div className="selected-filters-bar">
       <div className="selected-filters-list">
         {activeFilters.map((filter) => (
-          <span key={filter} className="selected-filter-chip">
-            {filter}
+          <span
+            key={`${filter.label}-${filter.value}`}
+            className="selected-filter-chip"
+          >
+            <strong>{filter.label}:</strong> {filter.value}
           </span>
         ))}
       </div>

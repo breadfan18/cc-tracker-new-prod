@@ -1526,8 +1526,8 @@ p {
   align-items: center;
   flex-wrap: wrap;
   padding: 2px;
-  gap: 10px;
-  margin: 5px;
+  gap: 5px;
+  margin: 10px 0;
 }
 
 .selected-filters-list {
@@ -1543,20 +1543,13 @@ p {
   background-color: var(--light-gray);
   color: var(--color-blue);
   font-size: 0.85rem;
-  line-height: 1.4;
 }
 
 .selected-filters-clear-button {
   background-color: transparent;
   color: var(--fav-red);
   border: none;
-  font-size: 0.85rem;
-  border: 1px solid var(--fav-red);
-  border-radius: 20px;
-  line-height: 1.4;
-  padding: 5px 10px;
-  display: inline-flex;
-  align-items: center;
+  font-size: 0.75rem;
 }
 
 .selected-filters-clear-button:hover,
