@@ -1521,6 +1521,52 @@ p {
   font-size: 14px;
 }
 
+.selected-filters-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2px;
+  gap: 10px;
+  margin: 5px;
+}
+
+.selected-filters-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.selected-filter-chip {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background-color: var(--light-gray);
+  color: var(--color-blue);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.selected-filters-clear-button {
+  background-color: transparent;
+  color: var(--fav-red);
+  border: none;
+  font-size: 0.85rem;
+  border: 1px solid var(--fav-red);
+  border-radius: 20px;
+  line-height: 1.4;
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.selected-filters-clear-button:hover,
+.selected-filters-clear-button:active,
+.selected-filters-clear-button:focus-visible {
+  background-color: var(--fav-red) !important;
+  border-color: var(--fav-red) !important;
+  color: white !important;
+}
+
 .program-created-container {
   display: flex;
   flex-direction: column;

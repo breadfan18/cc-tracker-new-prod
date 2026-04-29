@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import _ from "lodash";
 import useCardsFilter from "../../hooks/filterCards";
 import Filters from "./Filters";
+import SelectedFilters from "./SelectedFilters";
 import { MainReduxState } from "../../types/redux";
 import { Card } from "../../types/cards-types";
 
@@ -95,6 +96,7 @@ function CardsByUserDropDown({ cards }: { cards: Card[] }) {
       >
         Favorites
       </Button>
+      <SelectedFilters filters={filters} resetFilters={resetFilters} />
       <hr />
       <CardListCards
         cards={cardsForSelectedUser}

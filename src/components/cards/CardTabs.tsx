@@ -8,6 +8,7 @@ import CardListCards from "./CardListCards";
 import { Button } from "react-bootstrap";
 import { sortBy } from "lodash";
 import Filters from "./Filters";
+import SelectedFilters from "./SelectedFilters";
 import useCardsFilter from "../../hooks/filterCards";
 import { AiFillHeart } from "react-icons/ai";
 import { MainReduxState } from "../../types/redux";
@@ -47,6 +48,7 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
   const userTabs = cardholders.map((user) => {
     return (
       <Tab eventKey={user.id} title={user.name.split(" ")[0]} key={user.id}>
+        <SelectedFilters filters={filters} resetFilters={resetFilters} />
         {isDesktop ? (
           <CardListTable
             cards={cardsForSelectedUser}
@@ -92,6 +94,7 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
         onSelect={handleSelectTab}
       >
         <Tab eventKey="all-cards" title="All Cards">
+          <SelectedFilters filters={filters} resetFilters={resetFilters} />
           {isDesktop ? (
             <CardListTable
               cards={filteredData}
@@ -114,6 +117,7 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
           eventKey="favorites"
           title={<AiFillHeart style={{ fontSize: "1.3rem" }} />}
         >
+          <SelectedFilters filters={filters} resetFilters={resetFilters} />
           {isDesktop ? (
             <CardListTable
               cards={cardsForSelectedUser}
