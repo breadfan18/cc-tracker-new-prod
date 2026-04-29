@@ -38,6 +38,13 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
     resetFilters,
   } = useCardsFilter(cards);
 
+  const handleRemoveFilter = (filterKey: keyof typeof filters) => {
+    if (filterKey === "cardName") setCardNameFilter("");
+    if (filterKey === "cardType") setCardTypeFilter("");
+    if (filterKey === "status") setStatusFilter("");
+    if (filterKey === "annualFee") setAnnualFeeFilter("");
+  };
+
   const cardsForSelectedUser =
     selectedUser === "all-cards"
       ? filteredData
@@ -48,7 +55,11 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
   const userTabs = cardholders.map((user) => {
     return (
       <Tab eventKey={user.id} title={user.name.split(" ")[0]} key={user.id}>
-        <SelectedFilters filters={filters} resetFilters={resetFilters} />
+        <SelectedFilters
+          filters={filters}
+          resetFilters={resetFilters}
+          onRemoveFilter={handleRemoveFilter}
+        />
         {isDesktop ? (
           <CardListTable
             cards={cardsForSelectedUser}
@@ -94,7 +105,11 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
         onSelect={handleSelectTab}
       >
         <Tab eventKey="all-cards" title="All Cards">
-          <SelectedFilters filters={filters} resetFilters={resetFilters} />
+          <SelectedFilters
+            filters={filters}
+            resetFilters={resetFilters}
+            onRemoveFilter={handleRemoveFilter}
+          />
           {isDesktop ? (
             <CardListTable
               cards={filteredData}
@@ -117,7 +132,11 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
           eventKey="favorites"
           title={<AiFillHeart style={{ fontSize: "1.3rem" }} />}
         >
-          <SelectedFilters filters={filters} resetFilters={resetFilters} />
+          <SelectedFilters
+            filters={filters}
+            resetFilters={resetFilters}
+            onRemoveFilter={handleRemoveFilter}
+          />
           {isDesktop ? (
             <CardListTable
               cards={cardsForSelectedUser}

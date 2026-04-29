@@ -34,6 +34,13 @@ function CardsByUserDropDown({ cards }: { cards: Card[] }) {
     resetFilters,
   } = useCardsFilter(cards);
 
+  const handleRemoveFilter = (filterKey: keyof typeof filters) => {
+    if (filterKey === "cardName") setCardNameFilter("");
+    if (filterKey === "cardType") setCardTypeFilter("");
+    if (filterKey === "status") setStatusFilter("");
+    if (filterKey === "annualFee") setAnnualFeeFilter("");
+  };
+
   const showAllUsers =
     selectedUser === undefined || selectedUser === "all-cards";
 
@@ -96,7 +103,11 @@ function CardsByUserDropDown({ cards }: { cards: Card[] }) {
       >
         Favorites
       </Button>
-      <SelectedFilters filters={filters} resetFilters={resetFilters} />
+      <SelectedFilters
+        filters={filters}
+        resetFilters={resetFilters}
+        onRemoveFilter={handleRemoveFilter}
+      />
       <hr />
       <CardListCards
         cards={cardsForSelectedUser}

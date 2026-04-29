@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import { IoClose } from "react-icons/io5";
 
 type FilterValues = {
   cardName: string;
@@ -10,9 +11,11 @@ type FilterValues = {
 type SelectedFiltersProps = {
   filters: FilterValues;
   resetFilters: () => void;
+  onRemoveFilter: (filterKey: keyof FilterValues) => void;
 };
 
 type ActiveFilter = {
+  key: keyof FilterValues;
   label: string;
   value: string;
 };
@@ -21,28 +24,45 @@ const getActiveFilters = (filters: FilterValues): ActiveFilter[] => {
   const activeFilters: ActiveFilter[] = [];
 
   if (filters.cardName) {
-    activeFilters.push({ label: "Card Name", value: filters.cardName });
+    activeFilters.push({
+      key: "cardName",
+      label: "Card Name",
+      value: filters.cardName,
+    });
   }
 
   if (filters.cardType) {
-    activeFilters.push({ label: "Type", value: filters.cardType });
+    activeFilters.push({
+      key: "cardType",
+      label: "Type",
+      value: filters.cardType,
+    });
   }
 
   if (filters.status) {
     activeFilters.push({
+      key: "status",
       label: "Status",
       value: `${filters.status.charAt(0).toUpperCase()}${filters.status.slice(1)}`,
     });
   }
 
   if (filters.annualFee === "show") {
-    activeFilters.push({ label: "Annual Fee", value: "Only" });
+    activeFilters.push({
+      key: "annualFee",
+      label: "Annual Fee",
+      value: "Only",
+    });
   }
 
   return activeFilters;
 };
 
-function SelectedFilters({ filters, resetFilters }: SelectedFiltersProps) {
+function SelectedFilters({
+  filters,
+  resetFilters,
+  onRemoveFilter,
+}: SelectedFiltersProps) {
   const activeFilters = getActiveFilters(filters);
 
   if (activeFilters.length === 0) {
@@ -58,12 +78,25 @@ function SelectedFilters({ filters, resetFilters }: SelectedFiltersProps) {
             className="selected-filter-chip"
           >
             <strong>{filter.label}:</strong> {filter.value}
+            <button
+              type="button"
+              className="selected-filter-remove-button"
+              aria-label={`Remove ${filter.label} filter`}
+              onClick={() => onRemoveFilter(filter.key)}
+            >
+              <IoClose />
+            </button>
           </span>
         ))}
       </div>
-      <Button className="selected-filters-clear-button" onClick={resetFilters}>
-        Clear All
-      </Button>
+      {activeFilters.length >= 2 ? (
+        <Button
+          className="selected-filters-clear-button"
+          onClick={resetFilters}
+        >
+          Clear All
+        </Button>
+      ) : null}
     </div>
   );
 }
