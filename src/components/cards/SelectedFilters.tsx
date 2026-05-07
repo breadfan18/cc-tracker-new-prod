@@ -12,6 +12,7 @@ type SelectedFiltersProps = {
   filters: FilterValues;
   resetFilters: () => void;
   onRemoveFilter: (filterKey: keyof FilterValues) => void;
+  showClearAllButton?: boolean;
 };
 
 type ActiveFilter = {
@@ -62,6 +63,7 @@ function SelectedFilters({
   filters,
   resetFilters,
   onRemoveFilter,
+  showClearAllButton = true,
 }: SelectedFiltersProps) {
   const activeFilters = getActiveFilters(filters);
 
@@ -89,7 +91,7 @@ function SelectedFilters({
           </span>
         ))}
       </div>
-      {activeFilters.length >= 2 ? (
+      {showClearAllButton && activeFilters.length >= 2 ? (
         <Button
           className="selected-filters-clear-button"
           onClick={resetFilters}

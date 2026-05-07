@@ -1,6 +1,7 @@
 import { Button, Offcanvas } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { TiDelete } from "react-icons/ti";
+import SelectedFilters from "./SelectedFilters";
 
 function Filters({
   showFilter,
@@ -13,6 +14,8 @@ function Filters({
   setCardTypeFilter,
   setStatusFilter,
   setAnnualFeeFilter,
+  removeFilter,
+  hasActiveFilters,
   resetFilters,
   setShowFilter,
 }) {
@@ -31,7 +34,7 @@ function Filters({
       className="filter-drawer"
     >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Filters</Offcanvas.Title>
+        <Offcanvas.Title>Filter Cards</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Form>
@@ -165,13 +168,29 @@ function Filters({
             />
           </Form.Group>
 
-          <div className="d-grid gap-2 mt-2">
-            <Button onClick={resetFilters} className="filter-reset-button">
-              Reset Filters
-            </Button>
+          <SelectedFilters
+            filters={filters}
+            resetFilters={resetFilters}
+            onRemoveFilter={removeFilter}
+            showClearAllButton={false}
+          />
+
+          <div className="d-flex gap-2 mt-2">
+            {hasActiveFilters && (
+              <Button
+                onClick={resetFilters}
+                className="filter-reset-button"
+                style={{ flex: 1 }}
+              >
+                Clear All
+              </Button>
+            )}
             <Button
               variant={closeActionVariant}
-              style={closeActionStyle}
+              style={{
+                ...closeActionStyle,
+                flex: 1,
+              }}
               onClick={() => setShowFilter(false)}
             >
               {closeActionLabel}

@@ -97,8 +97,16 @@ const useCardsFilter = (initialData: Card[]) => {
     return initialData.filter(applyFilters);
   }, [initialData, filters]);
 
-  const setFilter = (property: string, value: string): void => {
+  const hasActiveFilters = useMemo(() => {
+    return Object.values(filters).some((value) => value !== "");
+  }, [filters]);
+
+  const setFilter = (property: keyof Filters, value: string): void => {
     setFilters((prevFilters) => ({ ...prevFilters, [property]: value }));
+  };
+
+  const removeFilter = (filterKey: keyof Filters): void => {
+    setFilter(filterKey, "");
   };
 
   const resetFilters = (): void => {
@@ -112,6 +120,8 @@ const useCardsFilter = (initialData: Card[]) => {
     setCardTypeFilter: (value: string) => setFilter("cardType", value),
     setStatusFilter: (value: string) => setFilter("status", value),
     setAnnualFeeFilter: (value: string) => setFilter("annualFee", value),
+    removeFilter,
+    hasActiveFilters,
     resetFilters,
   };
 };

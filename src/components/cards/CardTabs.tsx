@@ -35,15 +35,10 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
     setCardTypeFilter,
     setStatusFilter,
     setAnnualFeeFilter,
+    removeFilter,
+    hasActiveFilters,
     resetFilters,
   } = useCardsFilter(cards);
-
-  const handleRemoveFilter = (filterKey: keyof typeof filters) => {
-    if (filterKey === "cardName") setCardNameFilter("");
-    if (filterKey === "cardType") setCardTypeFilter("");
-    if (filterKey === "status") setStatusFilter("");
-    if (filterKey === "annualFee") setAnnualFeeFilter("");
-  };
 
   const cardsForSelectedUser =
     selectedUser === "all-cards"
@@ -58,7 +53,7 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
         <SelectedFilters
           filters={filters}
           resetFilters={resetFilters}
-          onRemoveFilter={handleRemoveFilter}
+          onRemoveFilter={removeFilter}
         />
         {isDesktop ? (
           <CardListTable
@@ -89,6 +84,8 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
         setCardTypeFilter={setCardTypeFilter}
         setStatusFilter={setStatusFilter}
         setAnnualFeeFilter={setAnnualFeeFilter}
+        removeFilter={removeFilter}
+        hasActiveFilters={hasActiveFilters}
         resetFilters={resetFilters}
         setShowFilter={setShowFilter}
       />
@@ -108,7 +105,7 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
           <SelectedFilters
             filters={filters}
             resetFilters={resetFilters}
-            onRemoveFilter={handleRemoveFilter}
+            onRemoveFilter={removeFilter}
           />
           {isDesktop ? (
             <CardListTable
@@ -135,7 +132,7 @@ function CardTabs({ cards, windowWidth, isDesktop }: CardTabsProps) {
           <SelectedFilters
             filters={filters}
             resetFilters={resetFilters}
-            onRemoveFilter={handleRemoveFilter}
+            onRemoveFilter={removeFilter}
           />
           {isDesktop ? (
             <CardListTable
