@@ -6,8 +6,6 @@ import SelectedFilters from "./SelectedFilters";
 function Filters({
   showFilter,
   closeOnSelect = false,
-  closeActionLabel = "Close",
-  closeActionVariant = "outline-secondary",
   closeActionStyle = {},
   filters,
   setCardNameFilter,
@@ -186,14 +184,15 @@ function Filters({
               </Button>
             )}
             <Button
-              variant={closeActionVariant}
+              variant="primary"
               style={{
-                ...closeActionStyle,
+                backgroundColor: "var(--color-blue)",
+                borderColor: "var(--color-blue)",
                 flex: 1,
               }}
               onClick={() => setShowFilter(false)}
             >
-              {closeActionLabel}
+              Show Results
             </Button>
           </div>
         </Form>

@@ -53,12 +53,6 @@ function CardsByUserDropDown({ cards }: { cards: Card[] }) {
       <Filters
         showFilter={showFilter}
         closeOnSelect
-        closeActionLabel="Show Results"
-        closeActionVariant="primary"
-        closeActionStyle={{
-          backgroundColor: "var(--color-blue)",
-          borderColor: "var(--color-blue)",
-        }}
         filters={filters}
         setCardNameFilter={setCardNameFilter}
         setCardTypeFilter={setCardTypeFilter}

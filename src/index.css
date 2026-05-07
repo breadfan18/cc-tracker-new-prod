@@ -716,6 +716,11 @@ nav a {
   background-color: white;
 }
 
+.radioField .form-check-input:checked {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
 .custom-modal .modal-backdrop {
   background-color: white;
   opacity: 0.9;
