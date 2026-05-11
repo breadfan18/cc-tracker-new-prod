@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -42,7 +42,7 @@ function LoyaltyAddEditModal({
 }: LoyaltyAddEditModalProps) {
   const dispatch = useDispatch();
   const [loyaltyAccForModal, setLoyaltyAccForModal] = useState(
-    loyaltyAcc ? { ...loyaltyAcc } : newLoyaltyAcc
+    loyaltyAcc ? { ...loyaltyAcc } : newLoyaltyAcc,
   );
   const [programsFilteredByType, setFilteredPrograms] = useState<
     LoyaltyProgram[]
@@ -51,21 +51,37 @@ function LoyaltyAddEditModal({
   const { data: user } = useUser();
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const [errors, setErrors] = useState({});
-  const combinedPrograms = [...PROGRAMS, ...(userAddedPrograms || [])];
+  const combinedPrograms = useMemo(
+    () => [...PROGRAMS, ...(userAddedPrograms || [])],
+    [userAddedPrograms],
+  );
+
+  useEffect(() => {
+    if (!show) return;
+
+    if (!loyaltyAccForModal.loyaltyType) {
+      setFilteredPrograms([]);
+      return;
+    }
+
+    setFilteredPrograms(
+      combinedPrograms.filter(
+        (program) => program.type === loyaltyAccForModal.loyaltyType,
+      ),
+    );
+  }, [show, loyaltyAccForModal.loyaltyType, combinedPrograms]);
 
   const toggleShow = () => setShow(!show);
 
-  // BUG - why does the loyalty program field in the form not populate with the correct value when editing a loyalty account?
-
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (value !== "" || value !== null) {
+    if (value !== "" && value !== null) {
       delete errors[name];
     }
 
     if (name === LOYALTY_DATA_KEYS.loyaltyType) {
       const filteredPrograms = combinedPrograms.filter(
-        (program) => program.type === value
+        (program) => program.type === value,
       );
 
       setFilteredPrograms(filteredPrograms);
@@ -84,8 +100,8 @@ function LoyaltyAddEditModal({
         name === "id"
           ? parseInt(value, 10)
           : name === LOYALTY_DATA_KEYS.program
-          ? combinedPrograms.find((program) => program.id === value)
-          : value,
+            ? combinedPrograms.find((program) => program.id === value)
+            : value,
     }));
   };
 
@@ -111,7 +127,7 @@ function LoyaltyAddEditModal({
     toast.success(
       loyaltyAccForModal?.id === null
         ? "Loyalty Account Created"
-        : "Loyalty Account Updated"
+        : "Loyalty Account Updated",
     );
     toggleShow();
   };
