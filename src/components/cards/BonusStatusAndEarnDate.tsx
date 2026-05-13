@@ -33,22 +33,22 @@ export default function BonusStatusAndEarnDate({
   const backgroundColor = !isCard
     ? "none"
     : hasBonusEarnDate
-    ? EDIT_COLOR_GREEN_OPACITY
-    : noBonus
-    ? APP_COLOR_LIGHT_BLACK
-    : APP_COLOR_BLUE_OPACITY;
+      ? EDIT_COLOR_GREEN_OPACITY
+      : noBonus
+        ? APP_COLOR_LIGHT_BLACK
+        : APP_COLOR_BLUE_OPACITY;
 
   useEffect(() => {
     if (isCardDetailsPage && isMobileXS) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
-        "none"
+        "none",
       );
       document.documentElement.style.setProperty("--foo-right", "-8.5px");
     } else if (isCardDetailsPage) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
-        "block"
+        "block",
       );
     }
   }, [isCardDetailsPage, isMobileXS, windowWidth]);
@@ -56,8 +56,8 @@ export default function BonusStatusAndEarnDate({
   const bonusStatusTextColor = inverseColor
     ? "white"
     : hasBonusEarnDate
-    ? "green"
-    : APP_COLOR_BLUE;
+      ? "green"
+      : APP_COLOR_BLUE;
 
   return (
     <div
@@ -97,8 +97,8 @@ export default function BonusStatusAndEarnDate({
           {hasBonusEarnDate
             ? `Earned ${formatDate(card.bonusEarnDate)}`
             : noBonus
-            ? "No Bonus Offered"
-            : "Bonus In Progress"}
+              ? "No Bonus Offered"
+              : "Bonus In Progress"}
         </small>
       </div>
     </div>

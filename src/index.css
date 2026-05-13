@@ -256,6 +256,7 @@ pre {
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
   background-color: var(--black-opacity);
   color: var(--color-blue);
 }
@@ -264,6 +265,8 @@ pre {
   padding: 10px 16px;
   flex: 1;
   min-width: 0;
+  /* Reserve horizontal space for the ribbon-aligned bonus block */
+  padding-right: 9.5rem;
 }
 
 .cardDetailsTitleMain {
@@ -281,10 +284,27 @@ pre {
 }
 
 .cardDetailsHeaderBonus {
-  flex-shrink: 0;
+  position: absolute;
+  right: -14px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  height: fit-content;
   display: flex;
   align-items: center;
-  padding-right: 8px;
+}
+
+.cardDetailsHeaderBonus::after {
+  position: absolute;
+  content: "";
+  background-color: gray;
+  height: 28px;
+  width: 28px;
+  right: 4px;
+  bottom: -8px;
+  transform: rotate(66deg);
+  z-index: -1;
+  display: var(--bonus-ribbon-effect);
 }
 
 .cardDetailsStatus {
@@ -1332,7 +1352,7 @@ p {
   right: -7.5px;
   transform: rotate(51deg);
   z-index: -1;
-  display: var(--bonus-ribbon-effect);
+  display: none;
 }
 
 .cardDetailsMobileImgContainer {
