@@ -7,6 +7,7 @@ import {
 import { Spinner } from "../common/Spinner";
 import LoyaltyTabs from "./LoyaltyTabs";
 import LoyaltyAddEditModal from "./LoyaltyAddEditModal";
+import AddLoyaltyProgramDropdown from "./AddLoyaltyProgramDropdown";
 import { useUser } from "reactfire";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { PageNotifications } from "../common/Notifications/PageNotifications";
@@ -21,17 +22,17 @@ const LoyaltyPage = () => {
   const loading = useSelector((state: MainReduxState) =>
     Boolean(
       state.loading?.loyaltyData ||
-        state.loading?.cardholders ||
-        state.loading?.userLoyaltyPrograms
-    )
+      state.loading?.cardholders ||
+      state.loading?.userLoyaltyPrograms,
+    ),
   );
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const loyaltyNotifications = useSelector((state: MainReduxState) =>
-    state.notifications.filter((n) => n.notificationType === "loyalty")
+    state.notifications.filter((n) => n.notificationType === "loyalty"),
   );
 
   const userLoyaltyPrograms = useSelector(
-    (state: MainReduxState) => state.userLoyaltyPrograms
+    (state: MainReduxState) => state.userLoyaltyPrograms,
   );
 
   useEffect(() => {
@@ -70,14 +71,17 @@ const LoyaltyPage = () => {
           firebaseUid={user?.uid}
         />
       );
-    }
+    },
   );
 
   return (
     <div className="loyaltyContainer">
       <section className="sectionHeaders">
         <h2 style={{ marginBottom: 0 }}>Loyalty Accounts</h2>
-        <LoyaltyAddEditModal userAddedPrograms={userLoyaltyPrograms} />
+        <div className="d-flex align-items-center">
+          <LoyaltyAddEditModal userAddedPrograms={userLoyaltyPrograms} />
+          <AddLoyaltyProgramDropdown />
+        </div>
       </section>
       {loyaltyNotifications.length > 0 && (
         <section className="card-details-notifications-container">

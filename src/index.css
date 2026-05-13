@@ -1712,3 +1712,7 @@ p {
 #add-issuer-dropdown::after {
   display: none;
 }
+
+#add-loyalty-program-dropdown::after {
+  display: none;
+}
