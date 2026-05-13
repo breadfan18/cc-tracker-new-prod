@@ -19,6 +19,7 @@ import { TbAlertOctagonFilled } from "react-icons/tb";
 import { BsFillBellFill } from "react-icons/bs";
 import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
+import IssuerLogo from "./IssuerLogo";
 import { MainReduxState } from "../../types/redux";
 import { Card } from "../../types/cards-types";
 
@@ -94,7 +95,7 @@ export default function CardListCards({
               ))}
             </div>
             <div>
-              <img src={card.issuer.img} alt="Issuer" className="issuerLogos" />
+              <IssuerLogo issuer={card.issuer} alt={card.issuer.name} />
             </div>
           </section>
         </BootstrapCard.Body>

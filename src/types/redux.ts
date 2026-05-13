@@ -22,9 +22,11 @@ import {
   CREATE_LOYALTY_PROGRAM_SUCCESS,
   UPDATE_LOYALTY_PROGRAM_SUCCESS,
   DELETE_LOYALTY_PROGRAM_SUCCESS,
+  LOAD_ISSUERS_SUCCESS,
+  CREATE_ISSUER_SUCCESS,
 } from "../redux/actions/actionTypes";
 import { Cardholder } from "./cardholder-types";
-import { Card, CardNote, Notification, Tag } from "./cards-types";
+import { Card, CardNote, Issuer, Notification, Tag } from "./cards-types";
 import { LoyaltyData, LoyaltyProgram } from "./loyalty-types";
 import { Referral } from "./referral-types";
 import { ThunkAction } from "redux-thunk";
@@ -38,6 +40,7 @@ export type MainReduxState = {
   notifications: Notification[];
   theme: string;
   userLoyaltyPrograms: LoyaltyProgram[];
+  userIssuers: Issuer[];
 };
 
 export type ActionTypes<T = any> = {
@@ -60,7 +63,8 @@ export type AllDataTypes =
   | Notification
   | CardNote
   | Tag
-  | LoyaltyProgram;
+  | LoyaltyProgram
+  | Issuer;
 
 export type ApiActionTypes = { type: string };
 
@@ -100,3 +104,7 @@ export type LoyaltyProgramActionTypes =
   | { type: typeof CREATE_LOYALTY_PROGRAM_SUCCESS; payload: LoyaltyProgram }
   | { type: typeof UPDATE_LOYALTY_PROGRAM_SUCCESS; payload: LoyaltyProgram }
   | { type: typeof DELETE_LOYALTY_PROGRAM_SUCCESS; payload: LoyaltyProgram };
+
+export type IssuerActionTypes =
+  | { type: typeof LOAD_ISSUERS_SUCCESS; payload: Issuer[] }
+  | { type: typeof CREATE_ISSUER_SUCCESS; payload: Issuer };

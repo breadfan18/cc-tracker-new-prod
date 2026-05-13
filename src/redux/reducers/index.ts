@@ -7,6 +7,7 @@ import notifications from "./notificationsReducer";
 import loading from "./loadingReducer";
 import theme from "./themeReducer";
 import userLoyaltyPrograms from "./userLoyaltyProgramsReducer";
+import userIssuers from "./userIssuersReducer";
 import { USER_LOGOUT_SUCCESS } from "../actions/actionTypes";
 import { ActionTypes } from "../../types/redux";
 
@@ -19,6 +20,7 @@ const appReducer = combineReducers({
   notifications,
   theme,
   userLoyaltyPrograms,
+  userIssuers,
 });
 
 export type RootState = ReturnType<typeof appReducer>;

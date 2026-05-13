@@ -8,6 +8,7 @@ import CardsByUserDropDown from "./CardsByUserDropDown";
 import CardAddEditModal from "./CardAddEditModal";
 import { loadCardholdersFromFirebase } from "../../redux/actions/cardholderActions";
 import { loadReferralsFromFirebase } from "../../redux/actions/referralActions";
+import { loadUserIssuersFromFirebase } from "../../redux/actions/issuerActions";
 import { useUser } from "reactfire";
 import useWindhowWidth from "../../hooks/windowWidth";
 import { MainReduxState } from "../../types/redux";
@@ -18,16 +19,18 @@ const CardsPage = () => {
   const { status, data: user } = useUser();
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   const cards = useSelector((state: MainReduxState) =>
-    sortCardsByDate(state.cards)
+    sortCardsByDate(state.cards),
   );
   const loading = useSelector((state: MainReduxState) =>
     Boolean(
       state.loading?.cards ||
-        state.loading?.cardholders ||
-        state.loading?.referrals
-    )
+      state.loading?.cardholders ||
+      state.loading?.referrals ||
+      state.loading?.userIssuers,
+    ),
   );
   const referrals = useSelector((state: MainReduxState) => state.referrals);
+  const userIssuers = useSelector((state: MainReduxState) => state.userIssuers);
 
   useEffect(() => {
     if (!user || status !== "success") return;
@@ -43,11 +46,16 @@ const CardsPage = () => {
     if (referrals.length === 0) {
       dispatch(loadReferralsFromFirebase(user.uid));
     }
+
+    if (userIssuers.length === 0) {
+      dispatch(loadUserIssuersFromFirebase(user.uid));
+    }
   }, [
     dispatch,
     referrals.length,
     cardholders.length,
     cards.length,
+    userIssuers.length,
     status,
     user,
   ]);

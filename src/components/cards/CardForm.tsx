@@ -5,7 +5,6 @@ import {
   CARD_STATUS,
   CARD_DATA_KEYS,
   CARD_TYPE,
-  ISSUERS,
   DELETE_COLOR_RED,
 } from "../../constants";
 import DateInput from "../common/input-fields/DateInput";
@@ -18,17 +17,18 @@ import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
 import { MainReduxState } from "../../types/redux";
-import { Card } from "../../types/cards-types";
+import type { Card, Issuer } from "../../types/cards-types";
 import { Errors } from "../../types/input-types";
 
 type CardFormProps = {
   card: Card;
   onSave: (event: React.FormEvent<HTMLFormElement>) => void;
   onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
   saving?: boolean;
   errors?: Errors;
+  issuers: Issuer[];
 };
 
 const CardForm = ({
@@ -37,6 +37,7 @@ const CardForm = ({
   onChange,
   saving,
   errors = {},
+  issuers,
 }: CardFormProps) => {
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
   return (
@@ -103,7 +104,7 @@ const CardForm = ({
               label="Issuer"
               value={card.issuer.name || ""}
               defaultOption="Select Issuer"
-              options={ISSUERS.map((issuer) => ({
+              options={issuers.map((issuer) => ({
                 value: issuer.name,
                 text: issuer.name,
               }))}

@@ -25,6 +25,7 @@ import { getRemindersData } from "../../utils/reminderData";
 import CardFavIcon from "./CardFavIcon";
 import { useSelector } from "react-redux";
 import StampedStatus from "./StampedStatus";
+import IssuerLogo from "./IssuerLogo";
 import { MainReduxState } from "../../types/redux";
 import { Card } from "../../types/cards-types";
 
@@ -164,8 +165,8 @@ export default function CardListTable({
                       backgroundColor: bonusEarned
                         ? EDIT_COLOR_GREEN
                         : noBonus
-                        ? APP_COLOR_LIGHT_BLACK
-                        : APP_COLOR_BLUE,
+                          ? APP_COLOR_LIGHT_BLACK
+                          : APP_COLOR_BLUE,
                       borderRadius: "0 30px 30px 0",
                       padding: "5px 3px",
                     }}
@@ -181,8 +182,10 @@ export default function CardListTable({
               <td>{formatDate(appDate)}</td>
               {showUser && <td>{cardholder}</td>}
               <td>
-                <img className="issuerLogos" src={issuer.img} alt="" />
-                {`  ${cardName}`}
+                <div className="tableCardNameCell">
+                  <IssuerLogo issuer={issuer} alt={issuer.name} />
+                  <span>{cardName}</span>
+                </div>
               </td>
               <td>{cardType}</td>
               {windowWidth && windowWidth > 1505 && (

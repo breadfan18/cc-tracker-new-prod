@@ -8,6 +8,7 @@ const initialState: MainReduxState = {
   notifications: [],
   theme: "light",
   userLoyaltyPrograms: [],
+  userIssuers: [],
 };
 
 export default initialState;

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";
 import CardForm from "./CardForm";
 import CardFormResponsive from "./CardFormResponsive";
+import AddIssuerDropdown from "./AddIssuerDropdown";
 import { toast } from "react-toastify";
 import { MdModeEditOutline } from "react-icons/md";
 import { CARD_DATA_KEYS, ISSUERS, NEW_CARD } from "../../constants";
@@ -38,7 +39,18 @@ export default function CardAddEditModal({
     (state: MainReduxState) => state.notifications,
   );
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
+  const userIssuers = useSelector((state: MainReduxState) => state.userIssuers);
   const dispatch = useDispatch();
+
+  const allIssuers = useMemo(() => {
+    const issuerMap = new Map<string, (typeof ISSUERS)[number]>();
+
+    [...ISSUERS, ...userIssuers].forEach((issuer) => {
+      issuerMap.set(issuer.name.trim().toLowerCase(), issuer);
+    });
+
+    return Array.from(issuerMap.values());
+  }, [userIssuers]);
 
   const {
     creditLine,
@@ -91,7 +103,7 @@ export default function CardAddEditModal({
           : {
               [name]:
                 name === "issuer"
-                  ? ISSUERS.find((issuer) => issuer.name === value)
+                  ? allIssuers.find((issuer) => issuer.name === value)
                   : normalizedValue,
             }),
       }));
@@ -208,13 +220,18 @@ export default function CardAddEditModal({
           <MdModeEditOutline />
         </Button>
       ) : (
-        <Button
-          variant="primary"
-          onClick={clearCardState}
-          className="addButton"
-        >
-          Add Card
-        </Button>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Button
+            variant="primary"
+            onClick={clearCardState}
+            className="addButton"
+          >
+            Add Card
+          </Button>
+          <AddIssuerDropdown
+            existingIssuerNames={allIssuers.map((issuer) => issuer.name)}
+          />
+        </div>
       )}
 
       <Modal
@@ -236,6 +253,7 @@ export default function CardAddEditModal({
               onChange={handleChange}
               // toggle={toggle}
               errors={errors}
+              issuers={allIssuers}
             />
           ) : (
             <CardFormResponsive
@@ -243,6 +261,7 @@ export default function CardAddEditModal({
               onSave={handleSaveForFirebase}
               onChange={handleChange}
               errors={errors}
+              issuers={allIssuers}
             />
           )}
         </Modal.Body>

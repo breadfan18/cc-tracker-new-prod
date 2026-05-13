@@ -5,7 +5,6 @@ import {
   CARD_STATUS,
   CARD_DATA_KEYS,
   CARD_TYPE,
-  ISSUERS,
   DELETE_COLOR_RED,
 } from "../../constants";
 import DateInput from "../common/input-fields/DateInput";
@@ -15,7 +14,7 @@ import { formDisabledCheck, titleCase } from "../../helpers";
 import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import NumberInput from "../common/input-fields/NumberInput";
-import { Card } from "../../types/cards-types";
+import { Card, Issuer } from "../../types/cards-types";
 import { Errors } from "../../types/input-types";
 import { MainReduxState } from "../../types/redux";
 
@@ -23,10 +22,11 @@ type CardFormResponsiveProps = {
   card: Card | null;
   onSave: (event: React.FormEvent<HTMLFormElement>) => void;
   onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
   saving?: boolean;
   errors?: Errors;
+  issuers: Issuer[];
 };
 
 const CardFormResponsive = ({
@@ -35,6 +35,7 @@ const CardFormResponsive = ({
   onChange,
   saving,
   errors = {},
+  issuers,
 }: CardFormResponsiveProps) => {
   const cardholders = useSelector((state: MainReduxState) => state.cardholders);
 
@@ -94,7 +95,7 @@ const CardFormResponsive = ({
           label="Issuer"
           value={card?.issuer.name || ""}
           defaultOption="Select Issuer"
-          options={ISSUERS.map((issuer) => ({
+          options={issuers.map((issuer) => ({
             value: issuer.name,
             text: issuer.name,
           }))}
