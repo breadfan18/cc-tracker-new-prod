@@ -127,11 +127,13 @@ export function maskPwd(str: string): string {
 }
 
 export function formatDate(dateStr: string) {
-  if (!dateStr || dateStr === undefined || dateStr === "") return "N/A";
+  const normalizedDate = dateStr?.trim();
+  if (!normalizedDate || normalizedDate === "N/A") return "N/A";
 
   // If ISO date-time string, use Date object
-  if (dateStr.includes("T")) {
-    const date = new Date(dateStr);
+  if (normalizedDate.includes("T")) {
+    const date = new Date(normalizedDate);
+    if (Number.isNaN(date.getTime())) return "N/A";
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const dd = String(date.getDate()).padStart(2, "0");
     const yyyy = date.getFullYear();
@@ -139,12 +141,12 @@ export function formatDate(dateStr: string) {
   }
 
   // Otherwise, assume YYYY-MM-DD and split
-  const dateSplit = dateStr.split("-");
+  const dateSplit = normalizedDate.split("-");
   if (dateSplit.length === 3) {
     return `${dateSplit[1]}-${dateSplit[2]}-${dateSplit[0]}`;
   }
 
-  return dateStr;
+  return normalizedDate;
 }
 
 export function normalizeNumberInput(input: string | number): string {
@@ -315,19 +317,35 @@ export function getSpendByRemainingDays(
       spendDaysRemainingText: "Bonus Earned 🥳",
       spendByTextColor: EDIT_COLOR_GREEN,
     };
+  const normalizedSpendByDate = spendByDate?.trim();
+  if (!normalizedSpendByDate || normalizedSpendByDate === "N/A") {
+    return {
+      spendDaysRemaining: null,
+      spendDaysRemainingText: "No Spend By date",
+      spendByTextColor: null,
+    };
+  }
+
   const currentDate = new Date();
-  const targetDate = new Date(spendByDate);
+  const targetDate = new Date(normalizedSpendByDate);
+  if (Number.isNaN(targetDate.getTime())) {
+    return {
+      spendDaysRemaining: null,
+      spendDaysRemainingText: "No Spend By date",
+      spendByTextColor: null,
+    };
+  }
+
   const differenceInMillis = targetDate.getTime() - currentDate.getTime();
   const daysDifference = differenceInMillis / (1000 * 3600 * 24);
   const spendDaysRemaining = Math.floor(daysDifference);
-  const spendByTextColor =
-    spendDaysRemaining > 30 || !spendByDate ? null : "orange";
+  const spendByTextColor = spendDaysRemaining > 30 ? null : "orange";
   return {
     spendDaysRemaining,
     spendDaysRemainingText:
       spendDaysRemaining < 0
         ? "Spend date has passed"
-        : spendByDate
+        : normalizedSpendByDate
           ? `${spendDaysRemaining} days remaining`
           : "No Spend By date",
     spendByTextColor,

@@ -34,8 +34,8 @@ export default function CardDetailsInfo({
     return theme === "dark"
       ? "0 0 3px rgb(168, 166, 166)"
       : card.status === "open"
-      ? "2px 0 10px gray"
-      : `2px 0 15px ${setColorForCardStatus("cardCard", card.status)}`;
+        ? "2px 0 10px gray"
+        : `2px 0 15px ${setColorForCardStatus("cardCard", card.status)}`;
   };
 
   const noBonus = card.signupBonus === undefined || card.signupBonus === "0";
@@ -60,8 +60,8 @@ export default function CardDetailsInfo({
               backgroundColor: card.bonusEarned
                 ? EDIT_COLOR_GREEN_OPACITY
                 : noBonus
-                ? APP_COLOR_LIGHT_BLACK
-                : APP_COLOR_BLUE_OPACITY,
+                  ? APP_COLOR_LIGHT_BLACK
+                  : APP_COLOR_BLUE_OPACITY,
             }}
           >
             <BonusStatusAndEarnDate
@@ -91,26 +91,24 @@ export default function CardDetailsInfo({
           borderBottom: theme === "dark" ? "1px solid #4e5359" : undefined,
         }}
       >
-        <div style={{ padding: "10px 16px" }}>
-          <Card.Title
-            style={{
-              fontSize: "clamp(0.9rem, 4.5vw, 1.5rem)",
-            }}
-          >
+        <div className="cardDetailsTitleBlock">
+          <Card.Title className="cardDetailsTitleMain">
             {card.issuer.name} {card.card}
           </Card.Title>
-          <Card.Title style={{ fontSize: "clamp(0.7rem, 3.5vw, 1rem)" }}>
+          <Card.Title className="cardDetailsTitleSub">
             {card.cardholder}
           </Card.Title>
         </div>
         {!isMobile && (
-          <BonusStatusAndEarnDate
-            card={card}
-            isCard
-            inverseColor
-            iconSize="clamp(1.5rem, 10vw, 3rem)"
-            isCardDetailsPage
-          />
+          <div className="cardDetailsHeaderBonus">
+            <BonusStatusAndEarnDate
+              card={card}
+              isCard
+              inverseColor
+              iconSize="clamp(1.5rem, 10vw, 3rem)"
+              isCardDetailsPage
+            />
+          </div>
         )}
       </article>
       <Card.Body>

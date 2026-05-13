@@ -255,8 +255,36 @@ pre {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
   background-color: var(--black-opacity);
   color: var(--color-blue);
+}
+
+.cardDetailsTitleBlock {
+  padding: 10px 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.cardDetailsTitleMain {
+  font-size: clamp(0.9rem, 4.5vw, 1.5rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.cardDetailsTitleSub {
+  font-size: clamp(0.7rem, 3.5vw, 1rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.cardDetailsHeaderBonus {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
 }
 
 .cardDetailsStatus {
