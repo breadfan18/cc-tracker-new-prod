@@ -47,6 +47,7 @@ export default function CardAddEditModal({
     nextFeeDate,
     inquiries,
     bonusEarned,
+    bonusEarnDate,
   } = CARD_DATA_KEYS;
 
   function handleChange(event) {
@@ -58,7 +59,7 @@ export default function CardAddEditModal({
       ? normalizeNumberInput(value)
       : value;
 
-    if (normalizedValue !== "" || normalizedValue !== null) {
+    if (normalizedValue !== "" && normalizedValue !== null) {
       delete errors[name];
     }
 
@@ -81,12 +82,18 @@ export default function CardAddEditModal({
     } else {
       setCardForModal((prevCard) => ({
         ...prevCard,
-        [name]:
-          name === bonusEarned
-            ? checked
-            : name === "issuer"
-              ? ISSUERS.find((issuer) => issuer.name === value)
-              : normalizedValue,
+        ...(name === bonusEarned
+          ? {
+              [bonusEarned]: checked,
+              // Keep UI and persisted value in sync when bonus is toggled off.
+              [bonusEarnDate]: checked ? prevCard[bonusEarnDate] : "",
+            }
+          : {
+              [name]:
+                name === "issuer"
+                  ? ISSUERS.find((issuer) => issuer.name === value)
+                  : normalizedValue,
+            }),
       }));
     }
   }
@@ -95,15 +102,20 @@ export default function CardAddEditModal({
     event.preventDefault();
     if (!formIsValid()) return;
 
-    if (cardForModal.annualFee === "0" || cardForModal.annualFee === "") {
-      cardForModal.nextFeeDate = "";
-    }
-
-    if (!cardForModal.spendReq || cardForModal.spendReq === "0") {
-      cardForModal.spendBy = "";
-    }
-
     const finalCard = { ...cardForModal };
+
+    if (finalCard.annualFee === "0" || finalCard.annualFee === "") {
+      finalCard.nextFeeDate = "";
+    }
+
+    if (!finalCard.spendReq || finalCard.spendReq === "0") {
+      finalCard.spendBy = "";
+    }
+
+    if (!finalCard.bonusEarned) {
+      finalCard.bonusEarnDate = "";
+    }
+
     dispatch(saveCardToFirebase(finalCard, user?.uid));
 
     if (finalCard.status === "closed") {
