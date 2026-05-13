@@ -34,24 +34,23 @@ export default function ReferralsBonusStatusAndEarnDate({
   const backgroundColor = !isCard
     ? "none"
     : hasEarnDate
-    ? EDIT_COLOR_GREEN_OPACITY
-    : APP_COLOR_BLUE_OPACITY;
+      ? EDIT_COLOR_GREEN_OPACITY
+      : APP_COLOR_BLUE_OPACITY;
 
   useEffect(() => {
     if (isMobileXS) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
-        "none"
+        "none",
       );
-      document.documentElement.style.setProperty("--foo-right", "-8.5px");
     }
   }, [isMobileXS, windowWidth]);
 
   const bonusStatusTextColor = inverseColor
     ? "white"
     : hasEarnDate
-    ? "green"
-    : APP_COLOR_BLUE;
+      ? "green"
+      : APP_COLOR_BLUE;
 
   return (
     <div

@@ -1342,19 +1342,6 @@ p {
   }
 }
 
-.cardDetailsBody #cardDetailsCard::before {
-  position: absolute;
-  content: "";
-  background-color: gray;
-  height: 28px;
-  width: 28px;
-  top: 216px;
-  right: -7.5px;
-  transform: rotate(51deg);
-  z-index: -1;
-  display: none;
-}
-
 .cardDetailsMobileImgContainer {
   display: flex;
   justify-content: space-between;

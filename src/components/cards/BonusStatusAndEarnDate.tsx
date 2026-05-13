@@ -44,7 +44,6 @@ export default function BonusStatusAndEarnDate({
         "--bonus-ribbon-effect",
         "none",
       );
-      document.documentElement.style.setProperty("--foo-right", "-8.5px");
     } else if (isCardDetailsPage) {
       document.documentElement.style.setProperty(
         "--bonus-ribbon-effect",
