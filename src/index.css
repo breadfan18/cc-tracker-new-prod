@@ -1083,7 +1083,7 @@ div.alert-danger {
 
 .walletBonusBadge.pending {
   background: #ececee;
-  color: #34363d;
+  color: var(--color-blue);
 }
 
 .walletBonusBadge.none {
