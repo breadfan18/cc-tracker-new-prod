@@ -1,4 +1,4 @@
-import { AiFillHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { saveCardToFirebase } from "../../redux/actions/cardsActions";
 import { Card } from "../../types/cards-types";
@@ -10,8 +10,10 @@ export default function CardFavIcon({ card }: CardFavIconProps) {
   const { data: user } = useUser();
 
   const dispatch = useDispatch();
+  const HeartIcon = card.isFav ? AiFillHeart : AiOutlineHeart;
+
   return (
-    <AiFillHeart
+    <HeartIcon
       onClick={() =>
         dispatch(saveCardToFirebase({ ...card, isFav: !card.isFav }, user?.uid))
       }

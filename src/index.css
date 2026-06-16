@@ -1203,6 +1203,12 @@ div.alert-danger {
   color: var(--color-blue);
   font-weight: 700;
   font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.walletAction:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: -2px;
 }
 
 .walletAction > button,

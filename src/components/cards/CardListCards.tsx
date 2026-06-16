@@ -108,6 +108,29 @@ export default function CardListCards({
     );
   };
 
+  const triggerWalletAction = (actionElement: HTMLElement) => {
+    const control = actionElement.querySelector<HTMLElement>("button, .heart");
+    control?.click();
+  };
+
+  const handleWalletActionClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+  ) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("button, .heart")) return;
+
+    triggerWalletAction(event.currentTarget);
+  };
+
+  const handleWalletActionKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+  ) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    event.preventDefault();
+    triggerWalletAction(event.currentTarget);
+  };
+
   const renderWalletCard = (card: Card) => {
     const hasBonusEarnDate =
       card.bonusEarnDate?.includes("-") || card.bonusEarned;
@@ -200,15 +223,36 @@ export default function CardListCards({
               >
                 {showEditDelete && (
                   <>
-                    <div className="walletAction walletFavoriteAction">
+                    <div
+                      className="walletAction walletFavoriteAction"
+                      role="button"
+                      tabIndex={0}
+                      onClick={handleWalletActionClick}
+                      onKeyDown={handleWalletActionKeyDown}
+                      aria-label={`${card.isFav ? "Remove from" : "Add to"} Favorites`}
+                    >
                       <CardFavIcon card={card} />
                       <span>Favorite</span>
                     </div>
-                    <div className="walletAction">
+                    <div
+                      className="walletAction"
+                      role="button"
+                      tabIndex={0}
+                      onClick={handleWalletActionClick}
+                      onKeyDown={handleWalletActionKeyDown}
+                      aria-label={`Edit ${card.card}`}
+                    >
                       <CardAddEditModal card={card} />
                       <span>Edit</span>
                     </div>
-                    <div className="walletAction walletDeleteAction">
+                    <div
+                      className="walletAction walletDeleteAction"
+                      role="button"
+                      tabIndex={0}
+                      onClick={handleWalletActionClick}
+                      onKeyDown={handleWalletActionKeyDown}
+                      aria-label={`Delete ${card.card}`}
+                    >
                       <ConfirmDeleteModal
                         data={card}
                         dataType={DELETE_MODAL_TYPES.card}
