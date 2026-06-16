@@ -978,9 +978,375 @@ div.alert-danger {
   gap: 20px;
 }
 
+#cardCardContainer.expandableCardList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+}
+
+.walletCard.cardCard {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(217, 215, 215, 0.8);
+  border-left: 4px solid var(--wallet-card-accent);
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(33, 37, 41, 0.12);
+}
+
+.walletCard.cardCard::before {
+  display: none;
+}
+
+.walletCardBody {
+  padding: 0;
+}
+
+.walletCardSummary,
+.walletCardStats,
+.walletCardDetails,
+.walletCardActions {
+  display: grid;
+  align-items: center;
+}
+
+.walletCardSummary {
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: 9px;
+  padding: 13px 14px 11px;
+}
+
+.walletCardExpandButton,
+.walletCardTitleButton {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.walletCardExpandButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-blue);
+  font-size: 1.35rem;
+}
+
+.walletCardTitleButton {
+  min-width: 0;
+  text-align: left;
+  color: inherit;
+}
+
+.walletCardTitleButton strong,
+.walletCardTitleButton span {
+  display: block;
+}
+
+.walletCardTitleButton strong {
+  color: #34363d;
+  font-size: 1rem;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+
+.walletCardTitleButton span {
+  color: #454852;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.walletBonusBadge {
+  display: grid;
+  grid-template-columns: 24px minmax(64px, 1fr);
+  align-items: center;
+  gap: 7px;
+  min-width: 114px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.walletBonusBadge.earned {
+  background: transparent;
+  color: #198754;
+}
+
+.walletBonusBadge.pending {
+  background: #ececee;
+  color: #34363d;
+}
+
+.walletBonusBadge.none {
+  background: #e5e5e8;
+  color: #6f7280;
+}
+
+.walletBonusBadge > svg {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.walletBonusBadge strong,
+.walletBonusBadge span {
+  display: block;
+  line-height: 1.1;
+}
+
+.walletBonusBadge strong {
+  font-size: 0.92rem;
+}
+
+.walletBonusBadge span {
+  font-size: 0.66rem;
+  margin-top: 3px;
+}
+
+.walletCardStats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 13px 14px;
+  border-top: 1px solid rgba(217, 215, 215, 0.75);
+}
+
+.walletCardStats > div {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 6px;
+  align-items: start;
+  min-width: 0;
+  color: #34363d;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.walletCardStats > div:nth-child(2) {
+  grid-template-columns: 22px auto;
+  justify-content: center;
+}
+
+.walletCardStats svg {
+  color: #969aa5;
+  font-size: 1.05rem;
+  margin-top: 1px;
+}
+
+.walletCardStats span,
+.walletCardDetails div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.walletCardStats small,
+.walletCardDetails small {
+  color: #51545d;
+  font-size: 0.77rem;
+  line-height: 1.2;
+}
+
+.walletCardDetails {
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px 36px;
+  border-top: 1px solid rgba(217, 215, 215, 0.75);
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+.walletCardDetails .issuerLogos {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  align-self: center;
+}
+
+.walletCardActions {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  min-height: 46px;
+  border-top: 1px solid rgba(217, 215, 215, 0.75);
+  background: rgba(247, 248, 252, 0.9);
+}
+
+.walletCardReminders {
+  display: flex;
+  align-items: center;
+  padding-left: 18px;
+  gap: 8px;
+  color: orange;
+}
+
+.walletCardReminders svg:first-child {
+  color: var(--fav-red);
+}
+
+.walletAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border-left: 1px solid rgba(217, 215, 215, 0.9);
+  color: var(--color-blue);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.walletAction > button,
+.walletAction .heart {
+  margin: 0;
+}
+
+.walletAction > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: currentColor;
+  box-shadow: none;
+}
+
+.walletAction > button:hover,
+.walletAction > button:focus {
+  background: transparent;
+  color: currentColor;
+  box-shadow: none;
+}
+
+.walletAction .heart {
+  color: var(--fav-red);
+  font-size: 1.25rem;
+}
+
+.walletFavoriteAction {
+  color: var(--fav-red);
+}
+
+.walletDeleteAction {
+  color: var(--fav-red);
+}
+
+.bg-dark .walletCardTitleButton strong,
+.bg-dark .walletCardTitleButton span,
+.bg-dark .walletCardStats > div,
+.bg-dark .walletCardDetails,
+.bg-dark .walletCardStats small,
+.bg-dark .walletCardDetails small {
+  color: #f8f9fa;
+}
+
+.bg-dark .walletCardActions {
+  background: rgba(33, 37, 41, 0.9);
+}
+
+@media (max-width: 480px) {
+  .walletCardSummary {
+    grid-template-columns: 26px minmax(0, 1fr) minmax(96px, auto);
+    gap: 8px;
+    padding: 13px 12px 10px;
+  }
+
+  .walletCardExpandButton {
+    font-size: 1.28rem;
+  }
+
+  .walletCardTitleButton strong {
+    font-size: 0.94rem;
+  }
+
+  .walletCardTitleButton span {
+    font-size: 0.84rem;
+  }
+
+  .walletBonusBadge {
+    grid-template-columns: 20px minmax(58px, 1fr);
+    min-width: 96px;
+    gap: 6px;
+    padding: 7px;
+    background: transparent;
+    color: #4a4d57;
+  }
+
+  .walletBonusBadge.earned {
+    color: #198754;
+    padding-right: 2px;
+  }
+
+  .walletBonusBadge.pending,
+  .walletBonusBadge.none {
+    background: transparent;
+    color: #4a4d57;
+  }
+
+  .walletBonusBadge > svg {
+    font-size: 1.3rem;
+  }
+
+  .walletBonusBadge strong {
+    font-size: 0.86rem;
+  }
+
+  .walletBonusBadge span {
+    font-size: 0.62rem;
+  }
+
+  .walletCardStats {
+    gap: 8px;
+    padding: 13px 12px;
+  }
+
+  .walletCardStats > div {
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 6px;
+    font-size: 0.84rem;
+  }
+
+  .walletCardStats > div:nth-child(2) {
+    grid-template-columns: 18px auto;
+  }
+
+  .walletCardStats small,
+  .walletCardDetails small {
+    font-size: 0.76rem;
+  }
+
+  .walletCardDetails {
+    padding: 15px 26px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .walletCardActions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .walletAction {
+    gap: 5px;
+    padding: 0 6px;
+    font-size: 0.76rem;
+  }
+}
+
 .cardsContainer #cardCardContainer,
 .referralsPageContainer #cardCardContainer {
   padding: 0 10px 0 0;
+}
+
+.cardsContainer #cardCardContainer.expandableCardList {
+  padding: 0;
 }
 
 .cardsCardFooter {

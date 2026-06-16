@@ -105,6 +105,7 @@ function CardsByUserDropDown({ cards }: { cards: Card[] }) {
         showEditDelete
         showUserName={showAllUsers}
         showBonusInfo
+        expandableLayout
       />
     </div>
   );
