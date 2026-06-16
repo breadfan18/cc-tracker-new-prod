@@ -35,6 +35,11 @@
   --filter-drawer-input-border: #d3d3d3;
   --filter-chip-bkgrd: #e5e5e5;
   --filter-clear-icon-color: #6c757d;
+  --mobile-type-xs: 0.68rem;
+  --mobile-type-sm: 0.76rem;
+  --mobile-type-md: 0.84rem;
+  --mobile-type-lg: 1rem;
+  --mobile-type-xl: 1.22rem;
 }
 
 [data-theme="dark"] {
@@ -1264,11 +1269,11 @@ div.alert-danger {
   }
 
   .walletCardTitleButton strong {
-    font-size: 0.94rem;
+    font-size: var(--mobile-type-md);
   }
 
   .walletCardTitleButton span {
-    font-size: 0.84rem;
+    font-size: var(--mobile-type-sm);
   }
 
   .walletBonusBadge {
@@ -1296,11 +1301,11 @@ div.alert-danger {
   }
 
   .walletBonusBadge strong {
-    font-size: 0.86rem;
+    font-size: var(--mobile-type-sm);
   }
 
   .walletBonusBadge span {
-    font-size: 0.62rem;
+    font-size: var(--mobile-type-xs);
   }
 
   .walletCardStats {
@@ -1311,7 +1316,7 @@ div.alert-danger {
   .walletCardStats > div {
     grid-template-columns: 18px minmax(0, 1fr);
     gap: 6px;
-    font-size: 0.84rem;
+    font-size: var(--mobile-type-sm);
   }
 
   .walletCardStats > div:nth-child(2) {
@@ -1320,12 +1325,12 @@ div.alert-danger {
 
   .walletCardStats small,
   .walletCardDetails small {
-    font-size: 0.76rem;
+    font-size: var(--mobile-type-xs);
   }
 
   .walletCardDetails {
     padding: 15px 26px;
-    font-size: 0.88rem;
+    font-size: var(--mobile-type-sm);
     font-weight: 600;
   }
 
@@ -1336,7 +1341,7 @@ div.alert-danger {
   .walletAction {
     gap: 5px;
     padding: 0 6px;
-    font-size: 0.76rem;
+    font-size: var(--mobile-type-sm);
   }
 }
 
@@ -1915,6 +1920,62 @@ p {
   flex: 1;
   border-radius: 0 10px 10px 0;
   padding-left: 10px;
+}
+
+@media (max-width: 650px) {
+  body {
+    font-size: var(--mobile-type-md);
+  }
+
+  .smallNavContainer {
+    font-size: var(--mobile-type-md);
+  }
+
+  .navSmallContent a {
+    font-size: var(--mobile-type-md);
+    line-height: 1.2;
+    padding: 5px 10px;
+  }
+
+  #userSection {
+    font-size: var(--mobile-type-sm);
+    line-height: 1.12;
+  }
+
+  #userSection strong,
+  #userSection p,
+  #userSection span {
+    line-height: 1.12;
+  }
+
+  .sectionHeaders {
+    padding: 9px 10px;
+  }
+
+  .sectionHeaders h2 {
+    font-size: var(--mobile-type-xl);
+    line-height: 1.1;
+  }
+
+  .sectionHeaders .addButton,
+  .sectionHeaders button,
+  #cardFilterUserSelect,
+  .filterButtonSmallScreen,
+  .cardByDropDownFavButton {
+    font-size: var(--mobile-type-md);
+    line-height: 1.15;
+  }
+
+  #cardFilterUserSelect,
+  .filterButtonSmallScreen {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  .cardByDropDownFavButton {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
 }
 
 .filters-close-icon {
