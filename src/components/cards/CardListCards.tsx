@@ -113,9 +113,7 @@ export default function CardListCards({
     control?.click();
   };
 
-  const handleWalletActionClick = (
-    event: React.MouseEvent<HTMLDivElement>,
-  ) => {
+  const handleWalletActionClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
     if (target.closest("button, .heart")) return;
 
@@ -171,7 +169,7 @@ export default function CardListCards({
               <strong>
                 {card.issuer.name} {card.card}
               </strong>
-              <span>{showUserName ? card.cardholder : card.issuer.name}</span>
+              <span>{card.cardholder}</span>
             </button>
             {showBonusInfo && renderBonusBadge(card)}
           </section>
